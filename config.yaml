@@ -1,0 +1,50 @@
+config:
+  backup: true
+  banner: false
+  create: true
+  dotpath: ~/.dotfiles
+  ignoreempty: false
+  keepdot: false
+  link_by_default: true
+  longkey: true
+  showdiff: true
+  workdir: ~/.config/dotdrop
+dotfiles:
+  d_config_i3:
+    dst: ~/.config/i3
+    link: true
+    src: config/i3
+  d_local_bin:
+    dst: ~/.local/bin
+    link: !!python/object/apply:dotdrop.linktypes.LinkTypes
+    - 1
+    src: local/bin
+  f_config_nvim_init.vim:
+    dst: ~/.config/nvim/init.vim
+    link: true
+    src: config/nvim/init.vim
+  f_xresources:
+    dst: ~/.Xresources
+    link: !!python/object/apply:dotdrop.linktypes.LinkTypes
+    - 1
+    src: Xresources
+  f_zshenv:
+    dst: ~/.zshenv
+    link: true
+    src: zshenv
+profiles:
+  delta-alpha:
+    dotfiles: []
+    include:
+    - shared
+  lincoln-delta:
+    dotfiles:
+    - d_local_bin
+    - f_xresources
+    include:
+    - shared
+  shared:
+    dotfiles:
+    - f_zshenv
+    - f_config_nvim_init.vim
+    - d_config_i3

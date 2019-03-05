@@ -1,0 +1,22 @@
+#!/bin/bash
+# Take a screenshot
+scrot -z /tmp/screen_locked.png
+# Edit hte screenshot with imagemagic 
+# - This can take time, and should be optimzed
+convert /tmp/screen_locked.png \
+	-sample 10% \
+	-noise 2% -blur 1x1 \
+	-fill black -colorize 25% \
+	-sample 1000% -gravity center \
+	/tmp/screen_locked2.png
+
+# Execute the lock screen
+i3lock -i /tmp/screen_locked2.png \
+	-k --timestr="%H:%M" --timesize=68 --timecolor=eeeeeecc \
+	--time-font="Roboto Mono for Powerline" \
+	--datestr="%A %d. %B" --datesize=24 \
+	--datecolor=ddddddaa \
+	--indicator \
+	--radius=150 --ringcolor=ffffffcc --keyhlcolor=ff2222bb \
+	--veriftext="sjekker…" --wrongtext="feil!" --timesize=72
+

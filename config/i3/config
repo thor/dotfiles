@@ -1,0 +1,388 @@
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+#------------------
+# Personal main configurations/customizations
+#  Modkey! (Super/Windows/Meta)
+set $mod Mod4
+
+#  i3 path
+set $i3 ~/.config/i3
+# - also define the standard "locking" mechanism
+set $Locker i3-lock
+
+#  Custom named workspaces!
+#set $wm1  "1:   cli"
+#set $wm2  "2:   web"
+#set $wm3  "3:   irc"
+#set $wm4  "4:   doc"
+#set $wm5  "5:   med"
+#set $wm6  "6:   ls"
+#set $wm7  "7:   grp"
+#set $wm8  "8:   code"
+#set $wm9  "9:   work"
+#set $wm10 "10:   huh"
+#set $wm11 "11:   extra"
+set $wm1  "1"
+set $wm2  "2"
+set $wm3  "3"
+set $wm4  "4"
+set $wm5  "5"
+set $wm6  "6"
+set $wm7  "7"
+set $wm8  "8"
+set $wm9  "9"
+set $wm10 "10"
+set $wm11 "11"
+
+# FIXME: hack up my bluetooth headset to always work, due to keycodes
+bindcode --release 209 exec --no-startup-id "xdotool key 172"
+bindcode --release 208 exec --no-startup-id "xdotool key 172"
+
+# Start up environment apps
+# - I want a compositor. compton is nice and lightweight, plus available in the repos.
+exec --no-startup-id compton -b
+# - GNOME PolicyKit Agent
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+# - XSS for auto-locking with suspend/hibernate
+exec xss-lock -- $Locker
+# - polybar er kult, siden vi ikke bruker i3bra
+exec_always mmonitors.sh bars
+# - flashfocus!
+exec_always --no-startup-id flashfocus --time 250
+# - Random wallpaper at start, every - single - time I restart i3.
+exec_always --no-startup-id feh --bg-fill --no-fehbg --randomize ~/Dropbox/Variert/Bakgrunner/up-close/
+# - dunst notifications! Starts with config file ~/.config/dunst/dunstrc if available.
+exec_always --no-startup-id dunst
+# - udiskie removeable devices management
+exec --no-startup-id udiskie --smart-tray
+
+#-------------------
+# Client application assignments and actions!
+# - Assignments to workspaces
+assign [class="Firefox"] $wm2
+assign [class="^chromium"] $wm2
+assign [title="^IntelliJ IDEA"] $wm8
+assign [class="^jetbrains-pycharm"] $wm8
+assign [class="^jetbrains-intellij"] $wm8
+
+# - Window actions/behaviours
+for_window [class="^Gnome-disks$"] floating enable 
+for_window [title="^WeeChat" class="^Gnome-terminal"] move container to workspace $wm3
+for_window [class="^Skype" window_role="^CallWindow$"] floating enable, sticky enable, move position mouse, resize 650 400
+for_window [class="^Termite" window_role="^floating$"] floating enable, sticky enable
+for_window [class="^Zotero" title="^Quick Format Citation"] floating enable
+for_window [class="^Pavucontrol"] floating enable, resize set 550 690
+for_window [class="^Toggl Desktop$"] floating enable, resize set 500 600, sticky enable
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+font pango: DejaVu Sans Mono Bold 7
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Turn off the vertical borders on the edge of the screen
+hide_edge_borders both
+
+# Set the default border for windows
+default_border pixel 1
+
+#------------------
+# i3-gaps configuration
+# - uncomment to stop everything from messing up
+gaps inner 2
+gaps outer 0
+smart_gaps on
+
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 2
+        bindsym minus gaps inner current minus 2
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 2
+        bindsym Shift+minus gaps inner all minus 2
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 2
+        bindsym minus gaps outer current minus 2
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 2
+        bindsym Shift+minus gaps outer all minus 2
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+#------------------
+# Keyboard (most) bindings
+# start a floating terminal, because I'm lazy!
+bindsym $mod+Control+Return   exec termite -r floating
+# start a terminal
+bindsym $mod+Return           exec termite
+
+# kill focused window
+bindsym $mod+Shift+aring      kill
+
+# execution, windows, workspaes, et cetera
+# - desktop applications
+# -- current with only rofi's setup
+bindsym $mod+e                exec "rofi -show drun -width 35 -lines 10"
+# - rename workspace
+bindsym $mod+r                exec i3-input -F 'rename workspace to "%s"' -P 'new name for workspace: '
+# - open windows (. being 'e' physically)
+bindsym Mod1+Tab              exec --no-startup-id "rofi -show window"
+# - run something!
+bindsym $mod+q                exec --no-startup-id "rofi -show run"
+# - open a ssh connection
+bindsym $mod+i                exec --no-startup-id "rofi -show ssh"
+
+# - marks
+# -- create mark
+bindsym $mod+m         exec i3-input -F 'mark "%s"' -P 'label for mark: '
+# -- go to marks, 1-3
+bindsym $mod+Control+m exec i3-input -F '[con_mark="%s"] focus' -P 'goto mark: '
+
+# Focus movement
+# - keyboard
+bindsym $mod+h                focus left
+bindsym $mod+t                focus down
+bindsym $mod+n                focus up
+bindsym $mod+s                focus right
+
+# - scrolling
+bindsym $mod+Button4          --whole-window focus left
+bindsym $mod+Button5          --whole-window focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left             focus left
+bindsym $mod+Down             focus down
+bindsym $mod+Up               focus up
+bindsym $mod+Right            focus right
+
+# move focused window
+bindsym $mod+Shift+h          move left
+bindsym $mod+Shift+t          move down
+bindsym $mod+Shift+n          move up
+bindsym $mod+Shift+s          move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left       move left
+bindsym $mod+Shift+Down       move down
+bindsym $mod+Shift+Up         move up
+bindsym $mod+Shift+Right      move right
+
+# split in horizontal orientation
+bindsym $mod+d                split h
+
+# split in vertical orientation
+bindsym $mod+k                split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+u                fullscreen
+
+# enter all-spanning fullscreen mode for the focused container
+bindsym $mod+Ctrl+u           fullscreen toggle global
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+o                layout stacking
+bindsym $mod+comma            layout tabbed
+bindsym $mod+period           layout toggle split
+bindsym $mod+b                layout toggle all
+
+# toggle tiling / floating
+bindsym $mod+Shift+space      floating toggle
+
+# toggle sticky floating window, if floating of course
+bindcode $mod+35              sticky toggle
+
+# set/move as/to scratchpad window!
+# - uses bindcode with id 94, which is </> or ø
+bindcode $mod+Shift+94        move scratchpad
+bindcode $mod+94              scratchpad show
+
+# change focus between tiling / floating windows
+bindsym $mod+space            focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a                focus parent
+
+# focus the child container (crashes with split)
+#bindsym $mod+d focus child
+
+# flash current container (n in dvorak)
+bindsym $mod+w                exec --no-startup-id flash_window
+
+# toggle the border options
+bindsym $mod+x                border toggle
+
+# setup system-bindings for things like audio, backlight,
+# pulse audio volume control, using i3blocks
+bindsym XF86AudioLowerVolume  \
+	exec --no-startup-id      "set-volume.sh down"
+bindsym XF86AudioRaiseVolume  \
+	exec --no-startup-id      "set-volume.sh up"
+bindsym XF86AudioMute         \
+	exec --no-startup-id      "set-volume.sh toggle"
+
+# screen backlight control
+bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 1"
+bindsym XF86MonBrightnessUp   exec --no-startup-id "light -A 1"
+
+#------------------
+# Workspace keybindings/management
+
+# Jump back and forth between workspaces!
+bindsym $mod+Tab              workspace back_and_forth
+
+#------------------
+# Workspace configuration
+
+# switch to workspace
+bindsym $mod+1          workspace number $wm1
+bindsym $mod+2          workspace number $wm2
+bindsym $mod+3          workspace number $wm3
+bindsym $mod+4          workspace number $wm4
+bindsym $mod+5          workspace number $wm5
+bindsym $mod+6          workspace number $wm6
+bindsym $mod+7          workspace number $wm7
+bindsym $mod+8          workspace number $wm8
+bindsym $mod+9          workspace number $wm9
+bindsym $mod+0          workspace number $wm10
+bindsym $mod+plus       workspace number $wm11
+
+# move between monitors!
+bindsym $mod+Control+h  move workspace to output left
+bindsym $mod+Control+t  move workspace to output down
+bindsym $mod+Control+n  move workspace to output up
+bindsym $mod+Control+s  move workspace to output right
+
+# move focused container to workspace
+bindsym $mod+Shift+1    move container to workspace number $wm1
+bindsym $mod+Shift+2    move container to workspace number $wm2
+bindsym $mod+Shift+3    move container to workspace number $wm3
+bindsym $mod+Shift+4    move container to workspace number $wm4
+bindsym $mod+Shift+5    move container to workspace number $wm5
+bindsym $mod+Shift+6    move container to workspace number $wm6
+bindsym $mod+Shift+7    move container to workspace number $wm7
+bindsym $mod+Shift+8    move container to workspace number $wm8
+bindsym $mod+Shift+9    move container to workspace number $wm9
+bindsym $mod+Shift+0    move container to workspace number $wm10
+bindsym $mod+Shift+plus move container to workspace number $wm11
+
+# Move workspace #1 where we want it
+workspace $wm1          output eDP-1
+workspace $wm2          output eDP-1
+workspace $wm2          output DP-1-2
+workspace $wm3          output HDMI-1
+
+#------------------
+# i3 conf keybindings
+
+# reload the configuration file
+bindsym $mod+Shift+j reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+p restart
+# lock i3/session with custom script
+bindsym $mod+l exec --no-startup-id $Locker
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+period exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit' -b 'System options' 'i3-msg exec ~/.config/i3/i3-exit'"
+
+# MODE: allow system logoff, lock, suspending, etc -- uses $Locker
+set $mode_system System:  lock [L],  logout [E],  suspend [S],  hibernate [H],  hybrid-sleep [Shift+H],  reboot [R],  shutdown [Shift+s]
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym Shift+h exec --no-startup-id $Locker && systemctl hybrid-sleep, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Pause mode "$mode_system"
+bindsym $mod+Menu mode "$mode_system"
+bindsym $mod+Print mode "$mode_system"
+
+# MODE: configure monitors/deal with docking
+set $mode_dock Docking:  laptop [L],  work [W],  row [R],  extend left [H],  extend right [S],  duplicate [D]
+mode "$mode_dock" {
+	bindsym l exec --no-startup-id "mmonitors.sh laptop", mode "default"
+	bindsym w exec --no-startup-id "mmonitors.sh work", mode "default"
+	bindsym r exec --no-startup-id "mmonitors.sh row", mode "default"
+	bindsym h exec --no-startup-id "mmonitors.sh left", mode "default"
+	bindsym s exec --no-startup-id "mmonitors.sh right", mode "default"
+	bindsym d exec --no-startup-id "mmonitors.sh duplicate", mode "default"
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+Pause mode "$mode_dock"
+bindsym $mod+Mod1+Menu mode "$mode_dock"
+bindsym $mod+Ctrl+Print mode "$mode_dock"
+
+
+# MODE: resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym t resize grow height 5 px or 5 ppt
+        bindsym n resize shrink height 5 px or 5 ppt
+        bindsym s resize grow width 5 px or 5 ppt
+
+        bindsym Shift+h resize shrink width 25 px or 25 ppt
+        bindsym Shift+t resize grow height 25 px or 25 ppt
+        bindsym Shift+n resize shrink height 25 px or 25 ppt
+        bindsym Shift+s resize grow width 25 px or 25 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+p mode "resize"
+
+#------------------
+# Colours and bar conf
+
+# Window colors!	borders	backgr.	text	indic.	child b.
+client.focused		#5294E2	#5496E4	#ffffff	#ddccff	#3274b2
+client.unfocused 	#1B1E27	#2B2E37	#D8D8D8
+client.urgent 		#aa0000	#AB4642	#282828	#bb1111
+
