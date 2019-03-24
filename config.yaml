@@ -18,6 +18,10 @@ dotfiles:
     dst: ~/.config/zsh
     link: true
     src: config/zsh
+  d_config_base16:
+    dst: ~/.config/base16-shell
+    link: true
+    src: config/base16-shell
   d_local_bin:
     dst: ~/.local/bin
     link: true
@@ -55,6 +59,7 @@ profiles:
     dotfiles:
     - f_gitconfig
     - d_config_zsh
+    - d_config_base16
     - d_local_bin
     - f_xresources
     - f_zshenv
