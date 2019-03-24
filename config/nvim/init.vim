@@ -63,9 +63,8 @@ Plug 'vim-pandoc/vim-pandoc-syntax'      " pandoc-syntax
                                          " --- python
 Plug 'numirias/semshi',                  " Semantic Python highlighting
 	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
-Plug 'jeaye/color_coded',				 " Semantic C/C++ highlighting
-	\ Cond(has('nvim'), {
-		\'do': 'rm -f CMakeCache.txt && cmake . -DDOWNLOAD_CLANG=0 && make && make install',
+Plug 'arakashic/chromatica.nvim',		 " Semantic C/C++ highlighting
+	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins',
 		\'for': ['c', 'cpp', 'objc', 'objcpp'] })
 
 
@@ -143,11 +142,17 @@ let g:vimtex_format_enabled = 1
 let g:slime_target = 'tmux'
 
 
+" # Configuring chromatica
+" - Enable on startup, but see plug definition
+let g:chromatica#enable_at_startup = 1
+
+
 " # Configuring Terraform
 " - Aligning automatically
 let g:terraform_align = 1
 " - Foldin' 's pretty cool too
 let g:terraform_fold_sections = 1
+
 
 " # Configuring FastFold
 " - TeX, with vimtex too (see up)
