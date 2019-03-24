@@ -14,6 +14,10 @@ dotfiles:
     dst: ~/.config/i3
     link: true
     src: config/i3
+  d_config_zsh:
+    dst: ~/.config/zsh
+    link: true
+    src: config/zsh
   d_local_bin:
     dst: ~/.local/bin
     link: true
@@ -40,11 +44,12 @@ profiles:
     include:
     - shared
   lincoln-delta:
-    dotfiles:
+    dotfiles: []
     include:
     - shared
   shared:
     dotfiles:
+    - d_config_zsh
     - d_local_bin
     - f_xresources
     - f_zshenv
