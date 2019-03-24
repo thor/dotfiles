@@ -1,0 +1,454 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+; ${env:KEY:FALLBACK}
+; ${xrdb:KEY:FALLBACK}
+; ${BLOCK.KEY}
+
+[colors]
+background = #222
+background-alt = #444
+
+foreground = #dfdfdf
+foreground-alt = #555
+foreground-sec = #999
+
+primary = #ffb52a
+secondary = #e60053
+
+# see module/i3
+# -- https://sashat.me/2017/01/11/list-of-20-simple-distinct-colors/
+red     = #e6194B
+green   = #3cb44b
+yellow  = #ffe119
+blue    = #4363d8
+orange  = #f58231
+purple  = #911eb4
+cyan    = #42d4f4
+magenta = #f032e6
+lime    = #bfef45
+pink    = #fabebe
+
+good = ${self.green}
+alert = ${self.red}
+
+
+[bar/first]
+width = 100%
+height = 24
+offset-x = 0
+offset-y = 0
+radius = 0
+fixed-center = true
+
+; What monitor do I want it on? Ugh, no good multi-monitor support.
+monitor = ${env:MONITOR:eDP-1}
+; Only allow monitors with the state connected
+monitor-strict = true
+
+; i3 scrolling between workspaces
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = #f00
+
+border-size = 0
+border-bottom-size = 1
+border-bottom-color = #ff333333
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 0
+module-margin-right = 2
+
+
+; Order of font lookups
+font-0 = Noto Sans:size=10:pixelsize=10;0
+font-1 = Material Design Icons:style=Regular:pixelsize=13;2
+font-2 = Font Awesome 5 Free:style=solid:antialias=true:pixelsize=10;2
+font-3 = Wuncon Siji:pixelsize=8;1
+font-4 = DejaVu Sans:pixelsize=8;1
+font-5 = Noto Color Emoji:size=10:scale=10:pixelsize=13;2
+
+modules-left = i3 xwindow
+modules-center = date
+modules-right = filesystem memory cpu wlan eth net-speed openvpn battery temperature volume
+
+; Set not-likely-to-change settings
+;
+; Set locale
+locale = nb_NO.UTF-8
+
+tray-position = right
+tray-padding = 2
+tray-background = ${colors.background-alt}
+
+; Module settings
+eth-interface = enp0s25
+wifi-interface = wlp3s0
+
+
+[bar/lincoln-whiskey]
+inherit = bar/first
+
+; Device specific settings
+monitor-fallback = eDP-1
+battery = CMB1
+
+[bar/lincoln-delta]
+inherit = bar/first
+
+; Device specific settings
+monitor-fallback = DP-2
+battery = BAT0
+; Docking port
+eth-interface = enp0s20f0u6u2
+wifi-interface = wlp2s0
+
+
+[bar/delta-left]
+inherit = bar/first
+monitor = DP-1
+modules-right = 
+tray-position = none
+
+
+[bar/delta-right]
+inherit = bar/first
+monitor = DVI-D-0
+modules-right = 
+tray-position = none
+
+
+[bar/delta-center]
+inherit = bar/first
+monitor = DP-2
+
+; Device specific settings
+eth-interface = eno1
+
+[bar/lincoln-charlie]
+inherit = bar/first
+
+modules-right = filesystem volume memory cpu wlan eth battery battery-extra temperature date powermenu
+
+; Device specific settings
+monitor-fallback = LVDS-1
+battery = BAT0
+battery-extra = BAT1
+
+
+[module/xwindow]
+type = internal/xwindow
+
+label = %title%
+label-maxlen = 50
+label-padding = 2
+
+[module/filesystem]
+type = internal/fs
+
+interval = 30
+mount-0 = /
+
+label-mounted = %{F#0a81f5}%mountpoint%%{F-} %percentage_used%%
+label-mounted-foreground = ${colors.foreground-sec}
+label-mounted-underline = #88aaee
+label-unmounted = %mountpoint% not mounted
+
+
+[module/i3]
+type = internal/i3
+index-sort = true
+strip-wsnumbers = true
+
+; Whether to only show workspaces for said monitor or not
+pin-workspaces = true
+
+ws-icon-0  = 1;%{F#e6194B}  %{F-} cli
+ws-icon-1  = 2;%{F#3cb44b} %{T3} %{T-}%{F-} web
+ws-icon-2  = 3;%{F#ffe119} %{T3} %{T-}%{F-} irc
+ws-icon-3  = 4;%{F#4363d8} %{T3} %{T-}%{F-} doc
+ws-icon-4  = 5;%{F#f58231} %{T3} %{T-}%{F-} med
+ws-icon-5  = 6;%{F#911eb4} %{T3} %{T-}%{F-} ls
+ws-icon-6  = 7;%{F#42d4f4} %{T3} %{T-}%{F-} grp
+ws-icon-7  = 8;%{F#f032e6} %{T3} %{T-}%{F-} code
+ws-icon-8  = 9;%{F#bfef45} %{T3} %{T-}%{F-} work
+ws-icon-9  = 10;%{F#fabebe} %{T3} %{T-}%{F-} huh
+ws-icon-10 = 11;%{F#469990} %{T3} %{T-}%{F-} extra
+
+format = <label-state> <label-mode>
+
+; shared = referenced with ${self.whatever}
+padding = 2
+label = %icon% %{F#666}%name%%{F-}
+
+; mode = shortcuts and things like that
+label-mode = %mode%
+label-mode-padding = ${self.padding}
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = ${self.label}
+label-focused-background = ${colors.background-alt}
+label-focused-padding = ${self.label-mode-padding}
+label-focused-underline = ${colors.primary}
+label-focused-underline-size = 4
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = ${self.label}
+label-unfocused-padding = ${self.label-mode-padding}
+label-unfocused-overline = ${colors.background}
+
+; visible = Active workspace on unfocused monitor
+label-visible = ${self.label}
+label-visible-background = ${self.label-focused-background}
+label-visible-padding = ${self.label-mode-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = ${self.label}
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #f90000
+label = %percentage%%
+label-padding = 1
+
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #4bffdc
+label = %percentage_used%%
+label-padding = 1
+
+
+[module/wlan]
+type = internal/network
+interface = ${root.wifi-interface}
+interval = 5.0
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-underline = #9f78e1
+label-connected = %essid%
+label-connected-foreground = ${colors.foreground-sec}
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+format-packetloss = <animation-packetloss> <label-connected>
+animation-packetloss-0 = ⚠
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 📶
+animation-packetloss-1-foreground = #000000
+; Framerate in milliseconds
+animation-packetloss-framerate = 500
+
+ramp-signal-0 = 冷
+ramp-signal-1 = 爛
+ramp-signal-2 = 嵐
+ramp-signal-3 = 襤
+ramp-signal-4 = 蠟
+
+[module/eth]
+type = internal/network
+interface = ${root.eth-interface}
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/net-speed-wifi]
+type = internal/network
+interface = ${root.wifi-interface}
+
+[module/net-speed-eth]
+type = internal/network
+interface = ${root.eth-interface}
+
+[module/net-speed]
+type = internal/network
+interface = ${root.eth-interface}
+interval = 5.0
+
+label-connected = %downspeed:10:10% %upspeed% 
+
+%downspeed:min:max% = 5
+downspeed-min = 20
+accumulate-stats = true
+
+
+[module/openvpn]
+type = custom/script
+exec = ~/.config/polybar/openvpn.sh
+exec-if = pgrep -x openvpn
+
+interval = 10
+
+format-underline = #ff5555
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%d. %b"
+time = %H:%M
+
+label = %time% %date%
+label-padding = 1
+
+format-prefix = %{T3}%{T-} 
+format-padding = 3
+format-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-sec}
+
+
+[module/volume]
+type = internal/pulseaudio
+
+; Attempt to use volume mapping with linear increase in volume perceived by ear
+mapped = true
+
+; Use PA_VOLUME_UI_MAX (~153&) if true, otherwise PA_VOLUME_NORM (100%)
+use-ui-max = true
+
+format-volume = <ramp-volume> <label-volume>
+format-volume-underline = ${colors.green}
+
+label-volume = %percentage:3%%
+label-volume-padding = 1
+label-volume-foreground-0 = #55aa55
+label-volume-foreground-1 = #f5a70a
+label-volume-foreground-2 = #ff5555
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+label-muted = 
+label-muted-foreground = ${colors.alert}
+
+; Former main component of volume bit
+;bar-volume-indicator = ┫
+;bar-volume-fill = ━
+;bar-volume-empty = ─
+;bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/battery]
+type = internal/battery
+battery = ${root.battery}
+adapter = AC
+full-at = 95
+
+label-charging-foreground = ${colors.foreground-sec}
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = #ffb52a
+
+label-discharging = %percentage%% (%time%)
+label-discharging-foreground = ${colors.foreground-sec}
+format-discharging = %{T2}<ramp-capacity>%{T-} <label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+
+label-full = %percentage%%
+label-full-foreground = ${colors.foreground-sec}
+format-full-prefix = 
+format-full-underline = ${colors.good}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-5 = 
+ramp-capacity-6 = 
+ramp-capacity-7 = 
+ramp-capacity-8 = 
+ramp-capacity-9 = 
+ramp-capacity-foreground = ${colors.foreground}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-5 = 
+animation-charging-6 = 
+animation-charging-7 = 
+animation-charging-8 = 
+animation-charging-9 = 
+animation-charging-foreground = ${colors.foreground}
+animation-charging-framerate = 500
+
+
+[module/battery-extra]
+inherit = module/battery
+battery = ${root.battery-extra}
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-foreground = ${colors.foreground-sec}
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-font = 3
+ramp-foreground = ${colors.foreground}
+
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini

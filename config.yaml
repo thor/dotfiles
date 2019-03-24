@@ -10,6 +10,10 @@ config:
   showdiff: true
   workdir: ~/.config/dotdrop
 dotfiles:
+  d_config_base16:
+    dst: ~/.config/base16-shell
+    link: true
+    src: config/base16-shell
   d_config_i3:
     dst: ~/.config/i3
     link: true
@@ -18,10 +22,6 @@ dotfiles:
     dst: ~/.config/zsh
     link: true
     src: config/zsh
-  d_config_base16:
-    dst: ~/.config/base16-shell
-    link: true
-    src: config/base16-shell
   d_local_bin:
     dst: ~/.local/bin
     link: true
@@ -30,6 +30,10 @@ dotfiles:
     dst: ~/.config/nvim/
     link_children: true
     src: config/nvim/
+  f_config_polybar:
+    dst: ~/.config/polybar/config
+    link: true
+    src: config/polybar/config
   f_gitconfig:
     dst: ~/.gitconfig
     link: true
@@ -55,8 +59,13 @@ profiles:
     dotfiles: []
     include:
     - shared
+  lincoln-echo:
+    dotfiles: []
+    include:
+    - shared
   shared:
     dotfiles:
+    - f_config_polybar
     - f_gitconfig
     - d_config_zsh
     - d_config_base16
