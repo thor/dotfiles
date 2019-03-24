@@ -9,7 +9,7 @@ function _warn {
 BASE16_SHELL=$HOME/.config/base16-shell/scripts
 BASE16_THEME=base16-default-dark
 if [ -n "$PS1" ] && [ -s "$BASE16_SHELL/$BASE16_THEME.sh" ]; then
-	. "$BASE16_SHELL/scripts/$BASE16_THEME.sh"
+	. "$BASE16_SHELL/$BASE16_THEME.sh"
 else
 	_warn "No theme, missing $BASE16_SHELL/$BASE16_THEME.sh"
 fi
