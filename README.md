@@ -3,6 +3,14 @@ thor's `dotfiles`
 
 *Messy dot-files for a messy user*
 
+
+Usage 
+===============
+
+	$ git clone git@github.com:thor/dotfiles.git ~/.dotfiles
+	$ dotdrop install -c ~/.dotfiles/config.yaml
+
+
 `~/.config`
 -----------
 
