@@ -16,17 +16,19 @@ dotfiles:
     src: config/i3
   d_local_bin:
     dst: ~/.local/bin
-    link: !!python/object/apply:dotdrop.linktypes.LinkTypes
-    - 1
+    link: true
     src: local/bin
   f_config_nvim_init.vim:
     dst: ~/.config/nvim/init.vim
     link: true
     src: config/nvim/init.vim
+  f_gnupg_gpg.conf:
+    dst: ~/.gnupg/gpg.conf
+    link: true
+    src: gnupg/gpg.conf
   f_xresources:
     dst: ~/.Xresources
-    link: !!python/object/apply:dotdrop.linktypes.LinkTypes
-    - 1
+    link: true
     src: Xresources
   f_zshenv:
     dst: ~/.zshenv
@@ -39,12 +41,13 @@ profiles:
     - shared
   lincoln-delta:
     dotfiles:
-    - d_local_bin
-    - f_xresources
     include:
     - shared
   shared:
     dotfiles:
+    - d_local_bin
+    - f_xresources
     - f_zshenv
     - f_config_nvim_init.vim
     - d_config_i3
+    - f_gnupg_gpg.conf
