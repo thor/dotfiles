@@ -1,0 +1,23 @@
+[user]
+	email = thor@roht.no
+	name = Thor K. H.
+	signingkey = CED888E603D78BD3721687E7857DC2630B5916D8
+[push]
+	default = simple
+[core]
+	autocrlf = input
+[merge]
+	tool = nvimdiff
+[mergetool]
+	path = nvim
+	prompt = true
+[mergetool "nvimdiff"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[difftool]
+	prompt = false
+[diff]
+	tool = nvimdiff
+
+
+[commit]
+	gpgsign = false
