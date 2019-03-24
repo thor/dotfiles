@@ -1,6 +1,18 @@
-# Base16 Shell
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# zsh RC
+# - Contains various personal aliases and configuratios that always happen
+function _warn {
+	printf "WARN: %s\n" $*
+}
+
+# base16 Shell
+# - Modified to avoid .base16-theme, simplified somewhat
+BASE16_SHELL=$HOME/.config/base16-shell
+BASE16_THEME=base16-default-dark.sh
+if [ -n "$PS1" ] && [ -s $BASE16_SHELL/$BASE16_THEME ]; then
+	eval "$($BASE16_SHELL/$BASE16_THEME)"
+else
+	_warn "No theme, missing $BASE16_SHELL/$BASE16_THEME"
+fi
 
 # Nobody can live without their editor
 export EDITOR="nvim"
@@ -23,7 +35,7 @@ if [[ -d "/usr/share/fzf/" ]]; then
 	source "/usr/share/fzf/key-bindings.zsh"
 	source "/usr/share/fzf/completion.zsh"
 else
-	echo "could not find fzf script"
+	_warn "No FZF, could not find fzf script"
 fi
 
 # Use exa if available
@@ -38,7 +50,11 @@ if [[ $TERM == xterm-termite ]]; then
 fi
 
 # Configure thefuck
-eval "$(thefuck --alias)"
+if [ -s "$(which thefuck)" ]; then
+	eval "$(thefuck --alias)"
+else
+	_warn "No fuck, missing thefuck executable"
+fi
 
 # Be kind to me
 alias please='sudo $(fc -ln -1)'
