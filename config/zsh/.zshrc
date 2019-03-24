@@ -6,12 +6,12 @@ function _warn {
 
 # base16 Shell
 # - Modified to avoid .base16-theme, simplified somewhat
-BASE16_SHELL=$HOME/.config/base16-shell
-BASE16_THEME=base16-default-dark.sh
-if [ -n "$PS1" ] && [ -s $BASE16_SHELL/$BASE16_THEME ]; then
-	eval "$($BASE16_SHELL/$BASE16_THEME)"
+BASE16_SHELL=$HOME/.config/base16-shell/scripts
+BASE16_THEME=base16-default-dark
+if [ -n "$PS1" ] && [ -s "$BASE16_SHELL/$BASE16_THEME.sh" ]; then
+	. "$BASE16_SHELL/scripts/$BASE16_THEME.sh"
 else
-	_warn "No theme, missing $BASE16_SHELL/$BASE16_THEME"
+	_warn "No theme, missing $BASE16_SHELL/$BASE16_THEME.sh"
 fi
 
 # Nobody can live without their editor
@@ -19,11 +19,6 @@ export EDITOR="nvim"
 
 # Configure virtualenvwrapper
 export WORKON_HOME="$HOME/.virtualenvs"
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-alias ptpb="curl -F c=@- https://ptpb.pw"
 
 # Source prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -38,12 +33,6 @@ else
 	_warn "No FZF, could not find fzf script"
 fi
 
-# Use exa if available
-if [[ -s /usr/bin/exa ]]; then
-	alias ll="exa -lgFL 2"
-	alias la="ll -a"
-fi
-
 # termite: open current directory with ctrl+shift+t
 if [[ $TERM == xterm-termite ]]; then
 	. /etc/profile.d/vte.sh
@@ -55,6 +44,18 @@ if [ -s "$(which thefuck)" ]; then
 else
 	_warn "No fuck, missing thefuck executable"
 fi
+
+
+# Aliases and similar
+
+# Use exa if available
+if [[ -s /usr/bin/exa ]]; then
+	alias ll="exa -lgFL 2"
+	alias la="ll -a"
+fi
+
+# Setup ptpb pastebin
+alias ptpb="curl -F c=@- https://ptpb.pw"
 
 # Be kind to me
 alias please='sudo $(fc -ln -1)'
@@ -134,13 +135,13 @@ _fetchpr() {
 }
 
 # Checkout Github PR function
-gitpr() {
+function gitpr() {
     github="pull/$1/head:$2"
     _fetchpr $github $2 $3
 }
 
 # Checkout Bitbucket PR function
-bitpr() {
+function bitpr() {
     bitbucket="refs/pull-requests/$1/from:$2"
     _fetchpr $bitbucket $2 $3
 }
