@@ -7,8 +7,13 @@ thor's `dotfiles`
 Usage 
 ===============
 
-	$ git clone git@github.com:thor/dotfiles.git ~/.dotfiles
-	$ dotdrop install -c ~/.dotfiles/config.yaml
+```sh
+$ git clone git@github.com:thor/dotfiles.git ~/.dotfiles
+$ dotdrop install -c ~/.dotfiles/config.yaml
+$ # the following is somewhat ironic
+$ mkdir -p ~/.config/dotdrop
+$ ln -s ~/.dotfiles/config.yaml ~/.config/dotdrop/
+```
 
 
 `~/.config`

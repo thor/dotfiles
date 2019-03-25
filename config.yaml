@@ -8,7 +8,7 @@ config:
   link_by_default: true
   longkey: true
   showdiff: true
-  workdir: ~/.config/dotdrop
+  workdir: ~/.cache/dotdrop
 dotfiles:
   d_config_base16:
     dst: ~/.config/base16-shell
