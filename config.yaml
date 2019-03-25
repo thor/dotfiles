@@ -34,6 +34,10 @@ dotfiles:
     dst: ~/.config/polybar/config
     link: true
     src: config/polybar/config
+  f_config_termite_config:
+    dst: ~/.config/termite/config
+    link: true
+    src: config/termite/config
   f_gitconfig:
     dst: ~/.gitconfig
     link: true
@@ -75,3 +79,4 @@ profiles:
     - f_config_nvim
     - d_config_i3
     - f_gnupg_gpg.conf
+    - f_config_termite_config
