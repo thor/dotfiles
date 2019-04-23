@@ -34,6 +34,9 @@ Plug 'poppyschmo/deoplete-latex', " LaTeX completion
 	\ Cond(has('nvim'))
 Plug 'zchee/deoplete-jedi',       " Python completion
 	\ Cond(has('nvim'))
+Plug 'deoplete-plugins/deoplete-clang',
+	\ Cond(has('nvim'))			  " C/C++ completion
+	
 
 " - Syntax & File Type Enhancers
 Plug 'saltstack/salt-vim'                " YAML-assistance
@@ -113,6 +116,9 @@ if !exists('g:deoplete#omni#input_patterns')
 	let g:deoplete#omni#input_patterns = {}
 endif
 let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+" - Configure C/C++ completion
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/lib/clang/8.0.0/include'
 
 
 " # Configuring vim-pandoc
