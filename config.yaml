@@ -46,6 +46,10 @@ dotfiles:
     dst: ~/.gnupg/gpg.conf
     link: true
     src: gnupg/gpg.conf
+  f_tmux.conf:
+    dst: ~/.tmux.conf
+    link: true
+    src: tmux.conf
   f_xresources:
     dst: ~/.Xresources
     link: true
@@ -80,3 +84,4 @@ profiles:
     - d_config_i3
     - f_gnupg_gpg.conf
     - f_config_termite_config
+    - f_tmux.conf
