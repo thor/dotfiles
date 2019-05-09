@@ -127,7 +127,9 @@ let g:pandoc#formatting#mode = 'hA'
 " - Quick latex-command generation
 let g:pandoc#command#autoexec_command = 'Pandoc pdf'
 " - Set pdflatex as default engine
-let g:pandoc#command#latex_engine = 'pdflatex'
+let g:pandoc#command#latex_engine = 'lualatex'
+" - Enable bibtool for bibliography details (see deoplete)
+let g:pandoc#biblio#use_bibtool = 1
 
 
 " # Configuring vimtex
