@@ -16,12 +16,13 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'chriskempson/base16-vim'           " The enjoyable base-16 theme
 
 " - UI & Interaction
-Plug 'tpope/vim-fugitive' " Git, git, git
-Plug 'bling/vim-airline'  " It's so enjoyable with a nice status!
-Plug 'junegunn/fzf'       " Cooler fuzzy file finder
-Plug 'junegunn/fzf.vim'   " vim-integration for fuzzy file finder
-Plug 'junegunn/goyo.vim'  " Distraction free writing
-Plug 'Konfekt/FastFold'   " Less, aka faster, folding
+Plug 'tpope/vim-fugitive'     " Git, git, git
+Plug 'bling/vim-airline'      " It's so enjoyable with a nice status!
+Plug 'junegunn/fzf'           " Cooler fuzzy file finder
+Plug 'junegunn/fzf.vim'       " vim-integration for fuzzy file finder
+Plug 'junegunn/goyo.vim'      " Distraction free writing
+Plug 'junegunn/limelight.vim' " Hyper-focused writing in vim
+Plug 'Konfekt/FastFold'       " Less, aka faster, folding
 
 " - Settings management
 Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
@@ -130,6 +131,14 @@ let g:pandoc#command#autoexec_command = 'Pandoc pdf'
 let g:pandoc#command#latex_engine = 'lualatex'
 " - Enable bibtool for bibliography details (see deoplete)
 let g:pandoc#biblio#use_bibtool = 1
+" - Use citeproc backend for searching in bibliographies
+let g:pandoc#completion#mode = 'citeproc'
+" - Use headers from setext for level 1 and 2
+let g:pandoc#keyboard#sections#header_style = 's'
+" - Defer folding to fastfold (I think)
+let g:pandoc#folding#fastfolds = 1
+" - Fold the YAML front matter
+let g:pandoc#folding#fold_yaml = 1
 
 
 " # Configuring vimtex
