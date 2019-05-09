@@ -111,11 +111,11 @@ autocmd! BufWritePost * Neomake
 " # Configuring deoplete
 " - Enable at startup
 let g:deoplete#enable_at_startup = 1
-" - Configure autocompletion via vimtex
-if !exists('g:deoplete#omni#input_patterns')
-	let g:deoplete#omni#input_patterns = {}
-endif
-let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+" - Configure autocompletion for vimtex and vim-pandoc
+call deoplete#custom#var('omni', 'input_patterns', {
+			\ 'tex': g:vimtex#re#deoplete,
+			\ 'pandoc': '@\w*'
+			\ })
 " - Configure C/C++ completion
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/lib/clang/8.0.0/include'
