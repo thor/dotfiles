@@ -26,6 +26,10 @@ dotfiles:
     dst: ~/.local/bin
     link: true
     src: local/bin
+  d_local_share_pandoc:
+    dst: ~/.local/share/pandoc
+    link: true
+    src: local/share/pandoc
   f_config_nvim:
     dst: ~/.config/nvim/
     link_children: true
@@ -85,3 +89,4 @@ profiles:
     - f_gnupg_gpg.conf
     - f_config_termite_config
     - f_tmux.conf
+    - d_local_share_pandoc
