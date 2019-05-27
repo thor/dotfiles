@@ -484,9 +484,6 @@ $endif$
 $if(has-frontmatter)$
 \mainmatter
 $endif$
-\renewenvironment<>{itemize}[1][<+-| alert@+>]{%
-	\begin{originalitemize}#1}%
-	{\end{originalitemize}}
 $body$
 
 $if(has-frontmatter)$
