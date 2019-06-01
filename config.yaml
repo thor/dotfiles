@@ -38,6 +38,10 @@ dotfiles:
     dst: ~/.local/share/pandoc
     link: true
     src: local/share/pandoc
+  f_config_gtk-3.0_settings.ini:
+    dst: ~/.config/gtk-3.0/settings.ini
+    link: true
+    src: config/gtk-3.0/settings.ini
   f_config_nvim:
     dst: ~/.config/nvim/
     link_children: true
@@ -100,3 +104,4 @@ profiles:
     - d_local_share_pandoc
     - d_config_systemd
     - d_config_urlwatch
+    - f_config_gtk-3.0_settings.ini
