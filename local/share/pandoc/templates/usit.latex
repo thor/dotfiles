@@ -295,41 +295,29 @@ $else$
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 $endif$
 $if(beamer)$
-$else$
-$if(block-headings)$
-% Make \paragraph and \subparagraph free-standing
-\ifx\paragraph\undefined\else
-  \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-  \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-$endif$
-$endif$
-$if(pagestyle)$
-\pagestyle{$pagestyle$}
-$endif$
-
 % enable miniframes on the top, without subsections
 \useoutertheme[subsection=false]{miniframes}
 % \setbeamertemplate{navigation symbols}{} -->
 \mode<presentation>{\setbeamertemplate{blocks}[rounded][shadow=true]}
-% beamer: use transparency for covering hidden items
-% \setbeamercovered{transparent} -->
+% use transparency for covering hidden items
+\setbeamercovered{highly dynamic}
 
 % set colours and similarly -->
-\setbeamercolor{normal text}{fg=white!85!black,bg=black!90}
+% TODO: why doesn't the bg change?
+% background color used for USIT bg -->
+\setbeamercolor{bgcolor}{bg=black!95}
+\setbeamercolor{normal text}{fg=white!85!black,bg=black!95}
+\setbeamercolor{alerted text}{use=normal text,fg=red!60!normal text.fg}
+\setbeamercolor*{blocks}{use=normal text,bg=normal text.bg!10!black}
+\setbeamercolor{block body}{use=bgcolor, bg=bgcolor.bg!98!white}
+\setbeamercolor{block title}{use=block body, bg=block body.bg!98!white}
 \setbeamercolor*{structure}{fg=white}
-\setbeamercolor{alerted text}{use=structure,fg=red!60!white}
+% Palette colours
 \setbeamercolor*{palette primary}{use=structure,fg=structure.fg}
 \setbeamercolor*{palette secondary}{use=structure,fg=structure.fg!95!black}
 \setbeamercolor*{palette tertiary}{use=structure,fg=structure.fg!90!black}
 \setbeamercolor*{palette quaternary}{use=structure,fg=structure.fg!95!black,bg=black!80}
 \setbeamercolor*{framesubtitle}{fg=white}
-% background color used for USIT bg -->
-\setbeamercolor{bgcolor}{bg=black!90}
 
 % setup fonts -->
 \usepackage{fontspec}
@@ -355,6 +343,22 @@ $endif$
 \usepackage{letltxmacro}
 \LetLtxMacro\olditemize\itemize
 \renewcommand<>{\itemize}[1][<+-| alert@+>]{\olditemize[#1]}
+$else$
+$if(block-headings)$
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+$endif$
+$endif$
+$if(pagestyle)$
+\pagestyle{$pagestyle$}
+$endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
