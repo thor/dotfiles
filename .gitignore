@@ -1,0 +1,12 @@
+# nvim: also tracked by vim-plug
+config/nvim/autoload/
+# nvim: tracked by vim-plug
+config/nvim/plugged/
+# nvim: spelling is ignore for the time being
+config/nvim/spell/
+# nvim: same with undoing
+config/nvim/undodir/
+
+# zsh: history, completion, etc
+config/zsh/.zcompdump
+config/zsh/.zhistory
