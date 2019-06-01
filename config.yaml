@@ -18,6 +18,14 @@ dotfiles:
     dst: ~/.config/i3
     link: true
     src: config/i3
+  d_config_systemd:
+    dst: ~/.config/systemd
+    link: true
+    src: config/systemd
+  d_config_urlwatch:
+    dst: ~/.config/urlwatch
+    link: true
+    src: config/urlwatch
   d_config_zsh:
     dst: ~/.config/zsh
     link: true
@@ -90,3 +98,5 @@ profiles:
     - f_config_termite_config
     - f_tmux.conf
     - d_local_share_pandoc
+    - d_config_systemd
+    - d_config_urlwatch
