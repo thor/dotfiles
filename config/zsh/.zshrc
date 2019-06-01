@@ -55,7 +55,7 @@ if [[ -s /usr/bin/exa ]]; then
 fi
 
 # Setup ptpb pastebin
-alias ptpb="curl -F c=@- https://ptpb.pw"
+alias ptpb="curl -F c=@- https://0x0.st"
 
 # Be kind to me
 alias please='sudo $(fc -ln -1)'
