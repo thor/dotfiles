@@ -2,6 +2,12 @@ name: "returbil ledige biler"
 url: "http://returbil.no/freecar.asp?detail=show"
 filter: "css:table[width='689'] tr:not([height])>td>table tr td,html2text"
 ---
+name: "aur: koku-xinput-wine"
+url: "https://github.com/KoKuToru/koku-xinput-wine/releases/latest"
+filter:
+  - xpath: '(//div[contains(@class,"release-header")]/div/div)/a'
+  - html2text: re
+---
 # This is an example urls.yaml file for urlwatch
 # A basic URL job just needs a URL
 # name: "urlwatch webpage"
