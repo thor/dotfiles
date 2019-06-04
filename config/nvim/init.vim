@@ -77,6 +77,8 @@ Plug 'arakashic/chromatica.nvim',		 " Semantic C/C++ highlighting
 Plug 'junegunn/vim-easy-align'           " Align tables, comments, delims
 Plug 'dhruvasagar/vim-table-mode'		 " Quickly deal with tables and such
 Plug 'tpope/vim-surround'                " surrounding stuff, like parenthesis
+Plug 'dkarter/bullets.vim'				 " Bullet lists made easy and automatic
+
 
 " - Temporary plugins
 Plug 'lambdalisue/suda.vim'				 " Workaround for !sudo tee % in v-1.3
