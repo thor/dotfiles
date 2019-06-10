@@ -349,3 +349,11 @@ inoremap <silent><expr> <TAB>
 
 " - Map MarkDown/pandoc word count
 xnoremap <leader>w <esc>:'<,'>:w !mdwc<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Commands
+
+" - Add buffer deletion command for more-than-one windows and buffers
+command Bd bp | sp | bn | bd
+
