@@ -1,4 +1,9 @@
 #!/bin/bash
+# Set our standard locking-the-screen timeout
+declare -r _offtime=5
+
+# Get our current standby, suspend and offtimes
+_xset=$(LANG=en_US xset -q | grep "Standby:" | xargs echo)
 # Take a screenshot
 scrot -z /tmp/screen_locked.png
 # Edit hte screenshot with imagemagic 
@@ -10,8 +15,22 @@ convert /tmp/screen_locked.png \
 	-sample 1000% -gravity center \
 	/tmp/screen_locked2.png
 
-# Execute the lock screen
+# Catch current xset settings
+revert_dpms() {
+	set -e
+	_xset_standby=$(echo "$_xset" | cut -d" " -f2)
+	_xset_suspend=$(echo "$_xset" | cut -d" " -f2)
+	_xset_offtime=$(echo "$_xset" | cut -d" " -f2)
+	xset dpms "$_xset_standby" "$_xset_suspend" "$_xset_offtime"
+}
+# Spring revert trap before executing lock
+trap revert_dpms HUP INT TERM
+
+# Update our DPMS settings
+xset +dpms dpms $_offtime $_offtime $_offtime
+# Execute the lock screen without forking (-n)
 i3lock -i /tmp/screen_locked2.png \
+	--nofork --ignore-empty-password \
 	-k --timestr="%H:%M" --timesize=68 --timecolor=eeeeeecc \
 	--time-font="Roboto Mono for Powerline" \
 	--datestr="%A %d. %B" --datesize=24 \
@@ -20,3 +39,5 @@ i3lock -i /tmp/screen_locked2.png \
 	--radius=150 --ringcolor=ffffffcc --keyhlcolor=ff2222bb \
 	--veriftext="sjekker…" --wrongtext="feil!" --timesize=72
 
+# Revert our DPMS settings back again
+revert_dpms
