@@ -50,10 +50,10 @@ scrot -z $_TEMPORARY_BACKGROUND
 # Edit the screenshot with imagemagic 
 # - This can take time, and should be optimzed
 args_convert=(
-	# Quickly reduce the size of our background image
-	-sample 10%
-	# Add some noise and a bit of blur
-	-noise 2% -blur 1x1
+	# Quickly reduce the size of our background image and add noise
+	-sample 10% -noise 2% 
+	# Darken it and add a blur
+	-blur 2x2 -fill black -colorize 10%
 	# Scale it back up again with a gravity towards the center
 	-sample 1000% -gravity center
 	# Add rectangles to the image
