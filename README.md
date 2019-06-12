@@ -29,13 +29,8 @@ $ ln -s ~/.dotfiles/config.yaml ~/.config/dotdrop/
 -	`set-volume.sh`\
 	Increase, decrease and toggle mute of volume.
 
--	`i3-bars.sh`\
-	It does nothing.
-
-	[ ] Remove `i3-bars.sh`
-
 -	`i3-lock`\
-	Locks my screen in not-too-much-time.
+	Locks my screen in not-too-much-time, but also reduces DPMS.
 
 -	`i3-lock-on-suspend.sh`\
 	Locks my screen *on suspend*, which is neat. However, I have yet to fully
