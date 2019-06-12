@@ -89,8 +89,8 @@ args_i3lock=(
 	# Set the inside and ring color when verifying and failing
 	--insidevercolor fecf4dff --insidewrongcolor d23c3dff
 	--ringvercolor ffffffff --ringwrongcolor ffffffff
-	# Set the color of our "!" when no input, failed attempts and the size
-	--wrongcolor ffffffff --wrongsize 32  --wrong-align 0
+	# Set the color of our failed attempts and the size, but no noinput
+	--wrongcolor ffffffff --wrongsize 32  --wrong-align 0 --noinputtext=""
 )
 
 # Execute the lock screen without forking (-n)
