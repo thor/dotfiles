@@ -1,43 +1,100 @@
 #!/bin/bash
+# CONFIGURATION
+################################################################################
 # Set our standard locking-the-screen timeout
 declare -r _offtime=5
+# Set the height of the black rectangles
+declare -r _RHEIGHT=140
+# Set the width of the black rectangles
+declare -r _RWIDTH=380
+# Set the margin from the screen for the black rectangles
+declare -r _RMARGIN=50
+# Set where we store our temporary background
+declare -r _TEMPORARY_BACKGROUND=/tmp/lockscreen_background.png
 
+
+# HELPERS AND THE LIKES OF WHICH
+################################################################################
 # Get our current standby, suspend and offtimes
 _xset=$(LANG=en_US xset -q | grep "Standby:" | xargs echo)
-# Take a screenshot
-scrot -z /tmp/screen_locked.png
-# Edit hte screenshot with imagemagic 
-# - This can take time, and should be optimzed
-convert /tmp/screen_locked.png \
-	-sample 10% \
-	-noise 2% -blur 1x1 \
-	-fill black -colorize 25% \
-	-sample 1000% -gravity center \
-	/tmp/screen_locked2.png
 
-# Catch current xset settings
+# Gather monitor/screen data for rectangles
+_screens=$(xrandr --query | grep ' connected' | grep -o '[0-9][0-9]*x[0-9][0-9]*[^ ]*')
+
+# Loop through and create each rectangle
+_rects=" "
+for RES in $_screens; do
+	# See SC2206 to prevent word splitting
+	IFS=" " read -r -a SRA <<< "${RES//[x+]/ }"
+	CX=$((SRA[2] + _RMARGIN))
+	CY=$((SRA[1] - _RMARGIN))
+	_rects+="rectangle $CX,$CY $((CX + _RWIDTH)),$((CY - _RHEIGHT)) "
+done
+
+# Revert the DPMS settings to what they were
 revert_dpms() {
 	set -e
 	_xset_standby=$(echo "$_xset" | cut -d" " -f2)
-	_xset_suspend=$(echo "$_xset" | cut -d" " -f2)
-	_xset_offtime=$(echo "$_xset" | cut -d" " -f2)
+	_xset_suspend=$(echo "$_xset" | cut -d" " -f4)
+	_xset_offtime=$(echo "$_xset" | cut -d" " -f6)
 	xset dpms "$_xset_standby" "$_xset_suspend" "$_xset_offtime"
 }
+
+# MAIN PROCEDURE
+################################################################################
 # Spring revert trap before executing lock
 trap revert_dpms HUP INT TERM
 
+# Take a screenshot
+scrot -z $_TEMPORARY_BACKGROUND
+# Edit the screenshot with imagemagic 
+# - This can take time, and should be optimzed
+args_convert=(
+	# Quickly reduce the size of our background image
+	-sample 10%
+	# Add some noise and a bit of blur
+	-noise 2% -blur 1x1
+	# Scale it back up again with a gravity towards the center
+	-sample 1000% -gravity center
+	# Add rectangles to the image
+	-draw "fill black fill-opacity 0.4 $_rects"
+)
+convert $_TEMPORARY_BACKGROUND "${args_convert[@]}" $_TEMPORARY_BACKGROUND
+
 # Update our DPMS settings
 xset +dpms dpms $_offtime $_offtime $_offtime
-# Execute the lock screen without forking (-n)
-i3lock -i /tmp/screen_locked2.png \
-	--nofork --ignore-empty-password \
-	-k --timestr="%H:%M" --timesize=68 --timecolor=eeeeeecc \
-	--time-font="Roboto Mono for Powerline" \
-	--datestr="%A %d. %B" --datesize=24 \
-	--datecolor=ddddddaa \
-	--indicator \
-	--radius=150 --ringcolor=ffffffcc --keyhlcolor=ff2222bb \
-	--veriftext="sjekker…" --wrongtext="feil!" --timesize=72
+# Set up our i3lock parameters
+args_i3lock=(
+	# Use the background image we have
+	-i "$_TEMPORARY_BACKGROUND"
+	# Ignore empty passwords, but show failed attempts
+	--ignore-empty-password --show-failed-attempts
+	# Display a clock, and force it to be present
+	-k --force-clock --time-font "Arimo"
+	# The time and date, its size, string and position, then align it
+	--timepos "x+70:h-100" --timesize 76 --timestr "%H:%M" 
+	--datepos "tx+0:ty+30" --datesize 18 --datestr "%A %d. %B | Type to unlock..."
+	--time-align 1 --date-align 1
+	# Colour of the datestr and timestr
+	--timecolor ffffffff --datecolor eeeeeeff
+	# Always show the indicator, and its position, plus stroking colors
+	--indicator --indpos "x+390:h-125"
+	--keyhlcolor d23c3dff --bshlcolor d23c3dff --separatorcolor 00000000
+	# Ring radios, color and to use the line inside
+	--radius 40 --ringcolor ffffffcc --line-uses-inside
+	# No text while verifying or when it's wrong
+	--veriftext "" --wrongtext ""
+	# Standard inside and ring color
+	--insidecolor 00000000 --ringcolor ffffffff
+	# Set the inside and ring color when verifying and failing
+	--insidevercolor fecf4dff --insidewrongcolor d23c3dff
+	--ringvercolor ffffffff --ringwrongcolor ffffffff
+	# Set the color of our "!" when no input, failed attempts and the size
+	--wrongcolor ffffffff --wrongsize 32  --wrong-align 0
+)
 
+# Execute the lock screen without forking (-n)
+i3lock "${args_i3lock[@]}" --nofork
 # Revert our DPMS settings back again
 revert_dpms
+
