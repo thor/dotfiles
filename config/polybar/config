@@ -118,7 +118,7 @@ wifi-interface = wlp2s0
 
 [bar/delta-left]
 inherit = bar/first
-monitor = DP-1
+monitor = DP-4
 modules-right = 
 tray-position = none
 
