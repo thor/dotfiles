@@ -4,104 +4,109 @@ config:
   create: true
   dotpath: ~/.dotfiles
   ignoreempty: false
-  keepdot: false
-  link_by_default: true
+  keepdot: true
+  link_on_import: link_children
+  link_dotfile_default: link
   longkey: true
   showdiff: true
   workdir: ~/.cache/dotdrop
+  cmpignore:
+    - 'nvim/plugged'
+    - 'zsh/.zprezto'
+  upignore:
+    - 'nvim/plugged'
+    - 'zsh/.zprezto'
+    - 'weechat/logs'
+    - '*/.config/*'
 dotfiles:
+  d_config:
+    src: config
+    dst: ~/.config
+    link: link_children
+  d_config_nvim:
+    src: config/nvim
+    dst: ~/.config/nvim
+    link: link_children
   d_config_base16:
-    dst: ~/.config/base16-shell
-    link: true
     src: config/base16-shell
-  d_config_i3:
-    dst: ~/.config/i3
-    link: true
-    src: config/i3
-  d_config_systemd:
-    dst: ~/.config/systemd
-    link: true
-    src: config/systemd
-  d_config_urlwatch:
-    dst: ~/.config/urlwatch
-    link: true
-    src: config/urlwatch
+    dst: ~/.config/base16-shell
+    link: link
   d_config_zsh:
-    dst: ~/.config/zsh
-    link: true
     src: config/zsh
+    dst: ~/.config/zsh
+    link: link
   d_local_bin:
     dst: ~/.local/bin
-    link: true
+    link: link
     src: local/bin
   d_local_share_pandoc:
     dst: ~/.local/share/pandoc
-    link: true
+    link: link
     src: local/share/pandoc
-  f_config_gtk-3.0_settings.ini:
-    dst: ~/.config/gtk-3.0/settings.ini
-    link: true
-    src: config/gtk-3.0/settings.ini
-  f_config_nvim:
-    dst: ~/.config/nvim/
-    link_children: true
-    src: config/nvim/
-  f_config_polybar:
-    dst: ~/.config/polybar/config
-    link: true
-    src: config/polybar/config
-  f_config_termite_config:
-    dst: ~/.config/termite/config
-    link: true
-    src: config/termite/config
+  d_weechat:
+    dst: ~/.weechat
+    link: link_children
+    src: weechat
   f_gitconfig:
     dst: ~/.gitconfig
-    link: true
+    link: link
     src: gitconfig
   f_gnupg_gpg.conf:
     dst: ~/.gnupg/gpg.conf
-    link: true
+    link: link
     src: gnupg/gpg.conf
+  f_latexmkrc:
+    dst: ~/.latexmkrc
+    link: link
+    src: latexmkrc
+  f_signature:
+    src: ../docs/private-dotfiles/signature
+    dst: ~/.signature
+    link: link
+  f_config_neomutt_neomuttrc:
+    src: ../docs/private-dotfiles/neomuttrc
+    dst: ~/.config/neomutt/neomuttrc
+    link: link
   f_tmux.conf:
     dst: ~/.tmux.conf
-    link: true
+    link: link
     src: tmux.conf
   f_xresources:
     dst: ~/.Xresources
-    link: true
+    link: link
     src: Xresources
   f_zshenv:
     dst: ~/.zshenv
-    link: true
+    link: link
     src: zshenv
 profiles:
   delta-alpha:
-    dotfiles: []
     include:
     - shared
   lincoln-delta:
-    dotfiles: []
     include:
     - shared
   lincoln-echo:
-    dotfiles: []
     include:
     - shared
-  shared:
+  private:
     dotfiles:
-    - f_config_polybar
-    - f_gitconfig
-    - d_config_zsh
+    - f_signature
+    - f_config_neomutt_neomuttrc
+  shared:
+    include:
+      - private
+    dotfiles:
+    - d_config_nvim
+    - d_config
     - d_config_base16
+    - d_config_zsh
     - d_local_bin
+    - d_local_share_pandoc
+    - d_weechat
+    - f_latexmkrc
+    - f_gitconfig
     - f_xresources
     - f_zshenv
-    - f_config_nvim
-    - d_config_i3
     - f_gnupg_gpg.conf
-    - f_config_termite_config
     - f_tmux.conf
-    - d_local_share_pandoc
-    - d_config_systemd
-    - d_config_urlwatch
-    - f_config_gtk-3.0_settings.ini

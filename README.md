@@ -1,27 +1,28 @@
-thor's `dotfiles`
-===============
+thor's `dotfiles` ⚙
+===================
 
-*Messy dot-files for a messy user*
+>*Messy dotfiles for a messy user*
+
+These dotfiles are managed using [rcm][rcm], but may also be managed using
+[YADM][yadm], or even in part using [GNU stow][stow] if you want to stick to that.
 
 
 Usage 
 ===============
 
+I recommend that you *either* cherry-pick or fork the repository as a whole.
+
 ```sh
 $ git clone git@github.com:thor/dotfiles.git ~/.dotfiles
-$ dotdrop install -c ~/.dotfiles/config.yaml
-$ # the following is somewhat ironic
-$ mkdir -p ~/.config/dotdrop
-$ ln -s ~/.dotfiles/config.yaml ~/.config/dotdrop/
+$ rcup -d ~/.dotfiles
 ```
 
 
 `~/.config`
 -----------
 
-*Here be dragons* -- Abraham Lincoln
-
-
+>*Here be dragons*  
+>-- Abraham Lincoln
 
 `~/.local/bin` 
 --------------
