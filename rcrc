@@ -1,6 +1,6 @@
 # See man rcrc(5)
 # The first folder is the primary folder, and the target when using mkrc
-DOTFILES_DIRS="~/.dotfiles ~/docs/dotfiles"
+DOTFILES_DIRS="$HOME/.dotfiles $HOME/docs/dotfiles"
 SYMLINK_DIRS="config/zsh config/base16-shell"
 EXCLUDES="README.md"
 
