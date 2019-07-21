@@ -4,7 +4,7 @@ thor's `dotfiles` ⚙
 >*Messy dotfiles for a messy user*
 
 These dotfiles are managed using [rcm][rcm], but may also be managed using
-[YADM][yadm], or even in part using [GNU stow][stow] if you want to stick to that.
+[YADM][yadm].
 
 
 Usage 
@@ -22,7 +22,7 @@ $ rcup -d ~/.dotfiles
 -----------
 
 >*Here be dragons*  
->-- Abraham Lincoln
+>— Abraham Lincoln
 
 `~/.local/bin` 
 --------------
@@ -44,4 +44,14 @@ $ rcup -d ~/.dotfiles
 -	`rofi-lpass`\
 	Someone, somewhere, made a little thing for querying `lpass` via rofi.
 
+
+Notes 
+===============
+
+You could even, though not naturally, use [GNU stow][stow] if you'd like to
+manage the dotfiles through this repository.
+
+[rcm]: https://github.com/thoughtbot/rcm
+[yadm]: https://github.com/TheLocehiliosan/yadm
+[stow]: https://www.gnu.org/software/stow/
 
