@@ -45,6 +45,12 @@ else
 	_warn "No fuck, missing thefuck executable"
 fi
 
+# Set up WSL ssh-agent if relevant
+read _osrelease</proc/sys/kernel/osrelease
+if [[ "$_osrelease" == *Microsoft* ]] && [ -z "$SSH_AUTH_SOCK"]; then
+	eval $(/mnt/c/dev/ssh-agent-wsl -r)
+fi
+
 
 # Aliases and similar
 
