@@ -12,9 +12,11 @@ Usage
 
 I recommend that you *either* cherry-pick or fork the repository as a whole.
 
+The first setup is done as follows:
+
 ```sh
 $ git clone git@github.com:thor/dotfiles.git ~/.dotfiles
-$ rcup -d ~/.dotfiles
+$ RCRC=~/.dotfiles/rcrc rcup
 ```
 
 
