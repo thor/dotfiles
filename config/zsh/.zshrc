@@ -107,7 +107,7 @@ function print-ifi() {
 	local filepath="$1"
 	local file="${filepath##*/}"
 	scp "$filepath" tmhogaas@login.ifi.uio.no:Documents/
-	ssh -t tmhogaas@login.ifi.uio.no "/usr/bin/print \"Documents/${file}\" ${@:2};rm -f \"Documents/${file}\""
+	ssh -t tmhogaas@login.ifi.uio.no "/usr/bin/print ${@:2} \"Documents/${file}\"; rm -f \"Documents/${file}\""
 }
 
 function u-govc() {
