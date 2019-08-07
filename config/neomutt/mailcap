@@ -1,0 +1,6 @@
+text/html; w3m -I %{charset} -T text/html -o display_link_number=1 ; nametemplate=%s.html ; copiousoutput
+image/*;                w3m -I %{charset} ; copiousoutput
+# gzcat is not installed
+#application/x-gunzip;   gzcat; copiousoutput
+application/x-tar-gz;   gunzip -c %s | tar -tf - ; copiousoutput
+application/postscript; ps2ascii %s; copiousoutput
