@@ -1,0 +1,4 @@
+# Include the default system settings
+.include /etc/pulse/default.pa
+# Automatically switch to new devices when connected
+load-module module-switch-on-connect
