@@ -2,3 +2,5 @@
 .include /etc/pulse/default.pa
 # Automatically switch to new devices when connected
 load-module module-switch-on-connect
+# Switch between HSP and PFP when recording audio
+load-module module-bluetooth-policy auto_switch=2
