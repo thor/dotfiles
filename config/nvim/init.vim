@@ -20,6 +20,8 @@ Plug 'tpope/vim-fugitive'     " Git, git, git
 Plug 'bling/vim-airline'      " It's so enjoyable with a nice status!
 Plug 'junegunn/fzf'           " Cooler fuzzy file finder
 Plug 'junegunn/fzf.vim'       " vim-integration for fuzzy file finder
+Plug 'Shougo/defx.nvim',	  " file explorer not riddled by bugs
+	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
 Plug 'junegunn/goyo.vim'      " Distraction free writing
 Plug 'junegunn/limelight.vim' " Hyper-focused writing in vim
 Plug 'Konfekt/FastFold'       " Less, aka faster, folding
