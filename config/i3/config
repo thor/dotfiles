@@ -140,6 +140,8 @@ mode "$mode_gaps_outer" {
 bindsym $mod+Control+Return   exec termite -r floating
 # start a terminal
 bindsym $mod+Return           exec termite
+# start a kitty terminal
+bindsym $mod+Shift+Return           exec kitty
 
 # kill focused window
 bindsym $mod+Shift+aring      kill
