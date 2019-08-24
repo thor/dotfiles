@@ -46,7 +46,7 @@ revert_dpms() {
 trap revert_dpms HUP INT TERM
 
 # Take a screenshot
-scrot -z $_TEMPORARY_BACKGROUND
+scrot -zo $_TEMPORARY_BACKGROUND
 # Edit the screenshot with imagemagic 
 # - This can take time, and should be optimzed
 args_convert=(
@@ -78,7 +78,7 @@ args_i3lock=(
 	# Colour of the datestr and timestr
 	--timecolor ffffffff --datecolor eeeeeeff
 	# Always show the indicator, and its position, plus stroking colors
-	--indicator --indpos "x+390:h-125"
+	--indicator --indpos "x+370:h-125"
 	--keyhlcolor d23c3dff --bshlcolor d23c3dff --separatorcolor 00000000
 	# Ring radios, color and to use the line inside
 	--radius 40 --ringcolor ffffffcc --line-uses-inside
