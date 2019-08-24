@@ -11,12 +11,12 @@
 ; ${BLOCK.KEY}
 
 [colors]
-background = #222
-background-alt = #444
+background = #111
+background-alt = #222
 
-foreground = #dfdfdf
-foreground-alt = #555
-foreground-sec = #999
+foreground = #ccc
+foreground-alt = #444
+foreground-sec = #888
 
 primary = #ffb52a
 secondary = #e60053
@@ -105,6 +105,7 @@ inherit = bar/first
 monitor-fallback = eDP-1
 battery = CMB1
 
+
 [bar/lincoln-delta]
 inherit = bar/first
 
@@ -114,6 +115,17 @@ battery = BAT0
 ; Docking port
 eth-interface = enp0s20f0u6u2
 wifi-interface = wlp2s0
+
+
+[bar/lincoln-echo]
+inherit = bar/first
+
+; Device specific settings
+monitor-fallback = DP-2
+battery = BAT0
+; Docking port
+eth-interface = enp0s31f6
+wifi-interface = wlp61s0
 
 
 [bar/delta-left]
