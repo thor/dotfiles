@@ -1,6 +1,13 @@
-text/html; w3m -I %{charset} -T text/html -o display_link_number=1 ; nametemplate=%s.html ; copiousoutput
+# view HTML, and use link numbers with the files
+text/html;              w3m -I %{charset} -T text/html -o display_link_number=1 ; nametemplate=%s.html ; copiousoutput
+# view images too, inline
 image/*;                w3m -I %{charset} ; copiousoutput
 # gzcat is not installed
 #application/x-gunzip;   gzcat; copiousoutput
+# list archives
 application/x-tar-gz;   gunzip -c %s | tar -tf - ; copiousoutput
 application/postscript; ps2ascii %s; copiousoutput
+# view calendar invitations
+text/calendar;			mutt-ics; copiousoutput
+application/ics;		mutt-ics; copiousoutput
+
