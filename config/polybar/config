@@ -314,7 +314,6 @@ interval = 5.0
 
 label-connected = %downspeed:10:10% %upspeed% 
 
-%downspeed:min:max% = 5
 downspeed-min = 20
 accumulate-stats = true
 
