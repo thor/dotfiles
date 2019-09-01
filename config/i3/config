@@ -11,17 +11,7 @@ set $i3 ~/.config/i3
 set $Locker i3-lock
 
 #  Custom named workspaces!
-#set $wm1  "1:   cli"
-#set $wm2  "2:   web"
-#set $wm3  "3:   irc"
-#set $wm4  "4:   doc"
-#set $wm5  "5:   med"
-#set $wm6  "6:   ls"
-#set $wm7  "7:   grp"
-#set $wm8  "8:   code"
-#set $wm9  "9:   work"
-#set $wm10 "10:   huh"
-#set $wm11 "11:   extra"
+# - See polybar configuration for names/usage of workspaces
 set $wm1  "1"
 set $wm2  "2"
 set $wm3  "3"
@@ -64,6 +54,7 @@ assign [class="^chromium"] $wm2
 assign [title="^IntelliJ IDEA"] $wm8
 assign [class="^jetbrains-pycharm"] $wm8
 assign [class="^jetbrains-intellij"] $wm8
+assign [class="^Steam"] $wm5
 
 # - Window actions/behaviours
 for_window [class="^Gnome-disks$"] floating enable 
