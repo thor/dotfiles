@@ -82,7 +82,7 @@ font-5 = Noto Color Emoji:size=10:scale=10:pixelsize=13;2
 
 modules-left = i3 xwindow
 modules-center = date
-modules-right = filesystem memory cpu wlan eth net-speed openvpn battery temperature volume
+modules-right = filesystem filesystem-home memory cpu wlan eth net-speed openvpn battery temperature volume
 
 ; Set not-likely-to-change settings
 ;
@@ -174,6 +174,17 @@ interval = 30
 mount-0 = /
 
 label-mounted = %{F#0a81f5}%mountpoint%%{F-} %percentage_used%%
+label-mounted-foreground = ${colors.foreground-sec}
+label-mounted-underline = #88aaee
+label-unmounted = %mountpoint% not mounted
+
+[module/filesystem-home]
+type = internal/fs
+
+interval = 30
+mount-0 = /home
+
+label-mounted = %{F#0a81f5}~%{F-} %percentage_used%%
 label-mounted-foreground = ${colors.foreground-sec}
 label-mounted-underline = #88aaee
 label-unmounted = %mountpoint% not mounted
