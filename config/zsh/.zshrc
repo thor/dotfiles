@@ -80,11 +80,7 @@ alias vr="vagrant resume"
 alias vrld="vagrant reload"
 alias vssh="vagrant ssh"
 
-# USiT / UiO related
-alias ussh="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-alias u-socks="ssh -D 8888 -f -C -q -N thorhog@saruman.uio.no"
-alias u-socks-high="ssh -D 8889 -f -C -q -N thorhog-drift@virt-mgmt.uio.no"
-alias u-socks-external-high="ssh -D 8889 -f -C -q -N -J thorhog@saruman.uio.no,thorhog@dresden.uio.no thorhog-drift@virt-mgmt.uio.no"
+# Used by usit.sh
 function rawurlencode {
   local string="${@}"
   local strlen=${#string}
@@ -102,6 +98,8 @@ function rawurlencode {
   echo "${encoded}"    # You can either set a return variable (FASTER)
   REPLY="${encoded}"   #+or echo the result (EASIER)... or both... :p
 }
+
+# University-related for printing
 function print-ifi() {
 	set -x
 	local filepath="$1"
@@ -110,17 +108,12 @@ function print-ifi() {
 	ssh -t tmhogaas@login.ifi.uio.no "/usr/bin/print ${@:2} \"Documents/${file}\"; rm -f \"Documents/${file}\""
 }
 
-function u-govc() {
-	if [ "$1" != "" ]; then
-		local VC="${1}"
-	else
-		local VC="vcsa-vdiprod01"
-	fi
-	export https_proxy=127.0.0.1:8118
-	export GOVC_URL="thorhog-drift@${VC}.uio.no"
-	local GOVC_PASSWORD="$(rawurlencode $(secret-tool lookup domain UIO user thorhog-drift))"
-	govc session.login -u "thorhog-drift:${GOVC_PASSWORD}@${VC}.uio.no"
-}
+# Source usit.sh for work configuration
+if [[ -s "${ZDOTDIR:-$HOME}/usit.sh" ]]; then
+  source "${ZDOTDIR:-$HOME}/usit.sh"
+else 
+	_warn "Missing usit.sh, no work-related aliases will be loaded"
+fi
 
 # GitHub and BitBucket convenience
 _fetchpr() {
