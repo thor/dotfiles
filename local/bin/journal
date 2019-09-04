@@ -16,41 +16,49 @@ readonly DATE_JOURNAL_ENTRY="%A %d. %B %k:%M"
 # - create the folder containing the journal folder
 mkdir -p "$JOURNAL_FOLDER"
 
-if [ -z "$1" ]; then
+if [ -z "${1:-}" ]; then
 	echo -n "Title: "
 	read -r journal_title
 else
 	journal_title=$1
 fi
 
-journal_title_slug=$(echo "$journal_title" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9]+/-/g' | sed -E 's/^-+|-+$//g' | tr "[:upper:]-Z" "[:lower:]-z")
-journal_filename_core="$(date +"$DATE_JOURNAL")"
-journal_filename_glob="$journal_filename_core-*.md"
-journal_filename="$journal_filename_core-${journal_title_slug}.md"
-journal_filepath="$JOURNAL_FOLDER/$journal_filename"
+function journal() {
+	journal_title_slug=$(echo "$journal_title" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9]+/-/g' | sed -E 's/^-+|-+$//g' | tr "[:upper:]-Z" "[:lower:]-z")
+	journal_filename_core="$(date +"$DATE_JOURNAL")"
+	journal_filename_glob="$journal_filename_core-*.md"
+	journal_filename="$journal_filename_core-${journal_title_slug}.md"
+	journal_filepath="$JOURNAL_FOLDER/$journal_filename"
 
-old_journal_filepath="$(find $JOURNAL_FOLDER -maxdepth 1 -name "$journal_filename_glob" -print -quit)"
+	existing_journal="$(find $JOURNAL_FOLDER -maxdepth 1 -name "$journal_filename_glob" -print -quit)"
 
-if test -n "$old_journal_filepath"; then
-	set -x
-	printf "\n# %s: %s\n\n\n" "$(date +"$DATE_JOURNAL_ENTRY")" "$journal_title" >> "$old_journal_filepath"
-	nvim "$old_journal_filepath" +Goyo +$ +foldopen +startinsert
+	if test -n "$existing_journal"; then
+		set -x
+		printf \
+			"\n# %s: %s\n\n\n" \
+			"$(date +"$DATE_JOURNAL_ENTRY")" \
+			"$journal_title" \
+			>> "$existing_journal"
+		nvim "$existing_journal" +Goyo +$ +foldopen +startinsert
 
-else
-	cat <<- EOF | nvim +"file $journal_filepath" +Goyo +$ +foldopen +startinsert -
-	---
-	title: "$journal_title"
-	date: "$(date +"$DATE_JOURNAL")"
-	---
+	else
+		cat <<- EOF | nvim +"file $journal_filepath" +Goyo +$ +foldopen +startinsert -
+		---
+		title: "$journal_title"
+		date: "$(date +"$DATE_JOURNAL")"
+		---
 
-	# $(date +"$DATE_JOURNAL_ENTRY")
+		# $(date +"$DATE_JOURNAL_ENTRY")
 
 
-	EOF
-fi
+		EOF
+	fi
 
-# Return to start; OR in the event something happened to the folder
-cd "$EXECUTION_FOLDER" || exit
+	# Return to start; OR in the event something happened to the folder
+	cd "$EXECUTION_FOLDER" || exit
+
+}
+
 
 ## export or run
 if [ "${BASH_SOURCE[0]}" != "$0" ]; then

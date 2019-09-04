@@ -14,11 +14,6 @@ else
 	_warn "No theme, missing $BASE16_SHELL/$BASE16_THEME.sh"
 fi
 
-# Nobody can live without their editor
-export EDITOR="nvim"
-
-# Configure virtualenvwrapper
-export WORKON_HOME="$HOME/.virtualenvs"
 
 # Source prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -53,6 +48,9 @@ fi
 
 
 # Aliases and similar
+
+# Journal is too long
+alias j=journal
 
 # Use exa if available
 if [[ -s /usr/bin/exa ]]; then
