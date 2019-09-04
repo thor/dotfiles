@@ -109,8 +109,8 @@ function print-ifi() {
 }
 
 # Source usit.sh for work configuration
-if [[ -s "${ZDOTDIR:-$HOME}/usit.sh" ]]; then
-  source "${ZDOTDIR:-$HOME}/usit.sh"
+if [[ -s "${$HOME}/.local/lib/usit.sh" ]]; then
+  source "${$HOME}/.local/lib/usit.sh"
 else 
 	_warn "Missing usit.sh, no work-related aliases will be loaded"
 fi
