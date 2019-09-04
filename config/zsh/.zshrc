@@ -109,8 +109,8 @@ function print-ifi() {
 }
 
 # Source usit.sh for work configuration
-if [[ -s "${$HOME}/.local/lib/usit.sh" ]]; then
-  source "${$HOME}/.local/lib/usit.sh"
+if [[ -s "${HOME}/.local/lib/usit.sh" ]]; then
+  source "${HOME}/.local/lib/usit.sh"
 else 
 	_warn "Missing usit.sh, no work-related aliases will be loaded"
 fi
