@@ -49,33 +49,25 @@ Plug 'lervag/vimtex'                     " Added vimtex for LaTeX editing
 Plug 'rust-lang/rust.vim'                " Rust-syntax
 Plug 'Shirk/vim-gas'					 " AT&T Assembly syntax
 Plug 'wannesm/wmgraphviz.vim'            " GraphViz
-" Plug 'gabrielelana/vim-markdown'         " MarkDown (GitHub-flavour)
-Plug 'chikamichi/mediawiki.vim'          " Mediawiki-syntax
-									 " --- reStructuredText
-" Plug 'thor/riv.vim'                      " reStructuredText, bloated tho
-Plug 'gu-fan/riv.vim'                    " reStructuredText, bloated tho
-Plug 'gu-fan/InstantRst'                 " reStructuredText, previews
-                                         " --- binary hex
-Plug 'fidian/hexmode'                    " Hexmode
-Plug 'hashivim/vim-terraform'            " Terraform, syntax, with more
-Plug 'aklt/plantuml-syntax'              " PlantUML
-                                         " --- pandoc
-Plug 'vim-pandoc/vim-pandoc'             " pandoc-features
-Plug 'vim-pandoc/vim-pandoc-syntax'      " pandoc-syntax
-                                         " --- scheme/racket
-" Plug 'wlangstroth/vim-racket'            " racket syntax
-" Plug 'jpalardy/vim-slime'                " SLIME
-" Plug 'guns/vim-sexp'                     " S-editing
-                                         " --- python
-Plug 'numirias/semshi',                  " Semantic Python highlighting
-	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
+Plug 'fatih/vim-go',					 " Go-go-go-go
+	\ { 'do': ':GoUpdateBinaries' }
 Plug 'arakashic/chromatica.nvim',		 " Semantic C/C++ highlighting
 	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins',
 		\'for': ['c', 'cpp', 'objc', 'objcpp'] })
+Plug 'numirias/semshi',                  " Semantic Python highlighting
+	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
+
+" --- binary hex
+Plug 'fidian/hexmode'                    " Hexmode
+Plug 'hashivim/vim-terraform'            " Terraform, syntax, with more
+Plug 'aklt/plantuml-syntax'              " PlantUML
+
+" --- pandoc
+Plug 'vim-pandoc/vim-pandoc'             " pandoc-features
+Plug 'vim-pandoc/vim-pandoc-syntax'      " pandoc-syntax
 
 
-
-" - Text Manipulation
+"" - Text Manipulation
 Plug 'junegunn/vim-easy-align'           " Align tables, comments, delims
 Plug 'dhruvasagar/vim-table-mode'		 " Quickly deal with tables and such
 Plug 'tpope/vim-surround'                " surrounding stuff, like parenthesis
@@ -208,6 +200,18 @@ let g:pandoc_fold_enabled = 1
 let g:table_mode_corner_corner = '+'
 let g:table_mode_header_fillchar = '='
 
+" # Configuring defx
+runtime! sections/defx.vim
+
+" # Configuring Goyo
+" - Turning on and off syntax to fix issues with italis and bold
+"   https://github.com/junegunn/goyo.vim/issues/156
+function! s:goyo_leave()
+  syntax off
+  syntax on
+endfunction
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Core vim configurations
 " - (d) neovim default
@@ -268,7 +272,7 @@ augroup END " }
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Key mappings
+" Global key mappings
 
 " - Set mapleader to be space, convenient
 let mapleader = " "
@@ -348,6 +352,11 @@ inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ deoplete#manual_complete()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" File-based key mappings
+" TODO: move to own files
 
 " - Map MarkDown/pandoc word count
 xnoremap <leader>w <esc>:'<,'>:w !mdwc<CR>
