@@ -60,7 +60,7 @@ assign [class="^Steam"] $wm5
 for_window [class="^Gnome-disks$"] floating enable 
 for_window [title="^WeeChat" class="^Gnome-terminal"] move container to workspace $wm3
 for_window [class="^Skype" window_role="^CallWindow$"] floating enable, sticky enable, move position mouse, resize 650 400
-for_window [class="^Termite" window_role="^floating$"] floating enable, sticky enable
+for_window [class="^floating$"] floating enable, sticky enable
 for_window [class="^Zotero" title="^Quick Format Citation"] floating enable
 for_window [class="^Pavucontrol"] floating enable, resize set 550 690
 for_window [class="^Toggl Desktop$"] floating enable, resize set 500 600, sticky enable
@@ -128,7 +128,7 @@ mode "$mode_gaps_outer" {
 #------------------
 # Keyboard (most) bindings
 # start a floating terminal, because I'm lazy!
-bindsym $mod+Control+Return   exec kitty -r floating
+bindsym $mod+Control+Return   exec kitty --class floating
 # start a kitty terminal
 bindsym $mod+Return           exec kitty
 
