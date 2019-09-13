@@ -128,11 +128,9 @@ mode "$mode_gaps_outer" {
 #------------------
 # Keyboard (most) bindings
 # start a floating terminal, because I'm lazy!
-bindsym $mod+Control+Return   exec termite -r floating
-# start a terminal
-bindsym $mod+Return           exec termite
+bindsym $mod+Control+Return   exec kitty -r floating
 # start a kitty terminal
-bindsym $mod+Shift+Return           exec kitty
+bindsym $mod+Return           exec kitty
 
 # kill focused window
 bindsym $mod+Shift+aring      kill
