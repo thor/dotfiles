@@ -197,8 +197,9 @@ let g:pandoc_fold_enabled = 1
 
 " # Configuring vim-table-mode
 " - ReST-compatible tables for pandoc GRID tables too
-let g:table_mode_corner_corner = '+'
-let g:table_mode_header_fillchar = '='
+"   TODO: change this to + and = for .rst files only
+let g:table_mode_corner_corner = '|'
+let g:table_mode_header_fillchar = '-'
 
 " # Configuring defx
 runtime! sections/defx.vim
