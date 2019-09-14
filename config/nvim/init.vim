@@ -198,7 +198,7 @@ let g:pandoc_fold_enabled = 1
 " # Configuring vim-table-mode
 " - ReST-compatible tables for pandoc GRID tables too
 "   TODO: change this to + and = for .rst files only
-let g:table_mode_corner_corner = '|'
+let g:table_mode_corner = '|'
 let g:table_mode_header_fillchar = '-'
 
 " # Configuring defx
@@ -295,21 +295,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" - Setup table edit mode on with || and off with __ with pandoc disablement
-function! s:isAtStartOfLine(mapping)
-  let text_before_cursor = getline('.')[0 : col('.')-1]
-  let mapping_pattern = '\V' . escape(a:mapping, '\')
-  let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
-  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
-endfunction
-
-inoreabbrev <expr> <bar><bar>
-          \ <SID>isAtStartOfLine('\|\|') ?
-          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
-inoreabbrev <expr> __
-          \ <SID>isAtStartOfLine('__') ?
-          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
-
+" - Setup table mode is just enabled/disabled manually
 xnoremap <leader>tt <Plug>(table-mode-tableize)
 nnoremap <leader>tt <Plug>(table-mode-tableize)
 
@@ -322,7 +308,7 @@ nnoremap <leader>tm :<C-U>call <SID>toggleTables()<CR>
 function! s:pandocOnWrite()
   let g:pandoc#command#autoexec_on_writes = 1
 endfunction
-nnoremap <leader>pl :<C-U>call <SID>pandocOnWrite()<CR>
+nnoremap <leader>pw :<C-U>call <SID>pandocOnWrite()<CR>
 
 
 " - Map paste-mode
