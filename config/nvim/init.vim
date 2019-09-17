@@ -136,7 +136,7 @@ call deoplete#custom#var('omni', 'input_patterns', {
 			\ })
 " - Configure C/C++ completion
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-let g:deoplete#sources#clang#clang_header = '/lib/clang/8.0.0/include'
+let g:deoplete#sources#clang#clang_header = '/lib/clang/8.0.1/include'
 
 
 " # Configuring vim-pandoc
