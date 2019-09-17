@@ -1,9 +1,6 @@
 #
 # Executes commands at login pre-zshrc.
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
 
 #
 # Editors
@@ -20,16 +17,44 @@ if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
 fi
 
+# 
+# Appearance
+# 
+# - Set the default BASE16_THEME so that a terminal emulator may dynamically
+#   load it as it pleases, which works better for Kitty than setting it
+#   with a script upon every start. Plus, at the time of this writing, I
+#   start Kitty via i3.
+export BASE16_THEME=base16-default-dark
+
 #
 # Paths
 #
 
-# Ensure path arrays do not contain duplicates.
+# Ensure path arrays do not contain duplicates and setup added folders.
 typeset -gU cdpath fpath mailpath path
-# We don't actually set any paths here though
+path=(
+	~/.local/bin
+	~/dev/go/bin
+	~/.gem/ruby/2.5.0/bin
+	$path[@]
+)
+# Set up GOPATH
+export GOPATH=~/dev/go
 
-# Configure virtualenvwrapper
+# 
+# Special locations
+#
+
+# - Configure virtualenvwrapper
 export WORKON_HOME="$HOME/.virtualenvs"
+
+# - Temporary Files
+if [[ ! -d "$TMPDIR" ]]; then
+  export TMPDIR="/tmp/$LOGNAME"
+  mkdir -p -m 700 "$TMPDIR"
+fi
+
+TMPPREFIX="${TMPDIR%/}/zsh"
 
 #
 # Less
@@ -46,13 +71,3 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
 
-#
-# Temporary Files
-#
-
-if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$LOGNAME"
-  mkdir -p -m 700 "$TMPDIR"
-fi
-
-TMPPREFIX="${TMPDIR%/}/zsh"
