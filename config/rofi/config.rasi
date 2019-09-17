@@ -22,9 +22,9 @@ configuration {
 /*	drun-icon-theme: ;*/
 /*	drun-match-fields: "name,generic,exec,categories";*/
 /*	disable-history: false;*/
-/*	sort: false;*/
-/*  disabled as to use fzf-matching */
-  	levenshtein-sort: false;  
+	sort: true;
+/*  use fzf sort, not levehnstein */
+	sorting-method: "fzf";
 	case-sensitive: false;
 /*	cycle: true;*/
 	sidebar-mode: false;
