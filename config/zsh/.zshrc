@@ -1,14 +1,17 @@
 # zsh RC
 # - Contains various personal aliases and configuratios that always happen
 function _warn {
-	printf "WARN: %s\n" $*
+	printf "WARN: %s\n" "$@"
 }
 
 # base16 Shell
 # - Modified to avoid .base16-theme, simplified somewhat
+# - NOTE: the scripts are not necessary with kitty, nor helpful
 BASE16_SHELL=$HOME/.config/base16-shell/scripts
 BASE16_THEME=base16-default-dark
-if [ -n "$PS1" ] && [ -s "$BASE16_SHELL/$BASE16_THEME.sh" ]; then
+if [ "$TERM" = "xterm-kitty" ]; then
+	true
+elif [ -n "$PS1" ] && [ -s "$BASE16_SHELL/$BASE16_THEME.sh" ]; then
 	. "$BASE16_SHELL/$BASE16_THEME.sh"
 else
 	_warn "No theme, missing $BASE16_SHELL/$BASE16_THEME.sh"
@@ -34,16 +37,16 @@ if [[ $TERM == xterm-termite ]]; then
 fi
 
 # Configure thefuck
-if [ -s "$(which thefuck)" ]; then
+if [ -s "$(command -v thefuck)" ]; then
 	eval "$(thefuck --alias)"
 else
 	_warn "No fuck, missing thefuck executable"
 fi
 
 # Set up WSL ssh-agent if relevant
-read _osrelease</proc/sys/kernel/osrelease
-if [[ "$_osrelease" == *Microsoft* ]] && [ -z "$SSH_AUTH_SOCK"]; then
-	eval $(/mnt/c/dev/ssh-agent-wsl -r)
+read -r _osrelease</proc/sys/kernel/osrelease
+if [[ "$_osrelease" == *Microsoft* ]] && [ -z "$SSH_AUTH_SOCK" ]; then
+	eval "$(/mnt/c/dev/ssh-agent-wsl -r)"
 fi
 
 
@@ -80,7 +83,8 @@ alias vssh="vagrant ssh"
 
 # Used by usit.sh
 function rawurlencode {
-  local string="${@}"
+  # TODO: verify that it shouldn't be ${@}
+  local string="${*}"
   local strlen=${#string}
   local encoded=""
   local pos c o
@@ -120,12 +124,12 @@ _fetchpr() {
     branch=$2
     program=${funcstack#_fetchpr};
     if (( $# != 2 && $# != 3 )) then
-        echo usage:$program id branchname \[remote\];
+        echo "usage:$program id branchname \[remote\]"
 	return 1
     fi
 
     if git rev-parse --git-dir &> /dev/null; then
-         git fetch $origin $ref && git checkout $branch
+         git fetch "$origin" "$ref" && git checkout "$branch"
     else
 	echo 'error: not in git repo'
     fi
@@ -134,11 +138,11 @@ _fetchpr() {
 # Checkout Github PR function
 function gitpr() {
     github="pull/$1/head:$2"
-    _fetchpr $github $2 $3
+    _fetchpr "$github" "$2" "$3"
 }
 
 # Checkout Bitbucket PR function
 function bitpr() {
     bitbucket="refs/pull-requests/$1/from:$2"
-    _fetchpr $bitbucket $2 $3
+    _fetchpr "$bitbucket" "$2" "$3"
 }
