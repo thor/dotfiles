@@ -8,7 +8,7 @@ set -o nounset
 # - the folder we execute the script from
 readonly EXECUTION_FOLDER=$(pwd)
 # - the folder containing our journal entries
-readonly JOURNAL_FOLDER=~/dev/master-thesis/journal
+readonly JOURNAL_FOLDER=~/master/journal
 # - the date format for the journal on
 readonly DATE_JOURNAL="%Y-%m-%d"
 # - the date format for a journal entry
