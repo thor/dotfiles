@@ -19,12 +19,24 @@ $ git clone git@github.com:thor/dotfiles.git ~/.dotfiles
 $ RCRC=~/.dotfiles/rcrc rcup
 ```
 
+After that...
+
+```sh
+~ $ rcup
+```
 
 `~/.config`
 -----------
 
 >*Here be dragons*  
 >— Abraham Lincoln
+
+
+-	`kitty/`\
+	Configuration files for my *current choice* terminal emulator.
+-	`termite/`\
+	Configuration files for my former choice of terminal emulator.
+
 
 `~/.local/bin` 
 --------------
