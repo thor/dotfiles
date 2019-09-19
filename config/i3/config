@@ -64,6 +64,8 @@ for_window [class="^floating$"] floating enable, sticky enable
 for_window [class="^Zotero" title="^Quick Format Citation"] floating enable
 for_window [class="^Pavucontrol"] floating enable, resize set 550 690
 for_window [class="^Toggl Desktop$"] floating enable, resize set 500 600, sticky enable
+# -- Google Play Music mini player
+for_window [instance="fahmaaghhglfmonjliepjlchgpgfmobi"] floating enable, resize set 500 600, sticky enable
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
