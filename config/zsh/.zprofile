@@ -35,7 +35,6 @@ typeset -gU cdpath fpath mailpath path
 path=(
 	~/.local/bin
 	~/dev/go/bin
-	~/.gem/ruby/2.5.0/bin
 	$path[@]
 )
 # Set up GOPATH
