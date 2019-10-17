@@ -1,0 +1,2 @@
+#!/bin/sh
+pandoc --lua-filter wordcount.lua "$@"
