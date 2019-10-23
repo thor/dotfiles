@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 #
 # Executes commands at login pre-zshrc.
 #
@@ -12,10 +13,15 @@ export PAGER='less'
 
 #
 # Language
-#
+# 
+# - There's only one to default to
 if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
+  export LANG='en_GB.UTF-8'
 fi
+# - Ibus for Korean
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
 
 # 
 # Appearance
@@ -31,7 +37,7 @@ export BASE16_THEME=base16-default-dark
 #
 
 # Ensure path arrays do not contain duplicates and setup added folders.
-typeset -gU cdpath fpath mailpath path
+typeset -gu cdpath fpath mailpath path
 path=(
 	~/.local/bin
 	~/dev/go/bin
