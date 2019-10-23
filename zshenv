@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # We like our relatively dotless directory
 export ZDOTDIR=~/.config/zsh
 # Ensure that a non-login, non-interactive shell has a defined environment.
