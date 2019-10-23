@@ -324,6 +324,7 @@ mode "$mode_system" {
 bindsym $mod+Pause mode "$mode_system"
 bindsym $mod+Menu mode "$mode_system"
 bindsym $mod+Print mode "$mode_system"
+bindsym Ctrl+Alt+R exec sh -c "maim -s | xclip -selection clipboard -t image/png"
 
 # MODE: configure monitors/deal with docking
 set $mode_dock Docking:  laptop [L],  work [W],  row [R],  extend left [H],  extend right [S],  duplicate [D]
