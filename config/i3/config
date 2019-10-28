@@ -156,9 +156,9 @@ bindcode $mod+52              exec --no-startup-id "emoji-keyboard -s"
 
 # - marks
 # -- create mark
-bindsym $mod+m         exec i3-input -F 'mark "%s"' -P 'label for mark: '
+bindsym $mod+m exec i3-input -F 'mark "%s"' -l 1 -P 'label for mark: '
 # -- go to marks, 1-3
-bindsym $mod+Control+m exec i3-input -F '[con_mark="%s"] focus' -P 'goto mark: '
+bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'goto mark: '
 
 # Focus movement
 # - keyboard
