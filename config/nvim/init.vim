@@ -25,6 +25,8 @@ Plug 'Shougo/defx.nvim',	  " file explorer not riddled by bugs
 Plug 'junegunn/goyo.vim'      " Distraction free writing
 Plug 'junegunn/limelight.vim' " Hyper-focused writing in vim
 Plug 'Konfekt/FastFold'       " Less, aka faster, folding
+Plug 'vimwiki/vimwiki', 	  " personal wiki/notes for vim
+	\ {'for': 'mkd'}
 
 " - Settings management
 Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
@@ -62,9 +64,11 @@ Plug 'fidian/hexmode'                    " Hexmode
 Plug 'hashivim/vim-terraform'            " Terraform, syntax, with more
 Plug 'aklt/plantuml-syntax'              " PlantUML
 
-" --- pandoc
+" --- Writing enhancements
 Plug 'vim-pandoc/vim-pandoc'             " pandoc-features
 Plug 'vim-pandoc/vim-pandoc-syntax'      " pandoc-syntax
+Plug 'reedes/vim-pencil'			     " The pencil
+
 
 
 "" - Text Manipulation
@@ -141,7 +145,7 @@ let g:deoplete#sources#clang#clang_header = '/lib/clang/8.0.1/include'
 
 " # Configuring vim-pandoc
 " - Setting textwidth and formatting
-let g:pandoc#formatting#mode = 'hA'
+"let g:pandoc#formatting#mode = 'hA'
 " - Quick latex-command generation
 let g:pandoc#command#autoexec_command = 'Pandoc pdf'
 " - Set pdflatex as default engine
@@ -201,6 +205,31 @@ let g:pandoc_fold_enabled = 1
 let g:table_mode_corner = '|'
 let g:table_mode_header_fillchar = '-'
 
+" # Configuring vimwiki
+" - setting the list of notes/wikis
+let g:vimwiki_list = [
+			\ {'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'},
+			\ {'path': '~/master/journal','syntax': 'markdown', 'ext': '.md'}]
+" - try to use pandoc with vimwiki
+augroup vimwiki_pandoc
+  autocmd!
+  autocmd BufEnter,BufRead,BufNewFile *.md set filetype=pandoc
+  autocmd FileType vimwiki set syntax=pandoc
+augroup END
+" - try to change the file endings away from .md
+let g:vimwiki_ext2syntax = {'.mdk': 'markdown',
+			\ '.wiki': 'media'}
+
+" # Configuring vim-pencil
+" - soft as default
+let g:pencil#wrapModeDefault = 'soft'
+" - two spaces after periods
+let g:pencil#joinspaces = 1     " 0=one_space (def), 1=two_spaces
+" - no concealment
+let g:pencil#conceallevel = 2     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
+" - add to airline
+let g:airline_section_x = '%{PencilMode()}'
+
 " # Configuring defx
 runtime! sections/defx.vim
 
@@ -208,8 +237,10 @@ runtime! sections/defx.vim
 " - Turning on and off syntax to fix issues with italis and bold
 "   https://github.com/junegunn/goyo.vim/issues/156
 function! s:goyo_leave()
+  let l:set_syntax = &syntax
   syntax off
   syntax on
+  let &syntax = l:set_syntax
 endfunction
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
@@ -305,10 +336,18 @@ function! s:toggleTables()
 endfunction
 nnoremap <leader>tm :<C-U>call <SID>toggleTables()<CR>
 
+" - Setup Pandoc writes!
 function! s:pandocOnWrite()
   let g:pandoc#command#autoexec_on_writes = 1
 endfunction
 nnoremap <leader>pw :<C-U>call <SID>pandocOnWrite()<CR>
+
+" - Setup Pandoc soft-mode TODO
+function! s:pandocSoft()
+  call pandoc#formatting#DisableAutoformat()
+  PencilSoft
+endfunction
+nnoremap <leader>ps :<C-U>call <SID>pandocSoft()<CR>
 
 
 " - Map paste-mode
