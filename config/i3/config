@@ -145,8 +145,8 @@ bindsym $mod+e                exec "rofi -show drun -width 35 -lines 10"
 bindsym $mod+r                exec i3-input -F 'rename workspace to "%s"' -P 'new name for workspace: '
 # - open windows (. being 'e' physically)
 bindsym Mod1+Tab              exec --no-startup-id "rofi -show window"
-# - run something!
-bindsym $mod+q                exec --no-startup-id "rofi -show run"
+# - open password manager!
+bindsym $mod+q                exec --no-startup-id "rofi-lpass"
 # - open a ssh connection
 bindsym $mod+i                exec --no-startup-id "rofi -show ssh"
 
