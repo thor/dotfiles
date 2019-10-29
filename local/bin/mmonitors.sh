@@ -81,9 +81,17 @@ refresh_bar() {
 set_work() {
 	stop_compositor
 	$XRANDR \
-		--output eDP-1 --auto \
-		--output DP-1-2 --primary --auto --right-of eDP-1 \
-		--output HDMI-1 --auto --right-of DP-1-2
+		--output eDP-1 --off \
+		--output DP-1 --off --output HDMI-1 --off \
+		--output DP-2 --off \
+		--output HDMI-2 --mode 2560x1440 --pos 0x0 --rotate normal \
+		--output DP-2-1 --off \
+		--output DP-2-2 --off \
+		--output DP-2-3 --off \
+		--output DP-1-1 --mode 2560x1440 --pos 5120x0 --rotate normal \
+		--output DP-1-2 --primary --mode 2560x1440 --pos 2560x0 --rotate normal \
+		--output DP-1-3 --off
+	feh --bg-fill --no-fehbg --randomize ~/Dropbox/Variert/Bakgrunner/up-close/
 	start_compositor
 	refresh_bar
 }
