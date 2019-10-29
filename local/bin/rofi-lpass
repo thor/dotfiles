@@ -3,6 +3,10 @@
 set -e
 set -o pipefail
 
+print-settings() {
+  echo -en "\x00prompt\x1flastpass\n"
+}
+
 print-account-list() {
   lpass ls --format "%/as%ag - %an (%au) [%ai]" 2>&1
 }
@@ -86,5 +90,6 @@ if is-entry-selected "$1"; then
     exit 1
   fi
 else
+  print-settings
   print-account-list
 fi
