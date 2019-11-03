@@ -123,6 +123,9 @@ let g:airline_mode_map = {
 			\ 'V'  : 'V-L',
 			\ '' : 'V-B',
 			\ }
+" - enable basic wordcount for vim-pandoc
+let g:airline#extensions#wordcount#filetypes+=['pandoc']
+
 
 
 " # Configuring Neomake
