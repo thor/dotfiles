@@ -124,7 +124,9 @@ let g:airline_mode_map = {
 			\ '' : 'V-B',
 			\ }
 " - enable basic wordcount for vim-pandoc
-let g:airline#extensions#wordcount#filetypes+=['pandoc']
+let g:airline#extensions#wordcount#filetypes = [
+			\ 'asciidoc', 'help', 'mail', 'markdown', 'org', 'rst', 
+			\ 'tex', 'text', 'pandoc']
 
 
 
