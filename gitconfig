@@ -22,9 +22,11 @@
 	show = /usr/share/git/diff-highlight/diff-highlight | less
 	diff = /usr/share/git/diff-highlight/diff-highlight | less
 
-
-
 [commit]
 	gpgsign = false
 [gui]
 	fontdiff = -family \"Fantasque Sans Mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+
+[includeIf "gitdir:~/dev/USIT/"]
+	path = ~/.config/git/work
+
