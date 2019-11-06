@@ -1,0 +1,10 @@
+[Unit]
+Description=Mailbox %i timed synchronisation
+
+[Timer]
+OnUnitInactiveSec=300
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
