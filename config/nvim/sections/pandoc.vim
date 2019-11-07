@@ -38,11 +38,14 @@ else
 endif
 " }}}
 
-" try to use pandoc with vimwiki {{{
-augroup vimwiki_pandoc
+" pandoc autocmd {{{
+augroup just_pandoc_things
   autocmd!
+  " - making it work well with vimwiki (forcing upon it)
   autocmd BufEnter,BufRead,BufNewFile *.md set filetype=pandoc
   autocmd FileType vimwiki set syntax=pandoc
+  " - adding my favourite keybinding
+  noremap <Leader>t :noautocmd vimgrep /TODO/j *.md<CR>:cw<CR>
 augroup END
 " }}}
 
