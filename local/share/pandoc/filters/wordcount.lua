@@ -1,5 +1,4 @@
 -- counts words in a document 
-
 words = 0 
 
 wordcount = { 
