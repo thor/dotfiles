@@ -35,8 +35,6 @@ Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
 Plug 'neomake/neomake'            " Code linting and compiling
 Plug 'Shougo/deoplete.nvim',      " Code completion with darkness
 	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
-Plug 'poppyschmo/deoplete-latex', " LaTeX completion
-	\ Cond(has('nvim'))
 Plug 'zchee/deoplete-jedi',       " Python completion
 	\ Cond(has('nvim'))
 Plug 'deoplete-plugins/deoplete-clang',
@@ -47,7 +45,7 @@ Plug 'deoplete-plugins/deoplete-clang',
 Plug 'saltstack/salt-vim'                " YAML-assistance
 Plug 'stephpy/vim-yaml'                  " YAML-syntax
 Plug 'Matt-Deacalion/vim-systemd-syntax' " systemd unit files syntax
-Plug 'lervag/vimtex'                     " Added vimtex for LaTeX editing
+Plug 'lervag/vimtex'                     " LaTeX editing & completion and all
 Plug 'rust-lang/rust.vim'                " Rust-syntax
 Plug 'Shirk/vim-gas'					 " AT&T Assembly syntax
 Plug 'wannesm/wmgraphviz.vim'            " GraphViz
