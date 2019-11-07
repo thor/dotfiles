@@ -140,31 +140,18 @@ autocmd! BufWritePost * Neomake
 let g:deoplete#enable_at_startup = 1
 " - Configure autocompletion for vimtex and vim-pandoc
 call deoplete#custom#var('omni', 'input_patterns', {
+			\ 'pandoc': '@\w\w*',
 			\ 'tex': g:vimtex#re#deoplete,
-			\ 'pandoc': '@\w*'
 			\ })
+" - 350ms delay by default
+call deoplete#custom#option('auto_complete_delay', 350)
 " - Configure C/C++ completion
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/lib/clang/8.0.1/include'
 
 
 " # Configuring vim-pandoc
-" - Setting textwidth and formatting
-"let g:pandoc#formatting#mode = 'hA'
-" - Quick latex-command generation
-let g:pandoc#command#autoexec_command = 'Pandoc pdf'
-" - Set pdflatex as default engine
-let g:pandoc#command#latex_engine = 'lualatex'
-" - Enable bibtool for bibliography details (see deoplete)
-let g:pandoc#biblio#use_bibtool = 1
-" - Use citeproc backend for searching in bibliographies
-let g:pandoc#completion#mode = 'citeproc'
-" - Use headers from setext for level 1 and 2
-let g:pandoc#keyboard#sections#header_style = 's'
-" - Defer folding to fastfold (I think)
-let g:pandoc#folding#fastfolds = 1
-" - Fold the YAML front matter
-let g:pandoc#folding#fold_yaml = 1
+runtime! sections/pandoc.vim
 
 
 " # Configuring vimtex
@@ -215,12 +202,6 @@ let g:table_mode_header_fillchar = '-'
 let g:vimwiki_list = [
 			\ {'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'},
 			\ {'path': '~/master/journal','syntax': 'markdown', 'ext': '.md'}]
-" - try to use pandoc with vimwiki
-augroup vimwiki_pandoc
-  autocmd!
-  autocmd BufEnter,BufRead,BufNewFile *.md set filetype=pandoc
-  autocmd FileType vimwiki set syntax=pandoc
-augroup END
 " - try to change the file endings away from .md
 let g:vimwiki_ext2syntax = {'.mdk': 'markdown',
 			\ '.wiki': 'media'}
@@ -272,6 +253,7 @@ set background=dark             " Use the dark theme of whatever colorscheme.
 
 " Colouring / syntax / schemes
 let g:load_doxygen_syntax=1     " Automatically load Doxygen syntax for C/C++.
+set foldmethod=marker           " Change from manual to marker for folding defaults
 
 " Spacing / tabs / code-style
 set tabstop=4               " Visual space per TAB used!
@@ -342,16 +324,9 @@ endfunction
 nnoremap <leader>tm :<C-U>call <SID>toggleTables()<CR>
 
 " - Setup Pandoc writes!
-function! s:pandocOnWrite()
-  let g:pandoc#command#autoexec_on_writes = 1
-endfunction
 nnoremap <leader>pw :<C-U>call <SID>pandocOnWrite()<CR>
 
 " - Setup Pandoc soft-mode TODO
-function! s:pandocSoft()
-  call pandoc#formatting#DisableAutoformat()
-  PencilSoft
-endfunction
 nnoremap <leader>ps :<C-U>call <SID>pandocSoft()<CR>
 
 
@@ -378,10 +353,14 @@ nnoremap <F11> :Goyo<cr>
 function! s:check_back_space() abort "{{{
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
+endfunction "}}}
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
+      \ deoplete#manual_complete()
+inoremap <silent><expr> <s-TAB>
+      \ pumvisible() ? "\<C-p>" :
+      \ <SID>check_back_space() ? "\<s-TAB>" :
       \ deoplete#manual_complete()
 
 
@@ -389,8 +368,6 @@ inoremap <silent><expr> <TAB>
 " File-based key mappings
 " TODO: move to own files
 
-" - Map MarkDown/pandoc word count
-xnoremap <leader>w <esc>:'<,'>:w !mdwc<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

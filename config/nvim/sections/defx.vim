@@ -1,6 +1,6 @@
 "
 " PURPOSE
-"	Partial configuration for Defx
+"	Partial configuration for Defx and all that comes with it.
 "
 
 augroup vimrc_defx
