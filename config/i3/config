@@ -45,6 +45,8 @@ exec_always --no-startup-id feh --bg-fill --no-fehbg --randomize ~/Dropbox/Varie
 exec_always --no-startup-id dunst
 # - udiskie removeable devices management
 exec --no-startup-id udiskie --smart-tray
+# - then, for replacement of apps: start all the xdg apps in the user environment
+exec dex -ae user
 
 #-------------------
 # Client application assignments and actions!
