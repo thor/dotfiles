@@ -1,0 +1,7 @@
+#!/bin/bash
+set -o pipefail -eu
+
+i3-msg split horizontal
+kitty -- nvim '+set ft=mail' '+set fo+=w' '+set fileencoding=utf8' "$1"
+
+
