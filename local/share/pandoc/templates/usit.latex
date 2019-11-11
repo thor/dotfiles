@@ -325,10 +325,10 @@ $if(beamer)$
 \setsansfont{Lato}
 % setup logo with 40% transparency -->
 \usepackage{transparent}
-\logo{\transparent{0.6}\includegraphics[width=4cm]{uio-logo-c.eps}}
+\logo{\transparent{0.6}\includegraphics[width=4cm]{res/uio-logo-c.eps}}
 
 % setup background image -->
-\pgfdeclareimage[width=\paperwidth]{mybackground}{usit-bg-modified.png}
+\pgfdeclareimage[width=\paperwidth]{mybackground}{res/usit-bg-modified.png}
 \setbeamertemplate{background canvas}{%
 	\begin{picture}(0,300)
 	 \begin{beamercolorbox}[wd=2\paperwidth,ht=1.5\paperheight]{bgcolor}
@@ -342,7 +342,11 @@ $if(beamer)$
 % redefine itemize! 1/2 -->
 \usepackage{letltxmacro}
 \LetLtxMacro\olditemize\itemize
-\renewcommand<>{\itemize}[1][<+-| alert@+>]{\olditemize[#1]}
+\LetLtxMacro\oldenumerate\enumerate
+\makeatletter
+\g@addto@macro\beamer@lastminutepatches{\renewcommand<>{\itemize}[1][<alert@+|+->]{\olditemize[#1]}}
+\g@addto@macro\beamer@lastminutepatches{\renewcommand<>{\enumerate}[1][<alert@+|+->]{\oldenumerate[#1]}}
+\makeatother
 $else$
 $if(block-headings)$
 % Make \paragraph and \subparagraph free-standing
@@ -432,8 +436,6 @@ $if(logo)$
 $endif$
 $endif$
 
-% USIT: Alert by default
-% \renewcommand<>{\itemize}[1][<alert@+>]{\olditemize[#1]}
 \begin{document}
 $if(has-frontmatter)$
 \frontmatter
