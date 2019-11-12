@@ -49,7 +49,6 @@ stop_compositor() {
 
 set_laptop(){
 	stop_compositor
-	$XRANDR --output eDP-1 --auto
 	for VOUT in ${!VOUTS[*]}
 	do
 		if [ "${VOUT}" != 'eDP-1' ]
@@ -57,6 +56,7 @@ set_laptop(){
 			$XRANDR --output ${VOUT} --off
 		fi
 	done
+	$XRANDR --output eDP-1 --auto
 	start_compositor
 	refresh_bar
 }
