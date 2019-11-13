@@ -276,7 +276,8 @@ set backspace=indent,eol,start " (d) Backspace beyond single lines.
 set modeline                   " Configure settings per file.
 set mouse=a                    " (d) Mouse-support is actually really cool.
 set incsearch                  " (d) Incremental search view for /searches.
-
+" - Use ag instead of grep
+set grepprg=ag\ -n\ $*
 
 " Email configuration
 " - Add format option 'w' to add trailing white space, incl. 'a' for
