@@ -44,8 +44,6 @@ augroup just_pandoc_things
   " - making it work well with vimwiki (forcing upon it)
   autocmd BufEnter,BufRead,BufNewFile *.md set filetype=pandoc
   autocmd FileType vimwiki set syntax=pandoc
-  " - adding my favourite keybinding
-  noremap <Leader>t :noautocmd vimgrep /TODO/j *.md<CR>:cw<CR>
 augroup END
 " }}}
 
@@ -60,5 +58,7 @@ function! s:pandocOnWrite()
 endfunction
 " }}}
 
+" - adding my favourite keybinding
+noremap <Leader>t :noautocmd grep! "(TODO\\|FIXME).*" -o *.md<CR>:cw<CR>
 " - Map MarkDown/pandoc word count
 xnoremap <leader>w <esc>:'<,'>:w !mdwc<CR>
