@@ -198,8 +198,10 @@ let g:table_mode_header_fillchar = '-'
 " # Configuring vimwiki
 " - setting the list of notes/wikis
 let g:vimwiki_list = [
-			\ {'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'},
-			\ {'path': '~/master/journal','syntax': 'markdown', 'ext': '.md'}]
+			\ {'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md',
+				\ 'list_margin': 2 },
+			\ {'path': '~/master/journal','syntax': 'markdown', 'ext': '.md',
+				\ 'list_margin': 2 }]
 " - try to change the file endings away from .md
 let g:vimwiki_ext2syntax = {'.mdk': 'markdown',
 			\ '.wiki': 'media'}
