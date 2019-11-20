@@ -68,8 +68,8 @@ alias ptpb="curl -F c=@- https://0x0.st"
 alias please='sudo $(fc -ln -1)'
 
 # systemd-related
-alias sctl="systemctl"
-alias jctl="journalctl"
+alias uctl="systemctl --user"
+alias jctl="journalctl --user"
 
 # Vagrant Cheats
 alias vup="vagrant up"
