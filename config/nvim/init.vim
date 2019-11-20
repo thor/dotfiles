@@ -279,7 +279,7 @@ set modeline                   " Configure settings per file.
 set mouse=a                    " (d) Mouse-support is actually really cool.
 set incsearch                  " (d) Incremental search view for /searches.
 " - Use ag instead of grep
-set grepprg=ag\ -n\ $*
+set grepprg=rg\ -n\ $*
 
 " Email configuration
 " - Add format option 'w' to add trailing white space, incl. 'a' for
