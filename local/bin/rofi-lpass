@@ -8,6 +8,10 @@ print-settings() {
 }
 
 print-account-list() {
+  if ! lpass status; then
+    local -r email=$(zenity --entry --text "LastPass e-mail address:" --title "Not logged into LastPass")
+    lpass login --trust "$email"
+  fi
   lpass ls --format "%/as%ag - %an (%au) [%ai]" 2>&1
 }
 
@@ -72,15 +76,15 @@ if is-entry-selected "$1"; then
 
   if [[ -n $id ]]; then
     case "$selected" in
-      '>> Copy password'*)
+      *' Copy password'*)
         copy-account-field "$id" password ;;
-      '>> Copy username'*)
+      *' Copy username'*)
         copy-account-field "$id" username ;;
-      '>> Copy URL'*)
+      *' Copy URL'*)
         copy-account-field "$id" url ;;
-      '>> Copy ID'*)
+      *' Copy ID'*)
         copy-account-field "$id" id ;;
-      '>> Open'*)
+      *' Open'*)
         open-account-url "$id" ;;
       *)
         show-account-options "$id" ;;
