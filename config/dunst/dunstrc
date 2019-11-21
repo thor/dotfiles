@@ -30,7 +30,7 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5-30+20"
+    geometry = "256x5-10+34"
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
@@ -42,12 +42,12 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.).
-    transparency = 0
+    transparency = 20
 
     # The height of the entire notification.  If the height is smaller
     # than the font height and padding combined, it will be raised
     # to the font height and padding.
-    notification_height = 0
+    notification_height = 24
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
@@ -65,7 +65,7 @@
     frame_width = 3
 
     # Defines color of the frame around the notification window.
-    frame_color = "#1b1e27"
+    frame_color = "#5294E2"
 
     # Define a color for the separator.
     # possible values are:
@@ -142,7 +142,7 @@
 
     # When word_wrap is set to no, specify where to ellipsize long lines.
     # Possible values are "start", "middle" and "end".
-    ellipsize = middle
+    ellipsize = end
 
     # Ignore newlines '\n' in notifications.
     ignore_newline = no
@@ -237,7 +237,7 @@
     # On the US keyboard layout "grave" is normally above TAB and left
     # of "1". Make sure this key actually exists on your keyboard layout,
     # e.g. check output of 'xmodmap -pke'
-    history = ctrl+grave
+    history = ctrl+bar
 
     # Context menu.
     context = ctrl+shift+period
@@ -245,15 +245,15 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#222222"
+    background = "#111111"
     foreground = "#888888"
     timeout = 10
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
 
 [urgency_normal]
-    background = "#4284D2"
-    foreground = "#ffffff"
+    background = "#222222"
+    foreground = "#cccccc"
     timeout = 10
     # Icon for notifications with normal urgency, uncomment to enable
     #icon = /path/to/icon
