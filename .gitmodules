@@ -7,3 +7,6 @@
 [submodule "config/base16-kitty"]
 	path = config/base16-kitty
 	url = https://github.com/kdrag0n/base16-kitty.git
+[submodule "latexrun"]
+	path = local/lib/latexrun
+	url = https://github.com/ahueck/latexrun.git
