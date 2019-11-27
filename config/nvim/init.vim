@@ -22,6 +22,7 @@ Plug 'junegunn/fzf'           " Cooler fuzzy file finder
 Plug 'junegunn/fzf.vim'       " vim-integration for fuzzy file finder
 Plug 'Shougo/defx.nvim',	  " file explorer not riddled by bugs
 	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
+Plug 'kristijanhusak/defx-git' " git symbols for Defx
 Plug 'junegunn/goyo.vim'      " Distraction free writing
 Plug 'junegunn/limelight.vim' " Hyper-focused writing in vim
 Plug 'Konfekt/FastFold'       " Less, aka faster, folding
@@ -243,8 +244,8 @@ if has('persistent_undo') && !has('nvim')
 	let theUndoDir = expand($VIMHOME . '/undodir')
 	call system('mkdir ' . theUndoDir)
 	let &undodir = theUndoDir
-	set undofile
 endif
+set undofile              " actually enable the saving of history to the file
 
 " Themes 
 let base16colorspace=256        " Make sure that the scheme uses 256-colors.
