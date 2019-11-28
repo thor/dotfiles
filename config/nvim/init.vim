@@ -83,6 +83,64 @@ Plug 'lambdalisue/suda.vim'				 " Workaround for !sudo tee % in v-1.3
 " Finished pluggin' -- any plugins need to be before this
 call plug#end()
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Core vim configurations
+" - (d) neovim default
+
+let $VIMHOME=expand('<sfile>:p:h')
+
+" Buffer management & behaviour
+set hidden                " vim can remember buffers' contents when hidden
+" - (d) Persistent undo 
+if has('persistent_undo') && !has('nvim')
+	let theUndoDir = expand($VIMHOME . '/undodir')
+	call system('mkdir ' . theUndoDir)
+	let &undodir = theUndoDir
+endif
+set undofile              " actually enable the saving of history to the file
+
+" Themes 
+let base16colorspace=256        " Make sure that the scheme uses 256-colors.
+colorscheme base16-default-dark " base16-inspired colorscheme.
+set background=dark             " Use the dark theme of whatever colorscheme.
+
+" Colouring / syntax / schemes
+let g:load_doxygen_syntax=1     " Automatically load Doxygen syntax for C/C++.
+set foldmethod=marker           " Change from manual to marker for folding defaults
+
+" Spacing / tabs / code-style
+set tabstop=4               " Visual space per TAB used!
+set softtabstop=-1          " Spaces entered per TAB in editing.
+set shiftwidth=4            " Using 8 is ridicilous.
+set autoindent              " (d) Because automatic indentation is useful.
+set listchars=tab:▸\ ,eol:¬ " Configure how listchars should appear.
+
+" User interface / elements / locations
+set number                          " Show line numbers in the left bar.
+set relativenumber                  " Let the line numbers be relative to pos.
+set cursorline                      " Reveal the line I'm currently on.
+set wildmenu                        " (d) Show tab-complete line for :cmds.
+set colorcolumn=+1                  " Shows textwidth-column +1.
+set title							" Use terminal title
+highlight ColorColumn ctermbg=18    " Colours the textwidth bar.
+
+" Other behavioural configurations
+" - Restore guicursor after exiting
+au VimLeave * set guicursor=a:hor100-blinkon1
+set backspace=indent,eol,start " (d) Backspace beyond single lines.
+set modeline                   " Configure settings per file.
+set mouse=a                    " (d) Mouse-support is actually really cool.
+set incsearch                  " (d) Incremental search view for /searches.
+" - Use ag instead of grep
+set grepprg=rg\ -n\ $*
+
+" Email configuration
+" - Add format option 'w' to add trailing white space, incl. 'a' for
+"   auto-formatting. Used together with neomutts text_flowed-option.
+augroup mail_trailing_whitespace " {
+    autocmd!
+    autocmd FileType mail setlocal formatoptions+=wa
+augroup END " }
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -230,65 +288,6 @@ function! s:goyo_leave()
   let &syntax = l:set_syntax
 endfunction
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Core vim configurations
-" - (d) neovim default
-
-let $VIMHOME=expand('<sfile>:p:h')
-
-" Buffer management & behaviour
-set hidden                " vim can remember buffers' contents when hidden
-" - (d) Persistent undo 
-if has('persistent_undo') && !has('nvim')
-	let theUndoDir = expand($VIMHOME . '/undodir')
-	call system('mkdir ' . theUndoDir)
-	let &undodir = theUndoDir
-endif
-set undofile              " actually enable the saving of history to the file
-
-" Themes 
-let base16colorspace=256        " Make sure that the scheme uses 256-colors.
-colorscheme base16-default-dark " base16-inspired colorscheme.
-set background=dark             " Use the dark theme of whatever colorscheme.
-
-" Colouring / syntax / schemes
-let g:load_doxygen_syntax=1     " Automatically load Doxygen syntax for C/C++.
-set foldmethod=marker           " Change from manual to marker for folding defaults
-
-" Spacing / tabs / code-style
-set tabstop=4               " Visual space per TAB used!
-set softtabstop=-1          " Spaces entered per TAB in editing.
-set shiftwidth=4            " Using 8 is ridicilous.
-set autoindent              " (d) Because automatic indentation is useful.
-set listchars=tab:▸\ ,eol:¬ " Configure how listchars should appear.
-
-" User interface / elements / locations
-set number                          " Show line numbers in the left bar.
-set relativenumber                  " Let the line numbers be relative to pos.
-set cursorline                      " Reveal the line I'm currently on.
-set wildmenu                        " (d) Show tab-complete line for :cmds.
-set colorcolumn=+1                  " Shows textwidth-column +1.
-set title							" Use terminal title
-highlight ColorColumn ctermbg=18    " Colours the textwidth bar.
-
-" Other behavioural configurations
-" - Restore guicursor after exiting
-au VimLeave * set guicursor=a:hor100-blinkon1
-set backspace=indent,eol,start " (d) Backspace beyond single lines.
-set modeline                   " Configure settings per file.
-set mouse=a                    " (d) Mouse-support is actually really cool.
-set incsearch                  " (d) Incremental search view for /searches.
-" - Use ag instead of grep
-set grepprg=rg\ -n\ $*
-
-" Email configuration
-" - Add format option 'w' to add trailing white space, incl. 'a' for
-"   auto-formatting. Used together with neomutts text_flowed-option.
-augroup mail_trailing_whitespace " {
-    autocmd!
-    autocmd FileType mail setlocal formatoptions+=wa
-augroup END " }
 
 
 
