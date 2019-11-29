@@ -33,13 +33,13 @@ Plug 'vimwiki/vimwiki', 	  " personal wiki/notes for vim
 Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
 
 " - Linting & Auto-completion
-Plug 'neomake/neomake'            " Code linting and compiling
-Plug 'Shougo/deoplete.nvim',      " Code completion with darkness
+Plug 'dense-analysis/ale'    " linting et al and LSP
+Plug 'Shougo/deoplete.nvim', " Code completion with darkness
 	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
-Plug 'zchee/deoplete-jedi',       " Python completion
+Plug 'zchee/deoplete-jedi',  " Python completion
 	\ Cond(has('nvim'))
 Plug 'deoplete-plugins/deoplete-clang',
-	\ Cond(has('nvim'))			  " C/C++ completion
+	\ Cond(has('nvim'))      " C/C++ completion
 	
 
 " - Syntax & File Type Enhancers
@@ -186,15 +186,30 @@ let g:airline#extensions#wordcount#filetypes = [
 			\ 'tex', 'text', 'pandoc']
 
 
-
-" # Configuring Neomake
-" - Automatically run on writing files
-autocmd! BufWritePost * Neomake
+" # Configuring ALE
+" - Setting up linters
+let g:ale_linters = {'rust': ['rls']}
+" - Setting up fixers
+let g:ale_fixers = {
+			\'javascript': ['prettier', 'eslint']}
+" - Enabling pipenv integration
+let g:ale_python_auto_pipenv = 1
+" - Always keep the gutter open
+let g:ale_sign_column_always = 1
+" - Setting pretties
+let g:ale_sign_error = "◉"
+let g:ale_sign_warning = "◉"
+highlight ALEErrorSign ctermfg=9 ctermbg=18
+highlight ALEWarningSign ctermfg=11 ctermbg=18
 
 
 " # Configuring deoplete
 " - Enable at startup
 let g:deoplete#enable_at_startup = 1
+" - Configure ALE for deoplete
+call deoplete#custom#option('sources', {
+			\ '_': ['ale'],
+			\})
 " - Configure autocompletion for vimtex and vim-pandoc
 call deoplete#custom#var('omni', 'input_patterns', {
 			\ 'pandoc': '@\w\w*',
@@ -364,6 +379,11 @@ inoremap <silent><expr> <s-TAB>
       \ <SID>check_back_space() ? "\<s-TAB>" :
       \ deoplete#manual_complete()
 
+
+" - Syntax debugging
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " File-based key mappings
