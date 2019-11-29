@@ -11,7 +11,7 @@ augroup END
 
 nnoremap <silent><Leader>n :call <sid>defx_open({ 'split': v:true })<CR>
 nnoremap <silent><Leader>hf :call <sid>defx_open({ 'split': v:true, 'find_current_file': v:true })<CR>
-let s:default_columns = 'indent:git:icons:filename'
+let s:default_columns = 'indent:git:icon:filename'
 
 function! s:setup_defx() abort
   call defx#custom#option('_', {
@@ -91,6 +91,7 @@ function! s:defx_mappings() abort
   nnoremap <silent><buffer><expr> <2-LeftMouse> <sid>defx_toggle_tree()
   nnoremap <silent><buffer><expr> C defx#is_directory() ? defx#do_action('multi', ['open', 'change_vim_cwd']) : 'C'
   nnoremap <silent><buffer><expr> s defx#do_action('open', 'botright vsplit')
+  nnoremap <silent><buffer><expr> S defx#do_action('open', 'botright split')
   nnoremap <silent><buffer><expr> R defx#do_action('redraw')
   nnoremap <silent><buffer><expr> U defx#do_action('multi', [['cd', '..'], 'change_vim_cwd'])
   nnoremap <silent><buffer><expr> H defx#do_action('toggle_ignored_files')
