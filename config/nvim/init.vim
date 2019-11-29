@@ -187,11 +187,10 @@ let g:airline#extensions#wordcount#filetypes = [
 
 
 " # Configuring ALE
-" - Setting up linters
-let g:ale_linters = {'rust': ['rls']}
-" - Setting up fixers
-let g:ale_fixers = {
-			\'javascript': ['prettier', 'eslint']}
+" - Setting up linter aliases
+let g:ale_linter_aliases = {'pandoc': ['markdown']}
+" - Use global executables by default
+let g:ale_use_global_executables = 1
 " - Enabling pipenv integration
 let g:ale_python_auto_pipenv = 1
 " - Always keep the gutter open
@@ -209,6 +208,7 @@ let g:deoplete#enable_at_startup = 1
 " - Configure ALE for deoplete
 call deoplete#custom#option('sources', {
 			\ '_': ['ale'],
+			\ 'python': ['jedi']
 			\})
 " - Configure autocompletion for vimtex and vim-pandoc
 call deoplete#custom#var('omni', 'input_patterns', {
