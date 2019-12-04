@@ -16,8 +16,6 @@ let g:pandoc#command#latex_engine = 'lualatex'
 let g:pandoc#biblio#use_bibtool = 1
 " - Use headers from setext for level 1 and 2
 let g:pandoc#keyboard#sections#header_style = 's'
-" - Defer folding to fastfold (I think)
-let g:pandoc#folding#fastfolds = 1
 " - Fold the YAML front matter
 let g:pandoc#folding#fold_yaml = 1
 " - Fold stacked as to show all headers at the same time
