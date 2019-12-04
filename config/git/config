@@ -18,9 +18,9 @@
 [diff]
 	tool = nvimdiff
 [pager]
-	log = /usr/share/git/diff-highlight/diff-highlight | less
-	show = /usr/share/git/diff-highlight/diff-highlight | less
-	diff = /usr/share/git/diff-highlight/diff-highlight | less
+	log = /usr/share/git/diff-highlight/diff-highlight | less -+S
+	show = /usr/share/git/diff-highlight/diff-highlight | less -+S
+	diff = /usr/share/git/diff-highlight/diff-highlight | less -+S
 
 [commit]
 	gpgsign = false
