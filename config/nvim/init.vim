@@ -15,19 +15,19 @@ call plug#begin('~/.config/nvim/plugged')
 " - Themes & Visuals
 Plug 'chriskempson/base16-vim'           " The enjoyable base-16 theme
 
-" - UI & Interaction
-Plug 'tpope/vim-fugitive'     " Git, git, git
-Plug 'bling/vim-airline'      " It's so enjoyable with a nice status!
-Plug 'junegunn/fzf'           " Cooler fuzzy file finder
-Plug 'junegunn/fzf.vim'       " vim-integration for fuzzy file finder
-Plug 'Shougo/defx.nvim',	  " file explorer not riddled by bugs
+" - UX & Functionality
+Plug 'tpope/vim-fugitive'      " Git, git, git
+Plug 'bling/vim-airline'       " It's so enjoyable with a nice status!
+Plug 'junegunn/fzf'            " Cooler fuzzy file finder
+Plug 'junegunn/fzf.vim'        " vim-integration for fuzzy file finder
+Plug 'junegunn/goyo.vim'       " Distraction free writing
+Plug 'junegunn/limelight.vim'  " Hyper-focused writing in vim
+Plug 'Shougo/defx.nvim',       " file explorer not riddled by bugs
 	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
 Plug 'kristijanhusak/defx-git' " git symbols for Defx
-Plug 'junegunn/goyo.vim'      " Distraction free writing
-Plug 'junegunn/limelight.vim' " Hyper-focused writing in vim
-Plug 'Konfekt/FastFold'       " Less, aka faster, folding
-Plug 'vimwiki/vimwiki', 	  " personal wiki/notes for vim
-	\ {'for': 'mkd'}
+Plug 'chrisbra/nrrwrgn'        " Narrowing from Emacs
+Plug 'metakirby5/codi.vim'     " Interactive scratchpad/REPL buffer
+Plug 'mhinz/vim-signify'       " VCS gutter diffs
 
 " - Settings management
 Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
@@ -40,7 +40,11 @@ Plug 'zchee/deoplete-jedi',  " Python completion
 	\ Cond(has('nvim'))
 Plug 'deoplete-plugins/deoplete-clang',
 	\ Cond(has('nvim'))      " C/C++ completion
-	
+
+" - Quality of life
+Plug 'Konfekt/FastFold'       " Less, aka faster, folding
+Plug 'zhimsel/vim-stay'		  " Behind the scenes saving of folds
+
 
 " - Syntax & File Type Enhancers
 Plug 'saltstack/salt-vim'                " YAML-assistance
@@ -48,15 +52,16 @@ Plug 'stephpy/vim-yaml'                  " YAML-syntax
 Plug 'Matt-Deacalion/vim-systemd-syntax' " systemd unit files syntax
 Plug 'lervag/vimtex'                     " LaTeX editing & completion and all
 Plug 'rust-lang/rust.vim'                " Rust-syntax
-Plug 'Shirk/vim-gas'					 " AT&T Assembly syntax
+Plug 'Shirk/vim-gas'                     " AT&T Assembly syntax
 Plug 'wannesm/wmgraphviz.vim'            " GraphViz
-Plug 'fatih/vim-go',					 " Go-go-go-go
+Plug 'fatih/vim-go',                     " Go-go-go-go
 	\ { 'do': ':GoUpdateBinaries' }
-Plug 'arakashic/chromatica.nvim',		 " Semantic C/C++ highlighting
+Plug 'arakashic/chromatica.nvim',        " Semantic C/C++ highlighting
 	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins',
 		\'for': ['c', 'cpp', 'objc', 'objcpp'] })
 Plug 'numirias/semshi',                  " Semantic Python highlighting
 	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
+Plug 'vimwiki/vimwiki'                   " personal wiki/notes for vim
 
 " --- binary hex
 Plug 'fidian/hexmode'                    " Hexmode
@@ -133,6 +138,10 @@ set mouse=a                    " (d) Mouse-support is actually really cool.
 set incsearch                  " (d) Incremental search view for /searches.
 " - Use ag instead of grep
 set grepprg=rg\ -n\ $*
+" - Remove options from views
+set viewoptions-=options
+" - Double frequency of swap writes for vim-signify
+set updatetime=2000
 
 " Email configuration
 " - Add format option 'w' to add trailing white space, incl. 'a' for
@@ -279,6 +288,8 @@ let g:vimwiki_list = [
 " - try to change the file endings away from .md
 let g:vimwiki_ext2syntax = {'.mdk': 'markdown',
 			\ '.wiki': 'media'}
+" - no temporarily created vimwiki-temporary-wikis
+let g:vimwiki_global_ext = 0
 
 " # Configuring vim-pencil
 " - soft as default
@@ -343,7 +354,7 @@ nnoremap <leader>tm :<C-U>call <SID>toggleTables()<CR>
 nnoremap <leader>pw :<C-U>call <SID>pandocOnWrite()<CR>
 
 " - Setup Pandoc soft-mode TODO
-nnoremap <leader>ps :<C-U>call <SID>pandocSoft()<CR>
+nnoremap <leader>pS :<C-U>call <SID>pandocSoft()<CR>
 
 
 " - Map paste-mode
@@ -357,10 +368,12 @@ xmap ga <Plug>(EasyAlign)
 nmap <leader>s :set list!<cr>
 
 " - Map keys for FZF based on CtrlP and similarly
-nmap     <leader>p  :FZF<cr>
+nnoremap <C-P>      :<C-U>FZF<CR>
 nmap     <leader>P  :FZF!<cr>
 nmap     <leader>ph :FZF ~<cr>
-nnoremap <C-P>      :<C-U>FZF<CR>
+nmap     <leader>pb :Buffers<cr>
+nmap     <leader>ps :Rg<cr>
+
 
 " - Map key for distraction free writing mode
 nnoremap <F11> :Goyo<cr>
@@ -387,7 +400,6 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " File-based key mappings
-" TODO: move to own files
 
 
 
