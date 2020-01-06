@@ -4,12 +4,13 @@
 #
 
 #
-# Editors
+# Editors and tools
 #
 
 export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
+export FZF_DEFAULT_COMMAND='rg --files'
 
 #
 # Language
@@ -22,6 +23,7 @@ fi
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
+
 
 # 
 # Appearance
@@ -43,8 +45,10 @@ path=(
 	~/dev/go/bin
 	$path[@]
 )
+
 # Set up GOPATH
 export GOPATH=~/dev/go
+
 
 # 
 # Special locations
