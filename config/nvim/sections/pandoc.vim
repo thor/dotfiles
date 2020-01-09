@@ -25,6 +25,11 @@ let g:pandoc#biblio#bibs = ['../bibliography.bib']
 
 " }}}
 
+" Configuring vim-pandoc-after options {{{
+" - Enable the nrrwrgn and fastfold
+let g:pandoc#after#modules#enabled = ["nrrwrgn", "fastfold"]
+" }}}
+
 " Configuring citeproc-dependent settings {{{
 if filereadable("/usr/bin/pandoc-citeproc")
 	" - Use citeproc backend for searching in bibliographies

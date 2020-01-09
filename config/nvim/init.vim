@@ -71,6 +71,7 @@ Plug 'aklt/plantuml-syntax'              " PlantUML
 " --- Writing enhancements
 Plug 'vim-pandoc/vim-pandoc'             " pandoc-features
 Plug 'vim-pandoc/vim-pandoc-syntax'      " pandoc-syntax
+Plug 'vim-pandoc/vim-pandoc-after'       " plugin integration, incl. fastfold
 Plug 'reedes/vim-pencil'			     " The pencil
 
 
