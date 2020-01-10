@@ -30,7 +30,7 @@ bindcode --release 208 exec --no-startup-id "xdotool key 172"
 
 # Start up environment apps
 # - I want a compositor. compton is nice and lightweight, plus available in the repos.
-exec --no-startup-id compton -b
+exec --no-startup-id picom -b --experimental-backends
 # - GNOME PolicyKit Agent
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # - XSS for auto-locking with suspend/hibernate
