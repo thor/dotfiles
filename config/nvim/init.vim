@@ -281,6 +281,7 @@ let g:pandoc_fold_enabled = 1
 let g:table_mode_corner = '|'
 let g:table_mode_header_fillchar = '-'
 
+
 " # Configuring vimwiki
 " - setting the list of notes/wikis
 let g:vimwiki_list = [
@@ -304,6 +305,7 @@ let g:pencil#conceallevel = 2     " 0=disable, 1=one char, 2=hide char, 3=hide a
 " - add to airline
 let g:airline_section_x = '%{PencilMode()}'
 
+
 " # Configuring defx
 runtime! sections/defx.vim
 
@@ -319,6 +321,9 @@ function! s:goyo_leave()
 endfunction
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
+
+" # Configuring FZF
+runtime! sections/fzf.vim
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -373,10 +378,9 @@ nmap <leader>s :set list!<cr>
 
 " - Map keys for FZF based on CtrlP and similarly
 nnoremap <C-P>      :<C-U>FZF<CR>
-nmap     <leader>P  :FZF!<cr>
 nmap     <leader>ph :FZF ~<cr>
 nmap     <leader>pb :Buffers<cr>
-nmap     <leader>ps :Rg<cr>
+nmap     <leader>pg :Rg<cr>
 
 
 " - Map key for distraction free writing mode
