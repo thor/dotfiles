@@ -210,16 +210,18 @@ let g:ale_sign_error = "◉"
 let g:ale_sign_warning = "◉"
 highlight ALEErrorSign ctermfg=9 ctermbg=18
 highlight ALEWarningSign ctermfg=11 ctermbg=18
+" - Set default fixer
+let g:ale_fixers = ['prettier']
 
 
 " # Configuring deoplete
 " - Enable at startup
 let g:deoplete#enable_at_startup = 1
+" - Use system installed Python as host for neovim (ignore venv)
+"   Very useful for having virtualenvs.
+let g:python3_host_prog = '/usr/bin/python'
 " - Configure ALE for deoplete
-call deoplete#custom#option('sources', {
-			\ '_': ['ale'],
-			\ 'python': ['jedi']
-			\})
+"   Do nothing. It should be registered automatically.
 " - Configure autocompletion for vimtex and vim-pandoc
 call deoplete#custom#var('omni', 'input_patterns', {
 			\ 'pandoc': '@\w\w*',
@@ -304,6 +306,7 @@ let g:airline_section_x = '%{PencilMode()}'
 
 " # Configuring defx
 runtime! sections/defx.vim
+
 
 " # Configuring Goyo
 " - Turning on and off syntax to fix issues with italis and bold
