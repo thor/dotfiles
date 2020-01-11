@@ -37,12 +37,18 @@ is-actual-url() {
   fi
 }
 
+show-account-details() {
+  local id="$1"
+  zenity --info --text "$(lpass show "$id")"
+}
+
 show-account-options() {
   local id="$1"
 
   echo "🔒 Copy password [$id]"
   echo "👤 Copy username [$id]"
 
+  echo "📖 Show details [$id]"
   url=$(lpass show --url "$id")
   if is-actual-url "$url"; then
     echo "🌐 Open $url [$id]"
@@ -80,6 +86,8 @@ if is-entry-selected "$1"; then
         copy-account-field "$id" password ;;
       *' Copy username'*)
         copy-account-field "$id" username ;;
+      *' Show details'*)
+        show-account-details "$id" ;;
       *' Copy URL'*)
         copy-account-field "$id" url ;;
       *' Copy ID'*)
