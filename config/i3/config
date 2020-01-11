@@ -154,7 +154,8 @@ bindsym $mod+i                exec --no-startup-id "rofi -show ssh"
 
 # - interaction of odd kinds
 # -- emoji search (æ)
-bindcode $mod+52              exec --no-startup-id "emoji-keyboard -s"
+#bindcode $mod+52              exec --no-startup-id "emoji-keyboard -s"
+bindcode $mod+52              exec --no-startup-id "rofimoji"
 
 # - marks
 # -- create mark
