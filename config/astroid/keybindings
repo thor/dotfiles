@@ -1,0 +1,13 @@
+# Open/expand/activate focused element
+# thread_view.activate=Key (GDK_KEY_Return), Key (GDK_KEY_KP_Enter), Key (true, false, (guint) GDK_KEY_space)
+thread_view.activate=v
+
+# Make a new notmuch search query
+main_window.search=/ 
+main_window.undo=C-z
+
+# Deletion is nice
+thread_index.run(hooks::toggle-thread deleted %1, hooks::toggle-thread deleted %1)=x
+thread_index.multi.run(hooks::toggle-thread deleted %1, hooks::toggle-thread deleted %1)=x
+thread_view.run(hooks::toggle-mail deleted %2, hooks::toggle-mail deleted %2)=x
+#thread_view.run(hooks::toggle spam %2, hooks::toggle spam %2)=X
