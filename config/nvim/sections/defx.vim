@@ -10,7 +10,7 @@ augroup vimrc_defx
 augroup END
 
 nnoremap <silent><Leader>n :call <sid>defx_open({ 'split': v:true })<CR>
-nnoremap <silent><Leader>hf :call <sid>defx_open({ 'split': v:true, 'find_current_file': v:true })<CR>
+nnoremap <silent><Leader>N :call <sid>defx_open({ 'split': v:true, 'find_current_file': v:true })<CR>
 let s:default_columns = 'indent:git:icon:filename'
 
 function! s:setup_defx() abort
