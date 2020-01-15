@@ -82,7 +82,7 @@ font-5 = Noto Color Emoji:size=10:scale=10:pixelsize=13;2
 
 modules-left = i3 xwindow
 modules-center = date
-modules-right = filesystem filesystem-home memory cpu wlan eth net-speed openvpn battery temperature volume
+modules-right = fs-root fs-home memory cpu wlan eth net-speed openvpn battery temperature volume
 
 ; Set not-likely-to-change settings
 ;
@@ -152,7 +152,7 @@ eth-interface = eno1
 [bar/lincoln-charlie]
 inherit = bar/first
 
-modules-right = filesystem volume memory cpu wlan eth battery battery-extra temperature date powermenu
+modules-right = fs-root volume memory cpu wlan eth battery battery-extra temperature date powermenu
 
 ; Device specific settings
 monitor-fallback = LVDS-1
@@ -167,7 +167,7 @@ label = %title%
 label-maxlen = 50
 label-padding = 2
 
-[module/filesystem]
+[module/fs-root]
 type = internal/fs
 
 interval = 30
@@ -178,7 +178,7 @@ label-mounted-foreground = ${colors.foreground-sec}
 label-mounted-underline = #88aaee
 label-unmounted = %mountpoint% not mounted
 
-[module/filesystem-home]
+[module/fs-home]
 type = internal/fs
 
 interval = 30
