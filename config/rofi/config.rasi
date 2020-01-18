@@ -3,13 +3,13 @@ configuration {
     width: 100;
 /*	lines: 15;*/
 /*	columns: 1;*/
-	font: "Noto Sans, FontAwesome 11";
+/*	font: "Noto Sans, Noto Emoji 11";*/
 /*	bw: 1;*/
-	location: 0;
-    padding: 350;
-	yoffset: -150;
+/*	location: 0;*/
+	padding: 350;
+/*	yoffset: -150;*/
 /*	xoffset: 0;*/
-	fixed-num-lines: false;
+/*	fixed-num-lines: false;*/
 	show-icons: true;
 /*	terminal: "rofi-sensible-terminal";*/
 /*	ssh-client: "ssh";*/
@@ -27,7 +27,7 @@ configuration {
 	sorting-method: "fzf";
 	case-sensitive: false;
 /*	cycle: true;*/
-	sidebar-mode: false;
+/*	sidebar-mode: false;*/
 /*	eh: 1;*/
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
@@ -41,7 +41,7 @@ configuration {
 /*	filter: ;*/
 /*	separator-style: "dash";*/
 /*	hide-scrollbar: false;*/
-    fullscreen: true;
+/*	fullscreen: true;*/
 /*	fake-transparency: false;*/
 /*	dpi: -1;*/
 	threads: 4;
@@ -51,11 +51,11 @@ configuration {
 /*	window-format: "{w}    {i}{c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-	theme: ".config/rofi/theme.rasi";
-	color-normal: "#4f4f4f, #eeeeee, #444444, #eeeeee, #4f4f4f";
-	color-urgent: "#4f4f4f, #f03c3c, #444444, #f03c3c, #fdf6e3";
-	color-active: "#4f4f4f, #268bd2, #444444, #268bd2, #fdf6e3";
-	color-window: "#bb222222, #aaffb52a, #000000";
+	theme: "~/.config/rofi/theme.rasi";
+/*	color-normal: "#4f4f4f, #eeeeee, #444444, #eeeeee, #4f4f4f";*/
+/*	color-urgent: "#4f4f4f, #f03c3c, #444444, #f03c3c, #fdf6e3";*/
+/*	color-active: "#4f4f4f, #268bd2, #444444, #268bd2, #fdf6e3";*/
+/*	color-window: "#bb222222, #aaffb52a, #000000";*/
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
@@ -63,7 +63,7 @@ configuration {
 /*	display-windowcd: ;*/
 /*	display-run: ;*/
 /*	display-ssh: ;*/
-	display-drun: "";
+	display-drun: "🔎";
 /*	display-combi: ;*/
 /*	display-keys: ;*/
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/

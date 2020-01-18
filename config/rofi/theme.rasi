@@ -10,6 +10,8 @@
 
 	tertiary-color:	rgba ( 255, 181, 42, 67 % );
 
+	font:						 "Noto Sans, Noto Emoji 11";
+
     foreground:                  rgba ( 238, 238, 238, 100 % );
     normal-foreground:           @foreground;
     active-foreground:           rgba ( 38, 139, 210, 100 % );
@@ -43,14 +45,15 @@
 }
 window {
     background-color: @background;
-    border:           1;
-    padding:          25% 25%;
+    border:           0;
+    padding:          2%;
 	anchor: center;
 	fullscreen:	true;
 }
 mainbox {
-    border:  0;
-    padding: 0;
+	border-color: @tertiary-color;
+    padding: 10px;
+	margin: 25% 25%;
 }
 message {
     border:       2px dash 0px 0px ;
@@ -62,9 +65,9 @@ textbox {
 }
 listview {
     fixed-height: 0;
-    border:       2px dash 0px 0px ;
+    border:       0;
     border-color: @separatorcolor;
-    spacing:      2px ;
+    spacing:      1px ;
     scrollbar:    true;
     padding:      2px 0px 0px ;
 }
@@ -83,6 +86,7 @@ element normal.urgent {
 element normal.active {
     background-color: @active-background;
     text-color:       @active-foreground;
+	line-height: 2;
 }
 element selected.normal {
     background-color: @selected-normal-background;
