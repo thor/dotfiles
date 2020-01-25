@@ -10,7 +10,7 @@
 
 	tertiary-color:	rgba ( 255, 181, 42, 67 % );
 
-	font:						 "Noto Sans, Noto Emoji 11";
+	font:						 "Noto Sans 11";
 
     foreground:                  rgba ( 238, 238, 238, 100 % );
     normal-foreground:           @foreground;
