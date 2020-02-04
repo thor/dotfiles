@@ -47,7 +47,8 @@ Plug 'zhimsel/vim-stay'		  " Behind the scenes saving of folds
 
 
 " - Syntax & File Type Enhancers
-Plug 'saltstack/salt-vim'                " YAML-assistance
+Plug 'saltstack/salt-vim'                " YAML-assistance for Salt
+Plug 'pearofducks/ansible-vim'           " YAML-assistance for Ansible
 Plug 'stephpy/vim-yaml'                  " YAML-syntax
 Plug 'Matt-Deacalion/vim-systemd-syntax' " systemd unit files syntax
 Plug 'lervag/vimtex'                     " LaTeX editing & completion and all
