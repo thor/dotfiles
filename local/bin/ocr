@@ -1,0 +1,68 @@
+#!/bin/bash
+set -ueo pipefail
+
+function print_usage() {
+  cat <<- EOF
+	Usage: ocr.sh INFILE(S) OUTFILE [img2pdf arguments] [-- [ocrmypdf arguments]]
+	EOF
+}
+
+IMG2PDF_DEFAULT_ARGS=()
+OCR_DEFAULT_ARGS=(
+  --jobs 1
+  --clean
+  --deskew
+  -l eng -l nor
+)
+VERBOSE=0
+POSITIONAL=()
+REACHED_DASHES=0
+
+while [[ $# -gt 0 ]]; do
+  key=$1
+  case $key in
+    -v | --verbose)
+      VERBOSE=1
+      shift
+      shift
+      ;;
+    --)
+      REACHED_DASHES=1
+      shift
+      ;;
+    *) # Unknown option or input file, doesn't matter
+      if [[ "$REACHED_DASHES" -eq 0 ]]; then
+        POSITIONAL+=("$1") # save it in an array for later
+      else
+        OCR_ARGS+=("$1") # save it for the vars that continue on a journey
+      fi
+      shift # past argument
+      ;;
+  esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+OUTFILE="${POSITIONAL[-1]}"
+INFILES=("${POSITIONAL[@]::${#POSITIONAL[@]}-1}")
+
+if [[ "${#POSITIONAL[@]}" -lt 2 ]]; then
+  print_usage
+  exit 1
+fi
+
+# We know we're not trying to regex this
+# shellcheck disable=SC2076 
+if [[ " ${INFILES[*]} " =~ " ${OUTFILE} " ]]; then 
+  echo "Error: You cannot read and write to the same ${OUTFILE}"
+  print_usage
+  exit 1
+fi
+
+if [[ $VERBOSE -eq 1 ]]; then
+  echo "Default OCR arguments  = ${OCR_DEFAULT_ARGS[*]}"
+  echo "Complete OCR arguments = ${OCR_ARGS[*]}"
+  echo "Image(s) input file(s) = ${INFILES[*]}"
+  echo "PDF Output file        = ${OUTFILE}"
+fi
+
+img2pdf "${IMG2PDF_DEFAULT_ARGS[@]}" "${INFILES[@]}" | ocrmypdf "${OCR_DEFAULT_ARGS[@]}" "${OCR_ARGS[@]}" - "$OUTFILE"
