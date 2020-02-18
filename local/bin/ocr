@@ -3,7 +3,7 @@ set -ueo pipefail
 
 function print_usage() {
   cat <<- EOF
-	Usage: ocr.sh INFILE(S) OUTFILE [img2pdf arguments] [-- [ocrmypdf arguments]]
+	Usage: ocr.sh [img2pdf arguments] INFILE(S) OUTFILE [-- [ocrmypdf arguments]]
 	EOF
 }
 
@@ -21,7 +21,7 @@ REACHED_DASHES=0
 while [[ $# -gt 0 ]]; do
   key=$1
   case $key in
-    -v | --verbose)
+    -v|--verbose)
       VERBOSE=1
       shift
       shift
