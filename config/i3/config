@@ -327,7 +327,6 @@ mode "$mode_system" {
 bindsym $mod+Pause mode "$mode_system"
 bindsym $mod+Menu mode "$mode_system"
 bindsym $mod+Print mode "$mode_system"
-bindsym Ctrl+Alt+R exec sh -c "maim -s | xclip -selection clipboard -t image/png"
 
 # MODE: configure monitors/deal with docking
 set $mode_dock Docking:  laptop [L],  work [W],  row [R],  extend left [H],  extend right [S],  duplicate [D]
@@ -346,7 +345,7 @@ mode "$mode_dock" {
 bindsym $mod+Shift+Pause mode "$mode_dock"
 bindsym $mod+Mod1+Menu mode "$mode_dock"
 bindsym $mod+Ctrl+Print mode "$mode_dock"
-bindsym $mod+Ctrl+r exec --no-startup-id "sh -c 'maim -s | tee bilder/$(date +%s).png | xclip -i -sel clipboard -t image/png'"
+bindsym $mod+Ctrl+r exec --no-startup-id "sh -c 'maim -s | tee ~/bilder/$(date +%s).png | xclip -i -sel clipboard -t image/png'"
 
 
 # MODE: resize window (you can also use the mouse for that)
