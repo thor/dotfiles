@@ -63,6 +63,7 @@ Plug 'arakashic/chromatica.nvim',        " Semantic C/C++ highlighting
 Plug 'numirias/semshi',                  " Semantic Python highlighting
 	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
 Plug 'vimwiki/vimwiki'                   " personal wiki/notes for vim
+Plug 'jvirtanen/vim-hcl'				 " HCL2+ syntax highlighting
 
 " --- binary hex
 Plug 'fidian/hexmode'                    " Hexmode
