@@ -82,7 +82,7 @@ font-5 = Noto Color Emoji:size=10:scale=10:pixelsize=13;2
 
 modules-left = i3 xwindow
 modules-center = date
-modules-right = fs-root fs-home memory cpu wlan eth net-speed openvpn battery temperature volume
+modules-right = fs-root filesystem-home memory cpu wlan eth net-speed openvpn battery temperature volume
 
 ; Set not-likely-to-change settings
 ;
@@ -131,14 +131,14 @@ wifi-interface = wlp61s0
 [bar/delta-left]
 inherit = bar/first
 monitor = DP-4
-modules-right = 
+modules-right = temperature memory cpu 
 tray-position = none
 
 
 [bar/delta-right]
 inherit = bar/first
 monitor = DVI-D-0
-modules-right = 
+modules-right = temperature memory cpu 
 tray-position = none
 
 
@@ -148,6 +148,7 @@ monitor = DP-2
 
 ; Device specific settings
 eth-interface = eno1
+modules-right = fs-root filesystem-home wlan eth net-speed openvpn battery volume
 
 [bar/lincoln-charlie]
 inherit = bar/first
@@ -299,7 +300,7 @@ type = internal/network
 interface = ${root.eth-interface}
 interval = 3.0
 
-format-connected-underline = #55aa55
+format-connected-underline = ${colors.blue}
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
@@ -324,6 +325,7 @@ interface = ${root.eth-interface}
 interval = 5.0
 
 label-connected = %downspeed:10:10% %upspeed% 
+format-connected-underline = ${colors.blue}
 
 downspeed-min = 20
 accumulate-stats = true
