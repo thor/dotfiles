@@ -80,7 +80,7 @@ font-3 = Noto Color Emoji:size=10:scale=10:pixelsize=13;2
 
 modules-left = i3 xwindow
 modules-center = date
-modules-right = fs-root fs-home memory cpu wlan eth net-speed openvpn battery temperature volume
+modules-right = updates fs-root fs-home memory cpu wlan eth net-speed openvpn battery temperature volume
 
 ; Set not-likely-to-change settings
 ;
@@ -129,14 +129,14 @@ wifi-interface = wlp61s0
 [bar/delta-left]
 inherit = bar/first
 monitor = DP-4
-modules-right = temperature memory cpu 
+modules-right = updates temperature memory cpu 
 tray-position = none
 
 
 [bar/delta-right]
 inherit = bar/first
 monitor = DVI-D-0
-modules-right = temperature memory cpu 
+modules-right = updates temperature memory cpu 
 tray-position = none
 
 
@@ -457,6 +457,16 @@ ramp-3 = 
 ramp-4 = 
 ramp-font = 3
 ramp-foreground = ${colors.foreground}
+
+
+[module/updates]
+type = custom/script
+exec = pacman -Qqu | wc -l
+tail = false
+interval = 60
+format-prefix = 󰑐
+format-prefix-padding = 1
+format-underline = ${colors.lime}
 
 
 [settings]
