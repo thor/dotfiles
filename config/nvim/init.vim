@@ -278,13 +278,6 @@ let g:tex_fold_enabled = 1
 let g:pandoc_fold_enabled = 1
 
 
-" # Configuring vim-table-mode
-" - ReST-compatible tables for pandoc GRID tables too
-"   TODO: change this to + and = for .rst files only
-let g:table_mode_corner = '|'
-let g:table_mode_header_fillchar = '-'
-
-
 " # Configuring vimwiki
 " - setting the list of notes/wikis
 let g:vimwiki_list = [
