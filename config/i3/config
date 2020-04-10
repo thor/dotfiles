@@ -53,6 +53,7 @@ exec dex -ae user
 # - Assignments to workspaces
 assign [class="Firefox"] $wm2
 assign [class="^chromium"] $wm2
+assign [class="^discord"] $wm3
 assign [title="^IntelliJ IDEA"] $wm8
 assign [class="^jetbrains-pycharm"] $wm8
 assign [class="^jetbrains-intellij"] $wm8
