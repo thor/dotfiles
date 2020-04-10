@@ -7,7 +7,7 @@
 [core]
 	autocrlf = input
 [merge]
-	tool = nvimdiff
+	tool = nvim -d
 [mergetool]
 	path = nvim
 	prompt = true
@@ -16,7 +16,7 @@
 [difftool]
 	prompt = false
 [diff]
-	tool = nvimdiff
+	tool = nvim -d
 [pager]
 	log = /usr/share/git/diff-highlight/diff-highlight | less -+S
 	show = /usr/share/git/diff-highlight/diff-highlight | less -+S
