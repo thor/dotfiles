@@ -26,7 +26,14 @@
 	gpgsign = false
 [gui]
 	fontdiff = -family \"Fantasque Sans Mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+	editor = kitty-nvim
+	diff = meld
+	historybrowser = gitk
 
 [includeIf "gitdir:~/dev/USIT/"]
 	path = ~/.config/git/work
 
+[cola]
+	spellcheck = false
+	icontheme = default
+	fontdiff = Monospace,10,-1,5,50,0,0,0,0,0
