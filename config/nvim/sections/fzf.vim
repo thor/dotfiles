@@ -30,8 +30,13 @@ function! s:bibtex_cite_sink_insert(lines)
 endfunction
 
 inoremap <silent> @@ <c-g>u<c-o>:call fzf#run({
-                        \ 'source': Bibtex_ls(),
-                        \ 'sink*': function('<sid>bibtex_cite_sink_insert'),
-                        \ 'down': '25%',
-                        \ 'options': '--layout=reverse-list --multi --prompt "Cite> "'})<CR>
+			\ 'source': Bibtex_ls(),
+			\ 'sink*': function('<sid>bibtex_cite_sink_insert'),
+			\ 'down': '25%',
+			\ 'options': [
+				\ '--layout=reverse-list',
+				\ '--multi',
+				\ '--prompt',
+				\ '"Cite> "'
+			\ ]})<CR>
 
