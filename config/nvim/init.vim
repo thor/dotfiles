@@ -381,6 +381,8 @@ nnoremap <C-P>      :<C-U>Files<CR>
 nmap     <leader>ph :Files ~<cr>
 nmap     <leader>pb :Buffers<cr>
 nmap     <leader>pg :Rg<cr>
+nmap     <leader>pc :call vimtex#fzf#run('cl', g:fzf_layout)<cr>
+nmap     <leader>pt :call vimtex#fzf#run('t', g:fzf_layout)<cr>
 
 
 " - Map key for distraction free writing mode
