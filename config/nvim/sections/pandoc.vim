@@ -62,6 +62,6 @@ endfunction
 " }}}
 
 " - adding my favourite keybinding
-noremap <Leader>t :noautocmd grep! "(TODO\\|FIXME).*" -o %:h/*.md<CR>:cw<CR>
+noremap <Leader>t :noautocmd grep! "(TODO\\|FIXME\\|\\\fx).*" -o %:h/*.md<CR>:cw<CR>
 " - Map MarkDown/pandoc word count
 xnoremap <leader>w <esc>:'<,'>:w !mdwc<CR>
