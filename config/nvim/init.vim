@@ -33,13 +33,14 @@ Plug 'mhinz/vim-signify'       " VCS gutter diffs
 Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
 
 " - Linting & Auto-completion
-Plug 'dense-analysis/ale'    " linting et al and LSP
-Plug 'Shougo/deoplete.nvim', " Code completion with darkness
+Plug 'ludovicchabant/vim-gutentags' " tags generation
+Plug 'dense-analysis/ale'           " linting et al and LSP
+Plug 'Shougo/deoplete.nvim',        " Code completion with darkness
 	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
-Plug 'zchee/deoplete-jedi',  " Python completion
+Plug 'zchee/deoplete-jedi',         " Python completion
 	\ Cond(has('nvim'))
 Plug 'deoplete-plugins/deoplete-clang',
-	\ Cond(has('nvim'))      " C/C++ completion
+	\ Cond(has('nvim'))             " C/C++ completion
 
 " - Quality of life
 Plug 'Konfekt/FastFold'       " Less, aka faster, folding
