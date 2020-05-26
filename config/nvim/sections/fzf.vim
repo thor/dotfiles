@@ -4,9 +4,14 @@
 "
 let $FZF_BIBTEX_CACHEDIR = '/tmp/'
 
+" Setup the default fzf_layout for use in e.g. vimtex
+let g:fzf_layout = { 'down': '~30%' }
+
+" Setup :Files command
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+" Setup :Rg command
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
