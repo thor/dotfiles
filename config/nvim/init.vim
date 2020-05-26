@@ -255,16 +255,7 @@ runtime! sections/pandoc.vim
 
 
 " # Configuring vimtex
-" - Set vimtex to use zathura (remember .latexmkrc for synctex)!
-let g:vimtex_view_method = 'zathura'
-" - Configuring neovim-remote usage
-if has('nvim')
-	let g:vimtex_compiler_progname = '/usr/bin/nvr'
-endif
-" - Enable folds (see FastFold for better performance)
-let g:vimtex_fold_enabled = 1
-" - Custom formatexpr to handle inline comments
-let g:vimtex_format_enabled = 1
+runtime! sections/vimtex.vim
 
 
 " # Configuring vim-slime
