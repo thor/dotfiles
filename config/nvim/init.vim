@@ -52,6 +52,7 @@ Plug 'pearofducks/ansible-vim'           " YAML-assistance for Ansible
 Plug 'stephpy/vim-yaml'                  " YAML-syntax
 Plug 'Matt-Deacalion/vim-systemd-syntax' " systemd unit files syntax
 Plug 'lervag/vimtex'                     " LaTeX editing & completion and all
+Plug 'Konfekt/vim-sentence-chopper'      " Sentence chopping using latexindent
 Plug 'rust-lang/rust.vim'                " Rust-syntax
 Plug 'Shirk/vim-gas'                     " AT&T Assembly syntax
 Plug 'wannesm/wmgraphviz.vim'            " GraphViz
