@@ -109,10 +109,6 @@ if has('persistent_undo') && !has('nvim')
 endif
 set undofile              " actually enable the saving of history to the file
 
-" Themes 
-let base16colorspace=256        " Make sure that the scheme uses 256-colors.
-colorscheme base16-default-dark " base16-inspired colorscheme.
-set background=dark             " Use the dark theme of whatever colorscheme.
 
 " Colouring / syntax / schemes
 let g:load_doxygen_syntax=1     " Automatically load Doxygen syntax for C/C++.
@@ -133,7 +129,21 @@ set cursorline                      " Reveal the line I'm currently on.
 set wildmenu                        " (d) Show tab-complete line for :cmds.
 set colorcolumn=+1                  " Shows textwidth-column +1.
 set title							" Use terminal title
-highlight ColorColumn ctermbg=18    " Colours the textwidth bar.
+function! ColorSchemeOverride() abort
+	highlight ColorColumn ctermbg=18 " Colours the textwidth bar.
+	highlight CursorLine ctermbg=19  " Colours the cursor line.
+	highlight SpellCap ctermbg=NONE  " Remove background colour from spelling notices
+	highlight SpellBad ctermbg=NONE  " Remove background colour from spelling errors
+endfunction
+augroup custom_colours
+	autocmd!
+	autocmd ColorScheme * call ColorSchemeOverride()
+augroup END
+
+" Themes 
+set background=dark             " Use the dark theme of whatever colorscheme.
+let base16colorspace=256        " Make sure that the scheme uses 256-colors.
+colorscheme base16-default-dark " base16-inspired colorscheme.
 
 " Other behavioural configurations
 " - Restore guicursor after exiting
