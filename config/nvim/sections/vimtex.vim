@@ -44,8 +44,8 @@ let g:vimtex_toc_config = {
 let g:vimtex_toc_show_preamble = 0
 
 let s:lbl_todo  = '✅D: '
-let s:lbl_warn  = '⛔W: '
-let s:lbl_fixme = '⚡F: '
+let s:lbl_warn  = '⚡W: '
+let s:lbl_fixme = '⛔F: '
 
 let g:vimtex_toc_todo_labels = {
 			\ 'TODO': s:lbl_todo, 
@@ -70,7 +70,7 @@ function! s:matcher_fixmes.get_entry(context) abort dict " {{{1
     let s:matcher_continue = deepcopy(self)
   endif
 
-  let l:types = {'w': s:lbl_todo, 'f': s:lbl_fixme }
+  let l:types = {'w': s:lbl_warn, 'f': s:lbl_fixme }
 
   return {
         \ 'title'  : get(l:types, l:type, s:lbl_todo) . l:title,
