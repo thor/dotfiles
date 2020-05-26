@@ -121,7 +121,6 @@ set shiftwidth=4                                     " Using 8 is ridicilous.
 set autoindent                                       " (d) Because automatic indentation is useful.
 set listchars=tab:▸\ ,eol:¬,trail:·,extends:#,nbsp:␣ " Configure how listchars should appear.
 
-
 " User interface / elements / locations
 set number                          " Show line numbers in the left bar.
 set relativenumber                  " Let the line numbers be relative to pos.
@@ -223,8 +222,10 @@ let g:ale_sign_column_always = 1
 " - Setting pretties
 let g:ale_sign_error = "◉"
 let g:ale_sign_warning = "◉"
+let g:ale_sign_info = "◈"
 highlight ALEErrorSign ctermfg=9 ctermbg=18
 highlight ALEWarningSign ctermfg=11 ctermbg=18
+highlight ALEInfoSign ctermfg=6 ctermbg=18
 " - Set default fixer
 let g:ale_fixers = ['prettier']
 
