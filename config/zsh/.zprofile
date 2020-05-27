@@ -10,7 +10,7 @@
 export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
-export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_DEFAULT_COMMAND='rg --files -S'
 
 #
 # Language
