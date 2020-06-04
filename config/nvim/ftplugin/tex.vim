@@ -16,8 +16,10 @@ set wrap
 
 " F9: show detailed LT message for error under cursor, is left with 'q'
 map <F9> :ALEDetail<CR>
-" this turns off all other tex linters
-let b:ale_linters = { 'plaintex': ['lty'], 'tex': ['lty'] }
+" Specify the LaTeXlinters
+let b:ale_linters = ['lty', 'chktex', 'lacheck', 'redpen']
+" Enable latexindent as a fixer
+let b:ale_fixers = ['latexindent']
 " default place of LT installation: '~/lib/LanguageTool'
 let g:ale_tex_lty_ltdirectory = '/usr/share/java/languagetool'
 " set shell options to use custom definitions
