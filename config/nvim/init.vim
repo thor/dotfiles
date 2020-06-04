@@ -320,6 +320,11 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 runtime! sections/fzf.vim
 
 
+" # Configuring vim-gutentags (and tags)
+let g:gutentags_ctags_tagfile = '.tags'
+set tags=./.tags;,.tags
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Global key mappings
 
