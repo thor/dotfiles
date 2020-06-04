@@ -16,6 +16,7 @@ if has('nvim')
 endif
 " Enable folds (see FastFold for better performance)
 let g:vimtex_fold_enabled = 1
+" Custom formatexpr to handle inline comments disabled due to ALE and
 " Konfekt's sentence chopper, see |vimtex-nf-formatting|
 let g:vimtex_format_enabled = 0
 " Disable matchparen for \big and the likes to stop the delay it creates
@@ -26,6 +27,8 @@ let g:vimtex_view_use_temp_files = 0
 let g:vimtex_quickfix_method = 'pplatex'
 " Close the error window after writing a bit
 let g:vimtex_quickfix_autoclose_after_keystrokes = 3
+" Do not open the quickfix window on warnings
+let g:vimtex_quickfix_open_on_warning = 0
 
 " Update the latexmk configuration to use Make to make missing files like PNGs
 let g:vimtex_compiler_latexmk = {
