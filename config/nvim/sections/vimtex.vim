@@ -2,6 +2,12 @@
 let g:latexindent = 1
 let g:latexindent_options = '-l=./.latexindent.yaml -'
 
+" Override colors for the table of contents in vimtex
+highlight VimtexTocSec0 ctermfg=301
+highlight VimtexTocSec1 ctermfg=68
+highlight VimtexTocSec2 ctermfg=60
+
+
 " Set vimtex to use zathura (remember .latexmkrc for synctex)!
 let g:vimtex_view_method = 'zathura'
 " Configuring neovim-remote usage
