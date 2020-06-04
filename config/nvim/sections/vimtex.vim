@@ -20,6 +20,8 @@ let g:vimtex_fold_enabled = 1
 let g:vimtex_format_enabled = 1
 " Use temporary files to avoid overwriting output file while compiling
 let g:vimtex_view_use_temp_files = 0
+" Use pplatex for the delicious logs if possible
+let g:vimtex_quickfix_method = 'pplatex'
 " Close the error window after writing a bit
 let g:vimtex_quickfix_autoclose_after_keystrokes = 3
 
