@@ -16,8 +16,8 @@ if has('nvim')
 endif
 " Enable folds (see FastFold for better performance)
 let g:vimtex_fold_enabled = 1
-" Custom formatexpr to handle inline comments
-let g:vimtex_format_enabled = 1
+" Konfekt's sentence chopper, see |vimtex-nf-formatting|
+let g:vimtex_format_enabled = 0
 " Disable matchparen for \big and the likes to stop the delay it creates
 let g:vimtex_matchparen_enabled = 0
 " Use temporary files to avoid overwriting output file while compiling
