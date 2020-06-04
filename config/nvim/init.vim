@@ -59,9 +59,6 @@ Plug 'Shirk/vim-gas'                     " AT&T Assembly syntax
 Plug 'wannesm/wmgraphviz.vim'            " GraphViz
 Plug 'fatih/vim-go',                     " Go-go-go-go
 	\ { 'do': ':GoUpdateBinaries' }
-Plug 'arakashic/chromatica.nvim',        " Semantic C/C++ highlighting
-	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins',
-		\'for': ['c', 'cpp', 'objc', 'objcpp'] })
 Plug 'numirias/semshi',                  " Semantic Python highlighting
 	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
 Plug 'vimwiki/vimwiki'                   " personal wiki/notes for vim
@@ -262,10 +259,6 @@ runtime! sections/vimtex.vim
 " - Use tmux per default instead of screen
 let g:slime_target = 'tmux'
 
-
-" # Configuring chromatica
-" - Enable on startup, but see plug definition
-let g:chromatica#enable_at_startup = 1
 
 
 " # Configuring Terraform
