@@ -28,6 +28,7 @@ Plug 'kristijanhusak/defx-git' " git symbols for Defx
 Plug 'chrisbra/nrrwrgn'        " Narrowing from Emacs
 Plug 'metakirby5/codi.vim'     " Interactive scratchpad/REPL buffer
 Plug 'mhinz/vim-signify'       " VCS gutter diffs
+Plug 'justinmk/vim-sneak'      " Sneak, the missing motion
 
 " - Settings management
 Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
