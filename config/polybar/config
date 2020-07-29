@@ -283,16 +283,16 @@ format-disconnected =
 format-packetloss = <animation-packetloss> <label-connected>
 animation-packetloss-0 = ⚠
 animation-packetloss-0-foreground = #ffa64c
-animation-packetloss-1 = 📶
+animation-packetloss-1 = 󰖩
 animation-packetloss-1-foreground = #000000
 ; Framerate in milliseconds
 animation-packetloss-framerate = 500
 
-ramp-signal-0 = 冷
-ramp-signal-1 = 爛
-ramp-signal-2 = 嵐
-ramp-signal-3 = 襤
-ramp-signal-4 = 蠟
+ramp-signal-0 = 󰤯
+ramp-signal-1 = 󰤟
+ramp-signal-2 = 󰤢
+ramp-signal-3 = 󰤥
+ramp-signal-4 = 󰤨
 
 [module/eth]
 type = internal/network
