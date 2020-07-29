@@ -333,14 +333,13 @@ accumulate-stats = true
 
 [module/openvpn]
 type = custom/script
-exec = nmcli d show tun0 | grep -i ip4.addr | cut -d: -f2 | awk '{$1=$1};1'
-exec-if = pgrep -x openvpn
+exec = nmcli -t device show tun0 | grep -i ip4.addr | cut -d: -f2
+exec-if = nmcli device show tun0
 
 interval = 10
 
 format-underline = #ff5555
 format-prefix = " "
-#format-prefix-foreground = ${colors.foreground}
 label-foreground = ${colors.foreground-sec}
 
 
