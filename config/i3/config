@@ -40,7 +40,7 @@ exec_always mmonitors.sh bars
 # - flashfocus!
 exec_always --no-startup-id flashfocus --time 250
 # - Random wallpaper at start, every - single - time I restart i3.
-exec_always --no-startup-id feh --bg-fill --no-fehbg --randomize ~/Dropbox/Variert/Bakgrunner/up-close/
+exec_always --no-startup-id feh --bg-fill --no-fehbg --randomize ~/Dropbox/Ressurser/Bakgrunner/up-close/
 # - dunst notifications! Starts with config file ~/.config/dunst/dunstrc if available.
 exec_always --no-startup-id dunst
 # - udiskie removeable devices management
