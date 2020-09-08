@@ -105,6 +105,17 @@ monitor-fallback = eDP-1
 battery = CMB1
 
 
+[bar/lincoln-charlie]
+inherit = bar/first
+
+modules-right = fs-root volume memory cpu wlan eth battery battery-extra temperature date powermenu
+
+; Device specific settings
+monitor-fallback = LVDS-1
+battery = BAT0
+battery-extra = BAT1
+
+
 [bar/lincoln-delta]
 inherit = bar/first
 
@@ -148,16 +159,6 @@ monitor = DP-2
 ; Device specific settings
 eth-interface = eno1
 modules-right = fs-root fs-home wlan eth net-speed openvpn battery volume
-
-[bar/lincoln-charlie]
-inherit = bar/first
-
-modules-right = fs-root volume memory cpu wlan eth battery battery-extra temperature date powermenu
-
-; Device specific settings
-monitor-fallback = LVDS-1
-battery = BAT0
-battery-extra = BAT1
 
 
 [module/xwindow]
