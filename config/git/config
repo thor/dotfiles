@@ -31,9 +31,14 @@
 	historybrowser = gitk
 
 [includeIf "gitdir:~/dev/USIT/"]
-	path = ~/.config/git/work
+	path = ~/.config/git/usit
+	
+[includeIf "gitdir:~/dev/synkope/"]
+	path = ~/.config/git/synkope
 
 [cola]
 	spellcheck = false
 	icontheme = default
 	fontdiff = Monospace,10,-1,5,50,0,0,0,0,0
+[pull]
+	ff = only
