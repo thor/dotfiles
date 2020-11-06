@@ -10,6 +10,11 @@ set linebreak
 " Enable soft-wrapping
 set wrap
 
+" Make the tabstops and shiftwidths smaller
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
 " Setup vimtex
 
 " ale and YaLafi
