@@ -7,6 +7,8 @@ highlight VimtexTocSec0 ctermfg=301
 highlight VimtexTocSec1 ctermfg=68
 highlight VimtexTocSec2 ctermfg=60
 
+" There is only one flavour
+let g:tex_flavor = 'latex'
 
 " Set vimtex to use zathura (remember .latexmkrc for synctex)!
 let g:vimtex_view_method = 'zathura'
@@ -38,8 +40,15 @@ let g:vimtex_compiler_latexmk = {
 			\	 '-synctex=1',
 			\	 '-interaction=nonstopmode',
 			\	 '-use-make',
+			\	 '-r',
+			\    '/home/thor/dev/master/thesis/.latexmkrc',
 			\ ],
+			\ 'build_dir': '/home/thor/dev/master/thesis/out'
 			\}
+
+let g:vimtex_compiler_latexmk_engines = {
+        \ '_'                : '-pdflua',
+		\}
 
 " Configure table of contents
 " - Hide the help
