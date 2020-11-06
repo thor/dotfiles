@@ -81,7 +81,7 @@ font-4 = Noto Sans CJK KR:size=10:pixelsize=10;0
 
 modules-left = i3 xwindow
 modules-center = date
-modules-right = updates fs-root fs-home memory cpu wlan eth net-speed openvpn battery temperature volume
+modules-right = updates fs-root fs-home memory cpu wlan eth net-speed openvpn battery temperature volume powermenu
 
 ; Set not-likely-to-change settings
 ;
@@ -158,7 +158,7 @@ monitor = DP-2
 
 ; Device specific settings
 eth-interface = eno1
-modules-right = fs-root fs-home wlan eth net-speed openvpn battery volume
+modules-right = fs-root fs-home wlan eth net-speed openvpn battery volume powermenu
 
 
 [module/xwindow]
@@ -468,6 +468,34 @@ interval = 60
 format-prefix = 󰑐
 format-prefix-padding = 1
 format-underline = ${colors.lime}
+
+[module/powermenu]
+type = custom/menu
+
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+
+expand-right = false
+
+label-open = ""
+label-open-font = 3
+label-close = ""
+label-close-foreground = ${colors.lime}
+label-separator = " / "
+label-separator-foreground = ${colors.foreground}
+
+; suspend
+menu-0-2 = "󰒲"
+menu-0-2-exec = systemctl suspend
+menu-0-2-foreground = ${colors.orange}
+; reboot
+menu-0-1 = 
+menu-0-1-exec = systemctl reboot
+menu-0-1-foreground = ${colors.orange}
+; shutdown
+menu-0-0 = " "
+menu-0-0-exec = systemctl poweroff
+menu-0-0-foreground = ${colors.orange}
 
 
 [settings]
