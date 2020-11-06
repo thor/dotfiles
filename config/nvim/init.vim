@@ -19,6 +19,7 @@ Plug 'justinmk/vim-sneak'      " Sneak, the missing motion
 " - Themes & Visuals
 Plug 'chriskempson/base16-vim'           " The enjoyable base-16 theme
 
+if !exists('g:vscode')
 " - UX & Functionality
 Plug 'tpope/vim-fugitive'      " Git, git, git
 Plug 'bling/vim-airline'       " It's so enjoyable with a nice status!
@@ -27,7 +28,7 @@ Plug 'junegunn/fzf.vim'        " vim-integration for fuzzy file finder
 Plug 'junegunn/goyo.vim'       " Distraction free writing
 Plug 'junegunn/limelight.vim'  " Hyper-focused writing in vim
 Plug 'Shougo/defx.nvim',       " file explorer not riddled by bugs
-	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
+  \ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
 Plug 'kristijanhusak/defx-git' " git symbols for Defx
 Plug 'metakirby5/codi.vim'     " Interactive scratchpad/REPL buffer
 Plug 'mhinz/vim-signify'       " VCS gutter diffs
@@ -40,15 +41,17 @@ Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
 Plug 'ludovicchabant/vim-gutentags' " tags generation
 Plug 'dense-analysis/ale'           " linting et al and LSP
 Plug 'Shougo/deoplete.nvim',        " Code completion with darkness
-	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
+  \ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
 Plug 'zchee/deoplete-jedi',         " Python completion
-	\ Cond(has('nvim'))
+  \ Cond(has('nvim'))
 Plug 'deoplete-plugins/deoplete-clang',
-	\ Cond(has('nvim'))             " C/C++ completion
+  \ Cond(has('nvim'))               " C/C++ completion
+Plug 'neovim/nvim-lspconfig'        " LSP client configs for neovim
+Plug 'Shougo/deoplete-lsp'          " LSP completion source for deoplete
 
 " - Quality of life
-Plug 'Konfekt/FastFold'       " Less, aka faster, folding
-Plug 'zhimsel/vim-stay'		  " Behind the scenes saving of folds
+Plug 'Konfekt/FastFold'             " Less, aka faster, folding
+Plug 'zhimsel/vim-stay'             " Behind the scenes saving of folds
 
 
 " - Syntax & File Type Enhancers
@@ -62,11 +65,13 @@ Plug 'rust-lang/rust.vim'                " Rust-syntax
 Plug 'Shirk/vim-gas'                     " AT&T Assembly syntax
 Plug 'wannesm/wmgraphviz.vim'            " GraphViz
 Plug 'fatih/vim-go',                     " Go-go-go-go
-	\ { 'do': ':GoUpdateBinaries' }
+  \ { 'do': ':GoUpdateBinaries' }
 Plug 'numirias/semshi',                  " Semantic Python highlighting
-	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
+  \ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
 Plug 'vimwiki/vimwiki'                   " personal wiki/notes for vim
-Plug 'jvirtanen/vim-hcl'				 " HCL2+ syntax highlighting
+Plug 'jvirtanen/vim-hcl'                 " HCL2+ syntax highlighting
+
+endif
 
 " --- binary hex
 Plug 'fidian/hexmode'                    " Hexmode
@@ -77,19 +82,17 @@ Plug 'aklt/plantuml-syntax'              " PlantUML
 Plug 'vim-pandoc/vim-pandoc'             " pandoc-features
 Plug 'vim-pandoc/vim-pandoc-syntax'      " pandoc-syntax
 Plug 'vim-pandoc/vim-pandoc-after'       " plugin integration, incl. fastfold
-Plug 'reedes/vim-pencil'			     " The pencil
-
-
-
-"" - Text Manipulation
-Plug 'junegunn/vim-easy-align'           " Align tables, comments, delims
-Plug 'dhruvasagar/vim-table-mode'		 " Quickly deal with tables and such
-Plug 'tpope/vim-surround'                " surrounding stuff, like parenthesis
-Plug 'dkarter/bullets.vim'				 " Bullet lists made easy and automatic
-
+Plug 'reedes/vim-pencil'                 " The pencil
 
 " - Temporary plugins
-Plug 'lambdalisue/suda.vim'				 " Workaround for !sudo tee % in v-1.3
+Plug 'lambdalisue/suda.vim'       "  Workaround for !sudo tee % in v-1.3
+
+"" - Text Manipulation
+Plug 'junegunn/vim-easy-align'    "  Align tables, comments, delims
+Plug 'dhruvasagar/vim-table-mode' "  Quickly deal with tables and such
+Plug 'tpope/vim-surround'         "  surrounding stuff, like parenthesis
+Plug 'dkarter/bullets.vim'        "  Bullet lists made easy and automatic
+
 
 " Finished pluggin' -- any plugins need to be before this
 call plug#end()
@@ -169,7 +172,8 @@ augroup END " }
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin configurations
+" {{{ Terminal plugin configurations
+if !exists('g:vscode')
 
 
 " # Configuring vim-airline
@@ -251,58 +255,6 @@ let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/lib/clang/10.0.0/include'
 
 
-" # Configuring vim-pandoc
-runtime! sections/pandoc.vim
-
-
-" # Configuring vimtex
-runtime! sections/vimtex.vim
-
-
-" # Configuring vim-slime
-" - Use tmux per default instead of screen
-let g:slime_target = 'tmux'
-
-
-
-" # Configuring Terraform
-" - Aligning automatically
-let g:terraform_align = 1
-" - Foldin' 's pretty cool too
-let g:terraform_fold_sections = 1
-
-
-" # Configuring FastFold
-" - TeX, with vimtex too (see up)
-let g:tex_fold_enabled = 1
-" - pandoc
-let g:pandoc_fold_enabled = 1
-
-
-" # Configuring vimwiki
-" - setting the list of notes/wikis
-let g:vimwiki_list = [
-			\ {'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md',
-				\ 'list_margin': 2 },
-			\ {'path': '~/master/journal','syntax': 'markdown', 'ext': '.md',
-				\ 'list_margin': 2 }]
-" - try to change the file endings away from .md
-let g:vimwiki_ext2syntax = {'.mdk': 'markdown',
-			\ '.wiki': 'media'}
-" - no temporarily created vimwiki-temporary-wikis
-let g:vimwiki_global_ext = 0
-
-" # Configuring vim-pencil
-" - soft as default
-let g:pencil#wrapModeDefault = 'soft'
-" - two spaces after periods
-let g:pencil#joinspaces = 1     " 0=one_space (def), 1=two_spaces
-" - no concealment
-let g:pencil#conceallevel = 2     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
-" - add to airline
-let g:airline_section_x = '%{PencilMode()}'
-
-
 " # Configuring defx
 runtime! sections/defx.vim
 
@@ -323,13 +275,76 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 runtime! sections/fzf.vim
 
 
+" # Configuring FastFold
+" - TeX, with vimtex too (see up)
+let g:tex_fold_enabled = 1
+" - pandoc
+let g:pandoc_fold_enabled = 1
+
+
+" # Configuring vim-slime
+" - Use tmux per default instead of screen
+let g:slime_target = 'tmux'
+
+
+endif
+" }}}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" {{{ Non-terminal plugin configurations
+
+" # Configuring vim-pandoc
+runtime! sections/pandoc.vim
+
+
+" # Configuring vimtex
+runtime! sections/vimtex.vim
+
+
+" # Configuring Terraform
+" - Aligning automatically
+let g:terraform_align = 1
+" - Foldin' 's pretty cool too
+let g:terraform_fold_sections = 1
+
+
+" # Configuring vimwiki
+" - setting the list of notes/wikis
+let g:vimwiki_list = [
+			\ {'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md',
+				\ 'list_margin': 2 },
+			\ {'path': '~/master/journal','syntax': 'markdown', 'ext': '.md',
+				\ 'list_margin': 2 }]
+" - try to change the file endings away from .md
+let g:vimwiki_ext2syntax = {'.mdk': 'markdown',
+			\ '.wiki': 'media'}
+" - no temporarily created vimwiki-temporary-wikis
+let g:vimwiki_global_ext = 0
+
+
+" # Configuring vim-pencil
+" - soft as default
+let g:pencil#wrapModeDefault = 'soft'
+" - two spaces after periods
+let g:pencil#joinspaces = 1     " 0=one_space (def), 1=two_spaces
+" - no concealment
+let g:pencil#conceallevel = 2     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
+" - add to airline
+let g:airline_section_x = '%{PencilMode()}'
+
+
 " # Configuring vim-gutentags (and tags)
 let g:gutentags_ctags_tagfile = '.tags'
 set tags=./.tags;,.tags
 
 
+" # Configuring VSCode settings and keybindings
+runtime! sections/vscode.vim
+
+" }}}
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Global key mappings
+" {{{ Global key mappings
 
 " - Set mapleader to be space, convenient
 let mapleader = " "
@@ -410,10 +425,8 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" File-based key mappings
 
-
+" }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Commands
