@@ -12,6 +12,10 @@ endfunction
 " Load list of plugins for vim-plug
 call plug#begin('~/.config/nvim/plugged')
 
+" - Motions
+Plug 'chrisbra/nrrwrgn'        " Narrowing from Emacs
+Plug 'justinmk/vim-sneak'      " Sneak, the missing motion
+
 " - Themes & Visuals
 Plug 'chriskempson/base16-vim'           " The enjoyable base-16 theme
 
@@ -25,10 +29,9 @@ Plug 'junegunn/limelight.vim'  " Hyper-focused writing in vim
 Plug 'Shougo/defx.nvim',       " file explorer not riddled by bugs
 	\ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
 Plug 'kristijanhusak/defx-git' " git symbols for Defx
-Plug 'chrisbra/nrrwrgn'        " Narrowing from Emacs
 Plug 'metakirby5/codi.vim'     " Interactive scratchpad/REPL buffer
 Plug 'mhinz/vim-signify'       " VCS gutter diffs
-Plug 'justinmk/vim-sneak'      " Sneak, the missing motion
+
 
 " - Settings management
 Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
