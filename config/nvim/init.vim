@@ -255,6 +255,10 @@ let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/lib/clang/10.0.0/include'
 
 
+" # Configuring LSP client configurations
+runtime! sections/lsp.vim
+
+
 " # Configuring defx
 runtime! sections/defx.vim
 
@@ -419,6 +423,8 @@ inoremap <silent><expr> <s-TAB>
       \ <SID>check_back_space() ? "\<s-TAB>" :
       \ deoplete#manual_complete()
 
+" - Map Ctrl+Space for opening LSP suggestions
+inoremap <expr><C-Space> deoplete#manual_complete("lsp")
 
 " - Syntax debugging
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
