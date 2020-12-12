@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Reset the docking connection!
+nmcli connection down t-docking
+nmcli connection up t-docking
+
+# Set higher screensaver timeout
+xset dpms 3600 3600 3600
