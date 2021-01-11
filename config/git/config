@@ -6,6 +6,7 @@
 	default = simple
 [core]
 	autocrlf = input
+	excludesfile = ~/.config/git/ignore
 [merge]
 	tool = nvim -d
 [mergetool]
@@ -30,11 +31,14 @@
 	diff = meld
 	historybrowser = gitk
 
-[includeIf "gitdir:~/dev/USIT/"]
-	path = ~/.config/git/usit
-	
 [includeIf "gitdir:~/dev/synkope/"]
 	path = ~/.config/git/synkope
+
+[includeIf "gitdir:~/dev/client/"]
+	path = ~/.config/git/client
+
+[includeIf "gitdir:~/repos/"]
+	path = ~/.config/git/client
 
 [cola]
 	spellcheck = false
