@@ -1,6 +1,6 @@
 [user]
 	email = thor@roht.no
-	name = Thor K. H.
+	name = Thor K. Høgås
 	signingkey = CED888E603D78BD3721687E7857DC2630B5916D8
 [push]
 	default = simple
@@ -38,6 +38,8 @@
 	path = ~/.config/git/client
 
 [includeIf "gitdir:~/repos/"]
+	path = ~/.config/git/client
+[includeIf "gitdir:~/go/src/gitlab.statnett.no"]
 	path = ~/.config/git/client
 
 [cola]
