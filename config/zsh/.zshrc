@@ -51,9 +51,13 @@ else
 fi
 
 # Set up WSL ssh-agent if relevant
-read -r _osrelease</proc/sys/kernel/osrelease
-if [[ "$_osrelease" == *Microsoft* ]] && [ -z "$SSH_AUTH_SOCK" ]; then
-	eval "$(/mnt/c/dev/ssh-agent-wsl -r)"
+if [ -n "${WSL_DISTRO_NAME}" ]; then
+	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+	ss -a | grep -q $SSH_AUTH_SOCK
+	if [ $? -ne 0   ]; then
+		rm -f $SSH_AUTH_SOCK
+		( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"/mnt/c/tools/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
+	fi
 fi
 
 
