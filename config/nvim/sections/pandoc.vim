@@ -36,8 +36,6 @@ if filereadable("/usr/bin/pandoc-citeproc")
 	let g:pandoc#completion#bib#mode = 'citeproc'
 	" - Use previews in the information
 	let g:pandoc#completion#bib#use_preview = 1
-else
-	echoerr "pandoc-citeproc not installed at /usr/bin/pandoc-citeproc"
 endif
 " }}}
 
