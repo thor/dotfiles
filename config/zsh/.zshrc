@@ -121,11 +121,11 @@ function print-ifi() {
 	ssh -t tmhogaas@login.ifi.uio.no "/usr/bin/print ${@:2} \"Documents/${file}\"; rm -f \"Documents/${file}\""
 }
 
-# Source usit.sh for work configuration
-if [[ -s "${HOME}/.local/lib/usit.sh" ]]; then
-  source "${HOME}/.local/lib/usit.sh"
+# Source work.sh for work configuration
+if [[ -s "${HOME}/.local/lib/work.sh" ]]; then
+  source "${HOME}/.local/lib/work.sh"
 else 
-	_warn "Missing usit.sh, no work-related aliases will be loaded"
+	_warn "Missing ~/.local/lib/work.sh, no work-related aliases will be loaded"
 fi
 
 # GitHub and BitBucket convenience
