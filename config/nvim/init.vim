@@ -46,8 +46,6 @@ Plug 'zchee/deoplete-jedi',         " Python completion
   \ Cond(has('nvim'))
 Plug 'deoplete-plugins/deoplete-clang',
   \ Cond(has('nvim'))               " C/C++ completion
-Plug 'neovim/nvim-lspconfig'        " LSP client configs for neovim
-Plug 'Shougo/deoplete-lsp'          " LSP completion source for deoplete
 
 " - Quality of life
 Plug 'Konfekt/FastFold'             " Less, aka faster, folding
