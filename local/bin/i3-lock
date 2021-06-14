@@ -72,25 +72,25 @@ args_i3lock=(
 	# Display a clock, and force it to be present
 	-k --force-clock --time-font "Arimo"
 	# The time and date, its size, string and position, then align it
-	--timepos "x+70:h-100" --timesize 76 --timestr "%H:%M" 
-	--datepos "tx+0:ty+30" --datesize 18 --datestr "%A %d. %B | Type to unlock..."
+	--time-pos "x+70:h-100" --time-size 76 --time-str "%H:%M" 
+	--date-pos "tx+0:ty+30" --date-size 18 --date-str "%A %d. %B | Type to unlock..."
 	--time-align 1 --date-align 1
 	# Colour of the datestr and timestr
-	--timecolor ffffffff --datecolor eeeeeeff
+	--time-color ffffffff --date-color eeeeeeff
 	# Always show the indicator, and its position, plus stroking colors
-	--indicator --indpos "x+370:h-125"
-	--keyhlcolor d23c3dff --bshlcolor d23c3dff --separatorcolor 00000000
+	--indicator --ind-pos "x+370:h-125"
+	--keyhl-color d23c3dff --bshl-color d23c3dff --separator-color 00000000
 	# Ring radios, color and to use the line inside
-	--radius 40 --ringcolor ffffffcc --line-uses-inside
+	--radius 40 --ring-color ffffffcc --line-uses-inside
 	# No text while verifying or when it's wrong
-	--veriftext "" --wrongtext ""
+	--verif-text "" --wrong-text ""
 	# Standard inside and ring color
-	--insidecolor 00000000 --ringcolor ffffffff
+	--inside-color 00000000 --ring-color ffffffff
 	# Set the inside and ring color when verifying and failing
-	--insidevercolor fecf4dff --insidewrongcolor d23c3dff
-	--ringvercolor ffffffff --ringwrongcolor ffffffff
+	--insidever-color fecf4dff --insidewrong-color d23c3dff
+	--ringver-color ffffffff --ringwrong-color ffffffff
 	# Set the color of our failed attempts and the size, but no noinput
-	--wrongcolor ffffffff --wrongsize 32  --wrong-align 0 --noinputtext=""
+	--wrong-color ffffffff --wrong-size 32  --wrong-align 0 --noinput-text=""
 )
 
 # Execute the lock screen without forking (-n)
