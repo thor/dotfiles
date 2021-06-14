@@ -81,7 +81,7 @@ font-4 = Noto Sans CJK KR:size=10:pixelsize=10;0
 
 modules-left = i3 xwindow
 modules-center = date
-modules-right = updates fs-root fs-home memory cpu wlan eth net-speed openvpn battery temperature volume powermenu
+modules-right = updates fs-root fs-home memory cpu cpu-freq wlan eth net-speed openvpn battery temperature volume powermenu
 
 ; Set not-likely-to-change settings
 ;
@@ -108,7 +108,7 @@ battery = CMB1
 [bar/lincoln-charlie]
 inherit = bar/first
 
-modules-right = fs-root volume memory cpu wlan eth battery battery-extra temperature date powermenu
+modules-right = fs-root volume memory cpu cpu-freq wlan eth battery battery-extra temperature date powermenu
 
 ; Device specific settings
 monitor-fallback = LVDS-1
@@ -254,6 +254,17 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
 label = %percentage:3%%
 label-padding = 1
+
+[module/cpu-freq]
+type = custom/script
+exec = echo "scale=2; $(rg 'cpu MHz' /proc/cpuinfo | cut -d: -f2 | xargs | sed 's/ /\+/g' | bc)/8/1000" | bc
+
+interval = 5
+
+label = %output:4:4% GHz
+format-underline = #ff5555
+format-prefix = "󰓅 "
+label-foreground = ${colors.foreground-sec}
 
 
 [module/memory]
@@ -403,7 +414,7 @@ format-discharging-underline = ${self.format-charging-underline}
 
 label-full = %percentage%%
 label-full-foreground = ${colors.foreground-sec}
-format-full-prefix = 
+format-full-prefix = 󰁹 
 format-full-underline = ${colors.good}
 
 ramp-capacity-0 = 󰁺
