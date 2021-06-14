@@ -11,6 +11,7 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
 export FZF_DEFAULT_COMMAND='fd --color=never'
+export DIFFPROG='nvim -d'
 
 #
 # Language
