@@ -5,3 +5,7 @@ let b:ale_fixers = ['rustfmt']
 " Use clippy if possible
 let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')
 
+" LSP client configurations
+lua << EOF
+require'lspconfig'.rust_analyzer.setup{}
+EOF
