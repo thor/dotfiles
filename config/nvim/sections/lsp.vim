@@ -1,6 +1,6 @@
 " LSP client configurations
 lua << EOF
-require'nvim_lsp'.terraformls.setup{
+require'lspconfig'.terraformls.setup{
 	cmd = { "terraform-ls", "serve" }
 }
 EOF
