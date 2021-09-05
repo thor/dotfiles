@@ -67,7 +67,6 @@ Plug 'fatih/vim-go',                     " Go-go-go-go
   \ { 'do': ':GoUpdateBinaries' }
 Plug 'numirias/semshi',                  " Semantic Python highlighting
   \ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
-Plug 'vimwiki/vimwiki'                   " personal wiki/notes for vim
 Plug 'jvirtanen/vim-hcl'                 " HCL2+ syntax highlighting
 
 endif
@@ -309,20 +308,6 @@ runtime! sections/vimtex.vim
 let g:terraform_align = 1
 " - Foldin' 's pretty cool too
 let g:terraform_fold_sections = 1
-
-
-" # Configuring vimwiki
-" - setting the list of notes/wikis
-let g:vimwiki_list = [
-			\ {'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md',
-				\ 'list_margin': 2 },
-			\ {'path': '~/master/journal','syntax': 'markdown', 'ext': '.md',
-				\ 'list_margin': 2 }]
-" - try to change the file endings away from .md
-let g:vimwiki_ext2syntax = {'.mdk': 'markdown',
-			\ '.wiki': 'media'}
-" - no temporarily created vimwiki-temporary-wikis
-let g:vimwiki_global_ext = 0
 
 
 " # Configuring vim-pencil
