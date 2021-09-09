@@ -329,6 +329,12 @@ set tags=./.tags;,.tags
 " # Configuring VSCode settings and keybindings
 runtime! sections/vscode.vim
 
+
+" # Configuring WSL (Windows Subsystem for Linux) settings
+if !empty($WSL_DISTRO_NAME)
+	runtime! sections/wsl.vim
+endif
+
 " }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
