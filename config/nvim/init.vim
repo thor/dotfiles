@@ -117,9 +117,9 @@ let g:load_doxygen_syntax=1     " Automatically load Doxygen syntax for C/C++.
 set foldmethod=marker           " Change from manual to marker for folding defaults
 
 " Spacing / tabs / code-style
-set tabstop=4                                        " Visual space per TAB used!
+set tabstop=2                                        " Visual space per TAB used!
 set softtabstop=-1                                   " Spaces entered per TAB in editing.
-set shiftwidth=4                                     " Using 8 is ridicilous.
+set shiftwidth=2                                     " Using 8 is ridicilous.
 set autoindent                                       " (d) Because automatic indentation is useful.
 set listchars=tab:▸\ ,eol:¬,trail:·,extends:#,nbsp:␣ " Configure how listchars should appear.
 
