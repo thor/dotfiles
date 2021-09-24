@@ -16,10 +16,31 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'chrisbra/nrrwrgn'        " Narrowing from Emacs
 Plug 'justinmk/vim-sneak'      " Sneak, the missing motion
 
+"" - Text Manipulation
+Plug 'junegunn/vim-easy-align'    "  Align tables, comments, delims
+Plug 'dhruvasagar/vim-table-mode' "  Quickly deal with tables and such
+Plug 'tpope/vim-surround'         "  surrounding stuff, like parenthesis
+Plug 'dkarter/bullets.vim'        "  Bullet lists made easy and automatic
+
+if !exists('g:vscode')
+
+" --- Writing enhancements
+Plug 'vim-pandoc/vim-pandoc'             " pandoc-features
+Plug 'vim-pandoc/vim-pandoc-syntax'      " pandoc-syntax
+Plug 'vim-pandoc/vim-pandoc-after'       " plugin integration, incl. fastfold
+Plug 'reedes/vim-pencil'                 " The pencil
+
+" --- binary hex
+Plug 'fidian/hexmode'                    " Hexmode
+Plug 'hashivim/vim-terraform'            " Terraform, syntax, with more
+Plug 'aklt/plantuml-syntax'              " PlantUML
+
+" - Temporary plugins
+Plug 'lambdalisue/suda.vim'       "  Workaround for !sudo tee % in v-1.3
+
 " - Themes & Visuals
 Plug 'chriskempson/base16-vim'           " The enjoyable base-16 theme
 
-if !exists('g:vscode')
 " - UX & Functionality
 Plug 'tpope/vim-fugitive'      " Git, git, git
 Plug 'bling/vim-airline'       " It's so enjoyable with a nice status!
@@ -58,7 +79,6 @@ Plug 'saltstack/salt-vim'                " YAML-assistance for Salt
 Plug 'pearofducks/ansible-vim'           " YAML-assistance for Ansible
 Plug 'stephpy/vim-yaml'                  " YAML-syntax
 Plug 'Matt-Deacalion/vim-systemd-syntax' " systemd unit files syntax
-Plug 'lervag/vimtex'                     " LaTeX editing & completion and all
 Plug 'Konfekt/vim-sentence-chopper'      " Sentence chopping using latexindent
 Plug 'rust-lang/rust.vim'                " Rust-syntax
 Plug 'Shirk/vim-gas'                     " AT&T Assembly syntax
@@ -69,28 +89,11 @@ Plug 'numirias/semshi',                  " Semantic Python highlighting
   \ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
 Plug 'jvirtanen/vim-hcl'                 " HCL2+ syntax highlighting
 
+
+" - Syntax & File Type Enhancers
+Plug 'lervag/vimtex'                     " LaTeX editing & completion and all
+
 endif
-
-" --- binary hex
-Plug 'fidian/hexmode'                    " Hexmode
-Plug 'hashivim/vim-terraform'            " Terraform, syntax, with more
-Plug 'aklt/plantuml-syntax'              " PlantUML
-
-" --- Writing enhancements
-Plug 'vim-pandoc/vim-pandoc'             " pandoc-features
-Plug 'vim-pandoc/vim-pandoc-syntax'      " pandoc-syntax
-Plug 'vim-pandoc/vim-pandoc-after'       " plugin integration, incl. fastfold
-Plug 'reedes/vim-pencil'                 " The pencil
-
-" - Temporary plugins
-Plug 'lambdalisue/suda.vim'       "  Workaround for !sudo tee % in v-1.3
-
-"" - Text Manipulation
-Plug 'junegunn/vim-easy-align'    "  Align tables, comments, delims
-Plug 'dhruvasagar/vim-table-mode' "  Quickly deal with tables and such
-Plug 'tpope/vim-surround'         "  surrounding stuff, like parenthesis
-Plug 'dkarter/bullets.vim'        "  Bullet lists made easy and automatic
-
 
 " Finished pluggin' -- any plugins need to be before this
 call plug#end()
@@ -130,6 +133,9 @@ set cursorline                      " Reveal the line I'm currently on.
 set wildmenu                        " (d) Show tab-complete line for :cmds.
 set colorcolumn=+1                  " Shows textwidth-column +1.
 set title							" Use terminal title
+
+if !exists('g:vscode')
+
 function! ColorSchemeOverride() abort
 	highlight ColorColumn ctermbg=18 " Colours the textwidth bar.
 	highlight CursorLine ctermbg=19  " Colours the cursor line.
@@ -149,6 +155,9 @@ colorscheme base16-default-dark " base16-inspired colorscheme.
 " Other behavioural configurations
 " - Restore guicursor after exiting
 au VimLeave * set guicursor=a:hor100-blinkon1
+
+endif
+
 set backspace=indent,eol,start " (d) Backspace beyond single lines.
 set modeline                   " Configure settings per file.
 set mouse=a                    " (d) Mouse-support is actually really cool.
