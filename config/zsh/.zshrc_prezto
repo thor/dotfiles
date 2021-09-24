@@ -1,16 +1,9 @@
-# Allegedly common option for themes
-#setopt promptsubst
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-# Source zinit
-export ZINITZSH=~/.local/lib/zinit/zinit.zsh
-if [[ -s "$ZINITZSH" ]]; then source "$ZINITZSH"; fi
 
 # zsh RC
 # - Contains various personal aliases and configuratios that always happen
@@ -32,19 +25,18 @@ else
 fi
 
 
+# Source prezto
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
-# TODO: Try to add colors
-autoload colors
-colors
-
-zinit wait lucid for \
-	PZT::modules/spectrum \
-	PZT::modules/utility \
-	PZT::modules/terminal \
-	PZT::modules/editor \
-	PZT::modules/directory \
-	PZT::modules/prompt
-
+# Source fzf if it exists
+if [[ -d "/usr/share/fzf/" ]]; then
+	source "/usr/share/fzf/key-bindings.zsh"
+	source "/usr/share/fzf/completion.zsh"
+else
+	_warn "No FZF, could not find fzf script"
+fi
 
 # termite: open current directory with ctrl+shift+t
 if [[ $TERM == xterm-termite ]]; then
@@ -68,36 +60,6 @@ if [ -n "${WSL_DISTRO_NAME}" ]; then
 	fi
 fi
 
-# Load the theme
-zinit ice depth'1'
-zinit light romkatv/powerlevel10k
-
-# Source fzf if it exists
-if [[ -d "/usr/share/fzf/" ]]; then
-	zinit wait lucid as"completion" is-snippet for \
-		/usr/share/fzf/key-bindings.zsh \
-		/usr/share/fzf/completion.zsh
-	#source "/usr/share/fzf/key-bindings.zsh"
-	#source "/usr/share/fzf/completion.zsh"
-else
-	_warn "No FZF, could not find fzf script"
-fi
-
-zinit wait lucid for \
-	PZT::modules/git/alias.zsh \
-	zsh-users/zsh-completions \
-	PZT::modules/completion \
-
-# Syntax highlighting should come after the completion initialisation
-zinit wait lucid atload"zicompinit; zicdreplay" for \
-	zdharma/fast-syntax-highlighting
-
-
-zinit wait lucid is-snippet for \
-	/usr/share/nvm/init-nvm.sh
-
-# Replays all the compdef commands as compinit wasn't loaded yet
-#zinit cdreplay -q
 
 # Aliases and similar
 
@@ -106,7 +68,6 @@ alias j=journal
 
 # Use exa if available
 if [[ -s /usr/bin/exa ]]; then
-	alias ls=exa
 	alias ll="exa -lgFL 2"
 	alias la="ll -a"
 fi
@@ -119,7 +80,7 @@ alias please='sudo $(fc -ln -1)'
 
 # systemd-related
 alias uctl="systemctl --user"
-alias ujctl="journalctl --user"
+alias jctl="journalctl --user"
 
 # Vagrant Cheats
 alias vup="vagrant up"
@@ -162,7 +123,9 @@ function print-ifi() {
 
 # Source work.sh for work configuration
 if [[ -s "${HOME}/.local/lib/work.sh" ]]; then
-  zinit snippet "${HOME}/.local/lib/work.sh"
+  source "${HOME}/.local/lib/work.sh"
+else 
+	_warn "Missing ~/.local/lib/work.sh, no work-related aliases will be loaded"
 fi
 
 # GitHub and BitBucket convenience
