@@ -3,6 +3,7 @@
 if (exists('g:vscode'))
 
 " vim-commentary-esque bindings
+" https://github.com/asvetliakov/vscode-neovim#vim-commentary
 xmap gc  <Plug>VSCodeCommentary
 nmap gc  <Plug>VSCodeCommentary
 omap gc  <Plug>VSCodeCommentary
