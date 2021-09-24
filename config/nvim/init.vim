@@ -298,6 +298,15 @@ let g:pandoc_fold_enabled = 1
 let g:slime_target = 'tmux'
 
 
+" # Configuring vim-gutentags (and tags)
+let g:gutentags_ctags_tagfile = '.tags'
+set tags=./.tags;,.tags
+
+
+" # Configuring vimtex
+runtime! sections/vimtex.vim
+
+
 endif
 " }}}
 
@@ -306,10 +315,6 @@ endif
 
 " # Configuring vim-pandoc
 runtime! sections/pandoc.vim
-
-
-" # Configuring vimtex
-runtime! sections/vimtex.vim
 
 
 " # Configuring Terraform
@@ -328,11 +333,6 @@ let g:pencil#joinspaces = 1     " 0=one_space (def), 1=two_spaces
 let g:pencil#conceallevel = 2     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
 " - add to airline
 let g:airline_section_x = '%{PencilMode()}'
-
-
-" # Configuring vim-gutentags (and tags)
-let g:gutentags_ctags_tagfile = '.tags'
-set tags=./.tags;,.tags
 
 
 " # Configuring VSCode settings and keybindings
