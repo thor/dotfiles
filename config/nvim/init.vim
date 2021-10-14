@@ -68,6 +68,9 @@ Plug 'zchee/deoplete-jedi',         " Python completion
 Plug 'deoplete-plugins/deoplete-clang',
   \ Cond(has('nvim'))               " C/C++ completion
 Plug 'neovim/nvim-lspconfig'        " LSP configurations
+Plug 'folke/lsp-colors.nvim'        " Colours for LSP
+Plug 'folke/trouble.nvim'           " LSP error overview
+Plug 'kyazdani42/nvim-web-devicons' " LSP pretty icons
 
 " - Quality of life
 Plug 'Konfekt/FastFold'             " Less, aka faster, folding
@@ -114,6 +117,9 @@ if has('persistent_undo') && !has('nvim')
 endif
 set undofile              " actually enable the saving of history to the file
 
+
+" Windows
+set clipboard=unnamedplus
 
 " Colouring / syntax / schemes
 let g:load_doxygen_syntax=1     " Automatically load Doxygen syntax for C/C++.
