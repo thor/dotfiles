@@ -50,14 +50,20 @@ else
 	_warn "No fuck, missing thefuck executable"
 fi
 
+# Temporarily we're just using a local SSH agent because of some perky issues
 # Set up WSL ssh-agent if relevant
-if [ -n "${WSL_DISTRO_NAME}" ]; then
-	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
-	ss -a | grep -q $SSH_AUTH_SOCK
-	if [ $? -ne 0   ]; then
-		rm -f $SSH_AUTH_SOCK
-		( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"/mnt/c/tools/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
-	fi
+#if [ -n "${WSL_DISTRO_NAME}" ]; then
+#	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+#	ss -a | grep -q $SSH_AUTH_SOCK
+#	if [ $? -ne 0   ]; then
+#		rm -f $SSH_AUTH_SOCK
+#		( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"/mnt/c/tools/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
+#	fi
+#fi
+if [[ -n "${WSL_DISTRO_NAME}" ]] && [ -z "$SSH_AUTH_SOCK" ]; then
+	#eval "$(/mnt/c/dev/ssh-agent-wsl -r)"
+	eval "$(ssh-agent)"
+	ssh-add ~/.ssh/id_ed25519_work
 fi
 
 
