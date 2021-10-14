@@ -66,6 +66,8 @@ if [[ -n "${WSL_DISTRO_NAME}" ]] && [ -z "$SSH_AUTH_SOCK" ]; then
 	ssh-add ~/.ssh/id_ed25519_work
 fi
 
+# Setup direnv
+eval "$(direnv hook zsh)"
 
 # Aliases and similar
 
