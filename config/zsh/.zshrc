@@ -171,5 +171,8 @@ function bitpr() {
     _fetchpr "$bitbucket" "$2" "$3"
 }
 
+# Source nvm files
+source /usr/share/nvm/init-nvm.sh
+
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
