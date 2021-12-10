@@ -1,3 +1,5 @@
+@theme "~/.config/rofi/theme.rasi"
+
 configuration {
 /*	modi: "drun";*/
     width: 100;
@@ -51,7 +53,6 @@ configuration {
 /*	window-format: "{w}    {i}{c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-	theme: "~/.config/rofi/theme.rasi";
 /*	color-normal: "#4f4f4f, #eeeeee, #444444, #eeeeee, #4f4f4f";*/
 /*	color-urgent: "#4f4f4f, #f03c3c, #444444, #f03c3c, #fdf6e3";*/
 /*	color-active: "#4f4f4f, #268bd2, #444444, #268bd2, #fdf6e3";*/
