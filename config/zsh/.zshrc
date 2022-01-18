@@ -59,9 +59,10 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Source fzf if it exists
-if [[ -d "/usr/share/fzf/" ]]; then
-	source "/usr/share/fzf/key-bindings.zsh"
-	source "/usr/share/fzf/completion.zsh"
+if command -v fzf; then
+	_fzf_dir="$(_select_first /usr/share/fzf/ "$(_bp fzf)/shell/")"
+	source "${_fzf_dir}/key-bindings.zsh"
+	source "${_fzf_dir}/completion.zsh"
 else
 	_warn "No FZF, could not find fzf script"
 fi
@@ -78,7 +79,7 @@ if [[ $TERM == xterm-termite ]]; then
 fi
 
 # Configure thefuck
-if [ -s "$(command -v thefuck)" ]; then
+if command -v thefuck; then
 	eval "$(thefuck --alias)"
 else
 	_warn "No fuck, missing thefuck executable"
@@ -114,7 +115,7 @@ fi
 alias j=journal
 
 # Use exa if available
-if [[ -s /usr/bin/exa ]]; then
+if command -v exa; then
 	alias ll="exa -lgFL 2"
 	alias la="ll -a"
 fi
