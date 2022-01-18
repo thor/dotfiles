@@ -66,6 +66,12 @@ else
 	_warn "No FZF, could not find fzf script"
 fi
 
+# asdf: nvm, pyenv, rbenv, goenv, etc
+if command -v asdf; then
+	source "$(_bp asdf)/libexec/asdf.sh"
+fi
+
+
 # termite: open current directory with ctrl+shift+t
 if [[ $TERM == xterm-termite ]]; then
 	. /etc/profile.d/vte.sh
