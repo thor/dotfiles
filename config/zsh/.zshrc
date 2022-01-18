@@ -93,7 +93,9 @@ if [ -n "${WSL_DISTRO_NAME}" ]; then
 fi
 
 # Setup direnv
-eval "$(direnv hook zsh)"
+if command -v direnv; then
+    eval "$(direnv hook zsh)"
+fi
 
 # Setup nvm, the Node.js version manager
 if [ -f "/usr/share/nvm" ]; then
