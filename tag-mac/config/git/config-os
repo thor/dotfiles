@@ -1,0 +1,6 @@
+[pager]
+	# usual linux location: /usr/share/git/diff-highlight/diff-highlight
+	log = /opt/homebrew/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX
+	show = /opt/homebrew/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX
+	diff = /opt/homebrew/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX
+

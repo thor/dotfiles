@@ -18,11 +18,6 @@
 	prompt = false
 [diff]
 	tool = nvim -d
-[pager]
-	log = /usr/share/git/diff-highlight/diff-highlight | less -+S
-	show = /usr/share/git/diff-highlight/diff-highlight | less -+S
-	diff = /usr/share/git/diff-highlight/diff-highlight | less -+S
-
 [commit]
 	gpgsign = false
 [gui]
@@ -30,6 +25,10 @@
 	editor = kitty-nvim
 	diff = meld
 	historybrowser = gitk
+
+# Include customised system configuration
+[include]
+	path = ~/.config/git/config-os
 
 [includeIf "gitdir:~/dev/client/"]
 	path = ~/.config/git/client

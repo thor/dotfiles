@@ -1,0 +1,5 @@
+[pager]
+	log = /usr/share/git/diff-highlight/diff-highlight | less -FRSX
+	show = /usr/share/git/diff-highlight/diff-highlight | less -FRSX
+	diff = /usr/share/git/diff-highlight/diff-highlight | less -FRSX
+
