@@ -31,16 +31,12 @@
 	diff = meld
 	historybrowser = gitk
 
-[includeIf "gitdir:~/dev/synkope/"]
-	path = ~/.config/git/synkope
-
 [includeIf "gitdir:~/dev/client/"]
 	path = ~/.config/git/client
-
+[includeIf "gitdir:~/dev/work/"]
+	path = ~/.config/git/work
 [includeIf "gitdir:~/repos/"]
-	path = ~/.config/git/client
-[includeIf "gitdir:~/go/src/gitlab.statnett.no"]
-	path = ~/.config/git/client
+	path = ~/.config/git/work
 
 [cola]
 	spellcheck = false
