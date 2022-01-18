@@ -52,9 +52,6 @@ path=(
 # Set up GOPATH
 export GOPATH=~/dev/go
 
-# Setup direnv
-eval "$(direnv hook zsh)"
-
 # 
 # Special locations
 #
