@@ -176,5 +176,11 @@ else
 	_warn "Missing ~/.local/lib/work.sh, no work-related aliases will be loaded"
 fi
 
+# Google Cloud SDK
+if _exists gcloud; then
+	# TODO: Add paths for Arch setup? Ideally, site-functions should deal with this
+	_source_first "$(_bcp google-cloud-sdk)/latest/google-cloud-sdk/completion.zsh.inc"
+fi
+
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
