@@ -41,19 +41,17 @@ Plug 'lambdalisue/suda.vim'       "  Workaround for !sudo tee % in v-1.3
 " - Themes & Visuals
 Plug 'chriskempson/base16-vim'           " The enjoyable base-16 theme
 
-" - UX & Functionality
-Plug 'tpope/vim-fugitive'      " Git, git, git
-Plug 'bling/vim-airline'       " It's so enjoyable with a nice status!
-Plug 'junegunn/fzf'            " Cooler fuzzy file finder
-Plug 'junegunn/fzf.vim'        " vim-integration for fuzzy file finder
-Plug 'junegunn/goyo.vim'       " Distraction free writing
-Plug 'junegunn/limelight.vim'  " Hyper-focused writing in vim
-Plug 'Shougo/defx.nvim',       " file explorer not riddled by bugs
-  \ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
-Plug 'kristijanhusak/defx-git' " git symbols for Defx
-Plug 'metakirby5/codi.vim'     " Interactive scratchpad/REPL buffer
-Plug 'mhinz/vim-signify'       " VCS gutter diffs
-
+"    - UX & Functionality
+Plug 'tpope/vim-fugitive'           " Git, git, git
+Plug 'bling/vim-airline'            " It's so enjoyable with a nice status!
+Plug 'junegunn/fzf'                 " Cooler fuzzy file finder
+Plug 'junegunn/fzf.vim'             " vim-integration for fuzzy file finder
+Plug 'junegunn/goyo.vim'            " Distraction free writing
+Plug 'junegunn/limelight.vim'       " Hyper-focused writing in vim
+Plug 'kyazdani42/nvim-web-devicons' " file icons for file tree viewer
+Plug 'kyazdani42/nvim-tree.lua'     " file tree viewer
+Plug 'metakirby5/codi.vim'          " Interactive scratchpad/REPL buffer
+Plug 'mhinz/vim-signify'            " VCS gutter diffs
 
 " - Settings management
 Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
