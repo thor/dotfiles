@@ -270,8 +270,8 @@ let g:deoplete#sources#clang#clang_header = '/lib/clang/10.0.0/include'
 runtime! sections/lsp.vim
 
 
-" # Configuring defx
-runtime! sections/defx.vim
+" # Configuring tree file viewer
+runtime! sections/file-tree.lua
 
 
 " # Configuring Goyo
