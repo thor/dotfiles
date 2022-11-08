@@ -13,6 +13,9 @@
 [submodule "zinit"]
 	path = local/lib/zinit
 	url = https://github.com/zdharma-continuum/zinit.git
+[submodule "local/lib/kube-ps1"]
+	path = local/lib/kube-ps1
+	url = https://github.com/jonmosco/kube-ps1.git
 [submodule "packer.nvim"]
 	path = local/share/nvim/site/pack/packer/start/packer.nvim
 	url = https://github.com/wbthomason/packer.nvim
