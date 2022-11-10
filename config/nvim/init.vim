@@ -99,6 +99,9 @@ endif
 " Finished pluggin' -- any plugins need to be before this
 call plug#end()
 
+" Initialise Lua-based plugins with packer
+lua require('plugins')
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Core vim configurations
 " - (d) neovim default
