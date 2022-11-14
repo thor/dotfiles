@@ -1,5 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Relatively clean .vimrc & init.vim -- thor at roht dott no
+" vim: set et :
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Initialise vim-plug and them plugins
@@ -127,19 +128,20 @@ let g:load_doxygen_syntax=1     " Automatically load Doxygen syntax for C/C++.
 set foldmethod=marker           " Change from manual to marker for folding defaults
 
 " Spacing / tabs / code-style
-set tabstop=2                                        " Visual space per TAB used!
-set softtabstop=-1                                   " Spaces entered per TAB in editing.
-set shiftwidth=2                                     " Using 8 is ridicilous.
-set autoindent                                       " (d) Because automatic indentation is useful.
-set listchars=tab:▸\ ,eol:¬,trail:·,extends:#,nbsp:␣ " Configure how listchars should appear.
+set tabstop=2                                         " Visual space per TAB used!
+set softtabstop=-1                                    " Spaces entered per TAB in editing.
+set shiftwidth=2                                      " Using 8 is ridicilous.
+set autoindent                                        " (d) Because automatic indentation is useful.
+set listchars=tab:▸\ ,eol:¬,trail:·,extends:#,nbsp:␣  " Configure how listchars should appear.
 
 " User interface / elements / locations
-set number                          " Show line numbers in the left bar.
-set relativenumber                  " Let the line numbers be relative to pos.
-set cursorline                      " Reveal the line I'm currently on.
-set wildmenu                        " (d) Show tab-complete line for :cmds.
-set colorcolumn=+1                  " Shows textwidth-column +1.
-set title							" Use terminal title
+set number                                            " Show line numbers in the left bar.
+set relativenumber                                    " Let the line numbers be relative to pos.
+set cursorline                                        " Reveal the line I'm currently on.
+set wildmenu                                          " (d) Show tab-complete line for :cmds.
+set colorcolumn=+1                                    " Shows textwidth-column +1.
+set title                                             " Use terminal title
+set cmdheight=0                                       " Hide the status line unless command prompt active
 
 if !exists('g:vscode')
 
