@@ -60,13 +60,11 @@ Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
 " - Linting & Auto-completion
 Plug 'ludovicchabant/vim-gutentags' " tags generation
 Plug 'dense-analysis/ale'           " linting et al and LSP
-Plug 'Shougo/deoplete.nvim',        " Code completion with darkness
-  \ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
-Plug 'zchee/deoplete-jedi',         " Python completion
-  \ Cond(has('nvim'))
-Plug 'deoplete-plugins/deoplete-clang',
-  \ Cond(has('nvim'))               " C/C++ completion
+" TODO: Add completion plugin for Python
+" TODO: Add completion plugin for clang and C/C++
 Plug 'neovim/nvim-lspconfig'        " LSP configurations
+Plug 'nvim-treesitter/nvim-treesitter', " the tree-sitter
+	\ {'do': ':TSUpdate'}
 Plug 'folke/lsp-colors.nvim'        " Colours for LSP
 Plug 'folke/trouble.nvim'           " LSP error overview
 Plug 'kyazdani42/nvim-web-devicons' " LSP pretty icons
@@ -251,24 +249,6 @@ highlight ALEInfoSign ctermfg=6 ctermbg=18
 let g:ale_fixers = ['prettier']
 
 
-" # Configuring deoplete
-" - Enable at startup
-let g:deoplete#enable_at_startup = 1
-" - Use system installed Python as host for neovim (ignore venv)
-"   Very useful for having virtualenvs.
-let g:python3_host_prog = '/usr/bin/python'
-" - Configure ALE for deoplete
-"   Do nothing. It should be registered automatically.
-" - Configure autocompletion for vimtex and vim-pandoc
-call deoplete#custom#var('omni', 'input_patterns', {
-			\ 'pandoc': '@\w\w*',
-			\ 'tex': g:vimtex#re#deoplete,
-			\ })
-" - 350ms delay by default
-call deoplete#custom#option('auto_complete_delay', 350)
-" - Configure C/C++ completion
-let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-let g:deoplete#sources#clang#clang_header = '/lib/clang/10.0.0/include'
 
 
 " # Configuring LSP client configurations
