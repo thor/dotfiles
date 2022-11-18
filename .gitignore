@@ -2,6 +2,9 @@
 config/nvim/autoload/
 # nvim: tracked by vim-plug
 config/nvim/plugged/
+# nvim: tracked by packer
+local/share/nvim/site/pack/packer/start/*
+local/share/nvim/site/pack/packer/opt/
 # nvim: spelling is ignore for the time being
 config/nvim/spell/
 # nvim: same with undoing
