@@ -105,16 +105,8 @@ lua require('plugins')
 " Core vim configurations
 " - (d) neovim default
 
-let $VIMHOME=expand('<sfile>:p:h')
-
 " Buffer management & behaviour
 set hidden                " vim can remember buffers' contents when hidden
-" - (d) Persistent undo 
-if has('persistent_undo') && !has('nvim')
-	let theUndoDir = expand($VIMHOME . '/undodir')
-	call system('mkdir ' . theUndoDir)
-	let &undodir = theUndoDir
-endif
 set undofile              " actually enable the saving of history to the file
 
 
@@ -122,7 +114,6 @@ set undofile              " actually enable the saving of history to the file
 set clipboard=unnamedplus
 
 " Colouring / syntax / schemes
-let g:load_doxygen_syntax=1     " Automatically load Doxygen syntax for C/C++.
 set foldmethod=marker           " Change from manual to marker for folding defaults
 
 " Spacing / tabs / code-style
