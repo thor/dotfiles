@@ -252,7 +252,7 @@ let g:ale_fixers = ['prettier']
 
 
 " # Configuring LSP client configurations
-runtime! sections/lsp.vim
+runtime! sections/lsp.lua
 
 
 " # Configuring tree file viewer
