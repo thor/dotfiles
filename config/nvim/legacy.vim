@@ -62,9 +62,6 @@ Plug 'ludovicchabant/vim-gutentags' " tags generation
 Plug 'dense-analysis/ale'           " linting et al and LSP
 " TODO: Add completion plugin for Python
 " TODO: Add completion plugin for clang and C/C++
-Plug 'neovim/nvim-lspconfig'        " LSP configurations
-Plug 'nvim-treesitter/nvim-treesitter', " the tree-sitter
-	\ {'do': ':TSUpdate'}
 Plug 'folke/lsp-colors.nvim'        " Colours for LSP
 Plug 'folke/trouble.nvim'           " LSP error overview
 Plug 'kyazdani42/nvim-web-devicons' " LSP pretty icons
