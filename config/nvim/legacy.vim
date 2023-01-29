@@ -49,8 +49,6 @@ Plug 'junegunn/fzf'                 " Cooler fuzzy file finder
 Plug 'junegunn/fzf.vim'             " vim-integration for fuzzy file finder
 Plug 'junegunn/goyo.vim'            " Distraction free writing
 Plug 'junegunn/limelight.vim'       " Hyper-focused writing in vim
-Plug 'kyazdani42/nvim-web-devicons' " file icons for file tree viewer
-Plug 'kyazdani42/nvim-tree.lua'     " file tree viewer
 Plug 'metakirby5/codi.vim'          " Interactive scratchpad/REPL buffer
 Plug 'mhinz/vim-signify'            " VCS gutter diffs
 
