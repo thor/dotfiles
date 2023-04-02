@@ -4,8 +4,11 @@ require('packer').startup(function(use)
 
 	use {'krivahtoo/silicon.nvim', run = './install.sh'}
 	-- file enhancements and syntax fixes, nvim-specific
-	use 'neovim/nvim-lspconfig' -- core lsp
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+	---- core lsp
+	use 'neovim/nvim-lspconfig'
+	---- enhanced highlighting, incl. additional treesitter context
+	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
+	use 'nvim-treesitter/nvim-treesitter-context'
 
 	-- file tree viewer with dev icons
 	use {
