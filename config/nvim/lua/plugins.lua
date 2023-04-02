@@ -15,6 +15,12 @@ require('packer').startup(function(use)
 		'kyazdani42/nvim-tree.lua',
 		requires = {{'kyazdani42/nvim-web-devicons', opt = true }}
 	}
+
+	-- git diff view browser
+	use {
+		'sindrets/diffview.nvim',
+		requires = {{'nvim-lua/plenary.nvim'}}
+	}
 end)
 
 require('silicon').setup({
