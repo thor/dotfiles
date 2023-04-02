@@ -2,7 +2,9 @@ require('packer').startup(function(use)
 	-- Packer itself
 	use 'wbthomason/packer.nvim'
 
+	-- interface-agnostic
 	use {'krivahtoo/silicon.nvim', run = './install.sh'}
+
 	-- file enhancements and syntax fixes, nvim-specific
 	---- core lsp
 	use 'neovim/nvim-lspconfig'
@@ -23,6 +25,7 @@ require('packer').startup(function(use)
 	}
 end)
 
+-- Configure silicon
 require('silicon').setup({
   font = 'Fantasque Sans Mono=16',
   theme = 'Monokai Extended',
