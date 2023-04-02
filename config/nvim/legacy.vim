@@ -101,14 +101,6 @@ if !exists('g:vscode')
 " - Restore guicursor after exiting
 au VimLeave * set guicursor=a:hor100-blinkon1
 
-" Email configuration
-" - Add format option 'w' to add trailing white space, incl. 'a' for
-"   auto-formatting. Used together with neomutts text_flowed-option.
-augroup mail_trailing_whitespace " {
-    autocmd!
-    autocmd FileType mail setlocal formatoptions+=wa
-augroup END " }
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " {{{ Terminal plugin configurations
