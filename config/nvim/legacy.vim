@@ -93,40 +93,8 @@ endif
 " Finished pluggin' -- any plugins need to be before this
 call plug#end()
 
-" Initialise Lua-based plugins with packer
-lua require('plugins')
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Core vim configurations
-" - (d) neovim default
-
-" Buffer management & behaviour
-set hidden                " vim can remember buffers' contents when hidden
-set undofile              " actually enable the saving of history to the file
-
-
-" Windows
-set clipboard=unnamedplus
-
-" Colouring / syntax / schemes
-set foldmethod=marker           " Change from manual to marker for folding defaults
-
-" Spacing / tabs / code-style
-set tabstop=2                                         " Visual space per TAB used!
-set softtabstop=-1                                    " Spaces entered per TAB in editing.
-set shiftwidth=2                                      " Using 8 is ridicilous.
-set autoindent                                        " (d) Because automatic indentation is useful.
-set listchars=tab:▸\ ,eol:¬,trail:·,extends:#,nbsp:␣  " Configure how listchars should appear.
-
-" User interface / elements / locations
-set number                                            " Show line numbers in the left bar.
-set relativenumber                                    " Let the line numbers be relative to pos.
-set cursorline                                        " Reveal the line I'm currently on.
-set wildmenu                                          " (d) Show tab-complete line for :cmds.
-set colorcolumn=+1                                    " Shows textwidth-column +1.
-set title                                             " Use terminal title
-set cmdheight=0                                       " Hide the status line unless command prompt active
-
+" Core vim configurations not migrated yet
 if !exists('g:vscode')
 
 function! ColorSchemeOverride() abort
@@ -149,19 +117,6 @@ colorscheme base16-default-dark " base16-inspired colorscheme.
 " - Restore guicursor after exiting
 au VimLeave * set guicursor=a:hor100-blinkon1
 
-endif
-
-set backspace=indent,eol,start " (d) Backspace beyond single lines.
-set modeline                   " Configure settings per file.
-set mouse=a                    " (d) Mouse-support is actually really cool.
-set incsearch                  " (d) Incremental search view for /searches.
-" - Use ag instead of grep
-set grepprg=rg\ -n\ $*
-" - Remove options from views
-set viewoptions-=options
-" - Double frequency of swap writes for vim-signify
-set updatetime=2000
-
 " Email configuration
 " - Add format option 'w' to add trailing white space, incl. 'a' for
 "   auto-formatting. Used together with neomutts text_flowed-option.
@@ -173,8 +128,6 @@ augroup END " }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " {{{ Terminal plugin configurations
-if !exists('g:vscode')
-
 
 " # Configuring vim-airline
 " - Custom symbols
@@ -235,6 +188,8 @@ highlight ALEInfoSign ctermfg=6 ctermbg=18
 let g:ale_fixers = ['prettier']
 
 
+" # Configuring the tree-sitter
+runtime! sections/treesitter.lua
 
 
 " # Configuring LSP client configurations
