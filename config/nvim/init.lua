@@ -45,7 +45,23 @@ vim.o.cmdheight      = 0 -- " Hide the status line unless command prompt active
 -- Themes
 vim.o.background = 'dark' -- " Use the dark theme of whatever colorscheme.
 
--- TODO: insert base16colorspace and colorscheme
+---- Customise the color scheme
+vim.api.nvim_create_autocmd({'ColorScheme'}, {
+  group = vim.api.nvim_create_augroup('colorscheme', { clear = true }),
+  colorgroup,
+  callback = function() 
+    -- Colours the textwidth bar.
+    vim.cmd('highlight ColorColumn ctermbg=18')
+    -- Colours the cursor line, because I like it.
+    vim.cmd('highlight CursorLine ctermbg=18')
+    -- Remove background colour from spelling notices
+    vim.cmd('highlight SpellCap ctermbg=NONE')
+    -- Remove background colour from spelling errors
+    vim.cmd('highlight SpellBad ctermbg=NONE')
+  end
+})
+vim.g.base16colorspace = 256 -- tell base16 what to do
+vim.cmd('colorscheme base16-default-dark') -- enable the colorscheme
 
 end
 

@@ -97,22 +97,6 @@ call plug#end()
 " Core vim configurations not migrated yet
 if !exists('g:vscode')
 
-function! ColorSchemeOverride() abort
-	highlight ColorColumn ctermbg=18 " Colours the textwidth bar.
-	highlight CursorLine ctermbg=19  " Colours the cursor line.
-	highlight SpellCap ctermbg=NONE  " Remove background colour from spelling notices
-	highlight SpellBad ctermbg=NONE  " Remove background colour from spelling errors
-endfunction
-augroup custom_colours
-	autocmd!
-	autocmd ColorScheme * call ColorSchemeOverride()
-augroup END
-
-" Themes 
-set background=dark             " Use the dark theme of whatever colorscheme.
-let base16colorspace=256        " Make sure that the scheme uses 256-colors.
-colorscheme base16-default-dark " base16-inspired colorscheme.
-
 " Other behavioural configurations
 " - Restore guicursor after exiting
 au VimLeave * set guicursor=a:hor100-blinkon1
