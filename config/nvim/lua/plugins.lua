@@ -42,8 +42,8 @@ require('packer').startup(function(use)
 	}
 	use {
 		'nvim-treesitter/nvim-treesitter-context',
-		after = 'nvim-treesitter/nvim-treesitter',
-		config = function() 
+		requires = { 'nvim-treesitter/nvim-treesitter' },
+		config = function()
 			require'treesitter-context'.setup {
 				-- Use the highlight group TreesitterContext to change the colors of the
 				-- context. Per default it links to NormalFloat. Use the highlight group
