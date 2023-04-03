@@ -102,44 +102,6 @@ au VimLeave * set guicursor=a:hor100-blinkon1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " {{{ Terminal plugin configurations
 
-" # Configuring vim-airline
-" - Custom symbols
-if !exists('g:airline_symbols')
-   let g:airline_symbols = {}
-endif
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.spell = 'Ꞩ'
-" - Use powerline symbols
-let g:airline_powerline_fonts = 1
-" - Enable a list of buffers at the top
-let g:airline#extensions#tabline#enabled = 1
-" - Show just the filename
-" let g:airline#extensions#tabline#fnamemod = ':t'
-" - Shorthand modes
-let g:airline_mode_map = {
-			\ '__' : '-',
-			\ 'c'  : 'C',
-			\ 'i'  : 'I',
-			\ 'ic' : 'IC',
-			\ 'ix' : 'Ic',
-			\ 'n'  : 'N',
-			\ 'ni' : '(I)',
-			\ 'no' : 'OP',
-			\ 'R'  : 'R',
-			\ 'Rv' : 'RV',
-			\ 's'  : 'S',
-			\ 'S'  : 'S-L',
-			\ '' : 'S-B',
-			\ 't'  : 'T',
-			\ 'v'  : 'V',
-			\ 'V'  : 'V-L',
-			\ '' : 'V-B',
-			\ }
-" - enable basic wordcount for vim-pandoc
-let g:airline#extensions#wordcount#filetypes = [
-			\ 'asciidoc', 'help', 'mail', 'markdown', 'org', 'rst', 
-			\ 'tex', 'text', 'pandoc']
-
 
 " # Configuring ALE
 " - Setting up linter aliases

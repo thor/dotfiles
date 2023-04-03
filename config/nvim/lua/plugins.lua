@@ -1,3 +1,9 @@
+function is_terminal()
+	-- Utility function used to enable or disable addons depending
+	-- on whether we are running neovim in our terminal or from VS Code.
+	return vim.g.vscode == nil
+end
+
 require('packer').startup(function(use)
 	-- Packer itself
 	use 'wbthomason/packer.nvim'
@@ -33,7 +39,7 @@ require('packer').startup(function(use)
 				}
 			}
 		end
-	} 
+	}
 	use {
 		'nvim-treesitter/nvim-treesitter-context',
 		after = 'nvim-treesitter/nvim-treesitter',
@@ -63,10 +69,80 @@ require('packer').startup(function(use)
 		requires = {{'kyazdani42/nvim-web-devicons', opt = true }}
 	}
 
+	-- status line
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = {
+			-- provide icon support
+			{ 'kyazdani42/nvim-web-devicons', opt = true },
+			{ 'RRethy/nvim-base16' },
+		},
+		config = function()
+			local paste = function() 
+				if not vim.o.paste then 
+					return ''
+				end
+				return 'ρ' 
+			end
+			-- The map is built from my previous vim-airline mode map, but
+			-- it is not complete. I honestly don't know what all the modes are,
+			-- so I'll let future me look that up at some point.
+			local mode_map = {
+				 COMMAND  = 'CMD',
+				 INSERT  = 'I',
+				 --ic = 'IC',
+				 --ix = 'Ic',
+				 NORMAL  = 'N',
+				 --ni = '(I)',
+				 --no = 'OP',
+				 REPLACE  = 'R',
+				 --Rv = 'RV',
+				 --s  = 'S',
+				 --S  = 'S-L',
+				 --[''] = 'S-B',
+				 TERMINAL  = 'T',
+				 VISUAL  = 'V',
+				 ['V-LINE']  = 'V-L',
+				 ['V-BLOCK'] = 'V-B',
+			}
+			-- the actual configuration
+			require('lualine').setup{
+				sections = {
+					lualine_a = {
+						{ 
+							'mode',
+							fmt = function (str)
+								if mode_map[str] then
+									return mode_map[str]
+								end
+								return str
+							end
+						},
+						{ paste },
+					}
+				},
+				winbar = {
+					lualine_a = { 'buffers' },
+					lualine_z = { 'tabs' },
+				}
+			}
+		end,
+		cond = is_terminal()
+	}
+
 	-- git diff view browser
 	use {
 		'sindrets/diffview.nvim',
 		requires = {{'nvim-lua/plenary.nvim'}}
+	}
+	-- terminal visuals
+	---- Provide nvim-base16 to lualine
+	use { 
+		'RRethy/nvim-base16',
+		config = function()
+			vim.cmd('colorscheme base16-default-dark')
+		end,
+		cond = is_terminal(),
 	}
 
 	use { 
