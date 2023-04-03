@@ -37,7 +37,6 @@ vim.o.number         = true -- " Show line numbers in the left bar.
 vim.o.relativenumber = true -- " Let the line numbers be relative to pos.
 vim.o.cursorline     = true -- " Reveal the line I'm currently on.
 vim.o.wildmenu       = true -- " (d) Show tab-complete line for :cmds.
--- FIXME: verify colorcolumn works
 vim.o.colorcolumn    = '+1' -- " Shows textwidth-column +1, e.g. 79+1=80
 vim.o.title          = true -- " Use terminal title
 vim.o.cmdheight      = 0 -- " Hide the status line unless command prompt active
