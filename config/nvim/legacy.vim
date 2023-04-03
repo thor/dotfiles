@@ -41,7 +41,6 @@ Plug 'lambdalisue/suda.vim'       "  Workaround for !sudo tee % in v-1.3
 
 "    - UX & Functionality
 Plug 'tpope/vim-fugitive'           " Git, git, git
-Plug 'bling/vim-airline'            " It's so enjoyable with a nice status!
 Plug 'junegunn/fzf'                 " Cooler fuzzy file finder
 Plug 'junegunn/fzf.vim'             " vim-integration for fuzzy file finder
 Plug 'junegunn/goyo.vim'            " Distraction free writing
@@ -120,10 +119,6 @@ highlight ALEWarningSign ctermfg=11 ctermbg=18
 highlight ALEInfoSign ctermfg=6 ctermbg=18
 " - Set default fixer
 let g:ale_fixers = ['prettier']
-
-
-" # Configuring the tree-sitter
-runtime! sections/treesitter.lua
 
 
 " # Configuring LSP client configurations
