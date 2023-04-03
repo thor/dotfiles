@@ -251,6 +251,7 @@ nnoremap <leader>pS :<C-U>call <SID>pandocSoft()<CR>
 
 
 " - Map paste-mode
+map <F2> :set paste!<CR>:lua require('lualine').refresh()<CR>
 set pastetoggle=<F2>
 
 " - Map vim-easy-align commands
