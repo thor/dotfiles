@@ -134,8 +134,10 @@ require('packer').startup(function(use)
 	-- git diff view browser
 	use {
 		'sindrets/diffview.nvim',
-		requires = {{'nvim-lua/plenary.nvim'}}
+		requires = {{'nvim-lua/plenary.nvim'}},
+		cond = is_terminal(),
 	}
+
 	-- terminal visuals
 	---- Provide nvim-base16 to lualine
 	use { 
