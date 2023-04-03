@@ -68,4 +68,32 @@ require('packer').startup(function(use)
 		'sindrets/diffview.nvim',
 		requires = {{'nvim-lua/plenary.nvim'}}
 	}
+
+	use { 
+		'chriskempson/base16-vim',
+		after = 'nvim-base16',
+		config = function()
+			-- Use 256 colors for the theme
+			vim.g.base16colorspace = 256
+			vim.cmd('colorscheme base16-default-dark')
+			vim.api.nvim_create_autocmd({'ColorScheme'}, {
+				group = vim.api.nvim_create_augroup('colorscheme', { clear = true }),
+				colorgroup,
+				callback = function() 
+					-- Colour the line numbers a bit brighter to add contrast
+					vim.cmd('highlight LineNr ctermbg=17')
+					-- Colours the textwidth bar.
+					vim.cmd('highlight ColorColumn ctermbg=18')
+					-- Colours the cursor line, because I like it.
+					vim.cmd('highlight CursorLine ctermbg=18')
+					-- Remove background colour from spelling notices
+					vim.cmd('highlight SpellCap ctermbg=NONE')
+					-- Remove background colour from spelling errors
+					vim.cmd('highlight SpellBad ctermbg=NONE')
+				end
+			})
+		end,
+		cond = is_terminal()
+	}
+
 end)

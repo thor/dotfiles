@@ -39,9 +39,6 @@ Plug 'aklt/plantuml-syntax'              " PlantUML
 " - Temporary plugins
 Plug 'lambdalisue/suda.vim'       "  Workaround for !sudo tee % in v-1.3
 
-" - Themes & Visuals
-Plug 'chriskempson/base16-vim'           " The enjoyable base-16 theme
-
 "    - UX & Functionality
 Plug 'tpope/vim-fugitive'           " Git, git, git
 Plug 'bling/vim-airline'            " It's so enjoyable with a nice status!
