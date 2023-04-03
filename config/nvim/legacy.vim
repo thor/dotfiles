@@ -59,7 +59,6 @@ Plug 'dense-analysis/ale'           " linting et al and LSP
 " TODO: Add completion plugin for clang and C/C++
 Plug 'folke/lsp-colors.nvim'        " Colours for LSP
 Plug 'folke/trouble.nvim'           " LSP error overview
-Plug 'kyazdani42/nvim-web-devicons' " LSP pretty icons
 
 " - Quality of life
 Plug 'Konfekt/FastFold'             " Less, aka faster, folding
