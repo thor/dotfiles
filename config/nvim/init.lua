@@ -52,9 +52,6 @@ vim.o.mouse         = 'a' -- " (d) Mouse-support is actually really cool.
 vim.o.incsearch     = true -- " (d) Incremental search view for /searches.
 -- Use ag instead of grep
 vim.o.grepprg       = 'rg -n $*'
--- Remove options from views
--- TODO: fix viewoptions
--- set viewoptions -= options
 -- Double frequency of swap writes for vim-signify
 vim.o.updatetime    = 2000
 
