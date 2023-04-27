@@ -56,8 +56,6 @@ Plug 'ludovicchabant/vim-gutentags' " tags generation
 Plug 'dense-analysis/ale'           " linting et al and LSP
 " TODO: Add completion plugin for Python
 " TODO: Add completion plugin for clang and C/C++
-Plug 'folke/lsp-colors.nvim'        " Colours for LSP
-Plug 'folke/trouble.nvim'           " LSP error overview
 
 " - Quality of life
 Plug 'Konfekt/FastFold'             " Less, aka faster, folding
@@ -119,14 +117,6 @@ highlight ALEWarningSign ctermfg=11 ctermbg=18
 highlight ALEInfoSign ctermfg=6 ctermbg=18
 " - Set default fixer
 let g:ale_fixers = ['prettier']
-
-
-" # Configuring LSP client configurations
-runtime! sections/lsp.lua
-
-
-" # Configuring tree file viewer
-runtime! sections/file-tree.lua
 
 
 " # Configuring Goyo

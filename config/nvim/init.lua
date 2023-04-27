@@ -3,9 +3,6 @@
 -- vim: set et :
 -------------------------------------------------------------------------------
 
--- Initialise Lua-based plugins with packer
-require('plugins')
-
 -------------------------------------------------------------------------------
 -- Core vim configurations
 -- - (d) neovim default
@@ -64,3 +61,6 @@ vim.o.updatetime    = 2000
 -- Load remaining legacy configuration
 vim.cmd.source(vim.fn.expand('<sfile>:p:h') .. '/legacy.vim')
 
+-------------------------------------------------------------------------------
+-- Initialise Lua-based plugins with lazy
+require('plugins')
