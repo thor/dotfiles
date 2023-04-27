@@ -179,18 +179,13 @@ local plugins = {
 
   -- terminal visuals
   ---- Provide nvim-base16 to lualine
-  {
-    'RRethy/nvim-base16',
-    cond = is_terminal,
-    config = function()
-      vim.cmd('colorscheme base16-default-dark')
-    end,
-  },
+  { 'RRethy/nvim-base16', lazy = true },
 
   {
     'chriskempson/base16-vim',
-    dependencies = {'nvim-base16'},
+    dependencies = {'nvim-base16', 'RRethy/nvim-base16'},
     cond = is_terminal(),
+    priority = 1000, -- load as soon as possible
     config = function()
       -- Use 256 colors for the theme
       vim.g.base16colorspace = 256
