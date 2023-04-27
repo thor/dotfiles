@@ -56,10 +56,6 @@ vim.o.grepprg       = 'rg -n $*'
 -- Double frequency of swap writes for vim-signify
 vim.o.updatetime    = 2000
 
--- Email configuration
--- TODO: insert e-mail configuration
--- Add format option 'w' to add trailing white space, incl. 'a' for
--- auto-formatting. Used together with neomutts text_flowed-option.
 
 -------------------------------------------------------------------------------
 -- Load remaining legacy configuration
