@@ -16,15 +16,19 @@ vim.o.undofile = true              -- actually enable the saving of history to t
 vim.o.clipboard = 'unnamedplus'
 
 -- Syntax highlighting and folds
--- TODO: replace marker with expr and use treesitter
-vim.o.foldmethod = 'marker'         -- Change from manual to marker for folding defaults
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldtext =
+    [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) ]]
+vim.o.foldnestmax = 3
+vim.o.foldminlines = 1
 
 -- Spacing / tabs / code-style
 vim.o.tabstop     = 2 -- " Visual space per TAB used!
 vim.o.softtabstop = -1 -- " Spaces entered per TAB in editing.
 vim.o.shiftwidth  = 2 -- " Using 8 is ridicilous.
 vim.o.autoindent  = true -- " (d) Because automatic indentation is useful.
--- " Configure how listchars should appear.
+---- Configure how listchars should appear.
 vim.o.listchars   = table.concat({'tab:▸ ', 'eol:¬', 'trail:·', 'extends:#','nbsp:␣'}, ',')
 
 if not vim.g.vscode then
