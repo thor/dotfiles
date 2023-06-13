@@ -32,6 +32,9 @@ else
 	_warn "No theme, missing $BASE16_SHELL/$BASE16_THEME.sh"
 fi
 
+# iTerm2: disable the mark
+export ITERM2_SQUELCH_MARK=1
+
 
 # Source prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -117,26 +120,6 @@ alias vp="vagrant provision"
 alias vr="vagrant resume"
 alias vrld="vagrant reload"
 alias vssh="vagrant ssh"
-
-# Used by usit.sh
-function rawurlencode {
-  # TODO: verify that it shouldn't be ${@}
-  local string="${*}"
-  local strlen=${#string}
-  local encoded=""
-  local pos c o
-
-  for (( pos=0 ; pos<strlen ; pos++ )); do
-     c=${string:${pos}:1}
-     case "$c" in
-        [-_.~a-zA-Z0-9] ) o="${c}" ;;
-        * )               printf -v o '%%%02x' "'$c"
-     esac
-     encoded+="${o}"
-  done
-  echo "${encoded}"    # You can either set a return variable (FASTER)
-  REPLY="${encoded}"   #+or echo the result (EASIER)... or both... :p
-}
 
 # Source work.sh for work configuration
 if [[ -s "${HOME}/.local/lib/work.sh" ]]; then
