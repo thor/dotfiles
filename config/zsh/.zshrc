@@ -94,6 +94,9 @@ fi
 # Journal is too long
 alias j=journal
 
+# kubectl is our friend
+alias k=kubectl
+
 # Use exa if available
 if _exists exa; then
 	alias ll="exa -lgFL 2"
