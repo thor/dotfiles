@@ -1,19 +1,4 @@
 --------------------------------------------------------------------------------
--- Bootstrap the package manager
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
---------------------------------------------------------------------------------
 -- Helper functions for controlling plugins
 function is_terminal()
   -- Utility function used to enable or disable addons depending
@@ -23,17 +8,18 @@ end
 
 --------------------------------------------------------------------------------
 -- Current plugin manager
-local plugins = {
+return {
   -- interface-agnostic
   {
     'krivahtoo/silicon.nvim', 
     build = './install.sh build',
+		cond = false and is_terminal,
     config = function()
       require'silicon'.setup({
         font = 'Fantasque Sans Mono=16',
         theme = 'Monokai Extended',
-    })
-    end
+			})
+    end,
   },
 
   -- file enhancements and syntax fixes, nvim-specific, LSP
@@ -210,4 +196,3 @@ local plugins = {
   },
 }
 
-require('lazy').setup(plugins)
