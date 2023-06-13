@@ -25,7 +25,8 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'completion' \
   'syntax-highlighting' \
-  'prompt'
+  'prompt' \
+  'tmux'
 
 #
 # Editor
