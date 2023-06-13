@@ -1,3 +1,15 @@
+# zsh RC
+
+# Source load.d profile scripts
+for script in ${ZDOTDIR:-$HOME}/load.d/*.*sh; do
+	source "${script}"
+done
+
+# Setup direnv before instant prompt
+if _exists direnv; then
+		(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -5,39 +17,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# zsh RC
-# - Contains various personal aliases and configuratios that always happen
-function _warn {
-	printf "WARN: %s\n" "$@" 1>&2
-}
 
-# - help source files when they could be in different locations
-function _source_first {
-	for target in "$@"; do
-		if [ -f "$target" ]; then
-			source "$target"
-			return
-		fi
-	done
-	_warn "Failed to source one of $@ because none exists"
-}
-
-# - help select first file/directory that exists
-function _select_first {
-	for target in "$@"; do
-		if [ -e "$target" ]; then
-			echo "$target"
-			return
-		fi
-	done
-	_warn "Failed to select one from $* because none exists"
-	exit 1
-}
-
-# - get brew prefix
-function _bp {
-	brew --prefix "$@"
-}
 
 # base16 Shell
 # - Modified to avoid .base16-theme, simplified somewhat
@@ -59,7 +39,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Source fzf if it exists
-if command -v fzf; then
+if _exists fzf; then
 	_fzf_dir="$(_select_first /usr/share/fzf/ "$(_bp fzf)/shell/")"
 	source "${_fzf_dir}/key-bindings.zsh"
 	source "${_fzf_dir}/completion.zsh"
@@ -68,7 +48,7 @@ else
 fi
 
 # asdf: nvm, pyenv, rbenv, goenv, etc
-if command -v asdf; then
+if _exists asdf; then
 	source "$(_bp asdf)/libexec/asdf.sh"
 fi
 
@@ -79,7 +59,7 @@ if [[ $TERM == xterm-termite ]]; then
 fi
 
 # Configure thefuck
-if command -v thefuck; then
+if _exists thefuck; then
 	eval "$(thefuck --alias)"
 else
 	_warn "No fuck, missing thefuck executable"
@@ -115,7 +95,7 @@ fi
 alias j=journal
 
 # Use exa if available
-if command -v exa; then
+if _exists exa; then
 	alias ll="exa -lgFL 2"
 	alias la="ll -a"
 fi
