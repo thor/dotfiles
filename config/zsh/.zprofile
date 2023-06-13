@@ -77,9 +77,8 @@ fi
 #
 
 # Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
-export LESS='-F -g -i -M -R -S -w -z-4'
+# -X (disable screen clearing), -F (exit if content fits on one screen)
+export LESS='-F -g -i -M -R -S -w -z-4 -X --mouse'
 
 # Set the Less input preprocessor.
 # Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
