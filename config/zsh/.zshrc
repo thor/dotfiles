@@ -140,15 +140,6 @@ function rawurlencode {
   REPLY="${encoded}"   #+or echo the result (EASIER)... or both... :p
 }
 
-# University-related for printing
-function print-ifi() {
-	set -x
-	local filepath="$1"
-	local file="${filepath##*/}"
-	scp "$filepath" tmhogaas@login.ifi.uio.no:Documents/
-	ssh -t tmhogaas@login.ifi.uio.no "/usr/bin/print ${@:2} \"Documents/${file}\"; rm -f \"Documents/${file}\""
-}
-
 # Source work.sh for work configuration
 if [[ -s "${HOME}/.local/lib/work.sh" ]]; then
   source "${HOME}/.local/lib/work.sh"
