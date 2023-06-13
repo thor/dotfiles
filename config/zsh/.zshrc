@@ -84,11 +84,6 @@ if command -v direnv; then
     eval "$(direnv hook zsh)"
 fi
 
-# Setup nvm, the Node.js version manager
-if [ -f "/usr/share/nvm" ]; then
-	source /usr/share/nvm/init-nvm.sh
-fi
-
 # Aliases and similar
 
 # Journal is too long
