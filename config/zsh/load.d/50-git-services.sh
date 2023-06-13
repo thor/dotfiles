@@ -29,3 +29,18 @@ function bitpr() {
     bitbucket="refs/pull-requests/$1/from:$2"
     _fetchpr "$bitbucket" "$2" "$3"
 }
+
+# Friendly fzf-based fixup picker
+function gcff() {
+	commits="$(git log --topo-order --color --pretty=format:"%C(green)%h%C(reset) %s%C(red)%d%C(reset)")"
+	if [ "$?" != "0" ]; then
+		return 0
+	fi
+
+	commit="$(echo "$commits" | fzf --no-sort --reverse --height 15% --ansi | cut -d' ' -f1)"
+	if [ -z "$commit" ]; then
+		return 0
+	fi
+
+	git commit --fixup "$commit" "$@"
+}
