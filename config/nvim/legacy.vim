@@ -41,8 +41,6 @@ Plug 'lambdalisue/suda.vim'       "  Workaround for !sudo tee % in v-1.3
 
 "    - UX & Functionality
 Plug 'tpope/vim-fugitive'           " Git, git, git
-Plug 'junegunn/fzf'                 " Cooler fuzzy file finder
-Plug 'junegunn/fzf.vim'             " vim-integration for fuzzy file finder
 Plug 'junegunn/goyo.vim'            " Distraction free writing
 Plug 'junegunn/limelight.vim'       " Hyper-focused writing in vim
 Plug 'metakirby5/codi.vim'          " Interactive scratchpad/REPL buffer
@@ -77,9 +75,6 @@ Plug 'numirias/semshi',                  " Semantic Python highlighting
   \ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
 Plug 'jvirtanen/vim-hcl'                 " HCL2+ syntax highlighting
 
-
-" - Syntax & File Type Enhancers
-Plug 'lervag/vimtex'                     " LaTeX editing & completion and all
 
 endif
 
@@ -131,10 +126,6 @@ endfunction
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 
-" # Configuring FZF
-runtime! sections/fzf.vim
-
-
 " # Configuring FastFold
 " - TeX, with vimtex too (see up)
 let g:tex_fold_enabled = 1
@@ -150,10 +141,6 @@ let g:slime_target = 'tmux'
 " # Configuring vim-gutentags (and tags)
 let g:gutentags_ctags_tagfile = '.tags'
 set tags=./.tags;,.tags
-
-
-" # Configuring vimtex
-runtime! sections/vimtex.vim
 
 
 endif
@@ -245,15 +232,6 @@ xmap ga <Plug>(EasyAlign)
 
 " - Map list-characters key
 nmap <leader>s :set list!<cr>
-
-" - Map keys for FZF based on CtrlP and similarly
-nnoremap <C-P>      :<C-U>Files<CR>
-nmap     <leader>ph :Files ~<cr>
-nmap     <leader>pb :Buffers<cr>
-nmap     <leader>pg :Rg<cr>
-nmap     <leader>pc :call vimtex#fzf#run('cl', g:fzf_layout)<cr>
-nmap     <leader>pt :call vimtex#fzf#run('t', g:fzf_layout)<cr>
-
 
 " - Map key for distraction free writing mode
 nnoremap <F11> :Goyo<cr>
