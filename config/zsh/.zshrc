@@ -17,7 +17,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
+# Setup direnv after instant prompt
+if _exists direnv; then
+		(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
+fi
 
 # base16 Shell
 # - Modified to avoid .base16-theme, simplified somewhat
@@ -25,9 +28,9 @@ fi
 BASE16_SHELL=$HOME/.config/base16-shell/scripts
 BASE16_THEME=base16-default-dark
 if [ "$TERM" = "xterm-kitty" ]; then
-	true
+	# do nothing
 elif [ -n "$PS1" ] && [ -s "$BASE16_SHELL/$BASE16_THEME.sh" ]; then
-	. "$BASE16_SHELL/$BASE16_THEME.sh"
+	. "$BASE16_SHELL/$BASE16_THEME.sh" >/dev/null
 else
 	_warn "No theme, missing $BASE16_SHELL/$BASE16_THEME.sh"
 fi
@@ -56,9 +59,16 @@ else
 	_warn "No FZF, could not find fzf script"
 fi
 
+# rtx: the better alternative to asdf
+if _exists rtx; then
+	source "$(rtx activate zsh)" >/dev/null 2>&1
 # asdf: nvm, pyenv, rbenv, goenv, etc
-if _exists asdf; then
+elif _exists asdf; then
 	source "$(_bp asdf)/libexec/asdf.sh"
+	# Load asdf-direnv
+	source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+	# Tell asdf-python where to get default packages from
+	export ASDF_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.asdf/python-default-packages"
 fi
 
 
@@ -68,11 +78,7 @@ if [[ $TERM == xterm-termite ]]; then
 fi
 
 # Configure thefuck
-if _exists thefuck; then
-	eval "$(thefuck --alias)"
-else
-	_warn "No fuck, missing thefuck executable"
-fi
+_exists thefuck && eval "$(thefuck --alias)" || _warn "No fuck, missing thefuck executable"
 
 # Temporarily we're just using a local SSH agent because of some perky issues
 # Set up WSL ssh-agent if relevant
@@ -86,11 +92,6 @@ if [ -n "${WSL_DISTRO_NAME}" ]; then
 
 	# Then add our work profile
 	ssh-add -q ~/.ssh/id_ed25519_work
-fi
-
-# Setup direnv
-if command -v direnv; then
-    eval "$(direnv hook zsh)"
 fi
 
 # Aliases and similar
