@@ -32,6 +32,12 @@ else
 	_warn "No theme, missing $BASE16_SHELL/$BASE16_THEME.sh"
 fi
 
+# Source homebrew zsh completions, but do these zsh?
+if _exists brew 2>&1 >/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+	# We ignore compinit ectc because zprezto will do it for us
+fi
+
 # iTerm2: disable the mark
 export ITERM2_SQUELCH_MARK=1
 
