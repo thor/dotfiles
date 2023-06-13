@@ -156,6 +156,11 @@ return {
     end,
   },
 
+  -- git primary helper
+  {
+    'tpope/vim-fugitive',
+    cond = is_terminal,
+  },
   -- git diff view browser
   {
     'sindrets/diffview.nvim',

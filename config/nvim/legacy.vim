@@ -40,7 +40,6 @@ Plug 'aklt/plantuml-syntax'              " PlantUML
 Plug 'lambdalisue/suda.vim'       "  Workaround for !sudo tee % in v-1.3
 
 "    - UX & Functionality
-Plug 'tpope/vim-fugitive'           " Git, git, git
 Plug 'junegunn/goyo.vim'            " Distraction free writing
 Plug 'junegunn/limelight.vim'       " Hyper-focused writing in vim
 Plug 'metakirby5/codi.vim'          " Interactive scratchpad/REPL buffer

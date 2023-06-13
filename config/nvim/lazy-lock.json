@@ -15,5 +15,6 @@
   "plenary.nvim": { "branch": "master", "commit": "499e0743cf5e8075cd32af68baa3946a1c76adf1" },
   "silicon.nvim": { "branch": "main", "commit": "470b13ca125b948166721d33f47dc4cd02aac90d" },
   "trouble.nvim": { "branch": "main", "commit": "324c977cfeacb8498ca9ba1c74cc35bd18858a8d" },
+  "vim-fugitive": { "branch": "master", "commit": "43f18ab9155c853a84ded560c6104e6300ad41da" },
   "vimtex": { "branch": "master", "commit": "ed5c5eafe47dc8e0212f2ecafc0676a550a849e4" }
 }
