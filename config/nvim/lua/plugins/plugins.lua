@@ -24,20 +24,27 @@ return {
 
   -- file enhancements and syntax fixes, nvim-specific, LSP
   --- core lsp
-  { 'neovim/nvim-lspconfig', lazy = true },
+  { 'neovim/nvim-lspconfig',
+    event = "InsertEnter",
+    config = function()
+      -- Configuring LSP client configurations
+      -- TODO: Move to a better location, or make the plugin spec part of it?
+      require('sections/lsp')
+    end,
+  },
   --- Colours for LSP
   {'folke/lsp-colors.nvim', lazy = true, cond = is_terminal },
   --- LSP error overview in the terminal
   {
     'folke/trouble.nvim',
-    lazy = true,
     cond = is_terminal,
-    dependencies = { 'neovim/nvim-lspconfig' },
-    config = function() 
-      -- Configuring LSP client configurations
-      -- TODO: Move to a better location, or make the plugin spec part of it?
-      require('sections/lsp')
-    end,
+    dependencies = { 
+      'neovim/nvim-lspconfig',
+      'nvim-tree/nvim-web-devicons'
+    },
+    config = function()
+      require'trouble'.setup{}
+    end
   },
 
   ---- enhanced highlighting, incl. additional treesitter context

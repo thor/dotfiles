@@ -49,7 +49,4 @@ require'lspconfig'.terraformls.setup{
 require'lspconfig'.tsserver.setup{
 	on_attach = on_attach,
 }
--- unknown
-require'trouble'.setup{
-	on_attach = on_attach,
 }
