@@ -45,8 +45,12 @@ require'lspconfig'.terraformls.setup{
 	cmd = { "terraform-ls", "serve" },
 	on_attach = on_attach,
 }
--- unknown
+-- typescript
 require'lspconfig'.tsserver.setup{
 	on_attach = on_attach,
 }
+-- lua
+require'lspconfig'.lua_ls.setup{
+  on_attach = on_attach,
 }
+
