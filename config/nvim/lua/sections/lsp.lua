@@ -1,6 +1,6 @@
 -- LSP client configurations
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
@@ -14,7 +14,7 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -34,23 +34,39 @@ local on_attach = function(client, bufnr)
 end
 
 -- python
-require'lspconfig'.pylsp.setup{
+require 'lspconfig'.pylsp.setup {
   -- To enable pylsp-rope logging
-	-- cmd = { "pylsp", "-v", "--log-file", "/tmp/nvim-pylsp.log" },
-	cmd = { "python", "-m", "pylsp" },
-	on_attach = on_attach,
-}
--- terraform
-require'lspconfig'.terraformls.setup{
-	cmd = { "terraform-ls", "serve" },
-	on_attach = on_attach,
-}
--- typescript
-require'lspconfig'.tsserver.setup{
-	on_attach = on_attach,
-}
--- lua
-require'lspconfig'.lua_ls.setup{
+  -- cmd = { "pylsp", "-v", "--log-file", "/tmp/nvim-pylsp.log" },
+  cmd = { "python", "-m", "pylsp" },
   on_attach = on_attach,
 }
-
+-- terraform
+require 'lspconfig'.terraformls.setup {
+  cmd = { "terraform-ls", "serve" },
+  on_attach = on_attach,
+}
+-- typescript
+require 'lspconfig'.tsserver.setup {
+  on_attach = on_attach,
+}
+-- lua
+require 'lspconfig'.lua_ls.setup {
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Stop bothering me that 'vim' is missing; assume it's global
+        globals = { 'vim' },
+      },
+      workspace = {
+        -- Load in the nvim APIs
+        library = vim.api.nvim_get_runtime_file("", true),
+        -- Don't bother us about applying configurations
+        checkThirdParty = false,
+      },
+    }
+  },
+}
