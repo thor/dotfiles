@@ -25,17 +25,6 @@ Plug 'dkarter/bullets.vim'        "  Bullet lists made easy and automatic
 
 if !exists('g:vscode')
 
-" --- Writing enhancements
-Plug 'vim-pandoc/vim-pandoc'             " pandoc-features
-Plug 'vim-pandoc/vim-pandoc-syntax'      " pandoc-syntax
-Plug 'vim-pandoc/vim-pandoc-after'       " plugin integration, incl. fastfold
-Plug 'reedes/vim-pencil'                 " The pencil
-
-" --- binary hex
-Plug 'fidian/hexmode'                    " Hexmode
-Plug 'hashivim/vim-terraform'            " Terraform, syntax, with more
-Plug 'aklt/plantuml-syntax'              " PlantUML
-
 " - Temporary plugins
 Plug 'lambdalisue/suda.vim'       "  Workaround for !sudo tee % in v-1.3
 
@@ -50,29 +39,12 @@ Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
 
 " - Linting & Auto-completion
 Plug 'ludovicchabant/vim-gutentags' " tags generation
+" TODO: Figure out if ALE provides any functionality LSP does not
 Plug 'dense-analysis/ale'           " linting et al and LSP
-" TODO: Add completion plugin for Python
-" TODO: Add completion plugin for clang and C/C++
 
 " - Quality of life
 Plug 'Konfekt/FastFold'             " Less, aka faster, folding
 Plug 'zhimsel/vim-stay'             " Behind the scenes saving of folds
-
-
-" - Syntax & File Type Enhancers
-Plug 'saltstack/salt-vim'                " YAML-assistance for Salt
-Plug 'pearofducks/ansible-vim'           " YAML-assistance for Ansible
-Plug 'stephpy/vim-yaml'                  " YAML-syntax
-Plug 'Matt-Deacalion/vim-systemd-syntax' " systemd unit files syntax
-Plug 'Konfekt/vim-sentence-chopper'      " Sentence chopping using latexindent
-Plug 'rust-lang/rust.vim'                " Rust-syntax
-Plug 'Shirk/vim-gas'                     " AT&T Assembly syntax
-Plug 'wannesm/wmgraphviz.vim'            " GraphViz
-Plug 'fatih/vim-go',                     " Go-go-go-go
-  \ { 'do': ':GoUpdateBinaries' }
-Plug 'numirias/semshi',                  " Semantic Python highlighting
-  \ Cond(has('nvim'), {'do': ':UpdateRemotePlugins'})
-Plug 'jvirtanen/vim-hcl'                 " HCL2+ syntax highlighting
 
 
 endif
@@ -148,27 +120,6 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " {{{ Non-terminal plugin configurations
 
-" # Configuring vim-pandoc
-runtime! sections/pandoc.vim
-
-
-" # Configuring Terraform
-" - Aligning automatically
-let g:terraform_align = 1
-" - Foldin' 's pretty cool too
-let g:terraform_fold_sections = 1
-
-
-" # Configuring vim-pencil
-" - soft as default
-let g:pencil#wrapModeDefault = 'soft'
-" - two spaces after periods
-let g:pencil#joinspaces = 1     " 0=one_space (def), 1=two_spaces
-" - no concealment
-let g:pencil#conceallevel = 2     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
-" - add to airline
-let g:airline_section_x = '%{PencilMode()}'
-
 
 " # Configuring VSCode settings and keybindings
 runtime! sections/vscode.vim
@@ -213,12 +164,6 @@ function! s:toggleTables()
   call tablemode#Toggle()
 endfunction
 nnoremap <leader>tm :<C-U>call <SID>toggleTables()<CR>
-
-" - Setup Pandoc writes!
-nnoremap <leader>pw :<C-U>call <SID>pandocOnWrite()<CR>
-
-" - Setup Pandoc soft-mode TODO
-nnoremap <leader>pS :<C-U>call <SID>pandocSoft()<CR>
 
 
 " - Map paste-mode
