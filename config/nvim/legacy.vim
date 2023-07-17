@@ -19,7 +19,6 @@ Plug 'justinmk/vim-sneak'      " Sneak, the missing motion
 
 "" - Text Manipulation
 Plug 'junegunn/vim-easy-align'    "  Align tables, comments, delims
-Plug 'dhruvasagar/vim-table-mode' "  Quickly deal with tables and such
 Plug 'tpope/vim-surround'         "  surrounding stuff, like parenthesis
 Plug 'dkarter/bullets.vim'        "  Bullet lists made easy and automatic
 
@@ -38,12 +37,10 @@ Plug 'mhinz/vim-signify'            " VCS gutter diffs
 Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
 
 " - Linting & Auto-completion
-Plug 'ludovicchabant/vim-gutentags' " tags generation
 " TODO: Figure out if ALE provides any functionality LSP does not
 Plug 'dense-analysis/ale'           " linting et al and LSP
 
 " - Quality of life
-Plug 'Konfekt/FastFold'             " Less, aka faster, folding
 Plug 'zhimsel/vim-stay'             " Behind the scenes saving of folds
 
 
@@ -96,25 +93,8 @@ function! s:goyo_leave()
 endfunction
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-
-" # Configuring FastFold
-" - TeX, with vimtex too (see up)
-let g:tex_fold_enabled = 1
-" - pandoc
-let g:pandoc_fold_enabled = 1
-
-
-" # Configuring vim-slime
-" - Use tmux per default instead of screen
-let g:slime_target = 'tmux'
-
-
-" # Configuring vim-gutentags (and tags)
-let g:gutentags_ctags_tagfile = '.tags'
-set tags=./.tags;,.tags
-
-
 endif
+
 " }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -154,16 +134,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
-" - Setup table mode is just enabled/disabled manually
-xnoremap <leader>tt <Plug>(table-mode-tableize)
-nnoremap <leader>tt <Plug>(table-mode-tableize)
-
-function! s:toggleTables()
-  call pandoc#formatting#ToggleAutoformat()
-  call tablemode#Toggle()
-endfunction
-nnoremap <leader>tm :<C-U>call <SID>toggleTables()<CR>
 
 
 " - Map paste-mode
