@@ -15,7 +15,6 @@ call plug#begin('~/.config/nvim/plugged')
 
 " - Motions
 Plug 'chrisbra/nrrwrgn'        " Narrowing from Emacs
-Plug 'justinmk/vim-sneak'      " Sneak, the missing motion
 
 "" - Text Manipulation
 Plug 'junegunn/vim-easy-align'    "  Align tables, comments, delims
