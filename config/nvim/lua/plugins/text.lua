@@ -21,5 +21,31 @@ return {
     -- TODO: Consider moving sentence chopper to LaTeX dedicated configuration
     'Konfekt/vim-sentence-chopper',
     disabled = true,
-  }
+  },
+  {
+    -- Distraction free writing
+    'junegunn/goyo.vim',
+    -- TODO: Consider removing goyo or fixing the issue with the status lines
+    disabled = true,
+    -- Map key for distraction free writing mode
+    keys = {{ "<F11>", ":Goyo<cr>" }},
+    conf = function ()
+      -- Turning on and off syntax to fix issues with italics and bold
+      -- https://github.com/junegunn/goyo.vim/issues/156
+      vim.api.nvim_create_autocmd({"GoyoLeave"}, {
+        group = vim.api.nvim_create_augroup("goyo", { clear = true }),
+        callback = function ()
+          local previous_syntax = vim.opt.syntax
+          vim.cmd[[syntax off]]
+          vim.cmd[[syntax on]]
+          vim.opt.syntax = previous_syntax
+        end,
+      })
+    end,
+  },
+  {
+    -- Hyper-focused writing in vim
+    'junegunn/limelight.vim',
+    cond = is_terminal,
+  },
 }

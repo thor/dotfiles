@@ -28,8 +28,6 @@ if !exists('g:vscode')
 Plug 'lambdalisue/suda.vim'       "  Workaround for !sudo tee % in v-1.3
 
 "    - UX & Functionality
-Plug 'junegunn/goyo.vim'            " Distraction free writing
-Plug 'junegunn/limelight.vim'       " Hyper-focused writing in vim
 Plug 'metakirby5/codi.vim'          " Interactive scratchpad/REPL buffer
 Plug 'mhinz/vim-signify'            " VCS gutter diffs
 
@@ -81,17 +79,6 @@ highlight ALEInfoSign ctermfg=6 ctermbg=18
 " - Set default fixer
 let g:ale_fixers = ['prettier']
 
-
-" # Configuring Goyo
-" - Turning on and off syntax to fix issues with italis and bold
-"   https://github.com/junegunn/goyo.vim/issues/156
-function! s:goyo_leave()
-  let l:set_syntax = &syntax
-  syntax off
-  syntax on
-  let &syntax = l:set_syntax
-endfunction
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 endif
 
@@ -146,9 +133,6 @@ xmap ga <Plug>(EasyAlign)
 
 " - Map list-characters key
 nmap <leader>s :set list!<cr>
-
-" - Map key for distraction free writing mode
-nnoremap <F11> :Goyo<cr>
 
 " - Map tab in insert mode to go through suggestions
 function! s:check_back_space() abort "{{{
