@@ -36,5 +36,6 @@
   "vim-sentence-chopper": { "branch": "master", "commit": "39f50c65a46909e8c4c808310fa4187a8e3c1b38" },
   "vim-systemd-syntax": { "branch": "master", "commit": "394a516f524e74ac8808ede1496b25d8b9824827" },
   "vim-terraform": { "branch": "master", "commit": "2bbc5f65a80c79a5110494a2ba1b869075fcf7a0" },
-  "vim-yaml": { "branch": "master", "commit": "dce19542d5ec1663183b0f6844ec663b5d1f3d24" }
+  "vim-yaml": { "branch": "master", "commit": "dce19542d5ec1663183b0f6844ec663b5d1f3d24" },
+  "which-key.nvim": { "branch": "main", "commit": "38b990f6eabf62014018b4aae70a97d7a6c2eb88" }
 }
