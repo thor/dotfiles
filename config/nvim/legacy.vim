@@ -3,50 +3,6 @@
 " vim: set et :
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Initialise vim-plug and them plugins
-" - Conditional function to help share configuration across vim and nvim
-function! Cond(cond, ...)
-	let opts = get(a:000, 0, {})
-	return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
-endfunction
-
-" Load list of plugins for vim-plug
-call plug#begin('~/.config/nvim/plugged')
-
-" - Motions
-Plug 'chrisbra/nrrwrgn'        " Narrowing from Emacs
-
-"" - Text Manipulation
-Plug 'junegunn/vim-easy-align'    "  Align tables, comments, delims
-Plug 'tpope/vim-surround'         "  surrounding stuff, like parenthesis
-Plug 'dkarter/bullets.vim'        "  Bullet lists made easy and automatic
-
-if !exists('g:vscode')
-
-" - Temporary plugins
-Plug 'lambdalisue/suda.vim'       "  Workaround for !sudo tee % in v-1.3
-
-"    - UX & Functionality
-Plug 'metakirby5/codi.vim'          " Interactive scratchpad/REPL buffer
-Plug 'mhinz/vim-signify'            " VCS gutter diffs
-
-" - Settings management
-Plug 'editorconfig/editorconfig-vim' " Deal with shared EditorConfig files
-
-" - Linting & Auto-completion
-" TODO: Figure out if ALE provides any functionality LSP does not
-Plug 'dense-analysis/ale'           " linting et al and LSP
-
-" - Quality of life
-Plug 'zhimsel/vim-stay'             " Behind the scenes saving of folds
-
-
-endif
-
-" Finished pluggin' -- any plugins need to be before this
-call plug#end()
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Core vim configurations not migrated yet
 if !exists('g:vscode')
 
