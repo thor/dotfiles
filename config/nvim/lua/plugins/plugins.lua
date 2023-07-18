@@ -11,11 +11,11 @@ end
 return {
   -- interface-agnostic
   {
-    'krivahtoo/silicon.nvim', 
+    'krivahtoo/silicon.nvim',
     build = './install.sh build',
-		cond = false and is_terminal,
+    cond = false and is_terminal,
     config = function()
-      require'silicon'.setup({
+      require 'silicon'.setup({
         font = 'Fantasque Sans Mono=16',
         theme = 'Monokai Extended',
       })
@@ -25,7 +25,7 @@ return {
   -- file tree viewer with dev icons
   {
     'nvim-tree/nvim-tree.lua',
-    dependencies = {'nvim-tree/nvim-web-devicons'},
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     cond = is_terminal,
     config = function()
       require("sections/file-tree")
@@ -43,40 +43,40 @@ return {
     },
     cond = is_terminal,
     config = function()
-      local paste = function() 
-        if not vim.o.paste then 
+      local paste = function()
+        if not vim.o.paste then
           return ''
         end
-        return 'ρ' 
+        return 'ρ'
       end
       -- The map is built from my previous vim-airline mode map, but
       -- it is not complete. I honestly don't know what all the modes are,
       -- so I'll let future me look that up at some point.
       local mode_map = {
-         COMMAND  = 'CMD',
-         INSERT  = 'I',
-         --ic = 'IC',
-         --ix = 'Ic',
-         NORMAL  = 'N',
-         --ni = '(I)',
-         --no = 'OP',
-         REPLACE  = 'R',
-         --Rv = 'RV',
-         --s  = 'S',
-         --S  = 'S-L',
-         --[''] = 'S-B',
-         TERMINAL  = 'T',
-         VISUAL  = 'V',
-         ['V-LINE']  = 'V-L',
-         ['V-BLOCK'] = 'V-B',
+        COMMAND     = 'CMD',
+        INSERT      = 'I',
+        --ic = 'IC',
+        --ix = 'Ic',
+        NORMAL      = 'N',
+        --ni = '(I)',
+        --no = 'OP',
+        REPLACE     = 'R',
+        --Rv = 'RV',
+        --s  = 'S',
+        --S  = 'S-L',
+        --[''] = 'S-B',
+        TERMINAL    = 'T',
+        VISUAL      = 'V',
+        ['V-LINE']  = 'V-L',
+        ['V-BLOCK'] = 'V-B',
       }
       -- the actual configuration
-      require('lualine').setup{
+      require('lualine').setup {
         sections = {
           lualine_a = {
-            { 
+            {
               'mode',
-              fmt = function (str)
+              fmt = function(str)
                 if mode_map[str] then
                   return mode_map[str]
                 end
@@ -102,7 +102,7 @@ return {
   -- git diff view browser
   {
     'sindrets/diffview.nvim',
-    dependencies = {'nvim-lua/plenary.nvim'},
+    dependencies = { 'nvim-lua/plenary.nvim' },
     cond = is_terminal,
   },
 
@@ -112,16 +112,15 @@ return {
 
   {
     'chriskempson/base16-vim',
-    dependencies = {'nvim-base16', 'RRethy/nvim-base16'},
+    dependencies = { 'nvim-base16', 'RRethy/nvim-base16' },
     cond = is_terminal(),
     priority = 1000, -- load as soon as possible
     config = function()
       -- Use 256 colors for the theme
       vim.g.base16colorspace = 256
       vim.cmd('colorscheme base16-default-dark')
-      vim.api.nvim_create_autocmd({'ColorScheme'}, {
+      vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
         group = vim.api.nvim_create_augroup('colorscheme', { clear = true }),
-        colorgroup,
         callback = function()
           -- Colour the line numbers a bit brighter to add contrast
           vim.cmd('highlight LineNr ctermbg=17')
@@ -138,4 +137,3 @@ return {
     end,
   },
 }
-

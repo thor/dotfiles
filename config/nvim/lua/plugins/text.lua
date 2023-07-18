@@ -28,7 +28,7 @@ return {
     -- TODO: Consider removing goyo or fixing the issue with the status lines
     disabled = true,
     -- Map key for distraction free writing mode
-    keys = {{ "<F11>", ":Goyo<cr>" }},
+    keys = {{ "<F11>", ":Goyo<cr>", desc = "Open distraction free writing" }},
     conf = function ()
       -- Turning on and off syntax to fix issues with italics and bold
       -- https://github.com/junegunn/goyo.vim/issues/156
