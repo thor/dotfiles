@@ -82,3 +82,7 @@ require('lazy').setup("plugins")
 -- Load keyboard mappings, and whatever else of my settings that aren't plugins
 require 'thor.keymaps'
 require 'thor.commands'
+
+-- Load VSCode
+require 'thor.vscode'
+
