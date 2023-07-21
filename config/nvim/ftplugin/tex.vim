@@ -4,6 +4,12 @@
 "  autocmd FileType markdown,mkd call pencil#init()
 "  autocmd FileType text         call pencil#init()
 "augroup END
+
+" Return if we haven't loaded or plugins haven't loaded
+if b:did_ftplugin is v:null || !exists(':Pencil')
+  finish
+endif
+
 call pencil#init({'wrap': 'soft'})
 " Enable linebreaks
 set linebreak
@@ -14,8 +20,6 @@ set wrap
 set tabstop=2
 set shiftwidth=2
 set expandtab
-
-" Setup vimtex
 
 " ale and YaLafi
 

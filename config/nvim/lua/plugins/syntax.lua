@@ -23,7 +23,7 @@ local plugins = {
     -- Terraform
     'hashivim/vim-terraform',
     ft = 'terraform',
-    conf = function ()
+    config = function ()
       -- Aligning automatically
       vim.g.terraform_align = 1
       -- Foldin' 's pretty cool too
@@ -40,7 +40,7 @@ local plugins = {
     dependencies = {
       {
         'vim-pandoc/vim-pandoc',
-        conf = function ()
+        config = function ()
           -- Configuring vim-pandoc (not syntax)
           vim.cmd[[runtime! sections/pandoc.vim]]
         end,
@@ -66,11 +66,61 @@ local plugins = {
     -- TODO: Consider removing yaml plugin in lieu of yaml-companion or LSP
     'stephpy/vim-yaml',
     ft = 'yaml',
+  },
+  {
+    -- LaTeX editing & completion and all
+    -- NOTE: Temporarily disabled while I contemplate how often I use TeX these days
+    'lervag/vimtex',
+    ft = 'tex',
+    cond = true,
+    dependencies = { 'junegunn/fzf.vim', 'preservim/vim-pencil' },
+    config = function()
+      vim.g['$FZF_BIBTEX_CACHEDIR'] = '/tmp/'
+			-- Loading the old vimtex vimscript configuration
+			vim.cmd([[runtime! sections/vimtex.vim]])
+    end,
+    keys = {
+      {
+				-- TODO: Verify that this works if I have bibtex-ls and bibtex-cite setup.
+        "@@", function()
+          vim.cmd([[
+            function! Bibtex_ls()
+              let bibfiles = (
+                  \ globpath('.', '*.bib', v:true, v:true) +
+                  \ globpath('..', '*.bib', v:true, v:true) +
+                  \ globpath('*/', '*.bib', v:true, v:true)
+                  \ )
+              let bibfiles = join(bibfiles, ' ')
+              let source_cmd = 'bibtex-ls '.bibfiles
+              return source_cmd
+            endfunction
+
+            function! s:bibtex_cite_sink_insert(lines)
+                let r=system("bibtex-cite ", a:lines)
+                execute ':normal! a' . r
+                call feedkeys('a', 'n')
+            endfunction
+          ]])
+          return [[
+            <c-g>u<c-o>call fzf#run({
+              'source': Bibtex_ls(),
+              'sink*': function('<sid>bibtex_cite_sink_insert'),
+              'down': '25%',
+              'options': [ '--layout=reverse-list', '--multi', '--prompt', '\"Cite> \"' ]
+            })<CR>
+          ]]
+        end,
+        mode = "i",
+        expr = true,
+      },
+    }
   }
 }
 
 for i, _ in ipairs(plugins) do
-  plugins[i].cond = utils.is_terminal
+  if not plugins[i].cond then
+    plugins[i].cond = utils.is_terminal
+  end
   plugins[i].lazy = true
 end
 
