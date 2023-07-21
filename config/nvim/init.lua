@@ -57,9 +57,16 @@ vim.o.grepprg       = 'rg -n $*'
 vim.o.updatetime    = 2000
 
 
--------------------------------------------------------------------------------
--- Load remaining legacy configuration
-vim.cmd.source(vim.fn.expand('<sfile>:p:h') .. '/legacy.vim')
+
+-- Get the guicursor of my dreams
+vim.o.guicursor = vim.o.guicursor .. ",a:blinkwait175-blinkoff100-blinkon170"
+
+-- Restore it after exiting
+vim.api.nvim_create_autocmd('VimLeave', {
+  callback = function ()
+    vim.o.guicursor = "a:hor100-blinkon1"
+  end
+})
 
 -------------------------------------------------------------------------------
 -- Bootstrap the package manager

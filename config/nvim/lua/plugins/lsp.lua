@@ -38,6 +38,14 @@ return {
           }
         },
       }
+      -- TODO: Convert ale configuration into LSP configuration
+      -- let g:ale_sign_error = "◉"
+      -- let g:ale_sign_warning = "◉"
+      -- let g:ale_sign_info = "◈"
+      -- highlight ALEErrorSign ctermfg=9 ctermbg=18
+      -- highlight ALEWarningSign ctermfg=11 ctermbg=18
+      -- highlight ALEInfoSign ctermfg=6 ctermbg=18
+
       -- Use the LspAttach autocommand to only map the following keys
       -- after the language server attaches to the current buffer
       vim.api.nvim_create_autocmd('LspAttach', {
