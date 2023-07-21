@@ -1,13 +1,14 @@
+local utils = require "utils"
 return {
   {
     'junegunn/fzf',
-    cond = is_terminal,
+    cond = utils.is_terminal,
   },
   -- vim-integration for fuzzy file finder
   {
     'junegunn/fzf.vim',
     dependencies = {'junegunn/fzf'},
-    cond = is_terminal,
+    cond = utils.is_terminal,
     config = function()
       -- Set the default fzf_layout
       vim.g.fzf_layout = { down = '~40%' }

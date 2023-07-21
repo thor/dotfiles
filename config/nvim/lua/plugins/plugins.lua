@@ -1,10 +1,4 @@
---------------------------------------------------------------------------------
--- Helper functions for controlling plugins
-function is_terminal()
-  -- Utility function used to enable or disable addons depending
-  -- on whether we are running neovim in our terminal or from VS Code.
-  return vim.g.vscode == nil
-end
+local utils = require "utils"
 
 --------------------------------------------------------------------------------
 -- Current plugin manager
@@ -13,7 +7,7 @@ return {
   {
     'krivahtoo/silicon.nvim',
     build = './install.sh build',
-    cond = false and is_terminal,
+    cond = false and utils.is_terminal,
     config = function()
       require 'silicon'.setup({
         font = 'Fantasque Sans Mono=16',
@@ -26,7 +20,7 @@ return {
   {
     'nvim-tree/nvim-tree.lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    cond = is_terminal,
+    cond = utils.is_terminal,
     config = function()
       require("sections/file-tree")
     end
@@ -41,7 +35,7 @@ return {
       { 'nvim-tree/nvim-web-devicons' },
       { 'RRethy/nvim-base16' },
     },
-    cond = is_terminal,
+    cond = utils.is_terminal,
     config = function()
       local paste = function()
         if not vim.o.paste then
@@ -97,13 +91,13 @@ return {
   -- git primary helper
   {
     'tpope/vim-fugitive',
-    cond = is_terminal,
+    cond = utils.is_terminal,
   },
   -- git diff view browser
   {
     'sindrets/diffview.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    cond = is_terminal,
+    cond = utils.is_terminal,
   },
 
   -- terminal visuals
@@ -113,7 +107,7 @@ return {
   {
     'chriskempson/base16-vim',
     dependencies = { 'nvim-base16', 'RRethy/nvim-base16' },
-    cond = is_terminal(),
+    cond = utils.is_terminal,
     priority = 1000, -- load as soon as possible
     config = function()
       -- Use 256 colors for the theme

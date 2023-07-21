@@ -1,8 +1,9 @@
+local utils = require "utils"
 return {
 	{
 		'hrsh7th/nvim-cmp',
 		event = "InsertEnter",
-		cond = is_terminal,
+		cond = utils.is_terminal,
 		dependencies = {
 			-- the core of it all
 			-- TODO: Consider moving lspconfig into this file

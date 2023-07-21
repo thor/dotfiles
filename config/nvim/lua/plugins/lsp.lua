@@ -1,3 +1,5 @@
+local utils = require "utils"
+
 return {
   -- file enhancements and syntax fixes, nvim-specific, LSP
   --- core lsp
@@ -84,7 +86,7 @@ return {
   --- LSP error overview in the terminal
   {
     'folke/trouble.nvim',
-    cond = is_terminal,
+    cond = utils.is_terminal,
     dependencies = {
       'neovim/nvim-lspconfig',
       'nvim-tree/nvim-web-devicons'
@@ -98,7 +100,7 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    cond = is_terminal,
+    cond = utils.is_terminal,
     config = function()
       require 'nvim-treesitter.configs'.setup {
         -- A list of parser names, or "all"
@@ -127,7 +129,7 @@ return {
   {
     'nvim-treesitter/nvim-treesitter-context',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    cond = is_terminal,
+    cond = utils.is_terminal,
     config = function()
       require('treesitter-context').setup {
         -- Use the highlight group TreesitterContext to change the colors of the

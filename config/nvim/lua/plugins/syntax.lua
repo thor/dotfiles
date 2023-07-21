@@ -1,5 +1,6 @@
 -- Syntax files aren't provided for non-TUI
 -- TODO: Consider if it should be
+local utils = require "utils"
 
 local plugins = {
   {
@@ -69,7 +70,7 @@ local plugins = {
 }
 
 for i, _ in ipairs(plugins) do
-  plugins[i].cond = is_terminal
+  plugins[i].cond = utils.is_terminal
   plugins[i].lazy = true
 end
 

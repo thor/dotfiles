@@ -1,10 +1,11 @@
 -- TeX related plugins
+local utils = require "utils"
 return {
   -- LaTeX editing & completion and all
   -- NOTE: Temporarily disabled while I contemplate how often I use TeX these days
   {
     'lervag/vimtex',
-    cond = false and is_terminal,
+    cond = false and utils.is_terminal,
     dependencies = { 'junegunn/fzf.vim' },
     config = function()
       vim.g['$FZF_BIBTEX_CACHEDIR'] = '/tmp/'
@@ -12,7 +13,7 @@ return {
 			vim.cmd([[runtime! sections/vimtex.vim]])
     end,
     keys = {
-      { 
+      {
 				-- TODO: Verify that this works if I have bibtex-ls and bibtex-cite setup.
         "@@", function()
           vim.cmd([[
