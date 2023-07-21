@@ -56,6 +56,10 @@ vim.o.grepprg       = 'rg -n $*'
 -- Double frequency of swap writes for vim-signify
 vim.o.updatetime    = 2000
 
+-- Set mapleader to be space, convenient
+vim.g.mapleader = " "
+-- Set local leader to be the backspace, somewhat convenient
+vim.g.localleader = "\\"
 
 
 -- Get the guicursor of my dreams
