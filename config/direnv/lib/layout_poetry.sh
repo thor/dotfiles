@@ -9,7 +9,7 @@ layout_poetry() {
     if [ -d ".venv" ]; then
         VIRTUAL_ENV="$(pwd)/.venv"
     else
-        VIRTUAL_ENV=$(poetry env info --path 2>/dev/null ; true)
+        VIRTUAL_ENV="$(poetry env list --full-path | head -1)"
     fi
 
     if [ -z "$VIRTUAL_ENV" ] || [ ! -d "$VIRTUAL_ENV" ]; then
