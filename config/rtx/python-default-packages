@@ -1,0 +1,8 @@
+pynvim
+python-lsp-server[rope]
+python-lsp-black
+ruff-lsp
+pylsp-rope
+jedi
+black
+mypy
