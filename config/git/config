@@ -49,5 +49,8 @@
 	fontdiff = Monospace,10,-1,5,50,0,0,0,0,0
 [pull]
 	ff = only
+	rebase = true
 [init]
 	defaultBranch = main
+[rebase]
+	autoStash = true
