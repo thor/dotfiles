@@ -8,5 +8,12 @@ return {
       vim.o.timeoutlen = 300
     end,
     opts = {}
+  },
+  {
+    'kdheepak/lazygit.nvim',
+    dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>gg", "<cmd>LazyGit<CR>", desc = "open git overview" },
+    },
   }
 }
