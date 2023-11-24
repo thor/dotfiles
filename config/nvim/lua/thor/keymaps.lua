@@ -30,23 +30,23 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 
 -- Helpful mappings
 local mappings = {
-	-- Map vim-easy-align commands
-	-- TODO: Add vim-easy-align back into action
-	ga = { { 'n', 'x' }, "<Plug>(EasyAlign)", "easy align" },
-	["<leader>s"] = {
-		name = "+spelling",
-		p = { ":set list!<cr>", "show paragraph symbols" },
-		c = { "ea<C-X><C-S>", "spell check" },
-	},
-	["<leader>p"] = {
-		name = "+peek-a-boo"
-	},
-	["<leader>c"] = {
-		name = "+code",
-		a = "invoke code action",
-		e = { vim.diagnostic.open_float, "open float" },
-		q = { vim.diagnostic.setloclist, "set location list" },
-	},
+  -- Map vim-easy-align commands
+  -- TODO: Add vim-easy-align back into action
+  ga = { { 'n', 'x' }, "<Plug>(EasyAlign)", "easy align" },
+  ["<leader>s"] = {
+    name = "+spelling",
+    p = { ":set list!<cr>", "show paragraph symbols" },
+    c = { "ea<C-X><C-S>", "spell check" },
+  },
+  ["<leader>p"] = {
+    name = "+peek-a-boo"
+  },
+  ["<leader>c"] = {
+    name = "+code",
+    a = "invoke code action",
+    e = { vim.diagnostic.open_float, "open float" },
+    q = { vim.diagnostic.setloclist, "set location list" },
+  },
 }
 
 -- Setup friendly keymaps for myself with which-key
