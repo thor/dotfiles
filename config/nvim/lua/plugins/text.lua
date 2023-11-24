@@ -1,3 +1,5 @@
+local utils = require "utils"
+
 return {
   {
     -- Writing enhancements, such as soft & hard breaks
@@ -46,6 +48,6 @@ return {
   {
     -- Hyper-focused writing in vim
     'junegunn/limelight.vim',
-    cond = is_terminal,
+    cond = utils.is_terminal,
   },
 }
