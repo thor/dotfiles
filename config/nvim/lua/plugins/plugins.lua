@@ -81,7 +81,12 @@ return {
           }
         },
         winbar = {
-          lualine_a = { 'buffers' },
+          lualine_a = {
+            {
+              'buffers',
+              show_filename_only = false,
+            },
+          },
           lualine_z = { 'tabs' },
         }
       }
