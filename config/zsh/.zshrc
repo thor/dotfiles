@@ -59,18 +59,13 @@ else
 	_warn "No FZF, could not find fzf script"
 fi
 
-# rtx: the better alternative to asdf
-if _exists rtx; then
-	source "$(rtx activate zsh)" >/dev/null 2>&1
-# asdf: nvm, pyenv, rbenv, goenv, etc
-elif _exists asdf; then
-	source "$(_bp asdf)/libexec/asdf.sh"
-	# Load asdf-direnv
-	source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-	# Tell asdf-python where to get default packages from
-	export ASDF_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.asdf/python-default-packages"
+# mise: the better alternative to asdf
+if _exists mise; then
+	export RTX_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.config/mise/python-default-packages"
+	eval "$(mise activate zsh)" >/dev/null 2>&1
+else
+	_warn "mise wasn't available; you should install it"
 fi
-
 
 # termite: open current directory with ctrl+shift+t
 if [[ $TERM == xterm-termite ]]; then
