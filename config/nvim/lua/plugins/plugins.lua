@@ -107,17 +107,13 @@ return {
 
   -- terminal visuals
   ---- Provide nvim-base16 to lualine
-  { 'RRethy/nvim-base16', lazy = true },
-
+  -- TODO: remove base16 setups and possibly replace with mini.base16
   {
-    'chriskempson/base16-vim',
-    dependencies = { 'nvim-base16', 'RRethy/nvim-base16' },
-    cond = utils.is_terminal,
-    priority = 1000, -- load as soon as possible
+    'RRethy/nvim-base16',
+    lazy = false,
+    enabled = true,
     config = function()
-      -- Use 256 colors for the theme
-      vim.g.base16colorspace = 256
-      vim.cmd('colorscheme base16-default-dark')
+      vim.cmd [[colorscheme base16-default-dark]]
       vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
         group = vim.api.nvim_create_augroup('colorscheme', { clear = true }),
         callback = function()
@@ -133,6 +129,6 @@ return {
           vim.cmd('highlight SpellBad ctermbg=NONE')
         end
       })
-    end,
+    end
   },
 }
