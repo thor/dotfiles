@@ -16,6 +16,11 @@ vim.keymap.set('n', '<C-H>', '<C-W><C-H>', { noremap = true })
 vim.keymap.set('n', '<Tab>', ':bn<cr>', { noremap = true })
 vim.keymap.set('n', '<S-Tab>', ':bp<cr>', { noremap = true })
 
+
+-- Centre my location after moving up and down
+vim.keymap.set('n', 'j', 'jzz', { noremap = true })
+vim.keymap.set('n', 'k', 'kzz', { noremap = true })
+
 -- Syntax debugging
 -- TODO: Convert this line for the syntax debugging
 -- map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
