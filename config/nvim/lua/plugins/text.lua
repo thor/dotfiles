@@ -23,6 +23,11 @@ return {
     -- TODO: Consider moving sentence chopper to LaTeX dedicated configuration
     'Konfekt/vim-sentence-chopper',
     disabled = true,
+    keys = {
+      { "gw",  modes = { "n", "i" },           desc = "Chop sentences" },
+      { "gww", desc = "Chop a single sentence" },
+    },
+    cmd = { "ChopSentences" },
   },
   {
     -- Distraction free writing
