@@ -5,8 +5,8 @@ return {
     -- Writing enhancements, such as soft & hard breaks
     'preservim/vim-pencil',
     ft = { 'pandoc', 'markdown' },
-    dependencies = {'nvim-lualine/lualine.nvim'},
-    conf = function ()
+    dependencies = { 'nvim-lualine/lualine.nvim' },
+    conf = function()
       -- soft as default
       vim.g['pencil#wrapModeDefault'] = 'soft'
       -- two spaces after periods (--=one_space (def), 1=two_spaces)
@@ -35,16 +35,16 @@ return {
     -- TODO: Consider removing goyo or fixing the issue with the status lines
     disabled = true,
     -- Map key for distraction free writing mode
-    keys = {{ "<F11>", ":Goyo<cr>", desc = "Open distraction free writing" }},
-    conf = function ()
+    keys = { { "<F11>", ":Goyo<cr>", desc = "Open distraction free writing" } },
+    conf = function()
       -- Turning on and off syntax to fix issues with italics and bold
       -- https://github.com/junegunn/goyo.vim/issues/156
-      vim.api.nvim_create_autocmd({"GoyoLeave"}, {
+      vim.api.nvim_create_autocmd({ "GoyoLeave" }, {
         group = vim.api.nvim_create_augroup("goyo", { clear = true }),
-        callback = function ()
+        callback = function()
           local previous_syntax = vim.opt.syntax
-          vim.cmd[[syntax off]]
-          vim.cmd[[syntax on]]
+          vim.cmd [[syntax off]]
+          vim.cmd [[syntax on]]
           vim.opt.syntax = previous_syntax
         end,
       })
