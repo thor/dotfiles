@@ -50,8 +50,8 @@ return {
           null_ls.builtins.formatting.ruff,
           null_ls.builtins.diagnostics.mypy,
           null_ls.builtins.diagnostics.pylint.with({
-						extra_args = { "--disable", "too-few-public-methods,missing-function-docstring" },
-					}),
+            extra_args = { "--disable", "too-few-public-methods,missing-function-docstring" },
+          }),
           -- shell scripts
           null_ls.builtins.formatting.shfmt,
           null_ls.builtins.code_actions.shellcheck,
@@ -70,7 +70,7 @@ return {
     --- core lsp configs
     'neovim/nvim-lspconfig',
     dependencies = "williamboman/mason-lspconfig.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     cmd = { "LspInfo", "LspInstall", "LspUninstall" },
     config = function()
       -- bash
@@ -85,6 +85,7 @@ return {
         },
       }
       require 'lspconfig'.pyright.setup {}
+      -- php (!)
       require 'lspconfig'.phpactor.setup {}
       require 'lspconfig'.ruff_lsp.setup {}
       -- terraform
