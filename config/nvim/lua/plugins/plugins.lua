@@ -33,7 +33,6 @@ return {
     dependencies = {
       -- provide icon support
       { 'nvim-tree/nvim-web-devicons' },
-      { 'RRethy/nvim-base16' },
     },
     cond = utils.is_terminal,
     config = function()
@@ -66,6 +65,9 @@ return {
       }
       -- the actual configuration
       require('lualine').setup {
+        options = {
+          theme = 'auto',
+        },
         sections = {
           lualine_a = {
             {
@@ -106,29 +108,38 @@ return {
   },
 
   -- terminal visuals
-  ---- Provide nvim-base16 to lualine
-  -- TODO: remove base16 setups and possibly replace with mini.base16
   {
-    'RRethy/nvim-base16',
+    'echasnovski/mini.nvim',
+    version = false,
     lazy = false,
-    enabled = true,
-    config = function()
-      vim.cmd [[colorscheme base16-default-dark]]
-      vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
-        group = vim.api.nvim_create_augroup('colorscheme', { clear = true }),
-        callback = function()
-          -- Colour the line numbers a bit brighter to add contrast
-          vim.cmd('highlight LineNr ctermbg=17')
-          -- Colours the textwidth bar.
-          vim.cmd('highlight ColorColumn ctermbg=18')
-          -- Colours the cursor line, because I like it.
-          vim.cmd('highlight CursorLine ctermbg=18')
-          -- Remove background colour from spelling notices
-          vim.cmd('highlight SpellCap ctermbg=NONE')
-          -- Remove background colour from spelling errors
-          vim.cmd('highlight SpellBad ctermbg=NONE')
-        end
-      })
-    end
+    opts = {
+      base16 = {
+        -- default dark
+        palette = {
+          base00 = "#181818",
+          base01 = "#282828",
+          base02 = "#383838",
+          base03 = "#585858",
+          base04 = "#B8B8B8",
+          base05 = "#D8d8d8",
+          base06 = "#e8e8e8",
+          base07 = "#f8f8f8",
+          base08 = "#ab4642",
+          base09 = "#dc9656",
+          base0A = "#f7ca88",
+          base0B = "#A1B56C",
+          base0C = "#86c1b9",
+          base0D = "#7cafc2",
+          base0E = "#ba8baf",
+          base0F = "#a16946"
+        },
+        use_cterm = true,
+      },
+    },
+    config = function(_, opts)
+      for key, value in pairs(opts) do
+        require('mini.' .. key).setup(value)
+      end
+    end,
   },
 }
