@@ -98,8 +98,8 @@ alias j=journal
 alias k=kubectl
 
 # Use exa if available
-if _exists exa; then
-	alias ll="exa -lgFL 2"
+if _exists eza; then
+	alias ll="eza -lgL 2"
 	alias la="ll -a"
 fi
 
