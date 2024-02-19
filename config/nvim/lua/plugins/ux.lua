@@ -10,6 +10,12 @@ return {
     opts = {}
   },
   {
+    -- show beautiful indentation lines
+    "lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {},
+  },
+  {
     'kdheepak/lazygit.nvim',
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
