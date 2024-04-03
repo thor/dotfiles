@@ -19,3 +19,7 @@ config/zsh/.zsh_sessions
 # zsh: ignore iterm2 shell integration files
 config/zsh/.iterm2
 config/zsh/.iterm2_shell_integration.zsh
+
+# tmux: ignore the plugins, except the one in submodules
+config/tmux/plugins/
+!config/tmux/plugins/tpm

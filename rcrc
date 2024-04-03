@@ -1,6 +1,6 @@
 # See man rcrc(5)
 # The first folder is the primary folder, and the target when using mkrc
 DOTFILES_DIRS="$HOME/.dotfiles $HOME/docs/dotfiles"
-SYMLINK_DIRS="config/zsh config/base16-shell config/base16-kitty local/lib/zinit local/lib/kube-ps1 local/share/pandoc local/share/nvim/site/pack"
+SYMLINK_DIRS="config/zsh config/base16-shell config/tmux/plugins config/base16-kitty local/lib/zinit local/lib/kube-ps1 local/share/pandoc local/share/nvim/site/pack"
 EXCLUDES="README.md"
 
