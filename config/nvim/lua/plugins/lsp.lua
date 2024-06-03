@@ -43,18 +43,14 @@ return {
           -- yaml
           null_ls.builtins.diagnostics.yamllint,
           null_ls.builtins.formatting.yamlfmt,
-          -- toml
-          null_ls.builtins.formatting.taplo,
           -- python (see lsp for ruff and pyright)
           null_ls.builtins.formatting.black,
-          null_ls.builtins.formatting.ruff,
           null_ls.builtins.diagnostics.mypy,
           null_ls.builtins.diagnostics.pylint.with({
             extra_args = { "--disable", "too-few-public-methods,missing-function-docstring" },
           }),
           -- shell scripts
           null_ls.builtins.formatting.shfmt,
-          null_ls.builtins.code_actions.shellcheck,
           -- others
           null_ls.builtins.code_actions.refactoring,
         },
@@ -93,6 +89,8 @@ return {
         cmd = { "terraform-ls", "serve" },
       }
       require 'lspconfig'.tflint.setup {}
+      -- toml
+      require 'lspconfig'.taplo.setup {}
       -- typescript
       require 'lspconfig'.tsserver.setup {}
       -- lua
@@ -125,6 +123,8 @@ return {
           },
         },
       }
+      -- cpp
+      require 'lspconfig'.clangd.setup {}
 
       -- Use the LspAttach autocommand to only map the following keys
       -- after the language server attaches to the current buffer
