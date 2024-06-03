@@ -7,7 +7,7 @@ return {
   -- vim-integration for fuzzy file finder
   {
     'junegunn/fzf.vim',
-    dependencies = {'junegunn/fzf'},
+    dependencies = { 'junegunn/fzf' },
     cond = utils.is_terminal,
     config = function()
       -- Set the default fzf_layout
@@ -15,7 +15,7 @@ return {
       -- Dynamically move preview window up if the terminal is small
       vim.g.fzf_preview_window = { 'right,50%,<40(up,40%)', 'ctrl-/' }
       -- No customisation of Files command is necessary, but this is what it could look like
-      --vim.api.nvim_create_user_command('Files', 
+      --vim.api.nvim_create_user_command('Files',
       --  function(opts)
       --    vim.fn['fzf#vim#files'](opts.fargs[1], vim.fn['fzf#vim#with_preview'](), opts.bang)
       --  end,
@@ -23,11 +23,11 @@ return {
       --)
     end,
     keys = {
-      { "<C-P>", "<cmd>Files<CR>", desc = "Open the file picker" },
+      { "<C-P>",      "<cmd>Files<CR>",   desc = "Open the file picker" },
       { "<leader>ph", "<cmd>Files ~<cr>", desc = "Open from $HOME" },
       { "<leader>pb", "<cmd>Buffers<cr>", desc = "Open the buffer picker" },
-      { "<leader>pg", "<cmd>Rg<cr>", desc = "Grep through files" },
-			-- FIXME: Move the citation picker to the tex specific plugin configuration
+      { "<leader>pg", "<cmd>Rg<cr>",      desc = "Grep through files" },
+      -- FIXME: Move the citation picker to the tex specific plugin configuration
       -- { "<leader>pc", "<cmd>vim.fn['vimtex#fzf#run']('cl', g:fzf_layout)<cr>", desc = "Open citation picker" },
       -- { "<leader>pt", "<cmd>vim.fn['vimtex#fzf#run']('t', g:fzf_layout)<cr>", desc = "Open cross reference picker?" },
     },

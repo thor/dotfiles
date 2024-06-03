@@ -12,8 +12,8 @@ return {
   {
     -- show beautiful indentation lines
     "lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		opts = {},
+    main = "ibl",
+    opts = {},
   },
   {
     -- enhanced inputs and selection interfaces

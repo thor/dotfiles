@@ -23,7 +23,7 @@ local plugins = {
     -- Terraform
     'hashivim/vim-terraform',
     ft = 'terraform',
-    config = function ()
+    config = function()
       -- Aligning automatically
       vim.g.terraform_align = 1
       -- Foldin' 's pretty cool too
@@ -40,15 +40,15 @@ local plugins = {
     dependencies = {
       {
         'vim-pandoc/vim-pandoc',
-        config = function ()
+        config = function()
           -- Configuring vim-pandoc (not syntax)
-          vim.cmd[[runtime! sections/pandoc.vim]]
+          vim.cmd [[runtime! sections/pandoc.vim]]
         end,
       },
     },
     keys = {
-      { "<leader>pw",  "<C-U>call <SID>pandocOnWrite()<CR>", desc = "Enable Pandoc render on write" },
-      { "<leader>pS",  ":<C-U>call <SID>pandocSoft()<CR>", desc = "Enable Pandoc soft-mode" },
+      { "<leader>pw", "<C-U>call <SID>pandocOnWrite()<CR>", desc = "Enable Pandoc render on write" },
+      { "<leader>pS", ":<C-U>call <SID>pandocSoft()<CR>",   desc = "Enable Pandoc soft-mode" },
     },
   },
   {
@@ -76,13 +76,14 @@ local plugins = {
     dependencies = { 'junegunn/fzf.vim', 'preservim/vim-pencil' },
     config = function()
       vim.g['$FZF_BIBTEX_CACHEDIR'] = '/tmp/'
-			-- Loading the old vimtex vimscript configuration
-			vim.cmd([[runtime! sections/vimtex.vim]])
+      -- Loading the old vimtex vimscript configuration
+      vim.cmd([[runtime! sections/vimtex.vim]])
     end,
     keys = {
       {
-				-- TODO: Verify that this works if I have bibtex-ls and bibtex-cite setup.
-        "@@", function()
+        -- TODO: Verify that this works if I have bibtex-ls and bibtex-cite setup.
+        "@@",
+        function()
           vim.cmd([[
             function! Bibtex_ls()
               let bibfiles = (
