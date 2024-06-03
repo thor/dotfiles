@@ -66,7 +66,8 @@ return {
       -- the actual configuration
       require('lualine').setup {
         options = {
-          theme = 'auto',
+          disabled_filetypes = { "fzf", "NvimTree" },
+          theme = 'base16',
         },
         sections = {
           lualine_a = {
@@ -109,37 +110,9 @@ return {
 
   -- terminal visuals
   {
-    'echasnovski/mini.nvim',
-    version = false,
-    lazy = false,
-    opts = {
-      base16 = {
-        -- default dark
-        palette = {
-          base00 = "#181818",
-          base01 = "#282828",
-          base02 = "#383838",
-          base03 = "#585858",
-          base04 = "#B8B8B8",
-          base05 = "#D8d8d8",
-          base06 = "#e8e8e8",
-          base07 = "#f8f8f8",
-          base08 = "#ab4642",
-          base09 = "#dc9656",
-          base0A = "#f7ca88",
-          base0B = "#A1B56C",
-          base0C = "#86c1b9",
-          base0D = "#7cafc2",
-          base0E = "#ba8baf",
-          base0F = "#a16946"
-        },
-        use_cterm = true,
-      },
-    },
-    config = function(_, opts)
-      for key, value in pairs(opts) do
-        require('mini.' .. key).setup(value)
-      end
-    end,
+    'tinted-theming/base16-vim',
+    config = function()
+      vim.cmd [[colorscheme base16-default-dark]]
+    end
   },
 }
