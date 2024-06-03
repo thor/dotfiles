@@ -16,6 +16,11 @@ return {
 		opts = {},
   },
   {
+    -- enhanced inputs and selection interfaces
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
+  {
     'kdheepak/lazygit.nvim',
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
