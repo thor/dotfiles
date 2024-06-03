@@ -1,5 +1,13 @@
-local utils = require "utils"
+local utils = require('utils')
+
 return {
+  {
+    'L3MOND4D3/LuaSnip',
+    build = "echo 'js_regexp is optional; okay if it fails'; make install_jsregexp" or nil,
+    config = function()
+      require('luasnip.loaders.from_vscode').lazy_load()
+    end
+  },
   {
     'hrsh7th/nvim-cmp',
     event = "InsertEnter",
@@ -24,13 +32,14 @@ return {
     },
     config = function()
       -- Set up nvim-cmp.
-      local cmp = require 'cmp'
+      local cmp = require('cmp')
+      local luasnip = require('luasnip')
 
       cmp.setup({
         snippet = {
           -- We must specify a snippet engine, and we use luasnip
           expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
           end,
         },
         window = {
@@ -43,6 +52,25 @@ return {
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.locally_jumpable(1) then
+              luasnip.jump(1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
         }),
         -- We must also specify sources, which includes the snippet engine
         sources = cmp.config.sources({
@@ -57,9 +85,8 @@ return {
       cmp.setup.filetype('gitcommit', {
         sources = cmp.config.sources({
           { name = 'git' },
-        }, {
           { name = 'buffer' },
-        })
+        }),
       })
 
       -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
