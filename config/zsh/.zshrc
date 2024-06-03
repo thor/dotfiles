@@ -94,6 +94,10 @@ fi
 # Journal is too long
 alias j=journal
 
+# Kubernetes
+export KUBECONFIG=/dev/null
+alias ke="export KUBECONFIG=~/.kube/config"
+alias kd="export KUBECONFIG=/dev/null"
 # kubectl is our friend
 alias k=kubectl
 
