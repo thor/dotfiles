@@ -24,6 +24,7 @@ vim.o.foldnestmax  = 3
 vim.o.foldminlines = 1
 
 -- Spacing / tabs / code-style
+vim.o.expandtab    = true -- " spaces over tabs, sorry mac
 vim.o.tabstop      = 2    -- " Visual space per TAB used!
 vim.o.softtabstop  = -1   -- " Spaces entered per TAB in editing.
 vim.o.shiftwidth   = 2    -- " Using 8 is ridicilous.
