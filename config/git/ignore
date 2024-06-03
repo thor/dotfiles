@@ -1,2 +1,5 @@
 # Hide ctags-generated tag file
 .tags
+
+# Hide temporary temployment folders
+temp-deploy/
