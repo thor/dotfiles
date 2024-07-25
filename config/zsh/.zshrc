@@ -3,6 +3,9 @@
 # Toggle to enable profiling, see bottom of zshrc
 [ -z "$ZPROF" ] || zmodload zsh/zprof
 
+# Specifically for tools on macOS, specify XDG_CONFIG_HOME
+export XDG_CONFIG_HOME="$HOME/.config"
+
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
