@@ -89,6 +89,9 @@ alias kd="export KUBECONFIG=/dev/null"
 # kubectl is our friend
 alias k=kubectl
 
+# lazygit is neat
+alias lg=lazygit
+
 # Use exa if available
 if _exists eza; then
 	alias ll="eza -lgL 2"
