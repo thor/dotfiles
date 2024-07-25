@@ -1,9 +1,7 @@
 # zsh RC
 
-# Source load.d profile scripts
-for script in ${ZDOTDIR:-$HOME}/load.d/*.*sh; do
-	source "${script}"
-done
+# Toggle to enable profiling, see bottom of zshrc
+[ -z "$ZPROF" ] || zmodload zsh/zprof
 
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
@@ -12,6 +10,11 @@ done
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+# Source load.d profile scripts
+for script in ${ZDOTDIR:-$HOME}/load.d/*.*sh; do
+	source "${script}"
+done
 
 # Setup direnv after instant prompt
 if _exists direnv; then
@@ -138,3 +141,6 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+# Toggle to stop profiling, see toggle at top of zshrc
+[ -z "$ZPROF" ] || zprof
