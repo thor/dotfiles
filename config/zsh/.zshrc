@@ -5,10 +5,6 @@ for script in ${ZDOTDIR:-$HOME}/load.d/*.*sh; do
 	source "${script}"
 done
 
-# Setup direnv before instant prompt
-if _exists direnv; then
-		(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
-fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
