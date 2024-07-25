@@ -6,6 +6,8 @@
 # Specifically for tools on macOS, specify XDG_CONFIG_HOME
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# base16 Shell
+export BASE16_THEME=base16-default-dark
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -24,17 +26,11 @@ if _exists direnv; then
 		(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
 fi
 
-# base16 Shell
-# - Modified to avoid .base16-theme, simplified somewhat
-# - NOTE: the scripts are not necessary with kitty, nor helpful
-BASE16_SHELL=$HOME/.config/base16-shell/scripts
-BASE16_THEME=base16-default-dark
-if [ "$TERM" = "xterm-kitty" ]; then
-	# do nothing
-elif [ -n "$PS1" ] && [ -s "$BASE16_SHELL/$BASE16_THEME.sh" ]; then
-	. "$BASE16_SHELL/$BASE16_THEME.sh" >/dev/null
+# Source sheldon (the shell, specifically zsh plugin manager)
+if _exists sheldon; then
+  eval "$(sheldon source)"
 else
-	_warn "No theme, missing $BASE16_SHELL/$BASE16_THEME.sh"
+  _warn "No sheldon, couldn't source shell scripts"
 fi
 
 # Source homebrew zsh completions, but do these zsh?
@@ -45,16 +41,11 @@ fi
 # iTerm2: disable the mark
 export ITERM2_SQUELCH_MARK=1
 
-# Source prezto
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
 # Source fzf if it exists
 if _exists fzf; then
 	_fzf_dir="$(_select_first /usr/share/fzf/ "$(_bp fzf)/shell/")"
-	source "${_fzf_dir}/key-bindings.zsh"
-	source "${_fzf_dir}/completion.zsh"
+	zsh-defer source "${_fzf_dir}/key-bindings.zsh"
+	zsh-defer source "${_fzf_dir}/completion.zsh"
 else
 	_warn "No FZF, could not find fzf script"
 fi
@@ -62,7 +53,7 @@ fi
 # mise: the better alternative to asdf
 if _exists mise; then
 	export RTX_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.config/mise/python-default-packages"
-	eval "$(mise activate zsh)" >/dev/null 2>&1
+	zsh-defer eval "$(mise activate zsh)" >/dev/null 2>&1
 else
 	_warn "mise wasn't available; you should install it"
 fi
@@ -73,7 +64,7 @@ if [[ $TERM == xterm-termite ]]; then
 fi
 
 # Configure thefuck
-_exists thefuck && eval "$(thefuck --alias)" || _warn "No fuck, missing thefuck executable"
+_exists thefuck && zsh-defer eval "$(thefuck --alias)" || _warn "No fuck, missing thefuck executable"
 
 # Temporarily we're just using a local SSH agent because of some perky issues
 # Set up WSL ssh-agent if relevant
@@ -135,10 +126,8 @@ else
 fi
 
 # Google Cloud SDK
-if _exists gcloud; then
-	# TODO: Add paths for Arch setup? Ideally, site-functions should deal with this
-	_source_first "$(_bcp google-cloud-sdk)/latest/google-cloud-sdk/completion.zsh.inc"
-fi
+# TODO: Add paths for Arch setup? Ideally, site-functions should deal with this
+_exists gcloud && _source_first "$(_bcp google-cloud-sdk)/latest/google-cloud-sdk/completion.zsh.inc"
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
