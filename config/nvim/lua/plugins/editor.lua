@@ -19,5 +19,17 @@ return {
         modes = { 'n', 'x', 'o' },
       })
     end,
+  },
+  -- simplified magic to align things
+  {
+    "echasnovski/mini.nvim",
+    version = false,
+    config = function(_, opts)
+      require('mini.align').setup(opts)
+    end,
+    keys = {
+      { "ga", desc = "easily align", },
+      { "gA", desc = "easily align with preview", }
+    }
   }
 }
