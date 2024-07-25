@@ -52,7 +52,8 @@
     context                   # user@host
     dir                       # current directory
     vcs                       # git status
-		kubecontext
+    kubecontext               # kubernetes context
+    gcloud                    # gcloud active project
     command_execution_time    # previous command duration
     # =========================[ Line #2 ]=========================
     newline                   # \n
@@ -77,6 +78,10 @@
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SUBSEGMENT_SEPARATOR=' '  # separate segments with a space
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SEGMENT_SEPARATOR=        # no end-of-line symbol
   typeset -g POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION=           # no segment icons
+
+  # Show prompt segment only when the command you are typing invokes one of these tools.
+  typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|k9s'
+  typeset -g POWERLEVEL9K_GCLOUD_SHOW_ON_COMMAND='terraform|gcloud|klipy'
 
   # Add an empty line before each prompt except the first. This doesn't emulate the bug
   # in Pure that makes prompt drift down whenever you use the Alt-C binding from fzf or similar.
