@@ -21,10 +21,6 @@ for script in ${ZDOTDIR:-$HOME}/load.d/*.*sh; do
 	source "${script}"
 done
 
-# Setup direnv after instant prompt
-if _exists direnv; then
-		(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
-fi
 
 # Source sheldon (the shell, specifically zsh plugin manager)
 if _exists sheldon; then
@@ -33,13 +29,14 @@ else
   _warn "No sheldon, couldn't source shell scripts"
 fi
 
+# Setup direnv after instant prompt
+_exists direnv && emulate zsh -c "$(direnv hook zsh)"
+
 # Source homebrew zsh completions, but do these zsh?
 if _exists brew 2>&1 >/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
-# iTerm2: disable the mark
-export ITERM2_SQUELCH_MARK=1
 
 # Source fzf if it exists
 if _exists fzf; then
