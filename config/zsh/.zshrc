@@ -126,6 +126,11 @@ fi
 # TODO: Add paths for Arch setup? Ideally, site-functions should deal with this
 _exists gcloud && _source_first "$(_bcp google-cloud-sdk)/latest/google-cloud-sdk/completion.zsh.inc"
 
+# iTerm2: disable the mark
+export ITERM2_SQUELCH_MARK=1
+# iTerm2: load the shell integration if we're in here
+zsh-defer test -e "${ZDOTDIR:-$HOME}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR:-$HOME}/.iterm2_shell_integration.zsh" || true
+
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
