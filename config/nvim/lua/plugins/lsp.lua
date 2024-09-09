@@ -1,12 +1,17 @@
 local utils = require "utils"
 
+-- do not load lsp enhancements if nvim is used as the interface rather than editor
+if not utils.is_terminal() then
+  return {}
+end
+
 return {
   -- file enhancements and syntax fixes, nvim-specific, LSP
   {
     -- help us get packages for lsps without having to deal with a lot of system config
     "williamboman/mason.nvim",
     cmd = "Mason",
-    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "open Mason" } },
     build = ":MasonUpdate",
     opts = {
       ensure_installed = {
@@ -71,6 +76,8 @@ return {
     config = function()
       -- bash
       require 'lspconfig'.bashls.setup {}
+      -- go
+      require 'lspconfig'.gopls.setup {}
       -- python
       require 'lspconfig'.pylsp.setup {
         cmd = { "python", "-m", "pylsp" },
@@ -154,31 +161,59 @@ return {
           end, opts { desc = "list workspace folders" })
           vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts { desc = "show type definition" })
           vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, opts { desc = "rename symbol" })
-          vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts {})
-          vim.keymap.set('n', '<leader>f', function()
+          vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts { desc = "code actions" })
+          vim.keymap.set('n', '<leader>cf', function()
             vim.lsp.buf.format { async = true }
           end, opts { desc = "format document" })
         end
       })
     end,
   },
-  --- Colours for LSP
-  -- TODO: switcheroo to rrethy's nvim-base16
   --- LSP error overview in the terminal
   {
     'folke/trouble.nvim',
-    cond = utils.is_terminal,
+    opts = {},
     dependencies = {
       'neovim/nvim-lspconfig',
       'nvim-tree/nvim-web-devicons'
     },
+    cmd = "Trouble",
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle<cr>",                       desc = "show diagnostics" },
-      { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "workspace diagnostics" },
-      { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "document diagnostics" },
-      { "<leader>xl", "<cmd>TroubleToggle loclist<cr>",               desc = "toggle local list" },
-      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",              desc = "toggle quick fix" },
-      { "gr",         "<cmd>TroubleToggle lsp_references<cr>",        desc = "show code references" },
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "diagnostics"
+      },
+      {
+        "<leader>xb",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "buffer diagnostics"
+      },
+      {
+        "<leader>xl",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "local list"
+      },
+      {
+        "<leader>xq",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "quick fix list"
+      },
+      {
+        "gr",
+        "<cmd>Trouble lsp toggle pinned=true focus=true win.position=bottom<cr>",
+        desc = "code references"
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "definitions/references"
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "symbols"
+      },
     }
   },
 
@@ -186,20 +221,25 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    cond = utils.is_terminal,
     config = function()
       require 'nvim-treesitter.configs'.setup {
         -- A list of parser names, or "all"
         ensure_installed = {
           "bash",
+          "javascript",
+          "json",
           "lua",
+          "go",
+          "terraform",
+          "typescript",
+          "tsx",
+          "markdown",
+          "markdown_inline",
+          "php",
+          "python",
           "rust",
           "vim",
-          "go",
-          "python",
-          "terraform",
-          "markdown",
-          "php"
+          "yaml",
         },
 
         -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -223,7 +263,6 @@ return {
   {
     'nvim-treesitter/nvim-treesitter-context',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    cond = utils.is_terminal,
     config = function()
       require('treesitter-context').setup {
         -- Use the highlight group TreesitterContext to change the colors of the
