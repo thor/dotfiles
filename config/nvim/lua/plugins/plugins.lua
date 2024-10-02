@@ -91,6 +91,14 @@ return {
             },
           },
           lualine_z = { 'tabs' },
+        },
+        inactive_winbar = {
+          lualine_a = {
+            {
+              'buffers',
+              show_filename_only = true,
+            },
+          },
         }
       }
     end,
