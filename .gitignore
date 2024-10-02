@@ -23,3 +23,4 @@ config/zsh/.iterm2_shell_integration.zsh
 # tmux: ignore the plugins, except the one in submodules
 config/tmux/plugins/
 !config/tmux/plugins/tpm
+config/zsh/.zsh_history
