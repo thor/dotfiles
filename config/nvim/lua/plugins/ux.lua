@@ -2,6 +2,10 @@ return {
   {
     -- help me be better at remembering my own keys
     "folke/which-key.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "echasnovski/mini.nvim"
+    },
     event = "VeryLazy",
     init = function()
       vim.o.timeout = true
