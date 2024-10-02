@@ -31,5 +31,18 @@ return {
       { "ga", desc = "easily align", },
       { "gA", desc = "easily align with preview", }
     }
-  }
+  },
+  -- create beautiful screenshots of code
+  {
+    'krivahtoo/silicon.nvim',
+    build = './install.sh build',
+    cond = false, -- disabled due to build problems
+    config = function()
+      require 'silicon'.setup({
+        font = 'Fantasque Sans Mono=16',
+        theme = 'Monokai Extended',
+      })
+    end,
+  },
+
 }
