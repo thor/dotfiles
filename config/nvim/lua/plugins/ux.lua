@@ -53,20 +53,60 @@ return {
       }
     },
     keys = {
-      { "<leader>ff", function() require("telescope.builtin").find_files() end,                    desc = "Find files" },
-      { "<leader>fh", function() require("telescope.builtin").help_tags() end,                     desc = "Find help" },
-      { "<leader>fs", function() require("telescope.builtin").lsp_dynamic_workspace_symbols() end, desc = "Find symbol in workspace" },
-      { "<leader>ft", function() require("telescope.builtin").treesitter() end,                    desc = "Find symbol from treesitter" },
-      { "<leader>fd", function() require("telescope.builtin").diagnostics() end,                   desc = "Find diagnostics" },
-      { "<leader>gs", function() require("telescope.builtin").git_status() end,                    desc = "Open Git status" },
+      { "<leader>ff", function() require("telescope.builtin").find_files() end,            desc = "Find files" },
+      { "<leader>fb", function() require("telescope.builtin").find_files() end,            desc = "Find buffers" },
+      { "<leader>fg", function() require("telescope.builtin").live_grep() end,             desc = "Find by grep" },
+      { "<leader>fh", function() require("telescope.builtin").help_tags() end,             desc = "Find help" },
+      { "<leader>fs", function() require("telescope.builtin").lsp_workspace_symbols() end, desc = "Find symbol in workspace" },
+      { "<leader>ft", function() require("telescope.builtin").treesitter() end,            desc = "Find symbol from treesitter" },
+      { "<leader>fd", function() require("telescope.builtin").diagnostics() end,           desc = "Find diagnostics" },
+      { "<leader>gs", function() require("telescope.builtin").git_status() end,            desc = "Open Git status" },
     },
-    opts = {
-      defaults = {
-        winblend = 1
-      },
-    },
+    opts = function(_, opts)
+      local defaultConfig = require("telescope.config")
+
+      -- fetch the default Telescope configuration
+      local vimgrep_arguments = { unpack(defaultConfig.values.vimgrep_arguments) }
+      -- I want to search in hidden/dot files.
+      table.insert(vimgrep_arguments, "--hidden")
+      -- I don't want to search in the `.git` directory.
+      table.insert(vimgrep_arguments, "--glob")
+      table.insert(vimgrep_arguments, "!**/.git/*")
+
+      local actions = require('telescope.actions')
+      local options = {
+        defaults = {
+          -- `hidden = true` is not supported in text grep commands.
+          vimgrep_arguments = vimgrep_arguments,
+          winblend = 1,
+          -- close on escape
+          mappings = {
+            i = {
+              ["esc"] = actions.close
+            }
+          }
+        },
+        pickers = {
+          buffers = {
+            mappings = {
+              i = {
+                -- remove buffers by using c-d
+                ["<c-d>"] = actions.delete_buffer + actions.move_to_top
+              }
+            }
+          },
+
+          find_files = {
+            -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+            find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+          },
+        }
+      }
+      -- return vim.tbl_deep_extend('force', opts, options)
+      return options
+    end,
     config = function(_, opts)
-      require('telescope').setup { opts }
+      require('telescope').setup(opts)
       require('telescope').load_extension('fzf')
     end
   },
@@ -172,7 +212,8 @@ return {
     'tinted-theming/base16-vim',
     config = function()
       vim.cmd [[colorscheme base16-default-dark]]
-    end
+    end,
+    priority = 1000
   },
 
 }
