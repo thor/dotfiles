@@ -35,12 +35,15 @@ return {
   -- create beautiful screenshots of code
   {
     'krivahtoo/silicon.nvim',
-    build = './install.sh build',
-    cond = false, -- disabled due to build problems
+    build = './install.sh',
+    cond = true, -- disabled due to build problems
     config = function()
       require 'silicon'.setup({
-        font = 'Fantasque Sans Mono=16',
+        font = 'FantasqueSansMono Nerd Font=15',
         theme = 'Monokai Extended',
+        line_number = true,
+        pad_vert = 40,
+        pad_horiz = 60,
       })
     end,
   },
