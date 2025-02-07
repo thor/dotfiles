@@ -33,6 +33,14 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 
+
+-- Stop processing settings not relevant for e.g. VSCode
+local utils = require("utils")
+if not utils.is_terminal() then
+  return
+end
+
+
 -- Helpful mappings
 local mappings = {
   -- Group definitions
