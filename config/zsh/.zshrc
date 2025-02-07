@@ -118,6 +118,9 @@ alias vr="vagrant resume"
 alias vrld="vagrant reload"
 alias vssh="vagrant ssh"
 
+# nix-darwin
+alias nup="darwin-rebuild switch"
+
 # Source work.sh for work configuration
 if [[ -s "${HOME}/.local/lib/work.sh" ]]; then
   source "${HOME}/.local/lib/work.sh"
