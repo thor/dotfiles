@@ -26,4 +26,5 @@ layout_poetry() {
 	PATH_add "$VIRTUAL_ENV/bin"
 	export POETRY_ACTIVE=1
 	export VIRTUAL_ENV
+	log_status "Configured Poetry with the virtual environment '$VIRTUAL_ENV'"
 }
