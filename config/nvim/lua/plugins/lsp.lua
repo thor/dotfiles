@@ -90,7 +90,7 @@ return {
       require 'lspconfig'.pyright.setup {}
       -- php (!)
       require 'lspconfig'.phpactor.setup {}
-      require 'lspconfig'.ruff_lsp.setup {}
+      require 'lspconfig'.ruff.setup {}
       -- terraform
       require 'lspconfig'.terraformls.setup {
         cmd = { "terraform-ls", "serve" },
@@ -99,7 +99,7 @@ return {
       -- toml
       require 'lspconfig'.taplo.setup {}
       -- typescript
-      require 'lspconfig'.tsserver.setup {}
+      require 'lspconfig'.ts_ls.setup {}
       -- lua
       require 'lspconfig'.lua_ls.setup {
         settings = {
