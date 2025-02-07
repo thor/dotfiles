@@ -51,6 +51,7 @@ local mappings = {
   { "<leader>c",  group = "code" },
   { "<leader>ce", vim.diagnostic.open_float,  desc = "open diagnostics float" },
   { "<leader>cq", vim.diagnostic.setloclist,  desc = "set location list(?)" },
+  { "<leader>x",  group = "diagnostics" },
 }
 
 -- Setup friendly keymaps for myself with which-key
