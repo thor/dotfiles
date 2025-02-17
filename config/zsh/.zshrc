@@ -124,7 +124,7 @@ alias nep="pushd $HOME/.config/thonix; nvim flake.nix +'Telescope fd'; popd"
 
 # Source work.sh for work configuration
 if [[ -s "${HOME}/.local/lib/work.sh" ]]; then
-  source "${HOME}/.local/lib/work.sh"
+  zsh-defer source "${HOME}/.local/lib/work.sh"
 else 
 	_warn "Missing ~/.local/lib/work.sh, no work-related aliases will be loaded"
 fi
