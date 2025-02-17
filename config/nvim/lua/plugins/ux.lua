@@ -52,6 +52,7 @@ return {
         'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
       }
     },
+    cmd = { "Telescope" },
     keys = {
       { "<leader>ff", function() require("telescope.builtin").find_files() end,            desc = "Find files" },
       { "<leader>fb", function() require("telescope.builtin").find_files() end,            desc = "Find buffers" },
