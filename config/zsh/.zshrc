@@ -30,7 +30,7 @@ else
 fi
 
 # Setup direnv after instant prompt
-_exists direnv && emulate zsh -c "$(direnv hook zsh)"
+zsh-defer _exists direnv && emulate zsh -c "$(direnv hook zsh)"
 
 # Source homebrew zsh completions, but do these zsh?
 if _exists brew 2>&1 >/dev/null; then
