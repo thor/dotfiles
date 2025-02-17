@@ -120,6 +120,7 @@ alias vssh="vagrant ssh"
 
 # nix-darwin
 alias nup="darwin-rebuild switch"
+alias nep="pushd $HOME/.config/thonix; nvim flake.nix +'Telescope fd'; popd"
 
 # Source work.sh for work configuration
 if [[ -s "${HOME}/.local/lib/work.sh" ]]; then
