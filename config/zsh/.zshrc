@@ -38,9 +38,9 @@ if _exists brew 2>&1 >/dev/null; then
 fi
 
 
-# Source fzf if it exists
+# Source fzf if it exists (checks for fzf-share, too)
 if _exists fzf; then
-	_fzf_dir="$(_select_first /usr/share/fzf/ "$(_bp fzf)/shell/")"
+  _fzf_dir="$(_select_first /usr/share/fzf/ "$(_bp fzf)/shell/" "$(command -v fzf-share >/dev/null 2>&1 && fzf-share)")"
 	zsh-defer source "${_fzf_dir}/key-bindings.zsh"
 	zsh-defer source "${_fzf_dir}/completion.zsh"
 else
