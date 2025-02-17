@@ -55,6 +55,11 @@ else
 	_warn "mise wasn't available; you should install it"
 fi
 
+# Source cargo environments
+if [ -f "$HOME/.cargo/env" ]; then
+  zsh-defer source "$HOME/.cargo/env"
+fi
+
 # termite: open current directory with ctrl+shift+t
 if [[ $TERM == xterm-termite ]]; then
 	. /etc/profile.d/vte.sh
