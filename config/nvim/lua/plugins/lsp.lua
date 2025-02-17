@@ -78,6 +78,8 @@ return {
       require 'lspconfig'.bashls.setup {}
       -- go
       require 'lspconfig'.gopls.setup {}
+      -- nix
+      require 'lspconfig'.nixd.setup {}
       -- python
       require 'lspconfig'.pylsp.setup {
         cmd = { "python", "-m", "pylsp" },
