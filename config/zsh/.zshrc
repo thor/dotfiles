@@ -37,7 +37,6 @@ if _exists brew 2>&1 >/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
-
 # Source fzf if it exists (checks for fzf-share, too)
 if _exists fzf; then
   _fzf_dir="$(_select_first /usr/share/fzf/ "$(_bp fzf)/shell/" "$(command -v fzf-share >/dev/null 2>&1 && fzf-share)")"
@@ -136,7 +135,8 @@ fi
 
 # Google Cloud SDK
 # TODO: Add paths for Arch setup? Ideally, site-functions should deal with this
-_exists gcloud && _source_first "$(_bcp google-cloud-sdk)/latest/google-cloud-sdk/completion.zsh.inc"
+local _gcloud_completion="$(_bcp google-cloud-sdk)/latest/google-cloud-sdk/completion.zsh.inc"
+_exists $_gcloud_completion && _source_first $_gcloud_completion
 
 # iTerm2: disable the mark
 export ITERM2_SQUELCH_MARK=1
