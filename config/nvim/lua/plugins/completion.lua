@@ -31,9 +31,6 @@ return {
       { 'L3MON4D3/LuaSnip' },
       { 'saadparwaiz1/cmp_luasnip' }
     },
-    keys = {
-      { '<C-Space>', function() require('nvim-cmp').complete() end },
-    },
     config = function()
       -- Set up nvim-cmp.
       local cmp = require('cmp')
@@ -89,7 +86,6 @@ return {
       cmp.setup.filetype('gitcommit', {
         sources = cmp.config.sources({
           { name = 'git' },
-          { name = 'buffer' },
         }),
       })
 
@@ -108,7 +104,8 @@ return {
           { name = 'path' }
         }, {
           { name = 'cmdline' }
-        })
+        }),
+        matching = { disallow_symbol_nonprefix_matching = false }
       })
 
       -- Setup lspconfig capabilities
