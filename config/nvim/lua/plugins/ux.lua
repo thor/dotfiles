@@ -29,9 +29,11 @@ return {
   },
   {
     -- enhanced inputs and selection interfaces
-    'stevearc/dressing.nvim',
-    event = "VeryLazy",
-    opts = {},
+    'folke/snacks.nvim',
+    ---@type snacks.Config
+    opts = {
+      input = {}
+    },
   },
   {
     'kdheepak/lazygit.nvim',
