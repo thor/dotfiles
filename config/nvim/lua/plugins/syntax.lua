@@ -1,19 +1,13 @@
 -- Syntax files aren't provided for non-TUI
--- TODO: Consider if it should be
 local utils = require "utils"
 
+---@type LazySpec[]
 local plugins = {
-  {
-    -- Go-go-go-go
-    -- TODO: Consider deleting in favour of ray-x/go.nvim
-    -- TODO: add GoUpdateBinaries if I keep vim-go
-    'fatih/vim-go',
-    disabled = true,
-  },
   {
     -- Go-go-go-go neovim!
     'ray-x/go.nvim',
     disabled = true,
+    ft = 'go',
   },
   {
     -- PlantUML
@@ -118,11 +112,11 @@ local plugins = {
   }
 }
 
-for i, _ in ipairs(plugins) do
-  if not plugins[i].cond then
-    plugins[i].cond = utils.is_terminal
+for _, v in ipairs(plugins) do
+  if not v.cond or v.cond == {} then
+    v.cond = utils.is_terminal
   end
-  plugins[i].lazy = true
+  v.lazy = true
 end
 
 return plugins
