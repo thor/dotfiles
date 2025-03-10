@@ -24,7 +24,8 @@ return {
       { 'hrsh7th/cmp-cmdline' },
       {
         'petertriho/cmp-git',
-        dependencies = "nvim-lua/plenary.nvim"
+        dependencies = "nvim-lua/plenary.nvim",
+        opts = {},
       },
       -- a snippets engine is required for nvim-cmp
       { 'L3MON4D3/LuaSnip' },
