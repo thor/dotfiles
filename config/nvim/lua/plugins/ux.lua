@@ -44,7 +44,6 @@ return {
   },
   {
     'nvim-telescope/telescope.nvim',
-    version = '*',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'neovim/nvim-lspconfig',
@@ -57,7 +56,7 @@ return {
     cmd = { "Telescope" },
     keys = {
       { "<leader>ff", function() require("telescope.builtin").find_files() end,            desc = "Find files" },
-      { "<leader>fb", function() require("telescope.builtin").find_files() end,            desc = "Find buffers" },
+      { "<leader>fb", function() require("telescope.builtin").find_buffers() end,            desc = "Find buffers" },
       { "<leader>fg", function() require("telescope.builtin").live_grep() end,             desc = "Find by grep" },
       { "<leader>fh", function() require("telescope.builtin").help_tags() end,             desc = "Find help" },
       { "<leader>fs", function() require("telescope.builtin").lsp_workspace_symbols() end, desc = "Find symbol in workspace" },
