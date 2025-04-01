@@ -183,7 +183,7 @@ return {
       -- provide icon support
       { 'nvim-tree/nvim-web-devicons' },
     },
-    config = function()
+    opts = function()
       local paste = function()
         if not vim.o.paste then
           return ''
@@ -212,7 +212,7 @@ return {
         ['V-BLOCK'] = 'V-B',
       }
       -- the actual configuration
-      require('lualine').setup {
+      return {
         options = {
           disabled_filetypes = { "fzf", "NvimTree" },
           theme = 'base16',
@@ -265,6 +265,7 @@ return {
   -- terminal visuals
   {
     'tinted-theming/base16-vim',
+    lazy = false,
     config = function()
       vim.cmd [[colorscheme base16-default-dark]]
     end,
