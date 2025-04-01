@@ -10,6 +10,11 @@ local plugins = {
     ft = 'go',
   },
   {
+    -- Jinja ninja
+    'HiPhish/jinja.vim',
+    ft = 'jinja',
+  },
+  {
     -- PlantUML
     'aklt/plantuml-syntax',
   },
