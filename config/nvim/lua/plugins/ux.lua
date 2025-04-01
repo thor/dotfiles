@@ -19,7 +19,11 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    opts = {}
+    opts = {
+      spec = {
+        { "<leader>f", group = "find stuff" },
+      },
+    }
   },
   {
     -- show beautiful indentation lines
@@ -72,26 +76,39 @@ return {
       'nvim-lua/plenary.nvim',
       'neovim/nvim-lspconfig',
       {
-        'nvim-telescope/telescope-fzf-native.nvim', -- fzf
-        build =
-        'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release \z
+                 && cmake --build build --config Release \z
+                 && cmake --install build --prefix build',
+        config = function() require("telescope").load_extension("fzf") end,
       },
-      'crispgm/telescope-heading.nvim' -- heading
+      {
+        'crispgm/telescope-heading.nvim',
+        config = function() require("telescope").load_extension("heading") end,
+      },
+      {
+        "nvim-telescope/telescope-frecency.nvim",
+        -- install the latest stable version
+        version = "*",
+        config = function() require("telescope").load_extension("frecency") end,
+      }
     },
     lazy = true,
     cmd = { "Telescope" },
     keys = function(_)
       local ts = function(fn) return function() vim.cmd("Telescope " .. fn) end end
       return {
-        { "<leader>ff", ts("find_files"),            desc = "Find files" },
-        { "<leader>fb", ts("buffers"),               desc = "Find buffers" },
-        { "<leader>fg", ts("live_grep"),             desc = "Find by grep" },
-        { "<leader>fh", ts("heading"),               desc = "Find heading" },
-        { "<leader>fH", ts("help_tags"),             desc = "Find help" },
-        { "<leader>fs", ts("lsp_workspace_symbols"), desc = "Find symbol in workspace" },
-        { "<leader>ft", ts("treesitter"),            desc = "Find symbol from treesitter" },
-        { "<leader>fd", ts("diagnostics"),           desc = "Find diagnostics" },
-        { "<leader>gs", ts("git_status"),            desc = "Open Git status" },
+        { "<C-P>",      ts("find_files theme=ivy"),   desc = "Find files (ivy)" },
+        { "<leader>ff", ts("frecency workspace=CWD"), desc = "Find files" },
+        { "<leader>fF", ts("find_files"),             desc = "Find files (no rank)" },
+        { "<leader>fb", ts("buffers"),                desc = "Find buffers" },
+        { "<leader>fg", ts("live_grep"),              desc = "Find by grep" },
+        { "<leader>fh", ts("heading"),                desc = "Find heading" },
+        { "<leader>fH", ts("help_tags"),              desc = "Find help" },
+        { "<leader>fs", ts("lsp_workspace_symbols"),  desc = "Find symbol in workspace" },
+        { "<leader>ft", ts("treesitter"),             desc = "Find symbol from treesitter" },
+        { "<leader>fd", ts("diagnostics"),            desc = "Find diagnostics" },
+        { "<leader>gs", ts("git_status"),             desc = "Open Git status" },
       }
     end,
     opts = function(_, opts)
@@ -113,10 +130,13 @@ return {
           winblend = 1,
           -- close on escape
           mappings = {
-            i = {
-              ["esc"] = actions.close
-            }
-          }
+            i = { ["Esc"] = actions.close }
+          },
+          layout_strategy = "flex",
+          layout_config = {
+            vertical = { width = 0.9 },
+            horizontal = { width = 0.9 },
+          },
         },
         pickers = {
           buffers = {
@@ -137,11 +157,6 @@ return {
       -- return vim.tbl_deep_extend('force', opts, options)
       return options
     end,
-    config = function(_, opts)
-      require('telescope').setup(opts)
-      require('telescope').load_extension('fzf')
-      require('telescope').load_extension('heading')
-    end
   },
 
   -- file tree viewer with dev icons
