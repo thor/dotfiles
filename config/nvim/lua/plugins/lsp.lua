@@ -80,6 +80,26 @@ return {
       require 'lspconfig'.gopls.setup {}
       -- jsonnet
       require 'lspconfig'.jsonnet_ls.setup {}
+      -- lua
+      require 'lspconfig'.lua_ls.setup {
+        settings = {
+          Lua = {
+            runtime = {
+              version = 'LuaJIT',
+            },
+            diagnostics = {
+              -- Stop bothering me that 'vim' is missing; assume it's global
+              globals = { 'vim' },
+            },
+            workspace = {
+              -- Load in the nvim APIs
+              library = vim.api.nvim_get_runtime_file("", true),
+              -- Don't bother us about applying configurations
+              checkThirdParty = false,
+            },
+          }
+        },
+      }
       -- nix
       require 'lspconfig'.nixd.setup {}
       -- python
@@ -104,26 +124,6 @@ return {
       require 'lspconfig'.taplo.setup {}
       -- typescript
       require 'lspconfig'.ts_ls.setup {}
-      -- lua
-      require 'lspconfig'.lua_ls.setup {
-        settings = {
-          Lua = {
-            runtime = {
-              version = 'LuaJIT',
-            },
-            diagnostics = {
-              -- Stop bothering me that 'vim' is missing; assume it's global
-              globals = { 'vim' },
-            },
-            workspace = {
-              -- Load in the nvim APIs
-              library = vim.api.nvim_get_runtime_file("", true),
-              -- Don't bother us about applying configurations
-              checkThirdParty = false,
-            },
-          }
-        },
-      }
       -- yaml
       require 'lspconfig'.yamlls.setup {
         settings = {
@@ -235,14 +235,14 @@ return {
           "jsonnet",
           "lua",
           "go",
-          "terraform",
-          "typescript",
-          "tsx",
           "markdown",
           "markdown_inline",
           "php",
           "python",
           "rust",
+          "terraform",
+          "typescript",
+          "tsx",
           "vim",
           "yaml",
         },
