@@ -72,22 +72,28 @@ return {
       'nvim-lua/plenary.nvim',
       'neovim/nvim-lspconfig',
       {
-        'nvim-telescope/telescope-fzf-native.nvim',
+        'nvim-telescope/telescope-fzf-native.nvim', -- fzf
         build =
         'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-      }
+      },
+      'crispgm/telescope-heading.nvim' -- heading
     },
+    lazy = true,
     cmd = { "Telescope" },
-    keys = {
-      { "<leader>ff", function() require("telescope.builtin").find_files() end,            desc = "Find files" },
-      { "<leader>fb", function() require("telescope.builtin").buffers() end,               desc = "Find buffers" },
-      { "<leader>fg", function() require("telescope.builtin").live_grep() end,             desc = "Find by grep" },
-      { "<leader>fh", function() require("telescope.builtin").help_tags() end,             desc = "Find help" },
-      { "<leader>fs", function() require("telescope.builtin").lsp_workspace_symbols() end, desc = "Find symbol in workspace" },
-      { "<leader>ft", function() require("telescope.builtin").treesitter() end,            desc = "Find symbol from treesitter" },
-      { "<leader>fd", function() require("telescope.builtin").diagnostics() end,           desc = "Find diagnostics" },
-      { "<leader>gs", function() require("telescope.builtin").git_status() end,            desc = "Open Git status" },
-    },
+    keys = function(_)
+      local ts = function(fn) return function() vim.cmd("Telescope " .. fn) end end
+      return {
+        { "<leader>ff", ts("find_files"),            desc = "Find files" },
+        { "<leader>fb", ts("buffers"),               desc = "Find buffers" },
+        { "<leader>fg", ts("live_grep"),             desc = "Find by grep" },
+        { "<leader>fh", ts("heading"),               desc = "Find heading" },
+        { "<leader>fH", ts("help_tags"),             desc = "Find help" },
+        { "<leader>fs", ts("lsp_workspace_symbols"), desc = "Find symbol in workspace" },
+        { "<leader>ft", ts("treesitter"),            desc = "Find symbol from treesitter" },
+        { "<leader>fd", ts("diagnostics"),           desc = "Find diagnostics" },
+        { "<leader>gs", ts("git_status"),            desc = "Open Git status" },
+      }
+    end,
     opts = function(_, opts)
       local defaultConfig = require("telescope.config")
 
@@ -134,6 +140,7 @@ return {
     config = function(_, opts)
       require('telescope').setup(opts)
       require('telescope').load_extension('fzf')
+      require('telescope').load_extension('heading')
     end
   },
 
