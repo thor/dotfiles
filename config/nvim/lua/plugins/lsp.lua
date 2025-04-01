@@ -78,6 +78,8 @@ return {
       require 'lspconfig'.bashls.setup {}
       -- go
       require 'lspconfig'.gopls.setup {}
+      -- jsonnet
+      require 'lspconfig'.jsonnet_ls.setup {}
       -- nix
       require 'lspconfig'.nixd.setup {}
       -- python
@@ -230,6 +232,7 @@ return {
           "bash",
           "javascript",
           "json",
+          "jsonnet",
           "lua",
           "go",
           "terraform",
