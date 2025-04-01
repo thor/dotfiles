@@ -148,11 +148,33 @@ return {
   {
     'nvim-tree/nvim-tree.lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      require("sections/file-tree")
-    end
+    keys = {
+      { "<C-n>",      ":NvimTreeFindFileToggle<CR>", desc = "Toggle file in tree" },
+      { "<leader>nT", ":NvimTreeToggle<CR>",         desc = "Toggle file tree" },
+      { "<leader>nt", ":NvimTreeFindFile<CR>",       desc = "Show file in tree" },
+      { "<leader>nr", ":NvimTreeRefresh<CR>",        desc = "Refresh files" }
+    },
+    -- Disable netrw
+    init = function()
+      vim.g.loaded_netrw       = 1
+      vim.g.loaded_netrwPlugin = 1
+    end,
+    opts = function()
+      -- give files without icons padding for readability
+      vim.g.nvim_tree_icons = {
+        default = " "
+      }
+      return {
+        disable_netrw = true,
+        hijack_netrw = true,
+        hijack_cursor = true,
+        git = {
+          enable = true,
+          ignore = true,
+        },
+      }
+    end,
   },
-  { 'nvim-tree/nvim-web-devicons', lazy = true },
 
   -- status line
   {
