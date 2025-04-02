@@ -45,12 +45,12 @@ end
 local mappings = {
   -- Group definitions
   { "<leader>s",  group = "spelling" },
-  { "<leader>sw", "<cmd>set list!<cr>",           desc = "show whitespace symbols" },
-  { "<leader>sc", "ea<C-X><C-S>",             desc = "spell check" },
+  { "<leader>sw", "<cmd>set list!<cr>",      desc = "show whitespace symbols" },
+  { "<leader>sc", "ea<C-X><C-S>",            desc = "spell check" },
   { "<leader>p",  group = "peek-a-boo" },
   { "<leader>c",  group = "code" },
-  { "<leader>ce", vim.diagnostic.open_float,  desc = "open diagnostics float" },
-  { "<leader>cq", vim.diagnostic.setloclist,  desc = "set location list(?)" },
+  { "<leader>ce", vim.diagnostic.open_float, desc = "open diagnostics float" },
+  { "<leader>cq", vim.diagnostic.setloclist, desc = "set location list(?)" },
   { "<leader>x",  group = "diagnostics" },
 }
 
