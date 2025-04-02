@@ -1,7 +1,17 @@
 # - Contains various personal aliases and configuratios that always happen
+#
+_warnings=()
 function _warn {
-	printf "WARN: %s\n" "$@" 1>&2
+	_warnings+=("$@")
 }
+
+function _print_warnings {
+	if [ ${#_warnings} -gt 0 ]; then
+		echo "⚠️ Following warnings noted during load:"
+		printf " - %s\n" $_warnings
+	fi
+}
+
 
 # - help source files when they could be in different locations
 function _source_first {
@@ -33,11 +43,17 @@ function _exists {
 
 # - get brew prefix
 function _bp {
+	if ! _exists brew; then
+		return
+	fi
 	brew --prefix "$@"
 }
 
 # - get brew caskroom
 function _bcp {
+	if ! _exists brew; then
+		return
+	fi
 	brew --caskroom "$@"
 }
 
