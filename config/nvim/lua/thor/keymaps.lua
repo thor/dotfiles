@@ -49,7 +49,6 @@ local mappings = {
   { "<leader>sc", "ea<C-X><C-S>",                     desc = "spell check" },
   { "<leader>p",  group = "peek-a-boo" },
   { "<leader>c",  group = "code" },
-  { "<leader>q",  "<cmd>bp<bar>sp<bar>bn<bar>bd<CR>", desc = "close the buffer" },
   { "<leader>ce", vim.diagnostic.open_float,          desc = "open diagnostics float" },
   { "<leader>cq", vim.diagnostic.setloclist,          desc = "set location list(?)" },
   { "<leader>x",  group = "diagnostics" },

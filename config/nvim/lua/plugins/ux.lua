@@ -286,5 +286,12 @@ return {
     end,
     priority = 1000
   },
-
+  {
+    'qpkorr/vim-bufkill',
+    keys = {
+      { "<leader>qq", "<cmd>:BD<cr>", desc = "delete the buffer" },
+      { "<leader>qw", "<cmd>:BW<cr>", desc = "wipe the buffer" }
+    },
+    event = { "BufAdd", "BufNew", "BufDelete" },
+  }
 }
