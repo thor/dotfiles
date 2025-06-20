@@ -111,7 +111,15 @@ return {
           },
         },
       }
-      require 'lspconfig'.pyright.setup {}
+      require 'lspconfig'.pyright.setup {
+        settings = {
+          python = {
+            analysis = {
+              diagnosticMode = "workspace"
+            }
+          }
+        }
+      }
       -- php (!)
       require 'lspconfig'.phpactor.setup {}
       require 'lspconfig'.ruff.setup {}
