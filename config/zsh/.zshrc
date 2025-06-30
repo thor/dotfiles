@@ -64,8 +64,8 @@ if [[ $TERM == xterm-termite ]]; then
 	. /etc/profile.d/vte.sh
 fi
 
-# Configure thefuck
-_exists thefuck && zsh-defer eval "$(thefuck --alias)" || _warn "No fuck, missing thefuck executable"
+# Configure pay-respects
+_exists pay-respects && zsh-defer eval "$(pay-respects zsh)" || _warn "No pay-respects, missing pay-respects executable"
 
 # Temporarily we're just using a local SSH agent because of some perky issues
 # Set up WSL ssh-agent if relevant
