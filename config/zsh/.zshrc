@@ -59,13 +59,11 @@ if [ -f "$HOME/.cargo/env" ]; then
   zsh-defer source "$HOME/.cargo/env"
 fi
 
-# termite: open current directory with ctrl+shift+t
-if [[ $TERM == xterm-termite ]]; then
-	. /etc/profile.d/vte.sh
-fi
-
 # Configure pay-respects
 _exists pay-respects && zsh-defer eval "$(pay-respects zsh)" || _warn "No pay-respects, missing pay-respects executable"
+
+# Configure jujutsu
+_exists jj && zsh-defer eval "$(COMPLETE=zsh jj)" || true
 
 # Temporarily we're just using a local SSH agent because of some perky issues
 # Set up WSL ssh-agent if relevant
@@ -123,7 +121,7 @@ alias vrld="vagrant reload"
 alias vssh="vagrant ssh"
 
 # nix-darwin
-alias nup="darwin-rebuild switch"
+alias nup="sudo darwin-rebuild switch"
 alias nep="pushd $HOME/.config/thonix; nvim flake.nix +'Telescope fd'; popd"
 
 # Source work.sh for work configuration
@@ -146,3 +144,11 @@ export ITERM2_SQUELCH_MARK=1
 
 # Toggle to stop profiling, see toggle at top of zshrc
 [ -z "$ZPROF" ] || zprof
+
+# pnpm
+export PNPM_HOME="/Users/thor/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
