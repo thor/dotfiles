@@ -23,6 +23,11 @@ layout_poetry() {
 		VIRTUAL_ENV=$(poetry env info --path)
 	fi
 
+	if [ -z "$VIRTUAL_ENV" ]; then
+		log_warning "Potentially missing requisite version, can't prepare virtual environment"
+		unset VIRTUAL_ENV
+	fi
+
 	PATH_add "$VIRTUAL_ENV/bin"
 	export POETRY_ACTIVE=1
 	export VIRTUAL_ENV
