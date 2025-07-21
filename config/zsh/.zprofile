@@ -59,6 +59,9 @@ export GOPATH=~/dev/go
 # - Configure virtualenvwrapper
 export WORKON_HOME="$HOME/.virtualenvs"
 
+# - Specifically for tools on macOS, specify XDG_CONFIG_HOME
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # - Temporary Files
 if [[ ! -d "$TMPDIR" ]]; then
   export TMPDIR="/tmp/$LOGNAME"
@@ -66,6 +69,7 @@ if [[ ! -d "$TMPDIR" ]]; then
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
+
 
 # Source homebrew
 if [[ -f "/opt/homebrew/bin/brew" ]]; then

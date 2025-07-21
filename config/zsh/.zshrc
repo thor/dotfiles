@@ -3,9 +3,6 @@
 # Toggle to enable profiling, see bottom of zshrc
 [ -z "$ZPROF" ] || zmodload zsh/zprof
 
-# Specifically for tools on macOS, specify XDG_CONFIG_HOME
-export XDG_CONFIG_HOME="$HOME/.config"
-
 # base16 Shell
 export BASE16_THEME=base16-default-dark
 
