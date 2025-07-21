@@ -30,3 +30,7 @@ apply = ["defer"]
 [plugins.zprezto]
 local = "~/.config/zsh/.zprezto"
 use = ["init.zsh"]
+
+[plugins.jujutsu]
+github = "ohmyzsh/ohmyzsh"
+use = ["plugins/jj/jj.plugin.zsh"]
