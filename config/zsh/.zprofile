@@ -61,6 +61,10 @@ export WORKON_HOME="$HOME/.virtualenvs"
 
 # - Specifically for tools on macOS, specify XDG_CONFIG_HOME
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CONFIG_CACHE="$HOME/.cache"
+
+# Set ZSH cache directory
+export ZSH_CACHE_DIR="$XDG_CONFIG_CACHE/zsh"
 
 # - Temporary Files
 if [[ ! -d "$TMPDIR" ]]; then
