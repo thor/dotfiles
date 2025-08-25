@@ -1,5 +1,14 @@
 # Hide ctags-generated tag file
 .tags
 
+# Hide null-ls files
+.null-ls*
+
 # Hide temporary temployment folders
 temp-deploy/
+
+# direnv
+.direnv/CACHEDIR.TAG
+
+# terraform plans
+*.tfplan
