@@ -276,6 +276,13 @@ return {
     'sindrets/diffview.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
+  -- jujutsu diffeditor
+  {
+    "julienvincent/hunk.nvim",
+    dependencies = { 'MunifTanjim/nui.nvim' },
+    cmd = { "DiffEditor" },
+    opts = {},
+  },
 
   -- terminal visuals
   {

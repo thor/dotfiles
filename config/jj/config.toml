@@ -2,6 +2,7 @@
 
 [ui]
 default-command = "log"
+diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 
 [user]
 name = "Thor K. Høgås"
@@ -33,5 +34,5 @@ sign-on-push = true
 # Prevent pushing work in progress or anything explicitly labeled "private"
 private-commits = "description(glob:'wip:*') | description(glob:'private:*')"
 
-[core]
-fsmonitor = "watchman"
+[fsmonitor]
+backend = "watchman"
