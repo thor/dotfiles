@@ -8,6 +8,17 @@ diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 name = "Thor K. Høgås"
 email = "thor@roht.no"
 
+[merge-tools.nvim]
+program = "nvim"
+edit-args = ["-c", "DiffEditor $left $right $output"]
+merge-args = ["-d", "-o", "$left", "$base", "$right", "$output"]
+merge-tool-edits-conflict-markers = true
+
+[merge-tools.hunk]
+program = "nvim"
+merge-args = ["-c", "DiffEditor $left $right $output"]
+merge-tool-edits-conflict-markers = true
+
 [merge-tools.delta]
 # Supress warning on exit
 diff-expected-exit-codes = [0, 1]
