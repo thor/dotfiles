@@ -1,0 +1,7 @@
+---
+gui:
+  nerdFontsVersion: "3"
+
+git:
+  autoFetch: true
+  autoRefresh: true
