@@ -148,7 +148,8 @@ export ITERM2_SQUELCH_MARK=1
 [ -z "$ZPROF" ] || zprof
 
 # pnpm
-export PNPM_HOME="/Users/thor/Library/pnpm"
+[[ -f /Users/thor ]] && export PNPM_HOME="/Users/thor/Library/pnpm" || export PNPM_HOME="$HOME/.local/share/pnpm"
+
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
