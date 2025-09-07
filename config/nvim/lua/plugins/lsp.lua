@@ -48,6 +48,7 @@ return {
           -- yaml
           null_ls.builtins.diagnostics.yamllint,
           null_ls.builtins.formatting.yamlfmt,
+          null_ls.builtins.diagnostics.ansiblelint,
           -- python (see lsp for ruff and pyright)
           null_ls.builtins.formatting.black,
           null_ls.builtins.diagnostics.mypy,
