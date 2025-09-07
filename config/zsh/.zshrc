@@ -3,6 +3,25 @@
 # Toggle to enable profiling, see bottom of zshrc
 [ -z "$ZPROF" ] || zmodload zsh/zprof
 
+# Specifically for tools on macOS, specify XDG_CONFIG_HOME
+export XDG_CONFIG_HOME="$HOME/.config"
+
+
+# Temporarily we're just using a local SSH agent because of some perky issues
+# Set up WSL ssh-agent if relevant
+if [ -n "${WSL_DISTRO_NAME}" ]; then
+	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+	ss -a | grep -q $SSH_AUTH_SOCK
+	if [ $? -ne 0   ]; then
+		rm -f $SSH_AUTH_SOCK
+		( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"/mnt/c/dev/wsl-ssh-agent/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
+	fi
+
+	# Then add our work profile
+	[ -f "$HOME/.ssh/id_ed25519_work" ] && ssh-add -q ~/.ssh/id_ed25519_work
+fi
+
+
 # base16 Shell
 export BASE16_THEME=base16-default-dark
 
@@ -61,20 +80,6 @@ _exists pay-respects && zsh-defer eval "$(pay-respects zsh)" || _warn "No pay-re
 
 # Configure jujutsu
 _exists jj && zsh-defer eval "$(COMPLETE=zsh jj)" || true
-
-# Temporarily we're just using a local SSH agent because of some perky issues
-# Set up WSL ssh-agent if relevant
-if [ -n "${WSL_DISTRO_NAME}" ]; then
-	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
-	ss -a | grep -q $SSH_AUTH_SOCK
-	if [ $? -ne 0   ]; then
-		rm -f $SSH_AUTH_SOCK
-		( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"/mnt/c/dev/wsl-ssh-agent/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
-	fi
-
-	# Then add our work profile
-	ssh-add -q ~/.ssh/id_ed25519_work
-fi
 
 # Aliases and similar
 
