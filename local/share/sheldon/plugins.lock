@@ -1,37 +1,37 @@
-version = "0.8.0"
-home = "/Users/thor"
-config_dir = "/Users/thor/.config/sheldon"
-data_dir = "/Users/thor/.local/share/sheldon"
-config_file = "/Users/thor/.config/sheldon/plugins.toml"
+version = "0.8.5"
+home = "/home/thor"
+config_dir = "/home/thor/.config/sheldon"
+data_dir = "/home/thor/.local/share/sheldon"
+config_file = "/home/thor/.config/sheldon/plugins.toml"
 
 [[plugins]]
 name = "zsh-defer"
-source_dir = "/Users/thor/.local/share/sheldon/repos/github.com/romkatv/zsh-defer"
-files = ["/Users/thor/.local/share/sheldon/repos/github.com/romkatv/zsh-defer/zsh-defer.plugin.zsh"]
+source_dir = "/home/thor/.local/share/sheldon/repos/github.com/romkatv/zsh-defer"
+files = ["/home/thor/.local/share/sheldon/repos/github.com/romkatv/zsh-defer/zsh-defer.plugin.zsh"]
 apply = ["source"]
 
 [plugins.hooks]
 
 [[plugins]]
 name = "base16"
-source_dir = "/Users/thor/.local/share/sheldon/repos/github.com/chriskempson/base16-shell"
-files = ["/Users/thor/.local/share/sheldon/repos/github.com/chriskempson/base16-shell/base16-shell.plugin.zsh"]
+source_dir = "/home/thor/.local/share/sheldon/repos/github.com/chriskempson/base16-shell"
+files = ["/home/thor/.local/share/sheldon/repos/github.com/chriskempson/base16-shell/base16-shell.plugin.zsh"]
 apply = ["source"]
 
 [plugins.hooks]
 
 [[plugins]]
 name = "zsh-vi-mode"
-source_dir = "/Users/thor/.local/share/sheldon/repos/github.com/jeffreytse/zsh-vi-mode"
-files = ["/Users/thor/.local/share/sheldon/repos/github.com/jeffreytse/zsh-vi-mode/zsh-vi-mode.plugin.zsh"]
+source_dir = "/home/thor/.local/share/sheldon/repos/github.com/jeffreytse/zsh-vi-mode"
+files = ["/home/thor/.local/share/sheldon/repos/github.com/jeffreytse/zsh-vi-mode/zsh-vi-mode.plugin.zsh"]
 apply = ["defer"]
 
 [plugins.hooks]
 
 [[plugins]]
 name = "zprezto"
-source_dir = "/Users/thor/.config/zsh/.zprezto"
-files = ["/Users/thor/.config/zsh/.zprezto/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/autosuggestions/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/command-not-found/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/completion/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/directory/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/dnf/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/docker/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/dpkg/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/editor/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/emacs/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/environment/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/fasd/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/git/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/gnu-utility/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/gpg/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/haskell/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/helper/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/history/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/history-substring-search/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/homebrew/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/macports/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/node/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/ocaml/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/osx/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/pacman/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/perl/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/prompt/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/python/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/rails/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/rsync/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/ruby/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/screen/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/spectrum/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/ssh/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/syntax-highlighting/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/terminal/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/tmux/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/utility/init.zsh", "/Users/thor/.config/zsh/.zprezto/modules/yum/init.zsh"]
+source_dir = "/home/thor/.config/zsh/.zprezto"
+files = ["/home/thor/.config/zsh/.zprezto/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/autosuggestions/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/command-not-found/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/completion/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/directory/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/dnf/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/docker/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/dpkg/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/editor/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/emacs/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/environment/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/fasd/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/git/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/gnu-utility/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/gpg/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/haskell/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/helper/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/history/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/history-substring-search/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/homebrew/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/macports/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/node/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/ocaml/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/osx/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/pacman/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/perl/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/prompt/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/python/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/rails/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/rsync/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/ruby/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/screen/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/spectrum/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/ssh/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/syntax-highlighting/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/terminal/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/tmux/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/utility/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/yum/init.zsh"]
 apply = ["source"]
 
 [plugins.hooks]
@@ -40,9 +40,9 @@ apply = ["source"]
 PATH = 'export PATH="{{ dir }}:$PATH"'
 path = 'path=( "{{ dir }}" $path )'
 fpath = 'fpath=( "{{ dir }}" $fpath )'
-source = '''
+source = """
 {{ hooks?.pre | nl }}{% for file in files %}source "{{ file }}"
-{% endfor %}{{ hooks?.post | nl }}'''
-defer = '''
+{% endfor %}{{ hooks?.post | nl }}"""
+defer = """
 {{ hooks?.pre | nl }}{% for file in files %}zsh-defer source "{{ file }}"
-{% endfor %}{{ hooks?.post | nl }}'''
+{% endfor %}{{ hooks?.post | nl }}"""
