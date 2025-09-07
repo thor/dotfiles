@@ -44,6 +44,7 @@ if not vim.g.vscode then
 
   -- Themes
   vim.o.background     = 'dark' -- " Use the dark theme of whatever colorscheme.
+  vim.o.termguicolors  = true   -- " Use all the terminal GUI colours (256+)
 end
 
 vim.opt.backspace = { 'indent', 'eol', 'start' }   -- " (d) Backspace beyond single lines.
