@@ -50,3 +50,6 @@ private-commits = "description(glob:'wip:*') | description(glob:'private:*')"
 
 [fsmonitor]
 backend = "watchman"
+
+[fsmonitor.watchman]
+register-snapshot-trigger = true
