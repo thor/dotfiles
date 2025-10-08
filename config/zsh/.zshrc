@@ -122,6 +122,12 @@ alias vr="vagrant resume"
 alias vrld="vagrant reload"
 alias vssh="vagrant ssh"
 
+# jujutsu
+alias jjp="jj git push --tracked"
+alias jjs="jj show"
+alias jjl="jj log"
+alias jjrbm="jj rebase -r 'mine() & mutable()' -d 'trunk()'"
+
 # nix-darwin
 alias nup="sudo darwin-rebuild switch"
 alias nep="pushd $HOME/.config/thonix; nvim flake.nix +'Telescope fd'; popd"
