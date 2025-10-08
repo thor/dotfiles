@@ -24,7 +24,7 @@ layout_poetry() {
 	fi
 
 	if [ -z "$VIRTUAL_ENV" ]; then
-		log_warning "Potentially missing requisite version, can't prepare virtual environment"
+		log_status "Potentially missing requisite version, can't prepare virtual environment"
 		unset VIRTUAL_ENV
 	fi
 
