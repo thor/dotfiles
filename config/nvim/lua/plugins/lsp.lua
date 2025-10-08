@@ -76,13 +76,13 @@ return {
     cmd = { "LspInfo", "LspInstall", "LspUninstall" },
     config = function()
       -- bash
-      require 'lspconfig'.bashls.setup {}
+      vim.lsp.enable('bashls')
       -- go
-      require 'lspconfig'.gopls.setup {}
+      vim.lsp.enable('gopls')
       -- jsonnet
-      require 'lspconfig'.jsonnet_ls.setup {}
+      vim.lsp.enable('jsonnet_ls')
       -- lua
-      require 'lspconfig'.lua_ls.setup {
+      vim.lsp.config('lua_ls', {
         settings = {
           Lua = {
             runtime = {
@@ -100,19 +100,21 @@ return {
             },
           }
         },
-      }
+      })
+      vim.lsp.enable('lua_ls')
       -- nix
-      require 'lspconfig'.nixd.setup {}
+      vim.lsp.enable('nixd')
       -- python
-      require 'lspconfig'.pylsp.setup {
+      vim.lsp.config('pylsp', {
         cmd = { "python", "-m", "pylsp" },
         plugins = {
           black = {
             enabled = true,
           },
         },
-      }
-      require 'lspconfig'.pyright.setup {
+      })
+      vim.lsp.enable('pylsp')
+      vim.lsp.config('pyright', {
         settings = {
           python = {
             analysis = {
@@ -120,21 +122,23 @@ return {
             }
           }
         }
-      }
+      })
+      vim.lsp.enable('pyright')
       -- php (!)
-      require 'lspconfig'.phpactor.setup {}
-      require 'lspconfig'.ruff.setup {}
+      vim.lsp.enable('phpactor')
+      vim.lsp.enable('ruff')
       -- terraform
-      require 'lspconfig'.terraformls.setup {
+      vim.lsp.config('terraformls', {
         cmd = { "terraform-ls", "serve" },
-      }
-      require 'lspconfig'.tflint.setup {}
+      })
+      vim.lsp.enable('terraformls')
+      vim.lsp.enable('tflint')
       -- toml
-      require 'lspconfig'.taplo.setup {}
+      vim.lsp.enable('taplo')
       -- typescript
-      require 'lspconfig'.ts_ls.setup {}
+      vim.lsp.enable('ts_ls')
       -- yaml
-      require 'lspconfig'.yamlls.setup {
+      vim.lsp.config('yamlls', {
         settings = {
           yaml = {
             schemas = {
@@ -142,9 +146,10 @@ return {
             },
           },
         },
-      }
+      })
+      vim.lsp.enable('yamlls')
       -- cpp
-      require 'lspconfig'.clangd.setup {}
+      vim.lsp.enable('clangd')
 
       -- Use the LspAttach autocommand to only map the following keys
       -- after the language server attaches to the current buffer
