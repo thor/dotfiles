@@ -127,6 +127,8 @@ alias jjp="jj git push --tracked"
 alias jjs="jj show"
 alias jjl="jj log"
 alias jjrbm="jj rebase -r 'mine() & mutable()' -d 'trunk()'"
+alias jjn="jj new"
+alias jjgf"jj git fetch"
 
 # nix-darwin
 alias nup="sudo darwin-rebuild switch"
