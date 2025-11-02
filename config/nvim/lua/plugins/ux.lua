@@ -6,6 +6,8 @@ if not utils.is_terminal() then
   return {}
 end
 
+local have_make = vim.fn.executable("make") == 1
+
 return {
   {
     -- help me be better at remembering my own keys
@@ -78,9 +80,12 @@ return {
       'neovim/nvim-lspconfig',
       {
         'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release \z
-                 && cmake --build build --config Release \z
-                 && cmake --install build --prefix build',
+        -- fix broken build due to CMake version lagging behind
+        -- https://github.com/LazyVim/LazyVim/blob/12818a6cb499456f4903c5d8e68af43753ebc869/lua/lazyvim/plugins/extras/editor/telescope.lua#L65-L67
+        build = have_make and "make" or
+                'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release \z
+                && cmake --build build --config Release \z
+                && cmake --install build --prefix build',
         config = function() require("telescope").load_extension("fzf") end,
       },
       {
