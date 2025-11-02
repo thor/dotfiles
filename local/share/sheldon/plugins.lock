@@ -36,6 +36,14 @@ apply = ["source"]
 
 [plugins.hooks]
 
+[[plugins]]
+name = "jujutsu"
+source_dir = "/home/thor/.local/share/sheldon/repos/github.com/ohmyzsh/ohmyzsh"
+files = ["/home/thor/.local/share/sheldon/repos/github.com/ohmyzsh/ohmyzsh/plugins/jj/jj.plugin.zsh"]
+apply = ["source"]
+
+[plugins.hooks]
+
 [templates]
 PATH = 'export PATH="{{ dir }}:$PATH"'
 path = 'path=( "{{ dir }}" $path )'
