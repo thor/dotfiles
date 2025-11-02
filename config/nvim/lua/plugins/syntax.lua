@@ -51,6 +51,16 @@ local plugins = {
     },
   },
   {
+    'jghauser/auto-pandoc.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    keys = {
+      { '<leader>cp', function()
+        require("auto-pandoc").run_pandoc()
+      end
+      }
+    }
+  },
+  {
     -- Rust
     -- TODO: Update Rust with relevant LSP configuration
     'rust-lang/rust.vim',
