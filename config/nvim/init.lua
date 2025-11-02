@@ -61,7 +61,20 @@ vim.g.mapleader   = " "
 -- Set local leader to be the backspace, somewhat convenient
 vim.g.localleader = "\\"
 
+-- vim.g.clipboard = "clip"
+vim.g.clipboard = {
+      name = "WslClipboard",
+      copy = {
+         ['+'] = "clip.exe",
+         ['*'] = "clip.exe",
+       },
+      paste = {
+         ['+'] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+         ['*'] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
 
+      },
+      cache_enabled = 0,
+    }
 -- Get the guicursor of my dreams
 vim.o.guicursor = vim.o.guicursor .. ",a:blinkwait175-blinkoff100-blinkon170"
 
