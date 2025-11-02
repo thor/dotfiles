@@ -40,7 +40,7 @@ diff-formatter = ":git"
 [signing]
 behaviour = "own"
 backend = "ssh"
-key = "~/.ssh/id_ed25519_work.pub"
+key = "~/.ssh/id_ed25519.pub"
 
 [templates]
 git_push_bookmark = '"thor/push-" ++ change_id.short()'

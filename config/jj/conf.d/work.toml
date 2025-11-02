@@ -1,0 +1,9 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+[[--scope]]
+--when.repositories = ["~/dev/work"]
+
+[[scope.signing]]
+behaviour = "own"
+backend = "ssh"
+key = "~/.ssh/id_ed25519_work.pub"
