@@ -2,13 +2,18 @@
 
 [aliases]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+most = ["log", "-r", "most()"]
 
 [ui]
 default-command = "log"
 diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 
 [revsets]
-log = 'present(trunk()..@) | ancestors(bookmarks() | tracked_remote_bookmarks()::, 2) | present(trunk())'
+log = 'default()'
+
+[revset-aliases]
+'default()' = 'present(trunk()..@) | ancestors(bookmarks(), 2) | present(trunk())'
+'most()' = 'default() | ancestors(tracked_remote_bookmarks()::, 2)'
 
 [user]
 name = "Thor K. Høgås"
