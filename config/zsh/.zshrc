@@ -130,6 +130,8 @@ alias jjrbm="jj rebase -r 'mine() & mutable()' -d 'trunk()'"
 alias jjn="jj new"
 alias jjgf"jj git fetch"
 alias jjm="jj most"
+alias jjt="jj tug"
+alias jjtp="jjt && jjp"
 
 # nix-darwin
 alias nup="sudo darwin-rebuild switch"
