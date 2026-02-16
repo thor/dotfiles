@@ -73,6 +73,17 @@ return {
       { "<leader>gg", "<cmd>LazyGit<CR>", desc = "open git overview" },
     },
   },
+  -- experimental jujutsu integration
+  {
+    'NicolasGB/jj.nvim',
+    version = "*",
+    opts = {
+      diff = {
+        backend = "codediff"
+      },
+    },
+    cmd = { "J", "Jdiff", "Jvdiff", "Jhdiff" },
+  },
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
@@ -282,6 +293,12 @@ return {
     'sindrets/diffview.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
+  -- better diff viewer
+  {
+    'esmuellert/codediff.nvim',
+    dependencies = { 'MunifTanjim/nui.nvim' },
+    cmd = "CodeDiff",
+  },
   -- jujutsu diffeditor
   {
     "julienvincent/hunk.nvim",
@@ -289,7 +306,6 @@ return {
     cmd = { "DiffEditor" },
     opts = {},
   },
-
   -- terminal visuals
   {
     'tinted-theming/base16-vim',
