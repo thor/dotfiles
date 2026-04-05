@@ -7,9 +7,12 @@
 export XDG_CONFIG_HOME="$HOME/.config"
 
 
-# Temporarily we're just using a local SSH agent because of some perky issues
-# Set up WSL ssh-agent if relevant
 if [ -n "${WSL_DISTRO_NAME}" ]; then
+  # Keep it snappy without PATH_DIRS
+  unsetopt PATH_DIRS
+
+  # Temporarily we're just using a local SSH agent because of some perky issues
+  # Set up WSL ssh-agent if relevant
 	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
 	ss -a | grep -q $SSH_AUTH_SOCK
 	if [ $? -ne 0   ]; then
