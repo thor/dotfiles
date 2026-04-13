@@ -135,6 +135,11 @@ return {
       local vimgrep_arguments = { unpack(defaultConfig.values.vimgrep_arguments) }
       -- I want to search in hidden/dot files.
       table.insert(vimgrep_arguments, "--hidden")
+      -- I want to see symlinks, too.
+      table.insert(vimgrep_arguments, "--follow")
+      table.insert(vimgrep_arguments, "file")
+      table.insert(vimgrep_arguments, "--type")
+      table.insert(vimgrep_arguments, "symlink")
       -- I don't want to search in the `.git` directory.
       table.insert(vimgrep_arguments, "--glob")
       table.insert(vimgrep_arguments, "!**/.git/*")
@@ -167,11 +172,10 @@ return {
 
           find_files = {
             -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-            find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+            find_command = { "fd", "--type", "file", "--type", "symlink", "--hidden", "--glob", "--exclude=**/.git/*" },
           },
         },
       }
-      -- return vim.tbl_deep_extend('force', opts, options)
       return options
     end,
   },
@@ -247,7 +251,7 @@ return {
       return {
         options = {
           disabled_filetypes = { "fzf", "NvimTree" },
-          theme = 'base16',
+          theme = 'auto',
         },
         sections = {
           lualine_a = {
@@ -268,6 +272,7 @@ return {
             {
               'buffers',
               show_filename_only = false,
+              use_mode_colors = true,
             },
           },
           lualine_z = { 'tabs' },
@@ -314,6 +319,12 @@ return {
     opts = {
       default_scheme = "base16-default-dark", -- pick any bundled Base16/Base24
       compile = true, -- optional: precompile for faster startup
+      capabilities = {
+        undercurl = true, -- optional: i like the undercurl
+      },
+      selector = {
+        enabled = true,
+      }
     },
   },
   {
