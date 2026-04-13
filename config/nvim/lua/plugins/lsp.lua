@@ -238,11 +238,13 @@ return {
   ---- enhanced highlighting, incl. additional treesitter context
   {
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
     build = ':TSUpdate',
+    branch = 'main',
+    opts = {},
     config = function()
-      require 'nvim-treesitter.configs'.setup {
+      require 'nvim-treesitter'.install {
         -- A list of parser names, or "all"
-        ensure_installed = {
           "bash",
           "javascript",
           "json",
@@ -251,6 +253,7 @@ return {
           "go",
           "markdown",
           "markdown_inline",
+          "nix",
           "php",
           "python",
           "rust",
@@ -259,23 +262,14 @@ return {
           "tsx",
           "vim",
           "yaml",
-        },
-
-        -- Install parsers synchronously (only applied to `ensure_installed`)
-        sync_install = false,
-
-        -- Do not install parsers automatically, due missing tree-sitter CLI
-        auto_install = false,
-
-        -- None to ignore
-        ignore_install = {},
-
-        highlight = {
-          -- `false` will disable the whole extension
-          enable = true,
-        },
-        modules = {}
       }
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = { 'bash', 'sh', 'javascript', 'javascriptreact', 'jsonnet', 'go', 'lua', 
+        -- 'markdown', 
+        'nix', 'python', 'php', 'rust', 'terraform', 'typescript', 'jsx', 'vim', 'yaml',  },
+        callback = function() vim.treesitter.start() end,
+      })
     end
   },
 
