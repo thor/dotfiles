@@ -308,18 +308,19 @@ return {
   },
   -- terminal visuals
   {
-    'tinted-theming/base16-vim',
-    lazy = false,
-    config = function()
-      vim.cmd [[colorscheme base16-default-dark]]
-    end,
-    priority = 1000
+    "tinted-theming/tinted-nvim",
+    priority = 1000, -- load colorscheme early
+    lazy = false,    -- apply on startup
+    opts = {
+      default_scheme = "base16-default-dark", -- pick any bundled Base16/Base24
+      compile = true, -- optional: precompile for faster startup
+    },
   },
   {
     'qpkorr/vim-bufkill',
     keys = {
-      { "<leader>qq", "<cmd>:BD<cr>", desc = "delete the buffer" },
-      { "<leader>qw", "<cmd>:BW<cr>", desc = "wipe the buffer" }
+      { "<leader>bd", desc = "delete the buffer" },
+      { "<leader>bw", desc = "wipe the buffer" }
     },
     event = { "BufAdd", "BufNew", "BufDelete" },
   }
