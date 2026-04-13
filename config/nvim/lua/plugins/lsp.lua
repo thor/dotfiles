@@ -241,11 +241,8 @@ return {
     lazy = false,
     build = ':TSUpdate',
     branch = 'main',
-    opts = {},
-    config = function(opts)
-      require('nvim-treesitter').setup{ opts }
-      require('nvim-treesitter').install {
-        -- A list of parser names, or "all"
+    opts = {
+      languages = {
         "bash",
         "javascript",
         "json",
@@ -264,6 +261,12 @@ return {
         "vim",
         "yaml",
       }
+    },
+    ---@param opts TSConfig | {languages: string[]}
+    config = function(opts)
+      local ts = require('nvim-treesitter')
+      ts.setup({ opts })
+      ts.install(opts.languages)
 
       vim.api.nvim_create_autocmd('FileType', {
         pattern = {
@@ -279,7 +282,7 @@ return {
           'php',
           'rust',
           'terraform',
-          'typescript',
+          'typescript', 'typescriptreact',
           'jsx',
           'vim',
           'yaml', },
