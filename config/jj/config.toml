@@ -59,6 +59,8 @@ git_push_bookmark = '"thor/push-" ++ change_id.short()'
 sign-on-push = true
 # Prevent pushing work in progress or anything explicitly labeled "private"
 private-commits = "denylist()"
+# Write the change ID to preserve with other tools
+write-change-id-header = true
 
 [fsmonitor]
 backend = "watchman"
