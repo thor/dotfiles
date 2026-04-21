@@ -12,3 +12,5 @@ temp-deploy/
 
 # terraform plans
 *.tfplan
+
+**/.claude/settings.local.json
