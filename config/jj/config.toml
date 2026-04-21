@@ -1,28 +1,116 @@
 "$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
 
+################################################################################
 [aliases]
-tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "closest_pushable(@)"]
 most = ["log", "-r", "most()"]
 
+# From Austin (@thoughtpolice)
+# https://github.com/thoughtpolice/a/blob/5efc6c78aa51dfa9a79ec504082e125f82ef6ceb/tilde/aseipp/dotfiles/jj/config.toml#L204
+# reheat (or restack) the megamerge sources
+restack = ["rebase", "--simplify-parents", "-d", "trunk()", "-s", "roots(trunk()..stack(@))"]
+
+# From Austin and Isaac
+# https://isaaccorbrey.com/notes/jujutsu-megamerges-for-fun-and-profit
+# 'jj stack xyz' to move xyz into the megamerge in parallel to everything
+# else. See notes on 'megamerge()' above for how it's resolved.
+stack = ["rebase", "-A", "trunk()", "-B", "megamerge()", "-r"]
+# `jj stage` to include the whole stack after the megamerge
+stage = ["stack", "megamerge():: ~ empty()"]
+
+
+################################################################################
 [ui]
 default-command = "log"
 diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 
+
+################################################################################
 [revsets]
 log = 'default()'
 
+# Show @, then megamerges, then the trunk()
+log-graph-prioritize = 'coalesce(@, megamerge(), trunk())'
+
+
+################################################################################
 [revset-aliases]
+
 # don't show me so much when I use jj by default, it gets a bit overwhelming
 'default()' = "present(trunk()..@) | ancestors(bookmarks(), 2) | present(trunk())"
+
 # useful to see most things when I need *more*
 'most()' = "default() | ancestors(tracked_remote_bookmarks()::, 2)"
-# what I don't want to push
-'denylist()' = "description(glob:'wip:*') | description(glob:'private:*')"
 
+# what I don't want to push
+'denylist()' = "description(glob:'wip:*') | description(glob:'private:*') | megamerge()"
+
+# From Austin (@thoughtpolice)
+# https://github.com/thoughtpolice/a/blob/5efc6c78aa51dfa9a79ec504082e125f82ef6ceb/tilde/aseipp/dotfiles/jj/config.toml#L109
+# stack(x, n) is the set of mutable commits reachable from 'x', with 'n'
+# parents. 'n' is often useful to customize the display and return set for
+# certain operations. 'x' can be used to target the set of 'roots' to traverse,
+# e.g. @ is the current stack.
+'stack()' = 'stack(@)'
+'stack(x)' = 'stack(x, 2)'
+'stack(x, n)' = 'ancestors(reachable(x, mutable()), n)'
+
+# Followed from above
+# The current set of "open" works. It is defined as: all stacks that are
+# reachable from my working copy, or any other commit I wrote.
+# n = 1, meaning that nothing from `trunk()` is included, so all resulting
+# commits are mutable by definition.
+'open()' = 'stack(mine() | @, 1) ~ hidden()'
+
+# From Austin (@thoughtpolice)
+# https://github.com/thoughtpolice/a/blob/5efc6c78aa51dfa9a79ec504082e125f82ef6ceb/tilde/aseipp/dotfiles/jj/config.toml#L131
+# Find the megamerge. Mostly useful in combination with other aliases, primarily
+# 'sandwich'. Normally when there's only one megamerge, sandwich works perfectly
+# fine and is basically "magic". However, there are more complex cases; consider
+# something like this which represents a forked repository of an upstream:
+#
+#
+#    ----> P1 ... Pn -----------\
+#   /                            \
+#  /---> X --\           (main)   \
+# B          M1 --> T1 ... Tn --> M2 --> @
+#  \---> Y --/
+#
+# X and Y are typical features on top of base B, combined inside megamerge M1.
+# However, we may want changes T1...Tn to go on top of M1, because (in my case)
+# they're custom and will never go upstream, but are correctly published as part
+# of the fork; Tn is where the main bookmark points. Finally, we have changes P1
+# ... Pn which are private and should never be pushed upstream at all.
+#
+# In this case, sandwich will work poorly because 'reachable(stack(), merges())'
+# will resolve to {M1, M2}, which is not what we want for 'rebase -B'. So to
+# handle that case, we allow the user to specify the merge via literal tag
+# "megamerge". In this case if we 'bookmark set megamerge -r M1' then sandwich
+# will always work correctly.
+'megamerge()' = '''coalesce(
+  present(megamerge),
+  reachable(stack(), merges())
+)
+'''
+
+# From Andre (@indirect). 
+# Find a better revision to tug to, that isn't just blindly using @-
+'closest_pushable(to)' = '''heads(
+  ::to
+  & mutable()
+  & ~description(exact:"")
+  & ~descendants(denylist())
+  & (~empty() | merges()))
+'''
+
+
+################################################################################
 [user]
 name = "Thor K. Høgås"
 email = "thor@roht.no"
 
+
+################################################################################
 [merge-tools.nvim]
 program = "nvim"
 edit-args = ["-c", "DiffEditor $left $right $output"]
@@ -38,6 +126,8 @@ merge-tool-edits-conflict-markers = true
 # Supress warning on exit
 diff-expected-exit-codes = [0, 1]
 
+
+################################################################################
 [[--scope]]
 --when.commands = ["diff", "show", "log"]
 [--scope.ui]
@@ -46,14 +136,15 @@ pager = "delta"
 # NOTE: this is required when using `delta` as a pager
 diff-formatter = ":git"
 
+
+################################################################################
 [signing]
 behaviour = "own"
 backend = "ssh"
 key = "~/.ssh/id_ed25519.pub"
 
-[templates]
-git_push_bookmark = '"thor/push-" ++ change_id.short()'
 
+################################################################################
 [git]
 # Automatically sign commits when pushing them
 sign-on-push = true
@@ -62,6 +153,14 @@ private-commits = "denylist()"
 # Write the change ID to preserve with other tools
 write-change-id-header = true
 
+[templates]
+git_push_bookmark = '"thor/push-" ++ change_id.short()'
+
+[template-aliases]
+# I much prefer to see when we did something *other* than rebasing
+'commit_timestamp(commit)' = 'commit.author().timestamp()'
+
+################################################################################
 [fsmonitor]
 backend = "watchman"
 
