@@ -8,9 +8,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 
 if [ -n "${WSL_DISTRO_NAME}" ]; then
-  # Keep it snappy without PATH_DIRS
-  unsetopt PATH_DIRS
-
   # Temporarily we're just using a local SSH agent because of some perky issues
   # Set up WSL ssh-agent if relevant
 	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
@@ -158,9 +155,6 @@ export ITERM2_SQUELCH_MARK=1
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
-# Toggle to stop profiling, see toggle at top of zshrc
-[ -z "$ZPROF" ] || zprof
-
 # pnpm
 [[ -f /Users/thor ]] && export PNPM_HOME="/Users/thor/Library/pnpm" || export PNPM_HOME="$HOME/.local/share/pnpm"
 
@@ -169,3 +163,15 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+if [ -n "${WSL_DISTRO_NAME}" ]; then
+  # Keep it snappy without PATH_DIRS
+  unsetopt PATH_DIRS
+  
+  # Use the right stuff
+  export GALLIUM_DRIVER=d3d12
+  export LIBVA_DRIVER_NAME=d3d12
+fi
+
+# Toggle to stop profiling, see toggle at top of zshrc
+[ -z "$ZPROF" ] || zprof
