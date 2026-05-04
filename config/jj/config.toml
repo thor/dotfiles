@@ -140,7 +140,8 @@ diff-expected-exit-codes = [0, 1]
 # https://github.com/jj-vcs/jj/blob/v0.25.0/docs/config.md#processing-contents-to-be-paged
 pager = "delta"
 # NOTE: this is required when using `delta` as a pager
-diff-formatter = ":git"
+# diff-formatter = ":git"
+diff-formatter = "delta"
 
 
 ################################################################################
