@@ -3,9 +3,7 @@
 # Toggle to enable profiling, see bottom of zshrc
 [ -z "$ZPROF" ] || zmodload zsh/zprof
 
-# Specifically for tools on macOS, specify XDG_CONFIG_HOME
-export XDG_CONFIG_HOME="$HOME/.config"
-
+# XDG_CONFIG_HOME is set once in .zshenv (sourced for every zsh invocation)
 
 if [ -n "${WSL_DISTRO_NAME}" ]; then
   # Temporarily we're just using a local SSH agent because of some perky issues
