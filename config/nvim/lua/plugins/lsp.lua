@@ -114,7 +114,7 @@ return {
         },
       })
       vim.lsp.enable('pylsp')
-      vim.lsp.config('pyright', {
+      vim.lsp.config('basedpyright', {
         settings = {
           python = {
             analysis = {
@@ -123,7 +123,7 @@ return {
           }
         }
       })
-      vim.lsp.enable('pyright')
+      vim.lsp.enable('basedpyright')
       -- php (!)
       vim.lsp.enable('phpactor')
       vim.lsp.enable('ruff')
