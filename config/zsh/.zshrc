@@ -19,16 +19,12 @@ if [ -n "${WSL_DISTRO_NAME}" ]; then
 	[ -f "$HOME/.ssh/id_ed25519_work" ] && ssh-add -q ~/.ssh/id_ed25519_work
 fi
 
+# Make zsh-defer available to load.d scripts (sheldon reloads it later; idempotent)
+_zsh_defer_plugin="${XDG_DATA_HOME:-$HOME/.local/share}/sheldon/repos/github.com/romkatv/zsh-defer/zsh-defer.plugin.zsh"
+[ -f "$_zsh_defer_plugin" ] && source "$_zsh_defer_plugin"
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Source load.d profile scripts
-for script in ${ZDOTDIR:-$HOME}/load.d/*.*sh; do
+# Source load.d profile scripts ((N): expand to nothing when there's no match)
+for script in ${ZDOTDIR:-$HOME}/load.d/*.*sh(N); do
 	source "${script}"
 done
 
@@ -99,9 +95,6 @@ _exists $_gcloud_completion && _source_first $_gcloud_completion
 # iTerm2: disable the mark
 export ITERM2_SQUELCH_MARK=1
 
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
-
 # pnpm
 [[ -f /Users/thor ]] && export PNPM_HOME="/Users/thor/Library/pnpm" || export PNPM_HOME="$HOME/.local/share/pnpm"
 
@@ -120,5 +113,7 @@ if [ -n "${WSL_DISTRO_NAME}" ]; then
   export LIBVA_DRIVER_NAME=d3d12
 fi
 
+# Load starship
+eval "$(starship init zsh)"
 # Toggle to stop profiling, see toggle at top of zshrc
 [ -z "$ZPROF" ] || zprof
