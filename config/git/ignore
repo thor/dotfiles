@@ -14,3 +14,9 @@ temp-deploy/
 *.tfplan
 
 **/.claude/settings.local.json
+
+# superpowers
+.superpowers/
+
+# zsh stuff
+.zcompdump.*
