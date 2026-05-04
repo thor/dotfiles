@@ -20,9 +20,6 @@ if [ -n "${WSL_DISTRO_NAME}" ]; then
 fi
 
 
-# base16 Shell
-export BASE16_THEME=base16-default-dark
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -80,60 +77,12 @@ _exists pay-respects && zsh-defer eval "$(pay-respects zsh)" || _warn "No pay-re
 _exists jj && zsh-defer eval "$(COMPLETE=zsh jj)" || true
 
 # Aliases and similar
-
-# Journal is too long
-alias j=journal
-
-# Kubernetes
-export KUBECONFIG=/dev/null
-alias ke="export KUBECONFIG=~/.kube/config"
-alias kd="export KUBECONFIG=/dev/null"
-# kubectl is our friend
-alias k=kubectl
-
-# lazygit is neat
-alias lg=lazygit
-
 # Use exa if available
 if _exists eza; then
 	alias ll="eza -lgL 2"
 	alias la="ll -a"
 fi
 
-# Setup ptpb pastebin
-alias clbin="curl -F 'clbin=<-' https://clbin.com"
-
-# Be kind to me
-alias please='sudo $(fc -ln -1)'
-
-# systemd-related
-alias uctl="systemctl --user"
-alias jctl="journalctl --user"
-
-# Vagrant Cheats
-alias vup="vagrant up"
-alias vh="vagrant halt"
-alias vsus="vagrant suspend"
-alias vs="vagrant status"
-alias vp="vagrant provision"
-alias vr="vagrant resume"
-alias vrld="vagrant reload"
-alias vssh="vagrant ssh"
-
-# jujutsu
-alias jjp="jj git push --tracked"
-alias jjs="jj show"
-alias jjl="jj log"
-alias jjrbm="jj rebase -r 'mine() & mutable()' -d 'trunk()'"
-alias jjn="jj new"
-alias jjgf"jj git fetch"
-alias jjm="jj most"
-alias jjt="jj tug"
-alias jjtp="jjt && jjp"
-
-# nix-darwin
-alias nup="sudo darwin-rebuild switch"
-alias nep="pushd $HOME/.config/thonix; nvim flake.nix +'Telescope fd'; popd"
 
 # Source work.sh for work configuration
 if [[ -s "${HOME}/.local/lib/work.sh" ]]; then

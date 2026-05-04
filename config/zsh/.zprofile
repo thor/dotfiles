@@ -16,6 +16,54 @@ export DIFFPROG='nvim -d'
 export FZF_DEFAULT_COMMAND='fd --color=never -IH -E .git'
 
 #
+# Happy aliases
+#
+
+# Kubernetes
+export KUBECONFIG=/dev/null
+alias ke="export KUBECONFIG=~/.kube/config"
+alias kd="export KUBECONFIG=/dev/null"
+# kubectl is our friend
+alias k=kubectl
+
+# lazygit is neat
+alias lg=lazygit
+# Setup ptpb pastebin
+alias clbin="curl -F 'clbin=<-' https://clbin.com"
+
+# Be kind to me
+alias please='sudo $(fc -ln -1)'
+
+# systemd-related
+alias uctl="systemctl --user"
+alias jctl="journalctl --user"
+
+# Vagrant Cheats
+alias vup="vagrant up"
+alias vh="vagrant halt"
+alias vsus="vagrant suspend"
+alias vs="vagrant status"
+alias vp="vagrant provision"
+alias vr="vagrant resume"
+alias vrld="vagrant reload"
+alias vssh="vagrant ssh"
+
+# jujutsu
+alias jjp="jj git push --tracked"
+alias jjs="jj show"
+alias jjl="jj log"
+alias jjrbm="jj rebase -r 'mine() & mutable()' -d 'trunk()'"
+alias jjn="jj new"
+alias jjgf="jj git fetch"
+alias jjm="jj most"
+alias jjt="jj tug"
+alias jjtp="jjt && jjp"
+
+# nix-darwin
+alias nup="sudo darwin-rebuild switch"
+alias nep="pushd $HOME/.config/thonix; nvim flake.nix +'Telescope fd'; popd"
+
+#
 # Language
 # 
 # - There's only one to default to
@@ -35,6 +83,7 @@ export QT_IM_MODULE=ibus
 #   load it as it pleases, which works better for Kitty than setting it
 #   with a script upon every start. Plus, at the time of this writing, I
 #   start Kitty via i3.
+# TODO: eliminate as tinty sorts this for us
 export BASE16_THEME=base16-default-dark
 
 #
@@ -59,8 +108,7 @@ export GOPATH=~/dev/go
 # - Configure virtualenvwrapper
 export WORKON_HOME="$HOME/.virtualenvs"
 
-# - Specifically for tools on macOS, specify XDG_CONFIG_HOME
-export XDG_CONFIG_HOME="$HOME/.config"
+# - XDG_CONFIG_HOME is set once in .zshenv (sourced for every zsh invocation)
 export XDG_CONFIG_CACHE="$HOME/.cache"
 
 # Set ZSH cache directory
