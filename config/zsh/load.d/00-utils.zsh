@@ -38,7 +38,7 @@ function _select_first {
 
 # - check if executable exists
 function _exists {
-	command -v "$1" 2>&1 >/dev/null
+	command -v "$1" >/dev/null 2>&1
 }
 
 # - get brew prefix
