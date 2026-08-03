@@ -22,10 +22,10 @@ fi
 # Make zsh-defer available to load.d scripts (sheldon reloads it later; idempotent)
 _zsh_defer_plugin="${XDG_DATA_HOME:-$HOME/.local/share}/sheldon/repos/github.com/romkatv/zsh-defer/zsh-defer.plugin.zsh"
 [ -f "$_zsh_defer_plugin" ] && source "$_zsh_defer_plugin"
-
-# Source load.d profile scripts ((N): expand to nothing when there's no match)
+ 
+ # Source load.d profile scripts ((N): expand to nothing when there's no match)
 for script in ${ZDOTDIR:-$HOME}/load.d/*.*sh(N); do
-	source "${script}"
+  source "${script}"
 done
 
 
@@ -36,11 +36,11 @@ else
   _warn "No sheldon, couldn't source shell scripts"
 fi
 
-# Setup direnv after instant prompt
-zsh-defer _exists direnv && emulate zsh -c "$(direnv hook zsh)"
+# Setup direnv (synchronous so its hook is active for the first command)
+_exists direnv && emulate zsh -c "$(direnv hook zsh)"
 
 # Source homebrew zsh completions, but do these zsh?
-if _exists brew 2>&1 >/dev/null; then
+if _exists brew; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
@@ -55,8 +55,10 @@ fi
 
 # mise: the better alternative to asdf
 if _exists mise; then
-	export RTX_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.config/mise/python-default-packages"
-	zsh-defer eval "$(mise activate zsh)" >/dev/null 2>&1
+	# mise (was rtx) reads the MISE_ prefix now; RTX_ is ignored on current versions
+	export MISE_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.config/mise/python-default-packages"
+	# Synchronous so shims are on PATH for the first command
+	eval "$(mise activate zsh)"
 else
 	_warn "mise wasn't available; you should install it"
 fi
@@ -66,11 +68,18 @@ if [ -f "$HOME/.cargo/env" ]; then
   zsh-defer source "$HOME/.cargo/env"
 fi
 
-# Configure pay-respects
-_exists pay-respects && zsh-defer eval "$(pay-respects zsh)" || _warn "No pay-respects, missing pay-respects executable"
+# Ensure cargo bin is on PATH (in case ~/.cargo/env is absent)
+case ":$PATH:" in
+  *":$HOME/.cargo/bin:"*) ;;
+  *) export PATH="$HOME/.cargo/bin:$PATH" ;;
+esac
 
-# Configure jujutsu
-_exists jj && zsh-defer eval "$(COMPLETE=zsh jj)" || true
+# Configure pay-respects
+# Single-quote so the $(...) fork happens at defer time, not now
+_exists pay-respects && zsh-defer eval 'eval "$(pay-respects zsh)"' || _warn "No pay-respects, missing pay-respects executable"
+
+# Configure jujutsu completions (deferred; fork happens at defer time)
+_exists jj && zsh-defer eval 'eval "$(COMPLETE=zsh jj)"' || true
 
 # Aliases and similar
 # Use exa if available
@@ -87,16 +96,23 @@ else
 	_warn "Missing ~/.local/lib/work.sh, no work-related aliases will be loaded"
 fi
 
-# Google Cloud SDK
-# TODO: Add paths for Arch setup? Ideally, site-functions should deal with this
-local _gcloud_completion="$(_bcp google-cloud-sdk)/latest/google-cloud-sdk/completion.zsh.inc"
-_exists $_gcloud_completion && _source_first $_gcloud_completion
+# Google Cloud SDK completions
+# Derive the SDK root from the gcloud binary so this works regardless of the
+# install layout (homebrew, nix, tarball). Skips silently if no inc ships.
+if _exists gcloud; then
+  _gcloud_root="${$(readlink -f "$(command -v gcloud)"):h:h}"
+  [ -f "$_gcloud_root/completion.zsh.inc" ] && zsh-defer source "$_gcloud_root/completion.zsh.inc"
+fi
 
 # iTerm2: disable the mark
 export ITERM2_SQUELCH_MARK=1
 
 # pnpm
-[[ -f /Users/thor ]] && export PNPM_HOME="/Users/thor/Library/pnpm" || export PNPM_HOME="$HOME/.local/share/pnpm"
+if [[ "$OSTYPE" == darwin* ]]; then
+  export PNPM_HOME="$HOME/Library/pnpm"
+else
+  export PNPM_HOME="$HOME/.local/share/pnpm"
+fi
 
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
@@ -112,6 +128,9 @@ if [ -n "${WSL_DISTRO_NAME}" ]; then
   export GALLIUM_DRIVER=d3d12
   export LIBVA_DRIVER_NAME=d3d12
 fi
+
+# Surface any warnings collected during load (was previously never printed)
+_print_warnings
 
 # Load starship
 eval "$(starship init zsh)"
