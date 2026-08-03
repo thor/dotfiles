@@ -11,7 +11,6 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
 export AUR_PAGER='nvim'
-export FZF_DEFAULT_COMMAND='fd --color=never'
 export DIFFPROG='nvim -d'
 export FZF_DEFAULT_COMMAND='fd --color=never -IH -E .git'
 
