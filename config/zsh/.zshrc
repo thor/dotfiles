@@ -104,9 +104,6 @@ if _exists gcloud; then
   [ -f "$_gcloud_root/completion.zsh.inc" ] && zsh-defer source "$_gcloud_root/completion.zsh.inc"
 fi
 
-# iTerm2: disable the mark
-export ITERM2_SQUELCH_MARK=1
-
 # pnpm
 if [[ "$OSTYPE" == darwin* ]]; then
   export PNPM_HOME="$HOME/Library/pnpm"

@@ -14,6 +14,10 @@
 
 if [[ -o interactive ]]; then
   if [ "${ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX-}""$TERM" != "screen" -a "${ITERM_SHELL_INTEGRATION_INSTALLED-}" = "" -a "$TERM" != linux -a "$TERM" != dumb ]; then
+
+    # disable the mark
+    export ITERM2_SQUELCH_MARK=1
+
     ITERM_SHELL_INTEGRATION_INSTALLED=Yes
     ITERM2_SHOULD_DECORATE_PROMPT="1"
     # Indicates start of command output. Runs just before command executes.
