@@ -131,5 +131,35 @@ _print_warnings
 
 # Load starship
 eval "$(starship init zsh)"
+
+if [ -n "$_STARSHIP_TRANSIENT" ]; then
+  # Configure transient starship shell
+  autoload -Uz add-zsh-hook add-zle-hook-widget
+
+  # Derive the transient prompts from the live PROMPT so they auto-inherit every
+  # flag starship passes (--status, --cmd-duration, --jobs, ...). NOTE: this
+  # depends on starship emitting the subcommand as " prompt " (space-padded); if
+  # that ever changes, these substitutions silently stop matching.
+  TRANSIENT_PROMPT="${PROMPT// prompt / prompt --profile transient }"
+  TRANSIENT_RPROMPT="${PROMPT// prompt / prompt --profile rtransient }"
+
+  # Collapse the current line into the transient prompt (on Enter, and on Ctrl+C).
+  function transient-prompt {
+      PROMPT="$SAVED_PROMPT" RPROMPT="$SAVED_RPROMPT" zle .reset-prompt
+  }
+  # Fix ctrl+c behavior: collapse the prompt even when the line is aborted.
+  TRAPINT() { transient-prompt; return $(( 128 + $1 )) }
+
+  # Pre-render the transient prompt while idle so the Enter->collapse is instant.
+  # ${(e)...} runs the embedded $(starship ...) natively -- no eval, half the forks.
+  function transient-prompt-precmd {
+      SAVED_PROMPT="${(e)TRANSIENT_PROMPT}"
+      SAVED_RPROMPT="${(e)TRANSIENT_RPROMPT}"
+  }
+
+  add-zsh-hook precmd transient-prompt-precmd
+  add-zle-hook-widget zle-line-finish transient-prompt
+fi
+
 # Toggle to stop profiling, see toggle at top of zshrc
 [ -z "$ZPROF" ] || zprof
