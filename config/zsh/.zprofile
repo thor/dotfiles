@@ -48,9 +48,10 @@ alias vrld="vagrant reload"
 alias vssh="vagrant ssh"
 
 # jujutsu
-alias jjp="jj git push --tracked"
+alias jjgpt="jj git push --tracked"
 alias jjs="jj show"
 alias jjl="jj log"
+alias jjrs="jj restack"
 alias jjrbm="jj rebase -r 'mine() & mutable()' -d 'trunk()'"
 alias jjn="jj new"
 alias jjgf="jj git fetch"
