@@ -97,17 +97,12 @@ return {
                 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release \z
                 && cmake --build build --config Release \z
                 && cmake --install build --prefix build',
-        config = function() require("telescope").load_extension("fzf") end,
       },
-      {
-        'crispgm/telescope-heading.nvim',
-        config = function() require("telescope").load_extension("heading") end,
-      },
+      'crispgm/telescope-heading.nvim',
       {
         "nvim-telescope/telescope-frecency.nvim",
         -- install the latest stable version
         version = "*",
-        config = function() require("telescope").load_extension("frecency") end,
       }
     },
     lazy = true,
@@ -137,9 +132,6 @@ return {
       table.insert(vimgrep_arguments, "--hidden")
       -- I want to see symlinks, too.
       table.insert(vimgrep_arguments, "--follow")
-      table.insert(vimgrep_arguments, "file")
-      table.insert(vimgrep_arguments, "--type")
-      table.insert(vimgrep_arguments, "symlink")
       -- I don't want to search in the `.git` directory.
       table.insert(vimgrep_arguments, "--glob")
       table.insert(vimgrep_arguments, "!**/.git/*")
@@ -175,8 +167,19 @@ return {
             find_command = { "fd", "--type", "file", "--type", "symlink", "--hidden", "--glob", "--exclude=**/.git/*" },
           },
         },
+        extensions = {
+          frecency = { db_version = "v2" },
+        },
       }
       return options
+    end,
+    config = function(_, opts)
+      local telescope = require("telescope")
+      telescope.setup(opts)
+      -- load extensions only after setup, so ordering is deterministic
+      for _, ext in ipairs({ "fzf", "heading", "frecency" }) do
+        telescope.load_extension(ext)
+      end
     end,
   },
 
