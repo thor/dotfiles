@@ -57,7 +57,7 @@ alias jjn="jj new"
 alias jjgf="jj git fetch"
 alias jjm="jj most"
 alias jjt="jj tug"
-alias jjtp="jjt && jjp"
+alias jjtp="jjt && jjgp"
 
 # nix-darwin
 alias nup="sudo darwin-rebuild switch"
