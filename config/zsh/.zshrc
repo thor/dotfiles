@@ -36,6 +36,9 @@ else
   _warn "No sheldon, couldn't source shell scripts"
 fi
 
+# Prezto sets NO_CLOBBER; let >> still create new files (cmux history needs it)
+setopt APPEND_CREATE
+
 # Setup direnv (synchronous so its hook is active for the first command)
 _exists direnv && emulate zsh -c "$(direnv hook zsh)"
 
