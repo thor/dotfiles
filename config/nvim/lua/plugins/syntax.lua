@@ -4,6 +4,14 @@ local utils = require "utils"
 ---@type LazySpec[]
 local plugins = {
   {
+    'ricardoramirezr/blade-nav.nvim',
+    dependencies = {
+        'hrsh7th/nvim-cmp',
+    },
+    ft = { 'blade', 'php' },
+    opts = {},
+  },
+  {
     -- Go-go-go-go neovim!
     'ray-x/go.nvim',
     disabled = true,

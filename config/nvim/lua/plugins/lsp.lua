@@ -1,5 +1,6 @@
 local utils = require "utils"
 
+
 -- do not load lsp enhancements if nvim is used as the interface rather than editor
 if not utils.is_terminal() then
   return {}
@@ -241,6 +242,11 @@ return {
     opts = {
       languages = {
         "bash",
+        "blade",
+        -- blade inherits html's queries, which inject css into <style> and
+        -- style="", and comment into <!-- -->
+        "comment",
+        "css",
         "javascript",
         "json",
         "jsonnet",
@@ -250,6 +256,8 @@ return {
         "markdown_inline",
         "nix",
         "php",
+        -- blade injects raw PHP via php_only, not php
+        "php_only",
         "python",
         "rust",
         "terraform",
@@ -260,15 +268,16 @@ return {
       }
     },
     ---@param opts TSConfig | {languages: string[]}
-    config = function(opts)
+    config = function(_, opts)
       local ts = require('nvim-treesitter')
-      ts.setup({ opts })
+      ts.setup(opts)
       ts.install(opts.languages)
 
       vim.api.nvim_create_autocmd('FileType', {
         pattern = {
           'bash',
           'sh',
+          'blade',
           'javascript', 'javascriptreact',
           'jsonnet',
           'go',
