@@ -24,6 +24,9 @@ return {
     opts = {
       spec = {
         { "<leader>f", group = "find stuff" },
+        { "<leader>n", group = "file tree" },
+        { "<leader>g", group = "git" },
+        { "<leader>b", group = "buffers" },
       },
     }
   },
