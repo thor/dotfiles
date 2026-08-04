@@ -183,9 +183,16 @@ return {
     config = function(_, opts)
       local telescope = require("telescope")
       telescope.setup(opts)
-      -- load extensions only after setup, so ordering is deterministic
+      -- load extensions only after setup, so ordering is deterministic;
+      -- isolate each so one bad extension can't take down the whole picker
       for _, ext in ipairs({ "fzf", "heading", "frecency" }) do
-        telescope.load_extension(ext)
+        local ok, err = pcall(telescope.load_extension, ext)
+        if not ok then
+          vim.notify(
+            ("telescope: failed to load extension '%s': %s"):format(ext, err),
+            vim.log.levels.WARN
+          )
+        end
       end
     end,
   },
