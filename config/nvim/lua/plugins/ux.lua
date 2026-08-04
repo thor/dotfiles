@@ -296,7 +296,11 @@ return {
             {
               'buffers',
               show_filename_only = false,
-              use_mode_colors = true,
+              buffers_color = {
+                -- reuse the colorscheme's lualine groups so this tracks the theme
+                active = 'lualine_a_normal',
+                inactive = 'lualine_b_normal',
+              },
             },
           },
           lualine_z = { 'tabs' },
