@@ -167,8 +167,8 @@ return {
           },
 
           find_files = {
-            -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-            find_command = { "fd", "--type", "file", "--type", "symlink", "--hidden", "--glob", "--exclude=**/.git/*" },
+            -- fd already respects .gitignore, so `.git/` is excluded without extra globs.
+            find_command = { "fd", "--type", "file", "--type", "symlink", "--hidden" },
           },
         },
         extensions = {
