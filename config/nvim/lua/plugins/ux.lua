@@ -144,7 +144,7 @@ return {
           winblend = 1,
           -- close on escape
           mappings = {
-            i = { ["Esc"] = actions.close }
+            i = { ["<esc>"] = actions.close }
           },
           layout_strategy = "flex",
           layout_config = {
