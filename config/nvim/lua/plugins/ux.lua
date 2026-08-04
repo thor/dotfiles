@@ -152,8 +152,8 @@ return {
           },
           layout_strategy = "flex",
           layout_config = {
-            vertical = { width = 0.9 },
-            horizontal = { width = 0.9 },
+            vertical = { width = 0.9, height = 0.9 },
+            horizontal = { width = 0.9, height = 0.9 },
           },
         },
         pickers = {
