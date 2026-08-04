@@ -63,7 +63,8 @@ return {
     ---@type snacks.Config
     opts = {
       input = {},
-      picker = {}
+      -- telescope is the primary picker; keep snacks out of vim.ui.select
+      picker = { enabled = false },
     },
   },
   {
