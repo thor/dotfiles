@@ -38,11 +38,21 @@ revsets-git-sign-on-push = "~signed() & mine()"
 ################################################################################
 [revset-aliases]
 
+# My unmerged commits. Catches stacks with no bookmark that @ has moved away
+# from, e.g. after `jj new trunk()`.
+'dangling()' = "mine() & mutable()"
+'recent()' = 'committer_date(after:"2 weeks ago")'
+
 # don't show me so much when I use jj by default, it gets a bit overwhelming
-'default()' = "present(trunk()..@) | ancestors(bookmarks(), 2) | present(trunk())"
+'default()' = '''
+  present(trunk()..@)
+  | ancestors(bookmarks(), 2)
+  | present(trunk())
+  | present(trunk()..(dangling() & recent()))
+'''
 
 # useful to see most things when I need *more*
-'most()' = "default() | ancestors(tracked_remote_bookmarks()::, 2)"
+'most()' = "default() | ancestors(tracked_remote_bookmarks()::, 2) | present(trunk()..dangling())"
 
 # what I don't want to push
 'denylist()' = "description(glob:'wip:*') | description(glob:'private:*') | megamerge()"

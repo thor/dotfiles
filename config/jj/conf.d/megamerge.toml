@@ -1,0 +1,53 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+# Make the megamerge (see 'megamerge()' revset-alias in config.toml) stand out
+# in the log. Two independent pieces:
+#   - log_node: a distinctive graph glyph (◈) for megamerge commits
+#   - log:      a fully custom, minimal log line for megamerge commits
+# Both are colored via the 'megamerge' color label below.
+
+[templates]
+# Full override of builtin_log_node, preserving the builtin priority order:
+# working-copy (@) still wins, then megamerge (◈), then immutable/conflict/○.
+# NOTE: unicode-only — if you ever set ui.graph.style = "ascii", swap ◈ for
+# an ascii glyph (e.g. "#").
+log_node = '''
+coalesce(
+  if(!self, label("elided", "~")),
+  label(
+    separate(" ",
+      if(current_working_copy, "working_copy"),
+      if(immutable, "immutable", "mutable"),
+      if(conflict, "conflicted"),
+      if(self.contained_in("megamerge()"), "megamerge"),
+    ),
+    coalesce(
+      if(current_working_copy, "@"),
+      if(self.contained_in("megamerge()"), "◈"),
+      if(immutable, "◆"),
+      if(conflict, "×"),
+      "○",
+    )
+  )
+)
+'''
+
+# Replace the whole log line for megamerge commits: change id + marker +
+# description only (no bookmarks, commit id, committer, or timestamp).
+log = '''
+if(self.contained_in("megamerge()"),
+  label("megamerge",
+    separate(" ",
+      change_id.shortest(8),
+      "◈ MEGAMERGE",
+    )
+    ++ "\n"
+    ++ if(description, description.first_line(), "(no description set)")
+    ++ "\n"
+  ),
+  builtin_log_compact
+)
+'''
+
+[colors]
+megamerge = { fg = "magenta", bold = true }
