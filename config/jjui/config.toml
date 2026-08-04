@@ -133,6 +133,48 @@ jj_async("util", "exec", "--", "sh", "-c",
   'gh pr create -fH "$1" ${2:+-B "$2"} 1>&2', "sh", branch, base or "")
 '''
 
+# Open the diff in the Neovim that hosts jjui (jjui.nvim sets JJUI_NVIM and
+# Neovim sets $NVIM to its RPC socket). Calls require("jjui").diff(rev, file),
+# which returns "" or an error message. Falls back to the built-in diff.
+[[actions]]
+name = "custom.nvim_diff"
+desc = "diff in nvim"
+lua = '''
+local file = jjui.context.file()
+local server = os.getenv("NVIM")
+if os.getenv("JJUI_NVIM") ~= "1" or not server or server == "" then
+  if file and file ~= "" then
+    jjui.revisions.details.diff()
+  else
+    jjui.revisions.diff()
+  end
+  return
+end
+local rev = jjui.context.change_id()
+if not rev or rev == "" then
+  flash({ text = "No revision selected", error = true })
+  return
+end
+
+local function vimstr(s)
+  return "'" .. (s:gsub("'", "''")) .. "'"
+end
+local function shq(s)
+  return "'" .. (s:gsub("'", [['\'']])) .. "'"
+end
+
+local expr = "v:lua.require'jjui'.diff(" .. vimstr(rev) .. "," .. vimstr(file or "") .. ")"
+local h = io.popen("nvim --server " .. shq(server) .. " --remote-expr " .. shq(expr) .. " 2>&1")
+local out = h and h:read("*a") or "could not run nvim"
+if h then
+  h:close()
+end
+out = out:gsub("^%s+", ""):gsub("%s+$", "")
+if out ~= "" then
+  flash({ text = out, error = true })
+end
+'''
+
 # --- Keybindings ----------------------------------------------------------
 
 [[bindings]]
@@ -158,3 +200,16 @@ scope = "revisions"
 action = "custom.pr_create"
 seq = [",", "p"]
 desc = "gh pr create, based on the pushed parent"
+
+# Inside Neovim (jjui.nvim, ~/dev/thor/jjui.nvim), `d` opens the diff in
+# Neovim, in the revisions and file details views. Outside Neovim, `d` does
+# not change.
+[[bindings]]
+scope = "revisions"
+action = "custom.nvim_diff"
+key = "d"
+
+[[bindings]]
+scope = "revisions.details"
+action = "custom.nvim_diff"
+key = "d"
