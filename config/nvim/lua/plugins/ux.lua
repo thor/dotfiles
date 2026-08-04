@@ -108,19 +108,22 @@ return {
     lazy = true,
     cmd = { "Telescope" },
     keys = function(_)
+      -- defer the require so telescope still loads lazily on first keypress
+      local b = function(fn, o) return function() require("telescope.builtin")[fn](o) end end
+      -- extension pickers have no builtin, so drive them via :Telescope
       local ts = function(fn) return function() vim.cmd("Telescope " .. fn) end end
       return {
-        { "<C-P>",      ts("find_files theme=ivy"),   desc = "Find files (ivy)" },
-        { "<leader>ff", ts("frecency workspace=CWD"), desc = "Find files" },
-        { "<leader>fF", ts("find_files"),             desc = "Find files (no rank)" },
-        { "<leader>fb", ts("buffers"),                desc = "Find buffers" },
-        { "<leader>fg", ts("live_grep"),              desc = "Find by grep" },
-        { "<leader>fh", ts("heading"),                desc = "Find heading" },
-        { "<leader>fH", ts("help_tags"),              desc = "Find help" },
-        { "<leader>fs", ts("lsp_workspace_symbols"),  desc = "Find symbol in workspace" },
-        { "<leader>ft", ts("treesitter"),             desc = "Find symbol from treesitter" },
-        { "<leader>fd", ts("diagnostics"),            desc = "Find diagnostics" },
-        { "<leader>gs", ts("git_status"),             desc = "Open Git status" },
+        { "<C-P>",      b("find_files", { theme = "ivy" }), desc = "Find files (ivy)" },
+        { "<leader>ff", ts("frecency workspace=CWD"),       desc = "Find files" },
+        { "<leader>fF", b("find_files"),                    desc = "Find files (no rank)" },
+        { "<leader>fb", b("buffers"),                       desc = "Find buffers" },
+        { "<leader>fg", b("live_grep"),                     desc = "Find by grep" },
+        { "<leader>fh", ts("heading"),                      desc = "Find heading" },
+        { "<leader>fH", b("help_tags"),                     desc = "Find help" },
+        { "<leader>fs", b("lsp_workspace_symbols"),         desc = "Find symbol in workspace" },
+        { "<leader>ft", b("treesitter"),                    desc = "Find symbol from treesitter" },
+        { "<leader>fd", b("diagnostics"),                   desc = "Find diagnostics" },
+        { "<leader>gs", b("git_status"),                    desc = "Open Git status" },
       }
     end,
     opts = function(_, opts)
