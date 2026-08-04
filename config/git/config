@@ -1,7 +1,7 @@
 [user]
 	email = thor@roht.no
 	name = Thor K. Høgås
-	signingkey = CED888E603D78BD3721687E7857DC2630B5916D8
+	signingkey = ~/.ssh/id_ed25519.pub
 [push]
 	default = simple
 [core]
@@ -40,7 +40,7 @@
 	tool = nvim -d
 	colorMoved = default
 [commit]
-	gpgsign = false
+	gpgsign = true
 [gui]
 	fontdiff = -family \"Fantasque Sans Mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
 	editor = kitty-nvim
@@ -82,3 +82,5 @@
 [hook "hk-hygiene"]
 	command = test \"${HK:-1}\" = \"0\" || /run/current-system/sw/bin/mise x hk -- hk run hygiene --from-hook \"$@\"
 	event = hygiene
+[gpg]
+	format = ssh
