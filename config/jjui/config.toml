@@ -1,0 +1,13 @@
+[[actions]]
+name = "restack"
+desc = "restack the megamerge underneath current revision"
+lua = '''
+restack = jj_async("restack")
+flash(restack[1])
+'''
+
+[[bindings]]
+action = "restack"
+key = ";"
+scope = "revisions"
+desc = "restack megamerge"

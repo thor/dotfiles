@@ -26,12 +26,6 @@ stage = ["stack", "megamerge():: ~ empty()"]
 
 
 ################################################################################
-[ui]
-default-command = "log"
-diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
-
-
-################################################################################
 [revsets]
 log = 'default()'
 
@@ -131,6 +125,15 @@ merge-tool-edits-conflict-markers = true
 [merge-tools.delta]
 # Supress warning on exit
 diff-expected-exit-codes = [0, 1]
+diff-args = ["--width", "20", "--true-color", "auto", "--dark", "$left", "$right"]
+diff-invocation-mode = "file-by-file"
+
+
+################################################################################
+[ui]
+default-command = "log"
+diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
+# diff-formatter = ["delta", "--width", "$width", "$left", "$right"]
 
 
 ################################################################################
@@ -141,6 +144,12 @@ diff-expected-exit-codes = [0, 1]
 pager = "delta"
 # NOTE: this is required when using `delta` as a pager
 # diff-formatter = ":git"
+diff-formatter = "delta"
+
+# Configure delta as the non-git-based differ inside of jjui
+[[--scope]]
+--when.environments = ["JJUI"]
+[--scope.ui]
 diff-formatter = "delta"
 
 
