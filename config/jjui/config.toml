@@ -1,16 +1,29 @@
-[[actions]]
-name = "restack"
-desc = "restack the megamerge underneath current revision"
-lua = '''
-restack = jj_async("restack")
-flash(restack[1])
-'''
+# jjui configuration for jjui 0.10.x.
+#
+# Notes for editing:
+# * jjui 0.10 removed [custom_commands] and [leader]. Use [[actions]] (named
+#   Lua) and [[bindings]] (key or seq to action). A binding must name a
+#   built-in action or an [[actions]] name. Scopes are per view, for example
+#   "revisions", "ui" or "diff".
+# * Lua API: run `jjui -install-lua-types`, then read ~/.config/jjui/types.lua.
+# * Default bindings and options are in the jjui repo, in
+#   internal/config/default/{bindings,config}.toml:
+#     gh api repos/idursun/jjui/contents/internal/config/default/bindings.toml \
+#       --jq '.content' | base64 -d
+#   The revisions view has no default key sequences, so "," is free as a leader.
+# * jj_async() and jj_interactive() do not reload the log. jj_async() waits
+#   for the command, so call jjui.revisions.refresh() after it.
+# * exec_shell() does not capture output. To show shell output in a flash, use
+#   io.popen. jj() captures the output of jj.
+# * In jj templates, use local_bookmarks, not bookmarks. For help, run
+#   `jj help -k templates`.
+# * To check this file, run `printf q | jjui -limit 1` and look for errors in
+#   stderr. You cannot test key presses without a real terminal.
 
-[[bindings]]
-action = "restack"
-key = ";"
-scope = "revisions"
-desc = "restack megamerge"
+[ui]
+# Keep flash messages open for 8 seconds. The default is 4. If the value is 0,
+# a message stays open until you close it.
+flash_message_display_seconds = 8
 
 # The jjui defaults plus `--tool delta-auto` (see the jj config). delta shows
 # the diff side by side when the preview pane is at least 160 columns wide.
@@ -18,3 +31,130 @@ desc = "restack megamerge"
 revision_command = ["show", "--color", "always", "--tool", "delta-auto", "-r", "$change_id"]
 evolog_command = ["evolog", "--color", "always", "--tool", "delta-auto", "-r", "$commit_id", "-p", "-n", "1"]
 file_command = ["diff", "--color", "always", "--tool", "delta-auto", "-r", "$change_id", "$file"]
+
+# --- Custom actions -------------------------------------------------------
+
+[[actions]]
+name = "custom.restack"
+desc = "jj restack"
+lua = '''
+-- restack keeps change IDs, so select the same revision again.
+local sel = jjui.context.change_id()
+jj_async("restack")
+jjui.revisions.refresh({ keep_selections = true, selected_revision = sel })
+'''
+
+[[actions]]
+name = "custom.stack"
+desc = "jj stack (checked revisions, or the hovered one)"
+lua = '''
+-- `jj stack` ends in `-r`, so it needs revisions. Use the checked revisions.
+-- If no revision is checked, use the hovered revision.
+local revs = jjui.context.checked_change_ids()
+if not revs or #revs == 0 then
+  local hovered = jjui.context.change_id()
+  revs = hovered and hovered ~= "" and { hovered } or {}
+end
+if #revs == 0 then
+  flash({ text = "No revision selected", error = true })
+  return
+end
+-- One revset union moves all checked revisions together.
+jj_async("stack", table.concat(revs, " | "))
+jjui.revisions.refresh({ keep_selections = true, selected_revision = revs[1] })
+'''
+
+[[actions]]
+name = "custom.pr_create"
+desc = "gh pr create for selected revision, based on its pushed parent"
+lua = '''
+local rev = jjui.context.change_id()
+if not rev or rev == "" then
+  flash({ text = "No revision selected", error = true })
+  return
+end
+
+-- Return the first local bookmark on the revision, or nil.
+local function first_bookmark()
+  local out = jj("log", "-r", rev, "--no-graph", "-T", [[local_bookmarks.map(|b| b.name()).join("\n")]])
+  local name = split_lines(out or "")[1]
+  if name and name ~= "" then
+    return name
+  end
+  return nil
+end
+
+-- Return the pushed bookmark of the parent, or nil.
+-- Bookmarks on the "git" remote are local, so they do not count. A remote
+-- bookmark must point at the parent commit, so an amended parent counts as
+-- not pushed. A merge has more than one parent, so it gets no base.
+local function parent_branch()
+  -- The "P " prefix gives one line for each parent, also for a parent with
+  -- no bookmarks.
+  local out = jj("log", "-r", rev .. "-", "--no-graph", "-T",
+    [["P " ++ remote_bookmarks.filter(|b| b.remote() != "git").map(|b| b.name()).join(",") ++ "\n"]])
+  if not out then
+    return nil
+  end
+  local names = {}
+  for _, line in ipairs(split_lines(out, true)) do
+    if line:sub(1, 2) == "P " then
+      names[#names + 1] = line:sub(3)
+    end
+  end
+  if #names ~= 1 then
+    return nil
+  end
+  local first = names[1]:match("^[^,]*")
+  if first and first ~= "" then
+    return first
+  end
+  return nil
+end
+
+local base = parent_branch()
+local branch = first_bookmark()
+
+-- If the revision has no bookmark, create one and push it. If the push
+-- fails, jjui shows the error.
+if not branch then
+  jj_async("git", "push", "-c", rev)
+  jjui.revisions.refresh({ keep_selections = true })
+  branch = first_bookmark()
+  if not branch then
+    return
+  end
+end
+
+-- Run gh through `jj util exec` to get the jjui spinner. jjui shows only
+-- stderr, so send the PR URL to stderr. The shell gets the bookmark names as
+-- arguments, so it does not parse them.
+jj_async("util", "exec", "--", "sh", "-c",
+  'gh pr create -fH "$1" ${2:+-B "$2"} 1>&2', "sh", branch, base or "")
+'''
+
+# --- Keybindings ----------------------------------------------------------
+
+[[bindings]]
+scope = "revisions"
+action = "custom.restack"
+key = ";"
+desc = "jj restack"
+
+[[bindings]]
+scope = "revisions"
+action = "custom.restack"
+seq = [",", "r"]
+desc = "jj restack"
+
+[[bindings]]
+scope = "revisions"
+action = "custom.stack"
+seq = [",", "s"]
+desc = "jj stack"
+
+[[bindings]]
+scope = "revisions"
+action = "custom.pr_create"
+seq = [",", "p"]
+desc = "gh pr create, based on the pushed parent"
