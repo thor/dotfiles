@@ -11,3 +11,10 @@ action = "restack"
 key = ";"
 scope = "revisions"
 desc = "restack megamerge"
+
+# The jjui defaults plus `--tool delta-auto` (see the jj config). delta shows
+# the diff side by side when the preview pane is at least 160 columns wide.
+[preview]
+revision_command = ["show", "--color", "always", "--tool", "delta-auto", "-r", "$change_id"]
+evolog_command = ["evolog", "--color", "always", "--tool", "delta-auto", "-r", "$commit_id", "-p", "-n", "1"]
+file_command = ["diff", "--color", "always", "--tool", "delta-auto", "-r", "$change_id", "$file"]

@@ -130,6 +130,18 @@ diff-expected-exit-codes = [0, 1]
 diff-args = ["--width", "20", "--true-color", "auto", "--dark", "$left", "$right"]
 diff-invocation-mode = "file-by-file"
 
+[merge-tools.delta-auto]
+# delta, side by side when the output is at least 160 columns wide. jjui sets
+# COLUMNS to the preview pane width, and jj passes it as $width. jj replaces
+# $width, $left and $right everywhere in the args, so the script uses $1 to $3.
+program = "sh"
+diff-args = [
+  "-c",
+  's=; [ "${1:-0}" -ge 160 ] && s=--side-by-side; exec delta --width "$1" $s --true-color auto --dark "$2" "$3"',
+  "sh", "$width", "$left", "$right",
+]
+diff-expected-exit-codes = [0, 1]
+
 
 ################################################################################
 [ui]
