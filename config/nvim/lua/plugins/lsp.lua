@@ -52,9 +52,6 @@ return {
           -- python (see lsp for ruff and pyright)
           null_ls.builtins.formatting.black,
           null_ls.builtins.diagnostics.mypy,
-          null_ls.builtins.diagnostics.pylint.with({
-            extra_args = { "--disable", "too-few-public-methods,missing-function-docstring" },
-          }),
           -- shell scripts
           null_ls.builtins.formatting.shfmt,
           -- others
@@ -124,9 +121,9 @@ return {
         }
       })
       vim.lsp.enable('basedpyright')
+      vim.lsp.enable('ruff')
       -- php (!)
       vim.lsp.enable('phpactor')
-      vim.lsp.enable('ruff')
       -- terraform
       vim.lsp.config('terraformls', {
         cmd = { "terraform-ls", "serve" },
