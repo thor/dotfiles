@@ -32,8 +32,8 @@ log = 'default()'
 # Show @, then megamerges, then the trunk()
 log-graph-prioritize = 'coalesce(@, megamerge(), trunk())'
 
-# Automatically sign commits when pushing them
-revsets-git-sign-on-push = "~signed() & mine()"
+# Sign my unsigned commits when pushing them
+git-sign-on-push = "~signed() & mine()"
 
 ################################################################################
 [revset-aliases]
