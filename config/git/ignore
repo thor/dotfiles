@@ -20,3 +20,6 @@ temp-deploy/
 
 # zsh stuff
 .zcompdump.*
+
+# graphify output (moved out of repos via GRAPHIFY_OUT in mise)
+graphify-out/
