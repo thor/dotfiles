@@ -98,6 +98,16 @@ path=(
 	$path[@]
 )
 
+# WSL: /etc/wsl.conf sets appendWindowsPath=false, because every PATH lookup
+# through /mnt/c is slow (it made startup take ~5s). Add back only what we use.
+if [[ -n "$WSL_DISTRO_NAME" ]]; then
+	path+=(
+		/mnt/c/Windows/System32(N/)
+		/mnt/c/Windows(N/)
+		/mnt/c/Users/*/scoop/apps/vscode/current/bin(N/)
+	)
+fi
+
 # Set up GOPATH
 export GOPATH=~/dev/go
 
