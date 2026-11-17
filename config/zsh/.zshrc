@@ -55,8 +55,6 @@ fi
 
 # mise: the better alternative to asdf
 if _exists mise; then
-	# mise (was rtx) reads the MISE_ prefix now; RTX_ is ignored on current versions
-	export MISE_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.config/mise/python-default-packages"
 	# Synchronous so shims are on PATH for the first command
 	eval "$(mise activate zsh)"
 else

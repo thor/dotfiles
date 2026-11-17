@@ -1,0 +1,16 @@
+#!/bin/sh
+# mise global postinstall hook: install python-default-packages into every
+# Python version mise just installed (replaces the deprecated
+# python.default_packages_file setting).
+set -eu
+
+packages="${XDG_CONFIG_HOME:-$HOME/.config}/mise/python-default-packages"
+[ -f "$packages" ] || exit 0
+
+printf '%s' "${MISE_INSTALLED_TOOLS:-[]}" |
+	jq -r '.[] | select(.name == "python") | .install_path' |
+	while IFS= read -r dir; do
+		echo "mise postinstall: installing default packages into $dir" >&2
+		"$dir/bin/python" -m pip install --quiet -r "$packages" ||
+			echo "mise postinstall: pip install failed for $dir" >&2
+	done

@@ -1,0 +1,10 @@
+[settings]
+experimental = true
+idiomatic_version_file_enable_tools = ["python"]
+
+[tools]
+hk = "latest"
+terraform = "latest"
+
+[hooks]
+postinstall = '"${XDG_CONFIG_HOME:-$HOME/.config}/mise/postinstall-python"'
