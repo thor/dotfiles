@@ -27,9 +27,10 @@ github = "chriskempson/base16-shell"
 github = "jeffreytse/zsh-vi-mode"
 apply = ["defer"]
 
+# Inline rather than `local` + `use = ["init.zsh"]`: sheldon's `use` globs match
+# at any depth, which sourced every module's init.zsh and bypassed .zpreztorc.
 [plugins.zprezto]
-local = "~/.config/zsh/.zprezto"
-use = ["init.zsh"]
+inline = "source ~/.config/zsh/.zprezto/init.zsh"
 
 [plugins.jujutsu]
 github = "ohmyzsh/ohmyzsh"

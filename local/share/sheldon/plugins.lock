@@ -30,11 +30,7 @@ apply = ["defer"]
 
 [[plugins]]
 name = "zprezto"
-source_dir = "/home/thor/.config/zsh/.zprezto"
-files = ["/home/thor/.config/zsh/.zprezto/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/autosuggestions/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/command-not-found/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/completion/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/directory/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/dnf/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/docker/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/dpkg/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/editor/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/emacs/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/environment/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/fasd/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/git/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/gnu-utility/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/gpg/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/haskell/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/helper/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/history/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/history-substring-search/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/homebrew/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/macports/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/node/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/ocaml/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/osx/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/pacman/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/perl/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/prompt/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/python/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/rails/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/rsync/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/ruby/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/screen/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/spectrum/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/ssh/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/syntax-highlighting/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/terminal/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/tmux/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/utility/init.zsh", "/home/thor/.config/zsh/.zprezto/modules/yum/init.zsh"]
-apply = ["source"]
-
-[plugins.hooks]
+raw = "source ~/.config/zsh/.zprezto/init.zsh"
 
 [[plugins]]
 name = "jujutsu"
