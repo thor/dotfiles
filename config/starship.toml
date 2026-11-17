@@ -1,0 +1,41 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Modules referenced explicitly are left out of $all, so this keeps the default
+# order while putting the vcs module right after the directory.
+format = "$username$hostname$localip$shlvl$singularity$kubernetes$directory$vcs$all"
+
+# Show the clock on the right-hand side.
+right_format = "$time"
+
+[time]
+disabled = false
+format = "[$time]($style)"
+time_format = "%H:%M:%S"
+
+# Just the user part of the account, without the e-mail domain.
+[gcloud]
+format = 'on [$symbol$account]($style) '
+symbol = "☁️ "
+
+# Starship's vcs module picks one VCS per directory and shows only that one's
+# modules (jj_modules / git_modules). Check jj first so colocated jj+git repos
+# show jj rather than git.
+[vcs]
+order = ["jj", "git", "hg", "pijul", "fossil"]
+
+# $all would add the git modules again on their own. Disabling them only
+# affects that: vcs still shows them in plain git repos.
+[git_branch]
+disabled = true
+
+[git_commit]
+disabled = true
+
+[git_state]
+disabled = true
+
+[git_metrics]
+disabled = true
+
+[git_status]
+disabled = true
