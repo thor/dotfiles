@@ -53,14 +53,6 @@ else
 	_warn "No FZF, could not find fzf script"
 fi
 
-# mise: the better alternative to asdf
-if _exists mise; then
-	# Synchronous so shims are on PATH for the first command
-	eval "$(mise activate zsh)"
-else
-	_warn "mise wasn't available; you should install it"
-fi
-
 # Source cargo environments
 if [ -f "$HOME/.cargo/env" ]; then
   zsh-defer source "$HOME/.cargo/env"
@@ -114,6 +106,15 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# mise: the better alternative to asdf
+# Activated after cargo/pnpm PATH setup so mise tool paths take precedence
+if _exists mise; then
+	# Synchronous so shims are on PATH for the first command
+	eval "$(mise activate zsh)"
+else
+	_warn "mise wasn't available; you should install it"
+fi
 
 if [ -n "${WSL_DISTRO_NAME}" ]; then
   # Keep it snappy without PATH_DIRS
